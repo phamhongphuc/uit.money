@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Theme">
+        <attr name="ButtonStyle" format="reference"/>
+    </declare-styleable>
+
+    <!-- Components -->
+    <declare-styleable name="Button" parent="View">
+        <attr name="_icon" format="string"/>
+        <attr name="_text" format="string"/>
+        <attr name="_textAlign"/>
+        <attr name="_foreground"/>
+        <attr name="_background"/>
+        <attr name="_textPaddingLeft" format="boolean"/>
+        <attr name="_hasRipple"/>
+        <attr name="_backgroundActive" format="color"/>
+        <attr name="_font"/>
+        <attr name="_active" format="boolean"/>
+        <attr name="_fontSize" format="enum">
+            <enum name="small" value="0"/>
+            <enum name="large" value="1"/>
+            <enum name="medium" value="2"/>
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="TextInput" parent="View">
+        <attr name="_autoSize" format="boolean"/>
+        <attr name="_font"/>
+    </declare-styleable>
+</resources>
