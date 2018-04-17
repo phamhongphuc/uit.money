@@ -1,6 +1,6 @@
 # Where is my money?
 
-[![Travis Build](https://travis-ci.org/phamhongphuc/uit.money.svg?branch=master)](https://travis-ci.org/phamhongphuc/uit.money/builds "Most recent build")[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/phamhongphuc/uit.money.svg)](https://github.com/phamhongphuc/uit.money/issues "Average time to resolve an issue")[![Percentage of issues still open](http://isitmaintained.com/badge/open/phamhongphuc/uit.money.svg)](https://github.com/phamhongphuc/uit.money/issues "Percentage of issues still open")
+[![Travis Build](https://travis-ci.org/phamhongphuc/uit.money.svg?branch=master)](https://travis-ci.org/phamhongphuc/uit.money/builds "Most recent build") [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/phamhongphuc/uit.money.svg)](https://github.com/phamhongphuc/uit.money/issues "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/phamhongphuc/uit.money.svg)](https://github.com/phamhongphuc/uit.money/issues "Percentage of issues still open")
 
 Welcome to open source Android app!
 
