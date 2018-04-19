@@ -64,7 +64,7 @@ jobs:
 
     # Release
     - stage:          Release
-      if: branch = release
+      if:             (branch IN (master, release)) AND (tag ~= ^v)
       script:
         - openssl aes-256-cbc -K $encrypted_96b80e00ad7f_key -iv $encrypted_96b80e00ad7f_iv -in keystore.jks.enc -out keystore.jks -d
         - ./gradlew assembleRelease
