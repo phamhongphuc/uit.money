@@ -23,6 +23,7 @@ before_install:
 stages:
   - Unit test
   - Integration test
+  - Release
 
 jobs:
   include:
@@ -60,6 +61,24 @@ jobs:
         - sleep 10
         - adb shell input keyevent 82 &
       script:         ./gradlew connectedAndroidTest
+
+    # Release
+    - stage:          Release
+      if: branch = release
+      script:
+        - openssl aes-256-cbc -K $encrypted_96b80e00ad7f_key -iv $encrypted_96b80e00ad7f_iv -in keystore.jks.enc -out keystore.jks -d
+        - ./gradlew assembleRelease
+
+      deploy:
+        provider: releases
+        api_key:
+          secure: U2Nnx3gK0WRKV7BDXJaay0N+ovYklRUpfWBdIZEsMt1hSF9wkKE8URXuBGfzln7wjs7fKFCoOJD2DIIjRMjVL8FsjiEF3DSNXDrhLILmKPSfCDlf2X61RWn9FV1fgIw6XXMFvTFAAgZBBlYUkR74r4SYJgcwnB+ssBPrQfMuJ9i+IYUwgUHoPis4eMJtdRMnYqL1TzsdZfhQ0DROlC5HK6dTJ6ZmVj1kkKwvLrCifRVDagTMptoFayd2sETMSMijuI7xoACEN3dZGsty/KPGLFHCMMjEKlerMWEBv87HwOquCtKpVzznQYKkLRw+iUsNKN3O+hXz+xj3M6XWvrRllDrekw6/s0NqThVdqliBCOO2F9wGaoARkAAr7Son3IfTHpj/GuChm0PmfHVJ9SxWS5wp4yX6jaH6oZ4UiyzpLokeYDZR+9Lqq8wkEqnBB8xnM/pBnJu3jakFs6Mg5phb+17LuWwIHqEZDGTeF6TIMG9ywbXf4T2HtDY1nFcyjTHAab5VmjgFCgVP9xjI+zWcX3uJ94PaNeieQ1/XO839pYWZLk60kyXIxKHufW345skKFxjdTdR+2iwA3AU1zSmHAtZ/XqE2eP8/f7X+PfI3qlcJgzXyCiSq2L315o2fH+1E0LGjfCiz0yuZDv7aBc1qNbf8X+dvwyuoFeNcr6nADbE=
+        file: app/build/outputs/apk/release/app-release.apk
+        skip_cleanup: true
+        on:
+          tags: true
+          repo: phamhongphuc/uit.money
+          branch: feature-travis
 
 # ------------------------- ------------------------- ------------------------- #
 

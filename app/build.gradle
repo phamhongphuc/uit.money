@@ -15,12 +15,32 @@ android {
     dataBinding {
         enabled = true
     }
+
+    signingConfigs {
+        release { 
+            storeFile file("../keystore.jks")
+            storePassword System.getenv("keystore_password")
+            keyAlias System.getenv("keystore_alias")
+            keyPassword System.getenv("keystore_alias_password")
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
+
+//     def isRunningOnTravis = System.getenv("CI") == "true"
+//     if (isRunningOnTravis) {
+//         signingConfigs.release.storeFile = file("../keystore.jks")
+// //        signingConfigs.release.storePassword = System.getenv("keystore_password")
+// //        signingConfigs.release.keyAlias = System.getenv("keystore_alias")
+// //        signingConfigs.release.keyPassword = System.getenv("keystore_alias_password")
+//     }
+
 }
 
 dependencies {
