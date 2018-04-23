@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+    </data>
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ui.components.Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="20dp"
+            android:background="@color/facebook"
+            android:onClick="Login"
+            app:_foreground="@color/white"
+            app:_icon=""
+            app:_text="Đăng nhập với Facebook"/>
+
+        <ui.components.Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="20dp"
+            android:background="@color/facebook"
+            android:onClick="Logout"
+            app:_foreground="@color/white"
+            app:_icon=""
+            app:_text="Đăng xuất"/>
+    </android.support.v7.widget.LinearLayoutCompat>
+</layout>
