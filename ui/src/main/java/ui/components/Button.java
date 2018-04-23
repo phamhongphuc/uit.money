@@ -67,12 +67,12 @@ public class Button extends LinearLayoutCompat {
     private Float fontSize;
 
     public Button(Context context) {
-        super(context, null, R.attr.ButtonStyle);
+        super(context, null);
         Initialize(context, null);
     }
 
     public Button(Context context, AttributeSet attrs) {
-        super(context, attrs, R.attr.ButtonStyle);
+        super(context, attrs);
         Initialize(context, attrs);
     }
 
