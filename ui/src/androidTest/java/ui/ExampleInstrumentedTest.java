@@ -1,4 +1,4 @@
-package ai;
+package ui;
 
 import android.support.test.runner.AndroidJUnit4;
 

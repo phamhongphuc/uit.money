@@ -1,4 +1,4 @@
-package ai.components;
+package ui.components;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -19,7 +19,7 @@ import com.google.common.collect.ImmutableMap;
 import java.util.Map;
 import java.util.Objects;
 
-import ai.ai.lib.R;
+import ui.ai.lib.R;
 
 public class Button extends LinearLayoutCompat {
     private static final String TAG = "Ai.Button";

@@ -1,4 +1,4 @@
-package ai.components;
+package ui.components;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -14,7 +14,7 @@ import com.google.common.collect.ImmutableMap;
 
 import java.util.Map;
 
-import ai.ai.lib.R;
+import ui.ai.lib.R;
 
 public class TextInput extends AppCompatEditText {
     private static final String REGULAR = "fonts/segoe regular.ttf";
