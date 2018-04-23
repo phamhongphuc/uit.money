@@ -50,7 +50,7 @@ dependencies {
 
     annotationProcessor 'org.parceler:parceler:1.1.9'
 
-    implementation project(path: ':ai')
+    implementation project(path: ':ui')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'

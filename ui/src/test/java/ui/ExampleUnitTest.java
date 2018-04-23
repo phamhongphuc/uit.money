@@ -1,4 +1,4 @@
-package ai;
+package ui;
 
 import org.junit.Test;
 
