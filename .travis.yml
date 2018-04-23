@@ -32,6 +32,10 @@ jobs:
       script:         ./gradlew $module:test
 
     - stage:          Unit test
+      env:            module=model
+      script:         ./gradlew $module:test
+
+    - stage:          Unit test
       env:            module=app
       script:         ./gradlew $module:test
 
