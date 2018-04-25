@@ -14,7 +14,7 @@ import com.google.common.collect.ImmutableMap;
 
 import java.util.Map;
 
-import ui.ai.lib.R;
+import ui.ui.R;
 
 public class TextInput extends AppCompatEditText {
     private static final String REGULAR = "fonts/segoe regular.ttf";

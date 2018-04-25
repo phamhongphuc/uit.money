@@ -8,9 +8,13 @@
     <declare-styleable name="Button" parent="View">
         <attr name="_icon" format="string"/>
         <attr name="_text" format="string"/>
-        <attr name="_textAlign"/>
-        <attr name="_foreground"/>
-        <attr name="_background"/>
+        <attr name="_textAlign" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+        <attr name="_foreground" format="color"/>
+        <attr name="_background" format="color"/>
         <attr name="_textPaddingLeft" format="boolean"/>
         <attr name="_hasRipple"/>
         <attr name="_backgroundActive" format="color"/>
@@ -25,5 +29,17 @@
     <declare-styleable name="TextInput" parent="View">
         <attr name="_autoSize" format="boolean"/>
         <attr name="_font"/>
+    </declare-styleable>
+    <declare-styleable name="Text">
+        <attr name="_font" format="enum">
+            <enum name="regular" value="0"/>
+            <enum name="light" value="1"/>
+            <enum name="bold" value="2"/>
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="Shadow">
+        <attr name="_radius" format="dimension"/>
+        <attr name="_shadowRadius" format="dimension"/>
+        <attr name="_shadowColor" format="color"/>
     </declare-styleable>
 </resources>

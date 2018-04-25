@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -19,7 +20,7 @@ import com.google.common.collect.ImmutableMap;
 import java.util.Map;
 import java.util.Objects;
 
-import ui.ai.lib.R;
+import ui.ui.R;
 
 public class Button extends LinearLayoutCompat {
     private static final String TAG = "Ai.Button";
@@ -186,9 +187,9 @@ public class Button extends LinearLayoutCompat {
             textView.setTextSize(size * fontSize / dp);
             textView.setPadding(
                     (iconView == null && textPaddingLeft)
-                            ? (int) (size * 0.5f / dp) : 0,
+                            ? (int) (size * 1.f / dp) : 0,
                     0,
-                    (int) (size * 0.5f / dp),
+                    (int) (size * 1.f / dp),
                     0
             );
         }
@@ -229,5 +230,10 @@ public class Button extends LinearLayoutCompat {
         if (!set.isRunning()) set.start();
 
         invalidate();
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
     }
 }

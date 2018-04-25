@@ -41,7 +41,7 @@ android {
 }
 
 realm {
-    syncEnabled = true;
+    syncEnabled = true
 }
 
 dependencies {
