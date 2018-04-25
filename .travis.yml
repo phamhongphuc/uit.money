@@ -37,6 +37,10 @@ jobs:
       script:         ./gradlew $module:test
 
     - stage:          Unit test
+      env:            module=voice
+      script:         ./gradlew $module:test
+
+    - stage:          Unit test
       env:            module=app
       script:         ./gradlew $module:test
 
