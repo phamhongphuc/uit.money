@@ -18,7 +18,7 @@ android {
     }
 
     signingConfigs {
-        release { 
+        release {
             storeFile file("../keystore.jks")
             storePassword System.getenv("keystore_password")
             keyAlias System.getenv("keystore_alias")
@@ -31,6 +31,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+        }
+        debug {
+            ext.enableCrashlytics = false
         }
     }
 
@@ -45,11 +48,10 @@ realm {
 }
 
 dependencies {
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     testImplementation 'junit:junit:4.12'
-
-    annotationProcessor 'org.parceler:parceler:1.1.10'
 
     implementation project(path: ':ui')
     implementation project(path: ':model')
@@ -64,8 +66,10 @@ dependencies {
     implementation 'io.realm:android-adapters:3.0.0'
     implementation 'com.google.guava:guava:23.6-android'
     implementation 'com.squareup.picasso:picasso:2.5.2'
-    implementation 'org.parceler:parceler-api:1.1.10'
     implementation('io.socket:socket.io-client:1.0.0') {
         exclude group: 'org.json', module: 'json'
     }
+
+    implementation 'org.parceler:parceler-api:1.1.10'
+    annotationProcessor 'org.parceler:parceler:1.1.10'
 }
