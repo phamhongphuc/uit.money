@@ -10,6 +10,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     dataBinding {
@@ -33,14 +34,14 @@ android {
         }
     }
 
-//     def isRunningOnTravis = System.getenv("CI") == "true"
-//     if (isRunningOnTravis) {
-//         signingConfigs.release.storeFile = file("../keystore.jks")
-// //        signingConfigs.release.storePassword = System.getenv("keystore_password")
-// //        signingConfigs.release.keyAlias = System.getenv("keystore_alias")
-// //        signingConfigs.release.keyPassword = System.getenv("keystore_alias_password")
-//     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
 
+realm {
+    syncEnabled = true
 }
 
 dependencies {
@@ -48,20 +49,22 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     testImplementation 'junit:junit:4.12'
 
-    annotationProcessor 'org.parceler:parceler:1.1.9'
+    annotationProcessor 'org.parceler:parceler:1.1.10'
 
     implementation project(path: ':ui')
+    implementation project(path: ':model')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.android.support:design:27.1.1'
 
     implementation 'com.facebook.android:facebook-android-sdk:4.6.0'
-    implementation 'io.realm:android-adapters:2.1.1'
+    implementation 'io.realm:android-adapters:3.0.0'
     implementation 'com.google.guava:guava:23.6-android'
     implementation 'com.squareup.picasso:picasso:2.5.2'
-    implementation 'org.parceler:parceler-api:1.1.9'
+    implementation 'org.parceler:parceler-api:1.1.10'
     implementation('io.socket:socket.io-client:1.0.0') {
         exclude group: 'org.json', module: 'json'
     }

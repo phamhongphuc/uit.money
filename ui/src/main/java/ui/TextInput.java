@@ -1,4 +1,4 @@
-package ui.components;
+package ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -14,7 +14,7 @@ import com.google.common.collect.ImmutableMap;
 
 import java.util.Map;
 
-import ui.ai.lib.R;
+import ui.ui.R;
 
 public class TextInput extends AppCompatEditText {
     private static final String REGULAR = "fonts/segoe regular.ttf";
@@ -31,25 +31,25 @@ public class TextInput extends AppCompatEditText {
 
     public TextInput(Context context) {
         super(context);
-        Initialize(context, null);
+        initialize(context, null);
     }
 
     public TextInput(Context context, AttributeSet attrs) {
         super(context, attrs);
-        Initialize(context, attrs);
+        initialize(context, attrs);
     }
 
     public TextInput(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        Initialize(context, attrs);
+        initialize(context, attrs);
     }
 
-    private void Initialize(Context context, AttributeSet attrs) {
-        InitializeAttr(context, attrs);
-        InitializeView(context);
+    private void initialize(Context context, AttributeSet attrs) {
+        initializeAttr(context, attrs);
+        initializeView(context);
     }
 
-    private void InitializeView(Context context) {
+    private void initializeView(Context context) {
         setTypeface(
                 Typeface.createFromAsset(getContext().getAssets(), font)
         );
@@ -61,7 +61,7 @@ public class TextInput extends AppCompatEditText {
         );
     }
 
-    private void InitializeAttr(@NonNull Context context, @Nullable AttributeSet attrs) {
+    private void initializeAttr(@NonNull Context context, @Nullable AttributeSet attrs) {
         TypedArray typedArray;
 
         typedArray = context.obtainStyledAttributes(attrs, R.styleable.TextInput);

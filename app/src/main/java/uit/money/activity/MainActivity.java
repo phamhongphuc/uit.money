@@ -1,7 +1,9 @@
-package uit.money;
+package uit.money.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import uit.money.R;
 
 public class MainActivity extends AppCompatActivity {
 
