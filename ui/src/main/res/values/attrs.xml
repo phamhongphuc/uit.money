@@ -15,7 +15,14 @@
         </attr>
         <attr name="_foreground" format="color"/>
         <attr name="_background" format="color"/>
+        <attr name="_backgroundIcon" format="color"/>
+        <attr name="_backgroundText" format="color"/>
         <attr name="_textPaddingLeft" format="boolean"/>
+        <attr name="_childRadius" format="enum">
+            <enum name="none" value="0"/>
+            <enum name="icon" value="1"/>
+            <enum name="text" value="2"/>
+        </attr>
         <attr name="_hasRipple"/>
         <attr name="_backgroundActive" format="color"/>
         <attr name="_font"/>
@@ -25,6 +32,10 @@
             <enum name="large" value="1"/>
             <enum name="medium" value="2"/>
         </attr>
+        <attr name="_radius"/>
+        <attr name="_shadowSize"/>
+        <attr name="_shadowColor"/>
+        <attr name="_rippleColor" format="color"/>
     </declare-styleable>
     <declare-styleable name="TextInput" parent="View">
         <attr name="_autoSize" format="boolean"/>
@@ -32,14 +43,29 @@
     </declare-styleable>
     <declare-styleable name="Text">
         <attr name="_font" format="enum">
-            <enum name="regular" value="0"/>
-            <enum name="light" value="1"/>
-            <enum name="bold" value="2"/>
+            <enum name="none" value="0"/>
+            <enum name="regular" value="1"/>
+            <enum name="light" value="2"/>
+            <enum name="bold" value="3"/>
         </attr>
+        <attr name="_autoSize"/>
     </declare-styleable>
     <declare-styleable name="Shadow">
         <attr name="_radius" format="dimension"/>
-        <attr name="_shadowRadius" format="dimension"/>
+        <attr name="_shadowSize" format="dimension"/>
+        <attr name="_dx" format="dimension"/>
+        <attr name="_dy" format="dimension"/>
         <attr name="_shadowColor" format="color"/>
+        <attr name="_backgroundColor" format="color"/>
+    </declare-styleable>
+    <declare-styleable name="Line">
+        <attr name="_isFull" format="boolean"/>
+        <attr name="_color" format="color"/>
+    </declare-styleable>
+    <declare-styleable name="Square">
+        <attr name="_by" format="enum">
+            <enum name="width" value="0"/>
+            <enum name="height" value="1"/>
+        </attr>
     </declare-styleable>
 </resources>
