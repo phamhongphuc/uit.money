@@ -1,18 +1,23 @@
 package uit.money.activity;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
-import com.facebook.Profile;
 
-import io.realm.Realm;
-import model.User;
+import org.parceler.Parcels;
+
+import java.util.ArrayList;
+
+import model.model.Wallet;
 import uit.money.R;
+import uit.money.adapter.FragmentAdapter;
+import uit.money.databinding.ActivityLoginBinding;
 import uit.money.facebook.Credential;
+import uit.money.fragment.LoginFragment;
 
 public class LoginActivity extends RealmActivity {
     private static final String TAG = "LoginActivity";
@@ -22,43 +27,41 @@ public class LoginActivity extends RealmActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        InitializeListener();
+        initializeListener();
+        initializeBinding();
     }
 
-    private void InitializeListener() {
-        Log.d(TAG, "Đã login");
-        Credential.InitializeLogin(this::SaveUser);
+    private void initializeListener() {
+        Credential.initializeLogin(() -> {
+            // When already logged in facebook and connected or not connected to Realm Object Server
+            // Call after login() is called
+            Intent intent = new Intent(getBaseContext(), WalletActivity.class);
+            intent.putExtra("wallet", Parcels.wrap(Wallet.getCurrentWallet()));
+            startActivity(intent);
+            finish();
+        });
     }
 
-    private void SaveUser() {
-        Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-
-        User user = new User();
-        user.setFbid(AccessToken.getCurrentAccessToken().getUserId());
-        user.setName(Profile.getCurrentProfile().getName());
-
-        realm.copyToRealmOrUpdate(user);
-        realm.commitTransaction();
-
-        Intent intent = new Intent(getBaseContext(), MainActivity.class);
-        startActivity(intent);
-        finish();
+    private void initializeBinding() {
+        ActivityLoginBinding binding;
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        binding.setAdapter(new FragmentAdapter(
+                getSupportFragmentManager(),
+                new ArrayList<Fragment>() {{
+                    add(new LoginFragment(R.drawable.login_1_icon, R.string.login_1_title, R.string.login_1_content));
+                    add(new LoginFragment(R.drawable.login_2_icon, R.string.login_2_title, R.string.login_2_content));
+                    add(new LoginFragment(R.drawable.login_3_icon, R.string.login_3_title, R.string.login_3_content));
+                }}
+        ));
     }
 
-    public void Login(View view) {
-        Credential.Login(this);
+    public void login(View view) {
+        Credential.login(this);
     }
 
-    //region Facebook Login [onActivityResult]
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         CallbackManager.Factory.create().onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
-
-    public void Logout(View view) {
-        Credential.Logout();
-    }
-    //endregion
 }
