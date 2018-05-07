@@ -1,8 +1,23 @@
 <resources>
-    <string name="app_name">Money</string>
+    <string name="app_name">- Money</string>
     <string name="facebook_app_id">2071312033150967</string>
     <string name="fb_login_protocol_scheme">fb2071312033150967</string>
 
     <string name="icon">Icon</string>
     <string name="where_is_my_money">Where is my money?</string>
+    <string name="title">Quản lý tài chính cá nhân</string>
+    <string name="content">Là một bài toán của bất kì ai. Nhưng ko phải ai cũng có thời gian để giải quyết bài toán ấy.</string>
+    <string name="login_with_facebook_button">Đăng nhập với Facebook</string>
+
+    <drawable name="login_1_icon">@drawable/ic_list</drawable>
+    <string name="login_1_title">Ghi chép dễ dàng</string>
+    <string name="login_1_content">Bằng cách nhập tay hay tương tác giọng nói bạn có thể ghi chép các khoản thu chi của bản thân một cách đơn giản và nhanh chóng nhất.</string>
+
+    <drawable name="login_2_icon">@drawable/ic_report</drawable>
+    <string name="login_2_title">Quản lý hiệu quả</string>
+    <string name="login_2_content">Biểu đồ phân tích trực quan cho phép bạn có được cái nhìn dễ hình dung nhất về tình hình tài chính của bạn.</string>
+
+    <drawable name="login_3_icon">@drawable/ic_filter</drawable>
+    <string name="login_3_title">Kiểm soát chi tiêu</string>
+    <string name="login_3_content">Thiết lập mức chi tiêu trong ngân sách bạn đặt ra sẽ giúp bạn tránh được việc chi tiêu ngoài tâm kiểm soát</string>
 </resources>
