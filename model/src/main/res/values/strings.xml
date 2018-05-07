@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">model</string>
+    <string name="buy">Mua</string>
+    <string name="sell">Bán</string>
+
+    <string name="borrow">Mượn</string>
+    <string name="lend">Cho mượn</string>
+    <string name="today">Hôm nay</string>
+    <string name="yesterday">Hôm qua</string>
+    <string name="day_ago">ngày trước</string>
 </resources>
