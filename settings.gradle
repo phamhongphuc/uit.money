@@ -1,1 +1,1 @@
-include ':app', ':ui', ':model'
+include ':app', ':ui', ':model', ':voice'

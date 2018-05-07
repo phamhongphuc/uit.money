@@ -54,6 +54,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     implementation project(path: ':ui')
+    implementation project(path: ':voice')
     implementation project(path: ':model')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
