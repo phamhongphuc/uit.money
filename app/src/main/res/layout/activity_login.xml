@@ -2,36 +2,69 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.LoginActivity">
 
     <data>
+        <variable
+            name="adapter"
+            type="uit.money.adapter.FragmentAdapter"/>
     </data>
 
-    <android.support.v7.widget.LinearLayoutCompat
+    <ui.Col
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dark"
+        android:background="#fff"
+        android:clipChildren="false"
         android:gravity="center"
-        android:orientation="vertical">
+        android:paddingTop="24dp">
 
-        <ui.components.Button
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="20dp"
-            android:background="@color/facebook"
-            android:onClick="Login"
-            app:_foreground="@color/white"
-            app:_icon=""
-            app:_text="Đăng nhập với Facebook"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:clipChildren="false">
 
-        <ui.components.Button
-            android:layout_width="wrap_content"
+            <ui.Shadow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:_backgroundColor="#2ecc71"
+                app:_radius="6dp"
+                app:_shadowColor="#bb2ecc71"
+                app:_shadowSize="10dp"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipChildren="true">
+
+                <android.support.v4.view.ViewPager
+                    android:adapter="@{adapter}"
+                    android:id="@+id/viewPagerLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </FrameLayout>
+        </FrameLayout>
+
+        <ui.Button
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_margin="20dp"
-            android:background="@color/facebook"
-            android:onClick="Logout"
-            app:_foreground="@color/white"
-            app:_icon=""
-            app:_text="Đăng xuất"/>
-    </android.support.v7.widget.LinearLayoutCompat>
+            android:layout_margin="30dp"
+            android:onClick="login"
+            app:_background="#3498db"
+            app:_backgroundIcon="#2000"
+            app:_childRadius="none"
+            app:_font="light"
+            app:_foreground="#fff"
+            app:_icon=""
+            app:_radius="6dp"
+            app:_rippleColor="#99ffffff"
+            app:_shadowColor="#884cb7ff"
+            app:_shadowSize="6dp"
+            app:_text="@string/login_with_facebook_button"
+            app:_textAlign="left"/>
+    </ui.Col>
 </layout>
