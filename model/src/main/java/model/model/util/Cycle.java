@@ -1,7 +1,14 @@
-package model.deal.loan;
+package model.model.util;
+
+import org.parceler.Parcel;
 
 import io.realm.RealmObject;
+import io.realm.model_model_util_CycleRealmProxy;
 
+
+@Parcel(implementations = {model_model_util_CycleRealmProxy.class},
+        value = Parcel.Serialization.BEAN,
+        analyze = {Cycle.class})
 public class Cycle extends RealmObject {
     public Cycle() {
 
