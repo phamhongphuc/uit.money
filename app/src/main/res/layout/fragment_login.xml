@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="title"
+            type="String"/>
+
+        <variable
+            name="content"
+            type="String"/>
+
+        <variable
+            name="background"
+            type="android.graphics.drawable.Drawable"/>
+    </data>
+
+    <ui.Col
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ui.Square
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:_by="width">
+
+            <View
+                android:layout_width="185dp"
+                android:layout_height="185dp"
+                android:layout_gravity="center"
+                android:background="@{background}"
+                tools:background="@drawable/ic_report"/>
+        </ui.Square>
+
+        <ui.Col
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingEnd="30dp"
+            android:paddingStart="30dp">
+
+            <ui.Text
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginBottom="5dp"
+                android:text="@{title}"
+                android:textAlignment="textStart"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                app:_font="bold"
+                tools:text="Tiêu đề của Fragment"/>
+
+            <ui.Text
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:text="@{content}"
+                android:textAlignment="textStart"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                app:_font="regular"
+                tools:text="Nội dung của Fragment sẽ xuất hiện ở đây. Nội dung là một đoạn gì đó dài dài khoảng vài từ"/>
+        </ui.Col>
+    </ui.Col>
+</layout>
+

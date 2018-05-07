@@ -9,7 +9,8 @@
         android:name=".app.App"
         android:allowBackup="true"
         android:fullBackupContent="true"
-        android:icon="@drawable/ic_coin"
+        android:hardwareAccelerated="false"
+        android:icon="@drawable/ic_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
@@ -43,7 +44,7 @@
         <activity
             android:name=".activity.LoginActivity"
             android:noHistory="false"/>
-        <activity android:name=".activity.MainActivity"/>
+        <activity android:name=".activity.WalletActivity"/>
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"

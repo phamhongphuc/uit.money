@@ -12,5 +12,6 @@ public class RealmActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        realm.close();
     }
 }
