@@ -1,6 +1,7 @@
 package model.model;
 
 import android.databinding.ObservableField;
+import android.databinding.ObservableLong;
 
 import org.parceler.Parcel;
 
@@ -36,7 +37,7 @@ public class Wallet extends RealmObject {
     @Ignore
     private static RealmResults<Wallet> wallets = null;
     @Ignore
-    public final ObservableField<Long> money = new ObservableField<>(0L);
+    public final ObservableLong money = new ObservableLong(0);
     @PrimaryKey
     private int id;
     @Required
