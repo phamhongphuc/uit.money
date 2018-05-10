@@ -3,7 +3,6 @@ package ui;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
@@ -90,11 +89,6 @@ public class Button extends FrameLayout {
         initialize(context, null);
     }
 
-    public Button(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initialize(context, attrs);
-    }
-
     private void initialize(@NonNull Context context, @Nullable AttributeSet attrs) {
         setClipChildren(false);
         setClickable(true);
@@ -160,6 +154,29 @@ public class Button extends FrameLayout {
         addView(linearLayoutCompat);
     }
 
+    private void initializeIcon(Context context) {
+        if (icon != null && !Objects.equals(icon, "")) {
+            if (iconView == null) {
+                iconView = new AppCompatTextView(context);
+                linearLayoutCompat.addView(iconView);
+            }
+            iconView.setText(icon);
+            iconView.setTypeface(
+                    Typeface.createFromAsset(getContext().getAssets(), ICON)
+            );
+            iconView.setLayoutParams(new LinearLayoutCompat.LayoutParams(
+                    LinearLayoutCompat.LayoutParams.WRAP_CONTENT,
+                    LinearLayoutCompat.LayoutParams.MATCH_PARENT
+            ));
+            iconView.setIncludeFontPadding(false);
+            iconView.setGravity(Gravity.CENTER);
+            iconView.setTextColor(foreground);
+            iconView.setBackgroundDrawable(getGradientDrawable(backgroundIcon, radius, childRadius == RADIUS_ICON ? radius : 0));
+        } else if (iconView != null) {
+            linearLayoutCompat.removeView(iconView);
+        }
+    }
+
     private void initializeText(Context context) {
         if (text != null && !Objects.equals(text, "")) {
             if (textView == null) {
@@ -182,27 +199,35 @@ public class Button extends FrameLayout {
         }
     }
 
-    private void initializeIcon(Context context) {
-        if (icon != null && !Objects.equals(icon, "")) {
-            if (iconView == null) {
-                iconView = new AppCompatTextView(context);
-                linearLayoutCompat.addView(iconView);
-            }
-            iconView.setText(icon);
-            iconView.setTypeface(
-                    Typeface.createFromAsset(getContext().getAssets(), ICON)
-            );
-            iconView.setLayoutParams(new LinearLayoutCompat.LayoutParams(
-                    LinearLayoutCompat.LayoutParams.WRAP_CONTENT,
-                    LinearLayoutCompat.LayoutParams.MATCH_PARENT
-            ));
-            iconView.setIncludeFontPadding(false);
-            iconView.setGravity(Gravity.CENTER);
-            iconView.setTextColor(foreground);
-            iconView.setBackgroundDrawable(getGradientDrawable(backgroundIcon, radius, childRadius == RADIUS_ICON ? radius : 0));
-        } else if (iconView != null) {
-            linearLayoutCompat.removeView(iconView);
-        }
+    @NonNull
+    private RippleDrawable getRippleDrawable() {
+        float[] outer = new float[8];
+        Arrays.fill(outer, radius);
+        RoundRectShape roundRectShape = new RoundRectShape(
+                outer,
+                null,
+                null
+        );
+        return new RippleDrawable(
+                ColorStateList.valueOf(rippleColor),
+                null,
+                new ShapeDrawable(roundRectShape)
+        );
+    }
+
+    @NonNull
+    private GradientDrawable getGradientDrawable(@ColorInt int color, float left, float right) {
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setColor(color);
+        drawable.setCornerRadii(new float[]{
+                left, left, right, right, right, right, left, left
+        });
+        return drawable;
+    }
+
+    public Button(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        initialize(context, attrs);
     }
 
     @Override
@@ -232,41 +257,11 @@ public class Button extends FrameLayout {
 
     public void set_text(String text) {
         this.text = text;
+        initializeText(getContext());
     }
 
     public void set_icon(String icon) {
         this.icon = icon;
+        initializeIcon(getContext());
     }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-    }
-
-    @NonNull
-    private RippleDrawable getRippleDrawable() {
-        float[] outer = new float[8];
-        Arrays.fill(outer, radius);
-        RoundRectShape roundRectShape = new RoundRectShape(
-                outer,
-                null,
-                null
-        );
-        return new RippleDrawable(
-                ColorStateList.valueOf(rippleColor),
-                null,
-                new ShapeDrawable(roundRectShape)
-        );
-    }
-
-    @NonNull
-    private GradientDrawable getGradientDrawable(@ColorInt int color, float left, float right) {
-        GradientDrawable drawable = new GradientDrawable();
-        drawable.setColor(color);
-        drawable.setCornerRadii(new float[]{
-                left, left, right, right, right, right, left, left
-        });
-        return drawable;
-    }
-
 }

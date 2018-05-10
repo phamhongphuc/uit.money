@@ -60,7 +60,7 @@ public class Shadow extends View {
         paint.setAntiAlias(true);
         paint.setColor(backgroundColor);
         paint.setStyle(Paint.Style.FILL);
-        paint.setShadowLayer(shadowSize , dx, dy, shadowColor);
+        paint.setShadowLayer(shadowSize, dx, dy, shadowColor);
     }
 
     @Override
@@ -68,7 +68,6 @@ public class Shadow extends View {
         canvas.drawRoundRect(0, 0, getWidth(), getHeight(), radius, radius, paint);
     }
 
-    //region setter[shadowColor, shadowRadius]
     public void setShadowColor(int shadowColor) {
         this.shadowColor = shadowColor;
         initializePaint();
@@ -88,5 +87,4 @@ public class Shadow extends View {
         this.backgroundColor = backgroundColor;
         initializePaint();
     }
-    //endregion
 }
