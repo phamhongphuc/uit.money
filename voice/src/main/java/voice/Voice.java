@@ -33,10 +33,10 @@ import static android.speech.SpeechRecognizer.ERROR_SPEECH_TIMEOUT;
 
 public class Voice {
     private static final int PERMISSION_RECORD_AUDIO = 0;
+    private static Resources resources = null;
     private SpeechRecognizer speechRecognizer;
     private Intent speechRecognizerIntent;
     private Activity activity;
-    private static Resources resources = null;
 
     public Voice(Activity activity) {
         this.activity = activity;
@@ -90,6 +90,7 @@ public class Voice {
     }
 
     public static class Listener implements RecognitionListener {
+        private static final String TAG = "Voice Listener";
         private static final Map<Integer, Integer> ERROR = ImmutableMap.<Integer, Integer>builder()
                 .put(ERROR_AUDIO, R.string.error_audio)
                 .put(ERROR_CLIENT, R.string.error_client)
