@@ -1,6 +1,5 @@
 package model.model;
 
-import android.databinding.ObservableField;
 import android.databinding.ObservableLong;
 
 import org.parceler.Parcel;
@@ -35,8 +34,6 @@ import static model.Const.BUY;
         analyze = {Wallet.class})
 public class Wallet extends RealmObject {
     @Ignore
-    private static RealmResults<Wallet> wallets = null;
-    @Ignore
     public final ObservableLong money = new ObservableLong(0);
     @PrimaryKey
     private int id;
@@ -54,6 +51,10 @@ public class Wallet extends RealmObject {
 
     public Wallet(Callback callback) {
         callback.call(this);
+    }
+
+    public long getMoney() {
+        return money.get();
     }
 
     @Nullable
@@ -86,7 +87,7 @@ public class Wallet extends RealmObject {
     }
 
     private void autoId() {
-        wallets = Realm.getDefaultInstance()
+        RealmResults<Wallet> wallets = Realm.getDefaultInstance()
                 .where(Wallet.class)
                 .findAllAsync();
         wallets.load();
@@ -102,14 +103,13 @@ public class Wallet extends RealmObject {
         updateMoney(billDetails);
     }
 
-    public RealmResults<BillDetail> getBillDetails() {
+    private void getBillDetails() {
         if (billDetails == null) {
             billDetails = Realm.getDefaultInstance()
                     .where(BillDetail.class)
                     .equalTo("bill.wallet.id", id)
                     .findAllAsync();
         }
-        return billDetails;
     }
 
 
