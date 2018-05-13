@@ -13,7 +13,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import io.realm.Realm;
 import model.model.Person;
+import model.model.Wallet;
+import model.model.transaction.Bill;
 import model.model.transaction.BillDetail;
 import model.model.util.Object;
 
@@ -21,8 +24,7 @@ import static java.util.Arrays.asList;
 import static model.Const.BUY;
 import static model.Const.SELL;
 
-public class Bill {
-    // BUY SELL
+public class RecognizerBill {
     private static final Map<Keys, List<String>> BUY_SELL_KEYS = ImmutableMap.<Keys, List<String>>builder()
             .put(Keys.BUY_SELL, asList("mua", "bán", "sắm"))
             .put(Keys.PRICE, asList("hết", "tốn", "với giá", "mất", "giá"))
@@ -30,38 +32,50 @@ public class Bill {
             .put(Keys.TIME, asList("lúc", "vào lúc", "hồi", "ngày"))
             .put(Keys.WITH, asList("đi cùng", "cùng", "cùng với", "đi với"))
             .build();
+    private Bill bill;
+    private BillDetail billDetail;
+    private Object object;
+    private Person person;
 
-    public static model.model.transaction.Bill getBill(String input) {
+    private Wallet wallet;
+    private String input;
+
+    private boolean isValid;
+
+    public RecognizerBill(Wallet wallet, String input) {
+        this.wallet = wallet;
+        this.input = input;
+        isValid = createBill();
+    }
+
+    private boolean createBill() {
+        input = input.replaceAll("\\.", "");
+        input += ".";
         final Matcher matcher_buy_sell = getMatcher(
                 input,
                 "(mua|sắm)|(bán)",
                 joinKeywords(Keys.PRICE, Keys.LOCATION, Keys.TIME, Keys.WITH)
         );
-        if (!matcher_buy_sell.find()) return null;
+        if (!matcher_buy_sell.find()) return false;
 
-        model.model.transaction.Bill bill = new model.model.transaction.Bill();
+        bill = new Bill();
+        bill.setWallet(wallet);
 
         String buy = matcher_buy_sell.group(2);
         String sell = matcher_buy_sell.group(3);
-        if (!setBuyOrSell(bill, buy, sell)) return null;
+        if (!setBuyOrSell(bill, buy, sell)) return false;
 
         String amount_object = matcher_buy_sell.group(4);
-        final BillDetail detail = setBillDetail(bill, amount_object);
-        if (detail == null) return null;
+        billDetail = setBillDetail(bill, amount_object);
+        if (billDetail == null) return false;
 
         // PRICE
-        if (!setUnitPrice(input, detail)) return null;
+        if (!setUnitPrice()) return false;
+        setLocation();
+        setWith();
+        setTime();
 
-        // LOCATION
-        setLocation(input, bill);
-
-        // WITH
-        setWith(input, bill);
-
-        // TIME
-        setTime(input, bill);
-
-        return bill;
+        return true;
     }
 
     @NonNull
@@ -79,7 +93,7 @@ public class Bill {
         return TextUtils.join("|", keywords);
     }
 
-    private static boolean setBuyOrSell(model.model.transaction.Bill bill, String buy, String sell) {
+    private static boolean setBuyOrSell(Bill bill, String buy, String sell) {
         // BUY OR SELL
         if (buy != null) {
             bill.setBuyOrSell(BUY);
@@ -92,27 +106,21 @@ public class Bill {
         }
     }
 
-    private static BillDetail setBillDetail(model.model.transaction.Bill bill, String amount_object) {
+    private BillDetail setBillDetail(Bill bill, String amount_object) {
         BillDetail detail = new BillDetail();
         detail.setBill(bill);
 
-        final Matcher matcher_amount = getMatcher(amount_object, "((một)|(hai)|(ba)|(\\d+)) ([^\\r\\n]+)");
+        final Matcher matcher_amount = getMatcher(amount_object, "(một|hai|ba|\\d+) ([^\\r\\n]+)");
         if (!matcher_amount.find()) return null;
 
-        int amount = 0;
-        if (matcher_amount.group(2) != null) amount = 1;
-        else if (matcher_amount.group(3) != null) amount = 2;
-        else if (matcher_amount.group(4) != null) amount = 3;
-        else if (matcher_amount.group(5) != null) {
-            amount = Integer.parseInt(matcher_amount.group(5));
-        }
-        detail.setAmount(amount);
-        detail.setObject(new Object(matcher_amount.group(6)));
+        detail.setAmount(getInt(matcher_amount.group(1)));
+        object = new Object(matcher_amount.group(2).replaceAll("^(cái|chiếc) ", ""));
+        detail.setObject(object);
 
         return detail;
     }
 
-    private static boolean setUnitPrice(String input, BillDetail detail) {
+    private boolean setUnitPrice() {
         final Matcher matcher_price = getMatcher(
                 input,
                 joinKeywords(Keys.PRICE),
@@ -120,12 +128,15 @@ public class Bill {
         );
         if (!matcher_price.find()) return false;
         final String number = matcher_price.group(2)
+                .replaceAll("nghìn", "000")
+                .replaceAll("triệu", "000000")
+                .replaceAll("tỷ", "000000000")
                 .replaceAll("[^0-9]", "");
-        detail.setUnitPrice(Long.parseLong(number));
+        billDetail.setUnitPrice(Long.parseLong(number));
         return true;
     }
 
-    private static void setLocation(String input, model.model.transaction.Bill bill) {
+    private void setLocation() {
         final Matcher matcher_location = getMatcher(
                 input,
                 joinKeywords(Keys.LOCATION),
@@ -136,18 +147,19 @@ public class Bill {
         }
     }
 
-    private static void setWith(String input, model.model.transaction.Bill bill) {
+    private void setWith() {
         final Matcher matcher_with = getMatcher(
                 input,
                 joinKeywords(Keys.WITH),
                 joinKeywords(Keys.BUY_SELL, Keys.PRICE, Keys.TIME, Keys.LOCATION)
         );
         if (matcher_with.find()) {
-            bill.setWith(new Person(matcher_with.group(2)));
+            person = new Person(matcher_with.group(2));
+            bill.setWith(person);
         }
     }
 
-    private static void setTime(String input, model.model.transaction.Bill bill) {
+    private void setTime() {
         Date time = getTime(input, joinKeywords(Keys.BUY_SELL, Keys.PRICE, Keys.WITH, Keys.LOCATION));
         if (time != null) bill.setTime(time);
     }
@@ -157,14 +169,25 @@ public class Bill {
         return Pattern.compile(regex, Pattern.CASE_INSENSITIVE).matcher(input);
     }
 
+    private static int getInt(String hour_ago) {
+        return Integer.parseInt(
+                hour_ago
+                        .replaceAll("một", "1")
+                        .replaceAll("hai", "2")
+                        .replaceAll("ba", "3")
+                        .replaceAll("bốn", "4")
+                        .replaceAll("năm", "5")
+        );
+    }
+
     private static Date getTime(String input, String stop) {
         final Matcher matcher_time = getMatcher(
-                input, "(vào|vào lúc|lúc) ([^\\r\\n]+)|ngày (hôm qua)|(hôm kia)", stop
+                input, String.format("((vào lúc|vào|lúc) (([^\\r\\n](?!(%s)))+)|ngày (hôm qua)|(hôm kia))(?!(%s))[ \\.]", stop, stop)
         );
         if (matcher_time.find()) {
-            final String yesterday = matcher_time.group(4);
-            final String the_day_before_yesterday = matcher_time.group(5);
-            final String at = matcher_time.group(2);
+            final String yesterday = matcher_time.group(6);
+            final String the_day_before_yesterday = matcher_time.group(7);
+            final String at = matcher_time.group(3);
 
             final Calendar cal = Calendar.getInstance();
             if (yesterday != null) {
@@ -173,25 +196,25 @@ public class Bill {
                 cal.add(Calendar.DATE, -2);
             } else if (at != null) {
                 final Matcher matcher_at = getMatcher(
-                        at, "((\\d+) giờ trước|(\\d+) ngày trước|((\\d+):(\\d+)|(\\d+) giờ)( (\\d+) ngày trước|( ngày hôm qua)|( ngày hôm kia))?)"
+                        at, "((\\d+|một|hai|ba|bốn|năm) giờ trước|(\\d+|một|hai|ba|bốn|năm) ngày trước|((\\d+):(\\d+)|(\\d+|một|hai|ba|bốn|năm) giờ)( (\\d+|một|hai|ba|bốn|năm) ngày trước|( ngày hôm qua)|( ngày hôm kia))?)"
                 );
-                if (matcher_at.find()) return null;
+                if (!matcher_at.find()) return null;
                 final String hour_ago = matcher_at.group(2);
                 final String date_ago = matcher_at.group(3);
                 final String date_time = matcher_at.group(4);
                 if (hour_ago != null) {
-                    cal.add(Calendar.HOUR, -Integer.parseInt(hour_ago));
+                    cal.add(Calendar.HOUR, -getInt(hour_ago));
                 } else if (date_ago != null) {
-                    cal.add(Calendar.DATE, -Integer.parseInt(date_ago));
+                    cal.add(Calendar.DATE, -getInt(date_ago));
                 } else if (date_time != null) {
                     final String hour = matcher_at.group(5);
                     final String minute = matcher_at.group(6);
                     final String hour_only = matcher_at.group(7);
                     if (hour != null && minute != null) {
-                        cal.set(Calendar.HOUR, Integer.parseInt(hour));
-                        cal.set(Calendar.MINUTE, Integer.parseInt(minute));
+                        cal.set(Calendar.HOUR, getInt(hour));
+                        cal.set(Calendar.MINUTE, getInt(minute));
                     } else if (hour_only != null) {
-                        cal.set(Calendar.HOUR, Integer.parseInt(hour_only));
+                        cal.set(Calendar.HOUR, getInt(hour_only));
                         cal.set(Calendar.MINUTE, 0);
                     } else {
                         return null;
@@ -201,7 +224,7 @@ public class Bill {
                     final String on_yesterday = matcher_at.group(10);
                     final String on_the_day_before_yesterday = matcher_at.group(11);
                     if (on_date_ago != null) {
-                        cal.add(Calendar.DATE, -Integer.parseInt(on_date_ago));
+                        cal.add(Calendar.DATE, -getInt(on_date_ago));
                     } else if (on_yesterday != null) {
                         cal.add(Calendar.DATE, -1);
                     } else if (on_the_day_before_yesterday != null) {
@@ -212,6 +235,26 @@ public class Bill {
             return cal.getTime();
         }
         return null;
+    }
+
+    public boolean isValid() {
+        return isValid;
+    }
+
+    public void copyToRealmOrUpdate() {
+        if (!isValid) return;
+
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(r -> {
+            bill.autoId();
+            billDetail.autoId();
+
+            r.copyToRealmOrUpdate(bill);
+            r.copyToRealmOrUpdate(billDetail);
+            r.copyToRealmOrUpdate(object);
+
+            if (person != null) r.copyToRealmOrUpdate(person);
+        });
     }
 
     private enum Keys {
