@@ -44,6 +44,10 @@ public class Object extends RealmObject {
     //region LinkingObjects [billDetails]
     @LinkingObjects("object")
     private final RealmResults<BillDetail> billDetails = null;
+
+    public Object(String name) {
+        this.name = name;
+    }
     //endregion
 
     /**

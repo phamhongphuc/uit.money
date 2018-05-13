@@ -15,7 +15,6 @@ import model.model.transaction.Loan;
  * Ví dụ như: đối tác làm ăn, bạn bè, người mua / bán hàng với người sử dụng
  * <Fields>
  *
- * @see Person#id                       {@link Integer}
  * @see Person#name                     {@link String}
  */
 
@@ -25,24 +24,17 @@ import model.model.transaction.Loan;
 public class Person extends RealmObject {
     @LinkingObjects("partner")
     private final RealmResults<Loan> loans = null;
-    @LinkingObjects("partner")
-    private final RealmResults<Bill> bills = null;
     @LinkingObjects("with")
     private final RealmResults<Bill> multilineDealsWith = null;
     @PrimaryKey
-    private int id;
     private String name;
 
     public Person() {
 
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public Person(String name) {
+        this.name = name;
     }
 
     public String getName() {

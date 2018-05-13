@@ -35,7 +35,6 @@ import static model.Const.getString;
  * @see Bill#wallet            {@link Wallet}              >>  {@link Wallet#bills}
  * @see Bill#time              {@link Date}
  * @see Bill#location          {@link String}
- * @see Bill#partner           {@link Person}              >>  {@link Person#bills}
  * @see Bill#with              {@link Person}              >>  {@link Person#multilineDealsWith}
  * @see Bill#organization      {@link Organization}        >>  {@link Organization#bills}
  * @see Bill#buyOrSell         {@link Boolean}
@@ -53,7 +52,6 @@ public class Bill extends RealmObject implements Transaction, TransactionModel {
     @Required
     private Date time;
     private String location;
-    private Person partner;
     private Person with;
     private Organization organization;
     private boolean buyOrSell;
@@ -114,14 +112,6 @@ public class Bill extends RealmObject implements Transaction, TransactionModel {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public Person getPartner() {
-        return partner;
-    }
-
-    public void setPartner(Person partner) {
-        this.partner = partner;
     }
 
     public Person getWith() {
