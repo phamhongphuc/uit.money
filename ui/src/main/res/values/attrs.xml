@@ -73,4 +73,7 @@
         <attr name="_ratio" format="float"/>
         <attr name="_backgroundColor"/>
     </declare-styleable>
+    <declare-styleable name="Drawer">
+        <attr name="_isOpen" format="boolean"/>
+    </declare-styleable>
 </resources>

@@ -86,7 +86,6 @@ public class Circle extends View {
 
     public void set__ratio(float ratio) {
         this.ratio = ratio;
-        Log.i(TAG, "set__ratio: " + ratio + " - " + this.ratio);
         invalidate();
     }
 }
