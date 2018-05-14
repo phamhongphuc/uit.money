@@ -80,4 +80,9 @@
     <declare-styleable name="Drawer">
         <attr name="_isOpen" format="boolean"/>
     </declare-styleable>
+    <declare-styleable name="Avatar">
+        <attr name="_fbid" format="string"/>
+        <attr name="_innerSize" format="dimension"/>
+        <attr name="_outerSize" format="dimension"/>
+    </declare-styleable>
 </resources>
