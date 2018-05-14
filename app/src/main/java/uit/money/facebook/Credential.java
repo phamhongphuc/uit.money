@@ -1,7 +1,6 @@
 package uit.money.facebook;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.facebook.AccessToken;
@@ -10,6 +9,7 @@ import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 
 import java.util.Collections;
+import java.util.Map;
 
 import io.realm.ObjectServerError;
 import io.realm.Realm;
@@ -24,62 +24,69 @@ import static uit.money.app.Constants.BASE_URL;
 public class Credential {
     private static final String TAG = "Credential";
     private static AccessTokenTracker accessTokenTracker = null;
-    private static boolean isOnline = false;
+    private static AccessToken accessToken = null;
 
-    public static void initializeLogin(final Credential.Callback callback) {
+    public static void initializeLogin(final Credential.Callback nextActivity) {
+        // Don't call this method more than one time
         if (accessTokenTracker != null) return;
 
-        checkAndLogin(AccessToken.getCurrentAccessToken(), callback);
+        checkAndLogin(nextActivity);
         accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken accessToken) {
-                checkAndLogin(accessToken, callback);
+                checkAndLogin(nextActivity);
             }
         };
     }
 
-    private static void checkAndLogin(@Nullable AccessToken accessToken, final Credential.Callback callback) {
+    private static void checkAndLogin(final Callback nextActivity) {
+        accessToken = AccessToken.getCurrentAccessToken();
         if (accessToken == null || accessToken.isExpired()) return;
 
-        loginToRealm(accessToken, () -> {
-            setCurrentUser(accessToken);
+        Callback callback = () -> {
+            setCurrentUser();
+            nextActivity.call();
+        };
+        if (SyncUser.all().size() > 1) {
+            final Map<String, SyncUser> all = SyncUser.all();
+            for (Map.Entry<String, SyncUser> eachUser : all.entrySet()) {
+                eachUser.getValue().logOut();
+            }
+        } else if (SyncUser.current() != null) {
+            setDefaultConfiguration();
             callback.call();
-        });
+        } else {
+            SyncCredentials credentials = SyncCredentials.nickname(accessToken.getUserId(), false);
+            SyncUser.logInAsync(credentials, AUTH_URL, new SyncUser.Callback<SyncUser>() {
+                @Override
+                public void onSuccess(@NonNull SyncUser user) {
+                    setDefaultConfiguration();
+                    callback.call();
+                }
+
+                @Override
+                public void onError(@NonNull ObjectServerError error) {
+                    callback.call();
+                }
+            });
+        }
     }
 
-    private static void loginToRealm(AccessToken accessToken, @NonNull Callback callback) {
-        SyncCredentials credentials = SyncCredentials.nickname(accessToken.getUserId(), false);
-        SyncUser.logInAsync(credentials, AUTH_URL, new SyncUser.Callback<SyncUser>() {
-            @Override
-            public void onSuccess(@NonNull SyncUser user) {
-                String uri = BASE_URL + "/~/" + accessToken.getUserId();
-                SyncConfiguration configuration = new SyncConfiguration
-                        .Builder(user, uri)
-                        .partialRealm()
-                        .build();
-                Realm.setDefaultConfiguration(configuration);
-                isOnline = true;
-                callback.call();
-            }
-
-            @Override
-            public void onError(@NonNull ObjectServerError error) {
-                isOnline = false;
-                callback.call();
-            }
-        });
-    }
-
-    private static void setCurrentUser(AccessToken accessToken) {
+    private static void setCurrentUser() {
         Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
+        realm.executeTransaction(r -> {
+            User user = new User();
+            user.setFbid(accessToken.getUserId());
+            user.setName(Profile.getCurrentProfile().getName());
+            User.setCurrentUser(realm.copyToRealmOrUpdate(user));
+        });
+    }
 
-        User user = new User();
-        user.setFbid(accessToken.getUserId());
-        user.setName(Profile.getCurrentProfile().getName());
-        User.setCurrentUser(realm.copyToRealmOrUpdate(user));
-
-        realm.commitTransaction();
+    private static void setDefaultConfiguration() {
+        SyncConfiguration configuration = new SyncConfiguration
+                .Builder(SyncUser.current(), BASE_URL + "/~/" + accessToken.getUserId())
+                .build();
+        Realm.setDefaultConfiguration(configuration);
     }
 
     public static void login(AppCompatActivity activity) {
@@ -90,10 +97,6 @@ public class Credential {
 
     public static void logout() {
         LoginManager.getInstance().logOut();
-    }
-
-    public static boolean isOnline() {
-        return isOnline;
     }
 
     public interface Callback {
