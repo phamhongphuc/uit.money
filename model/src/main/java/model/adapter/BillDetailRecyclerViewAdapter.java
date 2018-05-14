@@ -14,7 +14,6 @@ import model.model.transaction.Bill;
 import model.model.transaction.BillDetail;
 
 public class BillDetailRecyclerViewAdapter extends RealmRecyclerViewAdapter<BillDetail, BillDetailRecyclerViewAdapter.ViewHolder> {
-
     public BillDetailRecyclerViewAdapter(Bill bill) {
         super(bill.getBillDetails(), true);
     }

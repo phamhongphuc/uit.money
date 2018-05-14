@@ -3,6 +3,7 @@ package model.model.transaction;
 import org.parceler.Parcel;
 
 import java.util.Date;
+import java.util.Objects;
 
 import io.realm.Realm;
 import io.realm.RealmObject;
@@ -176,5 +177,15 @@ public class Bill extends RealmObject implements Transaction, TransactionModel {
 
     public void setMoney(long money) {
         this.money = money;
+    }
+
+    public void autoId() {
+        RealmResults<Bill> bills = Realm.getDefaultInstance()
+                .where(Bill.class)
+                .findAllAsync();
+        bills.load();
+        id = bills.size() == 0
+                ? 0
+                : Objects.requireNonNull(bills.max("id")).intValue() + 1;
     }
 }

@@ -2,7 +2,11 @@ package model.model.transaction;
 
 import org.parceler.Parcel;
 
+import java.util.Objects;
+
+import io.realm.Realm;
 import io.realm.RealmObject;
+import io.realm.RealmResults;
 import io.realm.annotations.PrimaryKey;
 import io.realm.model_model_transaction_BillDetailRealmProxy;
 import model.model.util.Object;
@@ -77,5 +81,15 @@ public class BillDetail extends RealmObject {
 
     public void setUnitPrice(long unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+    public void autoId() {
+        RealmResults<BillDetail> billDetails = Realm.getDefaultInstance()
+                .where(BillDetail.class)
+                .findAllAsync();
+        billDetails.load();
+        id = billDetails.size() == 0
+                ? 0
+                : Objects.requireNonNull(billDetails.max("id")).intValue() + 1;
     }
 }
