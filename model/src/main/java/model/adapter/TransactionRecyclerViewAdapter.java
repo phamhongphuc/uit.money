@@ -21,7 +21,6 @@ import model.model.BR;
 import model.model.R;
 import model.model.Wallet;
 import model.model.transaction.Bill;
-import model.model.transaction.BillDetail;
 import model.model.transaction.Loan;
 
 import static model.Const.BILL;
@@ -33,7 +32,6 @@ import static model.Const.START_SEPARATOR;
 public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<TransactionRecyclerViewAdapter.ViewHolder> {
     private RealmResults<Loan> loans;
     private RealmResults<Bill> bills;
-    private RealmResults<BillDetail> billDetails;
     private ArrayList<TransactionModel> transactions;
 
     public TransactionRecyclerViewAdapter(Wallet wallet) {
