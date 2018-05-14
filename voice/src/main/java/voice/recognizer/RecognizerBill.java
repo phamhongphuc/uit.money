@@ -211,10 +211,10 @@ public class RecognizerBill {
                     final String minute = matcher_at.group(6);
                     final String hour_only = matcher_at.group(7);
                     if (hour != null && minute != null) {
-                        cal.set(Calendar.HOUR, getInt(hour));
+                        cal.set(Calendar.HOUR_OF_DAY, getInt(hour));
                         cal.set(Calendar.MINUTE, getInt(minute));
                     } else if (hour_only != null) {
-                        cal.set(Calendar.HOUR, getInt(hour_only));
+                        cal.set(Calendar.HOUR_OF_DAY, getInt(hour_only));
                         cal.set(Calendar.MINUTE, 0);
                     } else {
                         return null;
