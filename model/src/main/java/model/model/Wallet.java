@@ -1,6 +1,6 @@
 package model.model;
 
-import android.databinding.ObservableLong;
+import android.databinding.ObservableField;
 
 import org.parceler.Parcel;
 
@@ -21,6 +21,7 @@ import model.model.transaction.BillDetail;
 import model.model.transaction.Loan;
 
 import static model.Const.BUY;
+import static model.Const.getMoney;
 
 /**
  * <Fields>
@@ -34,7 +35,7 @@ import static model.Const.BUY;
         analyze = {Wallet.class})
 public class Wallet extends RealmObject {
     @Ignore
-    public final ObservableLong money = new ObservableLong(0);
+    public final ObservableField<String> money = new ObservableField<>("");
     @PrimaryKey
     private int id;
     @Required
@@ -51,10 +52,6 @@ public class Wallet extends RealmObject {
 
     public Wallet(Callback callback) {
         callback.call(this);
-    }
-
-    public long getMoney() {
-        return money.get();
     }
 
     @Nullable
@@ -97,28 +94,25 @@ public class Wallet extends RealmObject {
     }
 
     public void initialize() {
-        getBillDetails();
-        billDetails.removeAllChangeListeners();
-        billDetails.addChangeListener(this::updateMoney);
-        updateMoney(billDetails);
-    }
-
-    private void getBillDetails() {
         if (billDetails == null) {
             billDetails = Realm.getDefaultInstance()
                     .where(BillDetail.class)
                     .equalTo("bill.wallet.id", id)
                     .findAllAsync();
         }
+        billDetails.removeAllChangeListeners();
+        billDetails.addChangeListener(this::updateMoney);
+        updateMoney(billDetails);
     }
-
 
     private void updateMoney(RealmResults<BillDetail> billDetails) {
         long money = 0;
         for (BillDetail billDetail : billDetails) {
             money += billDetail.getMoney() * (billDetail.getBill().isBuyOrSell() == BUY ? -1 : 1);
         }
-        this.money.set(money);
+        this.money.set(
+                getMoney(money)
+        );
     }
 
     public RealmResults<Bill> getBills() {
