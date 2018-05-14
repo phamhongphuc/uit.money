@@ -37,6 +37,8 @@ public class Shadow extends View {
     }
 
     public void initialize(@NonNull Context context, @Nullable AttributeSet attrs) {
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+
         initializeAttr(context, attrs);
         initializePaint();
     }

@@ -16,6 +16,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.google.common.collect.ImmutableMap;
@@ -83,6 +84,8 @@ public class Button extends FrameLayout {
     private String font;
     private Float fontSize;
     private int shadowSize;
+    private int paddingLeft;
+    private int paddingRight;
 
     public Button(Context context) {
         super(context, null);
@@ -116,13 +119,16 @@ public class Button extends FrameLayout {
 
         textPaddingLeft = typedArray.getBoolean(R.styleable.Button__textPaddingLeft, true);
         childRadius = typedArray.getInt(R.styleable.Button__childRadius, RADIUS_NONE);
-        font = FONTs.get(typedArray.getInt(R.styleable.Button__font, 0));
+        font = FONTs.get(typedArray.getInt(R.styleable.Button__font, 1));
         fontSize = FONT_SIZEs.get(typedArray.getInt(R.styleable.Button__fontSize, 0));
 
         radius = MeasureSpec.getSize((int) typedArray.getDimension(R.styleable.Button__radius, 0));
         shadowSize = MeasureSpec.getSize((int) typedArray.getDimension(R.styleable.Button__shadowSize, 0));
         shadowColor = typedArray.getColor(R.styleable.Button__shadowColor, Color.TRANSPARENT);
         rippleColor = typedArray.getColor(R.styleable.Button__rippleColor, Color.WHITE);
+
+        paddingLeft = MeasureSpec.getSize((int) typedArray.getDimension(R.styleable.Button__paddingLeft, 0));
+        paddingRight = MeasureSpec.getSize((int) typedArray.getDimension(R.styleable.Button__paddingRight, 0));
 
         typedArray.recycle();
     }
@@ -149,8 +155,10 @@ public class Button extends FrameLayout {
                 LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT
         ));
+        linearLayoutCompat.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         linearLayoutCompat.setClipChildren(true);
         linearLayoutCompat.setClipToOutline(true);
+        linearLayoutCompat.setPadding(paddingLeft, 0, paddingRight, 0);
         addView(linearLayoutCompat);
     }
 
@@ -160,9 +168,10 @@ public class Button extends FrameLayout {
                 iconView = new AppCompatTextView(context);
                 linearLayoutCompat.addView(iconView);
             }
+            iconView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
             iconView.setText(icon);
             iconView.setTypeface(
-                    Typeface.createFromAsset(getContext().getAssets(), ICON)
+                    Typeface.createFromAsset(context.getAssets(), ICON)
             );
             iconView.setLayoutParams(new LinearLayoutCompat.LayoutParams(
                     LinearLayoutCompat.LayoutParams.WRAP_CONTENT,
@@ -183,9 +192,10 @@ public class Button extends FrameLayout {
                 textView = new AppCompatTextView(context);
                 linearLayoutCompat.addView(textView);
             }
+            textView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
             textView.setText(text);
             textView.setSingleLine(true);
-            textView.setTypeface(Typeface.createFromAsset(getContext().getAssets(), font));
+            textView.setTypeface(Typeface.createFromAsset(context.getAssets(), font));
             textView.setGravity(textAlign);
             textView.setLayoutParams(new LinearLayoutCompat.LayoutParams(
                     LayoutParams.WRAP_CONTENT,
