@@ -8,11 +8,8 @@ import android.view.View;
 
 import com.facebook.CallbackManager;
 
-import org.parceler.Parcels;
-
 import java.util.ArrayList;
 
-import model.model.Wallet;
 import uit.money.R;
 import uit.money.adapter.FragmentAdapter;
 import uit.money.databinding.ActivityLoginBinding;
@@ -33,11 +30,7 @@ public class LoginActivity extends RealmActivity {
 
     private void initializeListener() {
         Credential.initializeLogin(() -> {
-            // When already logged in facebook and connected or not connected to Realm Object Server
-            // Call after login() is called
-            Intent intent = new Intent(getBaseContext(), WalletActivity.class);
-            intent.putExtra("wallet", Parcels.wrap(Wallet.getCurrentWallet()));
-            startActivity(intent);
+            startActivity(new Intent(getBaseContext(), WalletActivity.class));
             finish();
         });
     }
@@ -59,6 +52,7 @@ public class LoginActivity extends RealmActivity {
         Credential.login(this);
     }
 
+    // Don't care about this method
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         CallbackManager.Factory.create().onActivityResult(requestCode, resultCode, data);
