@@ -11,134 +11,387 @@
             name="wallet"
             type="model.model.Wallet"/>
 
+        <variable
+            name="user"
+            type="model.model.User"/>
+
+        <variable
+            name="state"
+            type="uit.money.activity.WalletActivity.State"/>
     </data>
 
-    <FrameLayout
+    <ui.Drawer
+        android:id="@+id/drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#f5f5f5"
-        android:clipChildren="false">
-
-        <View
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="top"
-            android:layout_marginBottom="50dp"
-            android:layout_marginStart="74dp"
-            android:layout_marginTop="74dp"
-            android:background="#3c6"/>
+        android:fitsSystemWindows="false"
+        app:_isOpen="@={state.isOpenDrawer}">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="50dp"
-            android:layout_marginTop="74dp"
+            android:background="#f5f5f5"
             android:clipChildren="false"
-            android:clipToPadding="false">
+            android:fitsSystemWindows="false">
 
-            <ui.List
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:adapter="@{wallet.getTransactionAdapter()}"
+                android:layout_marginBottom="50dp"
+                android:layout_marginTop="74dp">
+
+                <ui.List
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adapter="@{wallet.getTransactionAdapter()}"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:scrollbarSize="4dp"
+                    android:scrollbarStyle="insideOverlay"
+                    android:scrollbarThumbVertical="@color/scrollbarThumb"
+                    android:scrollbars="vertical"
+                    tools:ignore="RtlSymmetry"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_bill"/>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="74dp"
+                    android:background="#3c6"/>
+            </FrameLayout>
+
+            <ui.Col
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_marginTop="24dp"
+                android:clipChildren="false">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:visibility="@{state.showSpeechRecognizerBar, default=visible}"/>
+
+                <ui.Text
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="#93c6"
+                    android:gravity="center"
+                    android:paddingBottom="4dp"
+                    android:paddingEnd="30dp"
+                    android:paddingStart="30dp"
+                    android:paddingTop="4dp"
+                    android:text="@{state.speechRecognizerString}"
+                    android:textColor="#fff"
+                    android:textSize="15sp"
+                    app:_font="regular"
+                    tools:ignore="RtlSymmetry"
+                    tools:text="369.000 đ"/>
+
+            </ui.Col>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="24dp"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:scrollbarSize="4dp"
-                android:scrollbarStyle="insideOverlay"
-                android:scrollbarThumbVertical="@color/scrollbarThumb"
-                android:scrollbars="vertical"
-                tools:ignore="RtlSymmetry"
-                tools:itemCount="3"
-                tools:listitem="@layout/item_bill"/>
-        </FrameLayout>
+                android:layerType="software">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="24dp"
-            android:clipChildren="false">
+                <ui.Shadow
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="top"
+                    app:_backgroundColor="#3c6"
+                    app:_shadowColor="#3c6"
+                    app:_shadowSize="6dp"/>
 
-            <ui.Shadow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:_backgroundColor="#3c6"
-                app:_shadowColor="#3c6"
-                app:_shadowSize="6dp"/>
+                <ui.Shadow
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom"
+                    android:layerType="software"
+                    app:_backgroundColor="#fff"
+                    app:_shadowColor="#3000"
+                    app:_shadowSize="8dp"/>
 
-            <ui.Row
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                <ui.Circle
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="-5dp"
+                    android:layout_marginStart="10dp"
+                    app:_backgroundColor="#93c6"
+                    app:_minSize="50dp"
+                    app:_ratio="@{state.ratio}"
+                    tools:_ratio="1"/>
+
+                <ui.Shadow
+                    android:layout_width="90dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginStart="30dp"
+                    app:_backgroundColor="#3c6"
+                    app:_radius="25dp"
+                    app:_shadowColor="#a3c6"
+                    app:_shadowSize="7dp"/>
 
                 <ui.Button
                     android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    app:_background="@android:color/transparent"
-                    app:_foreground="@android:color/white"
-                    app:_icon=""/>
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginStart="70dp"
+                    android:clipChildren="false"
+                    android:onClick="voice"
+                    app:_background="#0000"
+                    app:_fontSize="small"
+                    app:_foreground="#fff"
+                    app:_icon=""
+                    app:_radius="25dp"/>
+
+                <ui.Button
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginStart="30dp"
+                    android:clipChildren="false"
+                    android:onClick="voice"
+                    app:_background="#0000"
+                    app:_fontSize="medium"
+                    app:_foreground="#fff"
+                    app:_icon=""
+                    app:_radius="25dp"/>
 
                 <ui.Text
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@{wallet.name}"
-                    android:textAlignment="viewStart"
-                    android:textColor="@android:color/white"
-                    app:_autoSize="true"
-                    app:_font="regular"
-                    tools:ignore="RtlCompat"
-                    tools:text="wallet.name"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginStart="150dp"
+                    android:gravity="end|center_vertical"
+                    android:paddingEnd="30dp"
+                    android:text="@{wallet.money}"
+                    android:textColor="#3c6"
+                    android:textSize="18sp"
+                    app:_font="bold"
+                    tools:ignore="RtlSymmetry"
+                    tools:text="123.123.369.000 đ"/>
+            </FrameLayout>
 
-            </ui.Row>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="24dp"
+                android:background="@android:color/white"
+                android:clipChildren="false">
+
+                <ui.Row
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ui.Button
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:onClick="openDrawer"
+                        app:_background="#3c6"
+                        app:_childRadius="none"
+                        app:_font="light"
+                        app:_foreground="#fff"
+                        app:_icon=""
+                        app:_rippleColor="#99ffffff"
+                        app:_shadowColor="#884cb7ff"
+                        app:_shadowSize="6dp"
+                        app:_textAlign="left"
+                        app:_textPaddingLeft="false"/>
+
+                    <ui.Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:onClick="openWallets"
+                        app:_background="#3c6"
+                        app:_font="light"
+                        app:_foreground="#fff"
+                        app:_icon=""
+                        app:_rippleColor="#99ffffff"
+                        app:_shadowColor="#884cb7ff"
+                        app:_shadowSize="6dp"
+                        app:_text="@{wallet.name}"
+                        app:_textAlign="left"
+                        app:_textPaddingLeft="false"
+                        tools:_text="{Tên ví}"/>
+
+                    <ui.Button
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        app:_background="#3c6"
+                        app:_childRadius="none"
+                        app:_font="light"
+                        app:_foreground="#fff"
+                        app:_icon=""
+                        app:_rippleColor="#99ffffff"
+                        app:_shadowColor="#884cb7ff"
+                        app:_shadowSize="6dp"
+                        app:_textAlign="left"
+                        app:_textPaddingLeft="false"/>
+
+                    <ui.Button
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        app:_background="#3c6"
+                        app:_childRadius="none"
+                        app:_font="light"
+                        app:_foreground="#fff"
+                        app:_icon=""
+                        app:_rippleColor="#99ffffff"
+                        app:_shadowColor="#884cb7ff"
+                        app:_textAlign="left"
+                        app:_textPaddingLeft="false"/>
+
+                </ui.Row>
+            </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:background="#33cc66"/>
+
         </FrameLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:background="#3c6"/>
+        <android.support.design.widget.NavigationView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="bottom"
-            android:clipChildren="false"
-            android:clipToPadding="false">
-
-            <ui.Shadow
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:_backgroundColor="#fff"
-                app:_shadowColor="#2000"
-                app:_shadowSize="6dp"/>
-
-            <ui.Button
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="top"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="-15dp"
-                android:clickable="false"
                 android:clipChildren="false"
-                app:_background="#3c6"
-                app:_fontSize="medium"
-                app:_foreground="#fff"
-                app:_icon=""
-                app:_radius="25dp"
-                app:_shadowColor="#a3c6"
-                app:_shadowSize="7dp"/>
+                android:clipToPadding="false"
+                android:layerType="software">
 
-            <ui.Text
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="end"
-                android:layout_marginStart="150dp"
-                android:gravity="end|center_vertical"
-                android:paddingEnd="30dp"
-                android:text="@{model.Const.getMoney(wallet.money)}"
-                android:textColor="#222222"
-                android:textSize="18sp"
-                app:_font="bold"
-                tools:ignore="RtlSymmetry"
-                tools:text="369.000 đ"/>
-        </FrameLayout>
-    </FrameLayout>
+                <ui.Col
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="94dp"
+                    android:background="#f4f4f4"
+                    android:layerType="hardware">
+
+                    <ui.Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        app:_background="#15000000"
+                        app:_font="regular"
+                        app:_fontSize="small"
+                        app:_foreground="#555"
+                        app:_icon=""
+                        app:_paddingLeft="7dp"
+                        app:_rippleColor="#2000"
+                        app:_text="Danh sách ví"
+                        app:_textAlign="left"
+                        app:_textPaddingLeft="false"/>
+
+                    <ui.Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        app:_background="#0000"
+                        app:_font="regular"
+                        app:_fontSize="small"
+                        app:_foreground="#555"
+                        app:_icon=""
+                        app:_paddingLeft="7dp"
+                        app:_rippleColor="#2000"
+                        app:_text="Sổ nợ"
+                        app:_textAlign="left"
+                        app:_textPaddingLeft="false"/>
+
+                    <ui.Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        app:_background="#0000"
+                        app:_font="regular"
+                        app:_fontSize="small"
+                        app:_foreground="#555"
+                        app:_icon=""
+                        app:_paddingLeft="7dp"
+                        app:_rippleColor="#2000"
+                        app:_text="Thống kê"
+                        app:_textAlign="left"
+                        app:_textPaddingLeft="false"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <ui.Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        app:_background="#0000"
+                        app:_font="regular"
+                        app:_fontSize="small"
+                        app:_foreground="#555"
+                        app:_icon=""
+                        app:_paddingLeft="7dp"
+                        app:_rippleColor="#2000"
+                        app:_text="Hướng dẫn"
+                        app:_textAlign="left"
+                        app:_textPaddingLeft="false"/>
+
+                    <ui.Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="45dp"
+                        app:_background="#0000"
+                        app:_font="regular"
+                        app:_fontSize="small"
+                        app:_foreground="#555"
+                        app:_icon=""
+                        app:_paddingLeft="7dp"
+                        app:_rippleColor="#2000"
+                        app:_text="Đăng xuất"
+                        app:_textAlign="left"
+                        app:_textPaddingLeft="false"/>
+                </ui.Col>
+
+                <ui.Shadow
+                    android:layout_width="match_parent"
+                    android:layout_height="94dp"
+                    app:_backgroundColor="#3c6"
+                    app:_shadowColor="#a3c6"
+                    app:_shadowSize="5dp"/>
+
+                <ui.Row
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layerType="hardware"
+                    android:padding="15dp">
+
+                    <ui.Avatar
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="15dp"
+                        app:_fbid="@{user.fbid}"
+                        app:_innerSize="40dp"
+                        app:_outerSize="40dp"/>
+
+                    <ui.Text
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:gravity="center_vertical|start"
+                        android:text="@{user.name}"
+                        android:textColor="#cfff"
+                        android:textSize="17sp"
+                        app:_font="bold"/>
+                </ui.Row>
+            </FrameLayout>
+        </android.support.design.widget.NavigationView>
+    </ui.Drawer>
 </layout>
