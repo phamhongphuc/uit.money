@@ -11,5 +11,7 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowContentOverlay">@null</item>
+
+        <item name="android:colorPrimaryDark">#33cc66</item>
     </style>
 </resources>
