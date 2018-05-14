@@ -110,9 +110,7 @@ public class Wallet extends RealmObject {
         for (BillDetail billDetail : billDetails) {
             money += billDetail.getMoney() * (billDetail.getBill().isBuyOrSell() == BUY ? -1 : 1);
         }
-        this.money.set(
-                getMoney(money)
-        );
+        this.money.set(getMoney(money));
     }
 
     public RealmResults<Bill> getBills() {
