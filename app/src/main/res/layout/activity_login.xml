@@ -6,9 +6,10 @@
     tools:context=".activity.LoginActivity">
 
     <data>
+
         <variable
             name="adapter"
-            type="uit.money.adapter.FragmentAdapter"/>
+            type="uit.money.fragment.FragmentAdapter"/>
     </data>
 
     <ui.Col
@@ -17,6 +18,7 @@
         android:background="#fff"
         android:clipChildren="false"
         android:gravity="center"
+        android:layerType="software"
         android:paddingTop="24dp">
 
         <FrameLayout
@@ -39,13 +41,14 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clipChildren="true">
+                android:clipChildren="true"
+                android:layerType="hardware">
 
                 <android.support.v4.view.ViewPager
-                    android:adapter="@{adapter}"
                     android:id="@+id/viewPagerLogin"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:adapter="@{adapter}"/>
             </FrameLayout>
         </FrameLayout>
 

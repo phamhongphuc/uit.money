@@ -1,4 +1,4 @@
-package uit.money.adapterModel.separator;
+package uit.money.adapter.separator;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;

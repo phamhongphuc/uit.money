@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bill_detail_height">25dp</dimen>
+    <dimen name="bill_detail_cross_padding">15dp</dimen>
+    <dimen name="bill_detail_money_min_width">80dp</dimen>
+</resources>

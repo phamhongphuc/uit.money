@@ -8,7 +8,7 @@
 
         <variable
             name="dateSeparator"
-            type="uit.money.adapterModel.separator.DateSeparator"/>
+            type="uit.money.adapter.separator.DateSeparator"/>
     </data>
 
     <ui.Row

@@ -18,7 +18,7 @@ import java.util.Observable;
 import model.model.User;
 import model.model.Wallet;
 import uit.money.R;
-import uit.money.adapterModel.TransactionRecyclerViewAdapter;
+import uit.money.adapter.TransactionRecyclerViewAdapter;
 import uit.money.databinding.ActivityWalletBinding;
 import uit.money.facebook.Credential;
 import voice.Voice;

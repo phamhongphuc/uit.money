@@ -11,7 +11,7 @@
 
         <variable
             name="action"
-            type="uit.money.adapterModel.TransactionRecyclerViewAdapter.Action"/>
+            type="uit.money.adapter.TransactionRecyclerViewAdapter"/>
     </data>
 
     <ui.Row

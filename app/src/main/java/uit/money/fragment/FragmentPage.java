@@ -1,4 +1,4 @@
-package uit.money.adapter;
+package uit.money.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

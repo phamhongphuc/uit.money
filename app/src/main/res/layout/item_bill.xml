@@ -11,7 +11,7 @@
 
         <variable
             name="action"
-            type="uit.money.adapterModel.TransactionRecyclerViewAdapter.Action"/>
+            type="uit.money.adapter.TransactionRecyclerViewAdapter.Action"/>
     </data>
 
     <ui.Row
@@ -118,14 +118,10 @@
                         tools:text="Mua/Bán"/>
                 </ui.Row>
 
-                <!--<ui.List-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:adapter="@{bill.billDetailAdapter}"-->
-                <!--android:clickable="false"-->
-                <!--android:scrollbars="none"-->
-                <!--tools:itemCount="2"-->
-                <!--tools:listitem="@layout/item_bill_detail"/>-->
+                <uit.money.view.BillDetailsView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:_billId="@{bill.id}"/>
 
                 <ui.Row
                     android:layout_width="match_parent"

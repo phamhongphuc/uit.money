@@ -1,12 +1,12 @@
-package uit.money.adapterModel.separator;
+package uit.money.adapter.separator;
 
 import java.util.Date;
 
 import model.model.transaction.TransactionModel;
 
-import static model.Const.START_SEPARATOR;
+import static model.Const.END_SEPARATOR;
 
-public class StartSeparator implements TransactionModel {
+public class EndSeparator implements TransactionModel {
     @Override
     public Date getTime() {
         return null;
@@ -14,7 +14,7 @@ public class StartSeparator implements TransactionModel {
 
     @Override
     public int getType() {
-        return START_SEPARATOR;
+        return END_SEPARATOR;
     }
 
     @Override
