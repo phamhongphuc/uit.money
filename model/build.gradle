@@ -40,17 +40,15 @@ realm {
 dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    annotationProcessor 'org.parceler:parceler:1.1.10'
     testImplementation 'junit:junit:4.12'
 
-    annotationProcessor 'org.parceler:parceler:1.1.10'
-    implementation 'org.parceler:parceler-api:1.1.10'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation 'org.parceler:parceler-api:1.1.10'
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
-
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'io.realm:android-adapters:3.0.0'
-
     implementation 'org.apache.commons:commons-lang3:3.7'
 
     implementation project(path: ':ui')
