@@ -14,12 +14,16 @@
 
     <ui.Row
         android:layout_width="match_parent"
-        android:layout_height="25dp">
+        android:layout_height="25dp"
+        android:clickable="false"
+        android:focusable="false">
 
         <ui.Text
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:clickable="false"
+            android:focusable="false"
             android:gravity="center_vertical"
             android:text="@{`+ ` + billDetail.object.name}"
             android:textSize="15sp"
@@ -29,6 +33,8 @@
         <ui.Text
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:clickable="false"
+            android:focusable="false"
             android:gravity="center_vertical|end"
             android:text="@{String.valueOf(billDetail.amount)}"
             android:textColor="#999"
@@ -40,6 +46,8 @@
         <ui.Text
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:clickable="false"
+            android:focusable="false"
             android:gravity="center_vertical|end"
             android:paddingEnd="15dp"
             android:paddingStart="15dp"
@@ -52,6 +60,8 @@
         <ui.Text
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:clickable="false"
+            android:focusable="false"
             android:gravity="center_vertical|end"
             android:minWidth="90dp"
             android:text="@{model.Const.getMoney(billDetail.unitPrice)}"

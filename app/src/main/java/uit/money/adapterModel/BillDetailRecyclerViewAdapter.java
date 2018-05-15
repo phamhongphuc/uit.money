@@ -1,4 +1,4 @@
-package model.adapter;
+package uit.money.adapterModel;
 
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -6,10 +6,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import io.realm.RealmRecyclerViewAdapter;
-import model.model.BR;
-import model.model.R;
+import uit.money.BR;
+import uit.money.R;
 import model.model.transaction.Bill;
 import model.model.transaction.BillDetail;
 
@@ -45,6 +46,9 @@ public class BillDetailRecyclerViewAdapter extends RealmRecyclerViewAdapter<Bill
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT
             ));
+            binding.getRoot().setOnClickListener(v -> {
+                ((FrameLayout) v.getParent().getParent().getParent()).getChildAt(0).callOnClick();
+            });
             this.binding = binding;
         }
 

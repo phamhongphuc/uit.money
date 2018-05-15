@@ -15,7 +15,6 @@ import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 import io.realm.model_model_WalletRealmProxy;
-import model.adapter.TransactionRecyclerViewAdapter;
 import model.model.transaction.Bill;
 import model.model.transaction.BillDetail;
 import model.model.transaction.Loan;
@@ -152,10 +151,6 @@ public class Wallet extends RealmObject {
                 .where(Loan.class)
                 .equalTo("wallet.id", id)
                 .findAllAsync();
-    }
-
-    public TransactionRecyclerViewAdapter getTransactionAdapter() {
-        return new TransactionRecyclerViewAdapter(this);
     }
 
     public interface Callback {

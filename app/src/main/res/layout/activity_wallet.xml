@@ -16,6 +16,10 @@
             type="model.model.User"/>
 
         <variable
+            name="activity"
+            type="uit.money.activity.WalletActivity"/>
+
+        <variable
             name="state"
             type="uit.money.activity.WalletActivity.State"/>
     </data>
@@ -43,7 +47,7 @@
                 <ui.List
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:adapter="@{wallet.getTransactionAdapter()}"
+                    android:adapter="@{state.getTransactionAdapter(wallet)}"
                     android:clipChildren="false"
                     android:clipToPadding="false"
                     android:scrollbarSize="4dp"
@@ -334,6 +338,7 @@
                     <ui.Button
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
+                        android:onClick="logout"
                         app:_background="#0000"
                         app:_font="regular"
                         app:_fontSize="small"
@@ -341,7 +346,6 @@
                         app:_icon=""
                         app:_paddingLeft="7dp"
                         app:_rippleColor="#2000"
-                        android:onClick="logout"
                         app:_text="Đăng xuất"
                         app:_textAlign="left"
                         app:_textPaddingLeft="false"/>

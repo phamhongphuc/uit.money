@@ -1,12 +1,12 @@
-package model.adapter.separator;
+package uit.money.adapterModel.separator;
 
 import java.util.Date;
 
-import model.adapter.TransactionRecyclerViewAdapter;
+import model.model.transaction.TransactionModel;
 
 import static model.Const.START_SEPARATOR;
 
-public class StartSeparator implements TransactionRecyclerViewAdapter.TransactionModel {
+public class StartSeparator implements TransactionModel {
     @Override
     public Date getTime() {
         return null;

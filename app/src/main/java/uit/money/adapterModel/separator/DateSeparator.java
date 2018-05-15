@@ -1,15 +1,15 @@
-package model.adapter.separator;
+package uit.money.adapterModel.separator;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import model.adapter.TransactionRecyclerViewAdapter;
 import model.model.R;
+import model.model.transaction.TransactionModel;
 
 import static model.Const.DATE_SEPARATOR;
 import static model.Const.getString;
 
-public class DateSeparator implements TransactionRecyclerViewAdapter.TransactionModel {
+public class DateSeparator implements TransactionModel {
     private Date time;
 
     public DateSeparator(Date time) {

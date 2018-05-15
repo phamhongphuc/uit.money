@@ -12,14 +12,13 @@ import android.transition.TransitionManager;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.facebook.login.LoginManager;
-
 import java.util.ArrayList;
 import java.util.Observable;
 
 import model.model.User;
 import model.model.Wallet;
 import uit.money.R;
+import uit.money.adapterModel.TransactionRecyclerViewAdapter;
 import uit.money.databinding.ActivityWalletBinding;
 import uit.money.facebook.Credential;
 import voice.Voice;
@@ -151,6 +150,10 @@ public class WalletActivity extends RealmActivity {
         public static void setVisibility(View view, int visibility) {
             TransitionManager.beginDelayedTransition((ViewGroup) view.getParent());
             view.setVisibility(visibility);
+        }
+
+        public TransactionRecyclerViewAdapter getTransactionAdapter(Wallet wallet) {
+            return new TransactionRecyclerViewAdapter(wallet);
         }
     }
 }

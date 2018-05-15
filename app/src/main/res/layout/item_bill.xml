@@ -8,13 +8,19 @@
         <variable
             name="bill"
             type="model.model.transaction.Bill"/>
+
+        <variable
+            name="action"
+            type="uit.money.adapterModel.TransactionRecyclerViewAdapter.Action"/>
     </data>
 
     <ui.Row
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:clipChildren="false"
         android:clipToPadding="false"
+        android:focusable="true"
         android:layerType="software"
         android:paddingEnd="20dp"
         tools:background="#ccc"
@@ -49,14 +55,14 @@
                 android:layout_marginTop="0dp"
                 android:background="#3c6"/>
 
-            <ui.Button
+            <ui.Shadow
                 android:layout_width="21dp"
                 android:layout_height="21dp"
                 android:layout_gravity="center_horizontal|top"
                 android:layout_marginTop="17dp"
                 android:clickable="false"
                 android:clipChildren="false"
-                app:_background="#3c6"
+                app:_backgroundColor="#3c6"
                 app:_radius="10.5dp"
                 app:_shadowColor="#73c6"
                 app:_shadowSize="5dp"/>
@@ -68,21 +74,27 @@
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:clipChildren="false">
+            android:clickable="true"
+            android:clipChildren="false"
+            android:focusable="true">
 
             <ui.Shadow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{action::click}"
                 app:_backgroundColor="#fff"
                 app:_dy="1dp"
                 app:_radius="5dp"
+                app:_rippleColor="#73c6"
                 app:_shadowColor="#15000000"
                 app:_shadowSize="8dp"/>
 
             <ui.Col
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="false"
                 android:layerType="hardware"
                 android:paddingBottom="5dp"
                 android:paddingEnd="10dp"
@@ -91,7 +103,8 @@
 
                 <ui.Row
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:clickable="false">
 
                     <ui.Text
                         android:layout_width="match_parent"
@@ -105,19 +118,19 @@
                         tools:text="Mua/Bán"/>
                 </ui.Row>
 
-                <ui.List
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:adapter="@{bill.billDetailAdapter}"
-                    android:clipChildren="false"
-                    android:clipToPadding="false"
-                    android:scrollbars="none"
-                    tools:itemCount="3"
-                    tools:listitem="@layout/item_bill_detail"/>
+                <!--<ui.List-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:adapter="@{bill.billDetailAdapter}"-->
+                <!--android:clickable="false"-->
+                <!--android:scrollbars="none"-->
+                <!--tools:itemCount="2"-->
+                <!--tools:listitem="@layout/item_bill_detail"/>-->
 
                 <ui.Row
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:clickable="false">
 
                     <ui.Text
                         android:layout_width="match_parent"
@@ -128,7 +141,7 @@
                         android:textColor="@{bill.moneyColor}"
                         android:textSize="15sp"
                         app:_font="bold"
-                        tools:text="10.000 đ"/>
+                        tools:text="20.000 đ"/>
                 </ui.Row>
             </ui.Col>
         </FrameLayout>

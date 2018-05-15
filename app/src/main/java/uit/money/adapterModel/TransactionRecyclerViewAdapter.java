@@ -1,10 +1,12 @@
-package model.adapter;
+package uit.money.adapterModel;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import org.apache.commons.lang3.time.DateUtils;
@@ -16,13 +18,15 @@ import java.util.List;
 import java.util.ListIterator;
 
 import io.realm.RealmResults;
-import model.adapter.separator.DateSeparator;
-import model.adapter.separator.EndSeparator;
-import model.model.BR;
-import model.model.R;
 import model.model.Wallet;
 import model.model.transaction.Bill;
 import model.model.transaction.Loan;
+import model.model.transaction.TransactionModel;
+import uit.money.BR;
+import uit.money.R;
+import uit.money.activity.LoginActivity;
+import uit.money.adapterModel.separator.DateSeparator;
+import uit.money.adapterModel.separator.EndSeparator;
 
 import static model.Const.BILL;
 import static model.Const.DATE_SEPARATOR;
@@ -109,14 +113,6 @@ public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<Transac
         return transactions.size();
     }
 
-    public interface TransactionModel {
-        Date getTime();
-
-        int getType();
-
-        void initialize();
-    }
-
     static class ViewHolder extends RecyclerView.ViewHolder {
         private final ViewDataBinding binding;
         private int variable;
@@ -142,7 +138,17 @@ public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<Transac
         void bind(TransactionModel model) {
             model.initialize();
             binding.setVariable(variable, model);
+            binding.setVariable(BR.action, new Action());
             binding.executePendingBindings();
+        }
+    }
+
+    public static class Action {
+        Action() {
+        }
+
+        public void click(View view) {
+            view.getContext().startActivity(new Intent(view.getContext(), LoginActivity.class));
         }
     }
 }

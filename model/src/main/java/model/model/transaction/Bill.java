@@ -12,8 +12,6 @@ import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 import io.realm.model_model_transaction_BillRealmProxy;
-import model.adapter.BillDetailRecyclerViewAdapter;
-import model.adapter.TransactionRecyclerViewAdapter.TransactionModel;
 import model.model.Person;
 import model.model.R;
 import model.model.Wallet;
@@ -145,10 +143,6 @@ public class Bill extends RealmObject implements Transaction, TransactionModel {
             money += billDetail.getMoney();
         }
         setMoney(money);
-    }
-
-    public BillDetailRecyclerViewAdapter getBillDetailAdapter() {
-        return new BillDetailRecyclerViewAdapter(this);
     }
 
     public int getMoneyColor() {
