@@ -59,6 +59,7 @@
         <attr name="_shadowSize" format="dimension"/>
         <attr name="_dx" format="dimension"/>
         <attr name="_dy" format="dimension"/>
+        <attr name="_rippleColor"/>
         <attr name="_shadowColor" format="color"/>
         <attr name="_backgroundColor" format="color"/>
     </declare-styleable>

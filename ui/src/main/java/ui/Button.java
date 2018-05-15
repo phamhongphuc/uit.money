@@ -1,14 +1,10 @@
 package ui;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.RippleDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,7 +17,6 @@ import android.widget.FrameLayout;
 
 import com.google.common.collect.ImmutableMap;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
 
@@ -135,8 +130,8 @@ public class Button extends FrameLayout {
 
     private void initializeShadow(Context context) {
         Shadow shadow = new Shadow(context);
-        shadow.setForeground(getRippleDrawable());
         shadow.setClickable(true);
+        shadow.setRippleColor(rippleColor);
         shadow.setShadowColor(shadowColor);
         shadow.setBackground(background);
         shadow.setShadowSize(shadowSize);
@@ -207,22 +202,6 @@ public class Button extends FrameLayout {
         } else if (textView != null) {
             linearLayoutCompat.removeView(textView);
         }
-    }
-
-    @NonNull
-    private RippleDrawable getRippleDrawable() {
-        float[] outer = new float[8];
-        Arrays.fill(outer, radius);
-        RoundRectShape roundRectShape = new RoundRectShape(
-                outer,
-                null,
-                null
-        );
-        return new RippleDrawable(
-                ColorStateList.valueOf(rippleColor),
-                null,
-                new ShapeDrawable(roundRectShape)
-        );
     }
 
     @NonNull
