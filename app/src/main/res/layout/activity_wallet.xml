@@ -234,20 +234,6 @@
                         app:_childRadius="none"
                         app:_font="light"
                         app:_foreground="#fff"
-                        app:_icon=""
-                        app:_rippleColor="#99ffffff"
-                        app:_shadowColor="#884cb7ff"
-                        app:_shadowSize="6dp"
-                        app:_textAlign="left"
-                        app:_textPaddingLeft="false"/>
-
-                    <ui.Button
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        app:_background="#3c6"
-                        app:_childRadius="none"
-                        app:_font="light"
-                        app:_foreground="#fff"
                         app:_icon=""
                         app:_rippleColor="#99ffffff"
                         app:_shadowColor="#884cb7ff"
@@ -355,6 +341,7 @@
                         app:_icon=""
                         app:_paddingLeft="7dp"
                         app:_rippleColor="#2000"
+                        android:onClick="logout"
                         app:_text="Đăng xuất"
                         app:_textAlign="left"
                         app:_textPaddingLeft="false"/>

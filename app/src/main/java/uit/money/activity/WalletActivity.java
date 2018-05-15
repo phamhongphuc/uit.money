@@ -1,5 +1,6 @@
 package uit.money.activity;
 
+import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableBoolean;
@@ -11,6 +12,8 @@ import android.transition.TransitionManager;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.facebook.login.LoginManager;
+
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -18,6 +21,7 @@ import model.model.User;
 import model.model.Wallet;
 import uit.money.R;
 import uit.money.databinding.ActivityWalletBinding;
+import uit.money.facebook.Credential;
 import voice.Voice;
 import voice.recognizer.RecognizerBill;
 
@@ -125,6 +129,12 @@ public class WalletActivity extends RealmActivity {
     }
 
     public void openWallets(View view) {
+    }
+
+    public void logout(View view) {
+        Credential.logout();
+        startActivity(new Intent(getBaseContext(), LoginActivity.class));
+        finish();
     }
 
     public static class State extends Observable {
