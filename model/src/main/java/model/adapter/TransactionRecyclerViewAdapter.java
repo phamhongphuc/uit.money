@@ -12,6 +12,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.ListIterator;
 
 import io.realm.RealmResults;
@@ -32,7 +33,7 @@ import static model.Const.START_SEPARATOR;
 public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<TransactionRecyclerViewAdapter.ViewHolder> {
     private RealmResults<Loan> loans;
     private RealmResults<Bill> bills;
-    private ArrayList<TransactionModel> transactions;
+    private List<TransactionModel> transactions;
 
     public TransactionRecyclerViewAdapter(Wallet wallet) {
         loans = wallet.getLoans();
@@ -55,6 +56,7 @@ public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<Transac
         transactions.addAll(bills);
 
         Collections.sort(transactions, (a, b) -> a.getTime().compareTo(b.getTime()));
+
         ListIterator<TransactionModel> i = transactions.listIterator();
         Date time = new Date(0);
         while (i.hasNext()) {
