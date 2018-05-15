@@ -14,13 +14,14 @@ import java.util.Map;
 
 import ui.ui.R;
 
+import static ui.utils.Const.BOLD;
+import static ui.utils.Const.LIGHT;
+import static ui.utils.Const.NONE;
+import static ui.utils.Const.REGULAR;
+
 public class Text extends AppCompatTextView {
     private static final String TAG = "Text";
 
-    private static final String NONE = "";
-    private static final String REGULAR = "fonts/segoe regular.ttf";
-    private static final String LIGHT = "fonts/segoe light.ttf";
-    private static final String BOLD = "fonts/segoe bold.ttf";
     private static final Map<Integer, String> FONTs = ImmutableMap.<Integer, String>builder()
             .put(0, NONE)
             .put(1, REGULAR)
@@ -77,5 +78,10 @@ public class Text extends AppCompatTextView {
         final int height = MeasureSpec.getSize(heightMeasureSpec);
 
         if (autoSize) setTextSize(height * 0.35f / dp);
+    }
+
+    public void set_font(String font) {
+        this.font = font;
+        initializeTypeface(getContext());
     }
 }
