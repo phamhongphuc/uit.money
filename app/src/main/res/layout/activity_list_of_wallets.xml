@@ -118,7 +118,7 @@
                 <ui.Button
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:onClick="goBack"
+                    android:onClick="back"
                     app:_background="#3c6"
                     app:_childRadius="none"
                     app:_font="light"
@@ -147,7 +147,7 @@
                 <ui.Button
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:onClick="goBack"
+                    android:onClick="create"
                     app:_background="#3c6"
                     app:_childRadius="none"
                     app:_font="light"

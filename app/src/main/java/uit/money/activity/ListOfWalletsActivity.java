@@ -1,6 +1,7 @@
 package uit.money.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableField;
 import android.os.Bundle;
@@ -34,9 +35,12 @@ public class ListOfWalletsActivity extends RealmActivity {
         binding.setState(new State());
     }
 
-    public void goBack(View view) {
+    public void back(View view) {
         setResult(Activity.RESULT_CANCELED);
         finish();
+    }
+
+    public void create(View view) {
     }
 
     public static class State extends Observable {
