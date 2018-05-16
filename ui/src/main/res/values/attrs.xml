@@ -86,4 +86,7 @@
         <attr name="_innerSize" format="dimension"/>
         <attr name="_outerSize" format="dimension"/>
     </declare-styleable>
+    <declare-styleable name="List">
+        <attr name="_stackFromEnd" format="boolean"/>
+    </declare-styleable>
 </resources>
