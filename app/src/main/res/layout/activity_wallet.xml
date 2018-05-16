@@ -211,8 +211,6 @@
                         app:_foreground="#fff"
                         app:_icon=""
                         app:_rippleColor="#99ffffff"
-                        app:_shadowColor="#884cb7ff"
-                        app:_shadowSize="6dp"
                         app:_textAlign="left"
                         app:_textPaddingLeft="false"/>
 
@@ -232,8 +230,6 @@
                         app:_foreground="#fff"
                         app:_icon=""
                         app:_rippleColor="#99ffffff"
-                        app:_shadowColor="#884cb7ff"
-                        app:_shadowSize="6dp"
                         app:_text="@{wallet.name}"
                         app:_textAlign="left"
                         app:_textPaddingLeft="false"
@@ -248,7 +244,6 @@
                         app:_foreground="#fff"
                         app:_icon=""
                         app:_rippleColor="#99ffffff"
-                        app:_shadowColor="#884cb7ff"
                         app:_textAlign="left"
                         app:_textPaddingLeft="false"/>
 

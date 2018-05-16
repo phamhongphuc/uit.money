@@ -125,8 +125,6 @@
                     app:_foreground="#fff"
                     app:_icon=""
                     app:_rippleColor="#99ffffff"
-                    app:_shadowColor="#884cb7ff"
-                    app:_shadowSize="6dp"
                     app:_textAlign="left"
                     app:_textPaddingLeft="false"/>
 
@@ -143,9 +141,6 @@
                     app:_background="#3c6"
                     app:_font="light"
                     app:_foreground="#fff"
-                    app:_rippleColor="#99ffffff"
-                    app:_shadowColor="#884cb7ff"
-                    app:_shadowSize="6dp"
                     app:_text="Chọn một ví"
                     app:_textAlign="left"/>
 
@@ -159,8 +154,6 @@
                     app:_foreground="#fff"
                     app:_icon=""
                     app:_rippleColor="#99ffffff"
-                    app:_shadowColor="#884cb7ff"
-                    app:_shadowSize="6dp"
                     app:_textAlign="left"
                     app:_textPaddingLeft="false"/>
 
