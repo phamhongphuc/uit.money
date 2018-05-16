@@ -92,7 +92,7 @@ public class Wallet extends RealmObject {
         return managedWallet;
     }
 
-    private void autoId() {
+    public void autoId() {
         RealmResults<Wallet> wallets = Realm.getDefaultInstance()
                 .where(Wallet.class)
                 .findAllAsync();
