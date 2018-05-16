@@ -60,7 +60,7 @@
             app:_background="#3498db"
             app:_backgroundIcon="#2000"
             app:_childRadius="none"
-            app:_font="light"
+            app:_font="regular"
             app:_foreground="#fff"
             app:_icon=""
             app:_radius="6dp"

@@ -32,16 +32,15 @@ public class WalletActivity extends RealmActivity {
     private Wallet wallet;
     private Voice voice;
     private State state = new State();
-    private User user;
+    private ActivityWalletBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallet);
 
-        initializeWallet();
-        initializeUser();
         initializeVoice();
+        initializeWallet();
         initializeDataBinding();
     }
 
@@ -52,10 +51,6 @@ public class WalletActivity extends RealmActivity {
         }
     }
 
-    private void initializeUser() {
-        user = User.getCurrentUser();
-    }
-
     private void initializeVoice() {
         voice = new Voice(this);
         voice.setListener(new Voice.Listener() {
@@ -63,7 +58,7 @@ public class WalletActivity extends RealmActivity {
             public void onBeginningOfSpeech() {
                 super.onBeginningOfSpeech();
                 state.speechRecognizerString.set(getString(R.string.voice_start));
-                state.setShowSpeechRecognizerBar(true);
+                state.setIsShowSpeechRecognizerBar(true);
             }
 
             @Override
@@ -85,7 +80,7 @@ public class WalletActivity extends RealmActivity {
             public void onError(String error) {
                 state.speechRecognizerString.set(error);
                 state.ratio.set(0);
-                setTimeout(() -> state.setShowSpeechRecognizerBar(false), 1200);
+                setTimeout(() -> state.setIsShowSpeechRecognizerBar(false), 1200);
             }
 
             @Override
@@ -94,7 +89,7 @@ public class WalletActivity extends RealmActivity {
                 final ArrayList<String> log = getMatches(results);
                 state.speechRecognizerString.set(log.get(0));
                 state.ratio.set(0);
-                setTimeout(() -> state.setShowSpeechRecognizerBar(false), 1200);
+                setTimeout(() -> state.setIsShowSpeechRecognizerBar(false), 1200);
 
                 RecognizerBill recognizerBill = new RecognizerBill(wallet, log.get(0));
 
@@ -113,10 +108,9 @@ public class WalletActivity extends RealmActivity {
     }
 
     private void initializeDataBinding() {
-        final ActivityWalletBinding binding;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_wallet);
+        binding.setUser(User.getCurrentUser());
         binding.setWallet(wallet);
-        binding.setUser(user);
         binding.setState(state);
     }
 
@@ -132,12 +126,17 @@ public class WalletActivity extends RealmActivity {
         startActivityForResult(new Intent(getBaseContext(), ListOfWalletsActivity.class), CHANGE_WALLET);
     }
 
+    public void editWallet(View view) {
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CHANGE_WALLET) {
             if (resultCode == RESULT_OK) {
                 initializeWallet();
+                binding.setWallet(wallet);
             }
         }
     }
@@ -150,7 +149,7 @@ public class WalletActivity extends RealmActivity {
 
     public static class State extends Observable {
         public final ObservableBoolean isOpenDrawer = new ObservableBoolean(false);
-        public final ObservableInt showSpeechRecognizerBar = new ObservableInt(View.GONE);
+        public final ObservableInt isShowSpeechRecognizerBar = new ObservableInt(View.GONE);
         public final ObservableField<String> speechRecognizerString = new ObservableField<>("");
         public final ObservableFloat ratio = new ObservableFloat(0);
 
@@ -160,8 +159,8 @@ public class WalletActivity extends RealmActivity {
             view.setVisibility(visibility);
         }
 
-        public void setShowSpeechRecognizerBar(boolean value) {
-            showSpeechRecognizerBar.set(value ? View.VISIBLE : View.GONE);
+        public void setIsShowSpeechRecognizerBar(boolean value) {
+            isShowSpeechRecognizerBar.set(value ? View.VISIBLE : View.GONE);
         }
 
         public TransactionRecyclerViewAdapter getTransactionAdapter(Wallet wallet) {

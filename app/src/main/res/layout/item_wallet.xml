@@ -49,7 +49,7 @@
                 app:_radius="5dp"
                 app:_rippleColor="#73c6"
                 app:_shadowColor="#15000000"
-                app:_shadowSize="8dp"/>
+                app:_shadowSize="4dp"/>
 
             <ui.Col
                 android:layout_width="match_parent"

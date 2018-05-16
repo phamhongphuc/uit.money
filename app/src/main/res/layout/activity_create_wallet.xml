@@ -8,8 +8,8 @@
     <data>
 
         <variable
-            name="x"
-            type="String"/>
+            name="state"
+            type="uit.money.activity.CreateWalletActivity.State"/>
     </data>
 
     <FrameLayout
@@ -21,25 +21,77 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="50dp"
-            android:layout_marginTop="74dp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="74dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:layerType="software"
+            android:padding="20dp">
+
+            <ui.Shadow
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:_backgroundColor="#fff"
+                app:_shadowColor="#15000000"
+                app:_shadowSize="5dp"/>
 
             <ui.Col
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="15dp">
+                android:layout_height="wrap_content">
 
                 <ui.Row
                     android:layout_width="match_parent"
                     android:layout_height="50dp">
 
-                    <ui.TextInput
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                    <ui.Text
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/wallet_name_field"
+                        android:textColor="#444"
+                        app:_autoPadding="true"
+                        app:_autoSize="true"
+                        app:_font="regular"/>
+
+                    <ui.InputText
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        android:text="@={state.wallet}"
+                        android:textColor="#444"
+                        app:_autoSize="true"
+                        app:_font="regular"/>
+                </ui.Row>
+
+                <ui.Row
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <ui.Text
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/money_number"
+                        android:textColor="#444"
+                        app:_autoPadding="true"
+                        app:_autoSize="true"
+                        app:_font="regular"/>
+
+                    <ui.InputMoney
+                        android:id="@+id/abcde"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        android:digits="0123456789"
+                        android:inputType="numberDecimal"
+                        android:text="@={state.money}"
+                        android:textColor="#444"
+                        app:_autoSize="true"
+                        app:_font="regular"/>
                 </ui.Row>
             </ui.Col>
-
         </FrameLayout>
 
         <FrameLayout
@@ -59,45 +111,6 @@
                 app:_shadowColor="#3c6"
                 app:_shadowSize="6dp"/>
 
-            <ui.Shadow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="bottom"
-                android:layerType="software"
-                app:_backgroundColor="#fff"
-                app:_shadowColor="#3000"
-                app:_shadowSize="8dp"/>
-
-            <ui.Row
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="bottom">
-
-                <ui.Text
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="bottom|start"
-                    android:gravity="end|center_vertical"
-                    android:paddingStart="25dp"
-                    android:text="@string/sum"
-                    android:textColor="#3c6"
-                    android:textSize="18sp"
-                    app:_font="bold"
-                    tools:ignore="RtlSymmetry"/>
-
-                <ui.Text
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="bottom|start"
-                    android:layout_weight="1"
-                    android:gravity="end|center_vertical"
-                    android:paddingEnd="25dp"
-                    android:textColor="#3c6"
-                    android:textSize="18sp"
-                    app:_font="bold"
-                    tools:ignore="RtlSymmetry"
-                    tools:text="123.456.789 đ"/>
-            </ui.Row>
         </FrameLayout>
 
         <FrameLayout
@@ -118,7 +131,7 @@
                     android:onClick="back"
                     app:_background="#3c6"
                     app:_childRadius="none"
-                    app:_font="light"
+                    app:_font="regular"
                     app:_foreground="#fff"
                     app:_icon=""
                     app:_rippleColor="#99ffffff"
@@ -136,9 +149,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     app:_background="#3c6"
-                    app:_font="light"
+                    app:_font="regular"
                     app:_foreground="#fff"
-                    app:_text="Chọn một ví"
+                    app:_text="Tạo ví mới"
                     app:_textAlign="left"/>
 
                 <ui.Button
@@ -147,9 +160,9 @@
                     android:onClick="done"
                     app:_background="#3c6"
                     app:_childRadius="none"
-                    app:_font="light"
+                    app:_font="regular"
                     app:_foreground="#fff"
-                    app:_icon=""
+                    app:_icon=""
                     app:_rippleColor="#99ffffff"
                     app:_textAlign="left"
                     app:_textPaddingLeft="false"/>
