@@ -41,6 +41,7 @@ public class ListOfWalletsActivity extends RealmActivity {
     }
 
     public void create(View view) {
+        startActivity(new Intent(getBaseContext(), CreateWalletActivity.class));
     }
 
     public static class State extends Observable {
