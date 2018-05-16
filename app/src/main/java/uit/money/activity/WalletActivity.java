@@ -28,6 +28,7 @@ import static uit.money.utils.Timer.setTimeout;
 
 public class WalletActivity extends RealmActivity {
     private static final String TAG = "WalletActivity";
+    private static final int CHANGE_WALLET = 1;
     private Wallet wallet;
     private Voice voice;
     private State state = new State();
@@ -44,10 +45,6 @@ public class WalletActivity extends RealmActivity {
         initializeDataBinding();
     }
 
-    private void initializeUser() {
-        user = User.getCurrentUser();
-    }
-
     private void initializeWallet() {
         wallet = Wallet.getCurrentWallet();
         if (wallet != null) {
@@ -55,9 +52,20 @@ public class WalletActivity extends RealmActivity {
         }
     }
 
+    private void initializeUser() {
+        user = User.getCurrentUser();
+    }
+
     private void initializeVoice() {
         voice = new Voice(this);
         voice.setListener(new Voice.Listener() {
+            @Override
+            public void onBeginningOfSpeech() {
+                super.onBeginningOfSpeech();
+                state.speechRecognizerString.set(getString(R.string.voice_start));
+                state.setShowSpeechRecognizerBar(true);
+            }
+
             @Override
             public void onRmsChanged(float db) {
                 float ratio;
@@ -71,13 +79,6 @@ public class WalletActivity extends RealmActivity {
                     ratio = (db - min) / (max - min);
                 }
                 state.ratio.set(ratio);
-            }
-
-            @Override
-            public void onBeginningOfSpeech() {
-                super.onBeginningOfSpeech();
-                state.speechRecognizerString.set(getString(R.string.voice_start));
-                state.setShowSpeechRecognizerBar(true);
             }
 
             @Override
@@ -127,7 +128,18 @@ public class WalletActivity extends RealmActivity {
         state.isOpenDrawer.set(true);
     }
 
-    public void openWallets(View view) {
+    public void openListOfWallets(View view) {
+        startActivityForResult(new Intent(getBaseContext(), ListOfWalletsActivity.class), CHANGE_WALLET);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CHANGE_WALLET) {
+            if (resultCode == RESULT_OK) {
+                initializeWallet();
+            }
+        }
     }
 
     public void logout(View view) {
@@ -142,14 +154,14 @@ public class WalletActivity extends RealmActivity {
         public final ObservableField<String> speechRecognizerString = new ObservableField<>("");
         public final ObservableFloat ratio = new ObservableFloat(0);
 
-        public void setShowSpeechRecognizerBar(boolean value) {
-            showSpeechRecognizerBar.set(value ? View.VISIBLE : View.GONE);
-        }
-
         @BindingAdapter("android:visibility")
         public static void setVisibility(View view, int visibility) {
             TransitionManager.beginDelayedTransition((ViewGroup) view.getParent());
             view.setVisibility(visibility);
+        }
+
+        public void setShowSpeechRecognizerBar(boolean value) {
+            showSpeechRecognizerBar.set(value ? View.VISIBLE : View.GONE);
         }
 
         public TransactionRecyclerViewAdapter getTransactionAdapter(Wallet wallet) {

@@ -54,6 +54,7 @@
                     android:scrollbarStyle="insideOverlay"
                     android:scrollbarThumbVertical="@color/scrollbarThumb"
                     android:scrollbars="vertical"
+                    app:_stackFromEnd="true"
                     tools:ignore="RtlSymmetry"
                     tools:itemCount="3"
                     tools:listitem="@layout/item_bill"/>
@@ -197,7 +198,8 @@
 
                 <ui.Row
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="#3c6">
 
                     <ui.Button
                         android:layout_width="50dp"
@@ -214,11 +216,17 @@
                         app:_textAlign="left"
                         app:_textPaddingLeft="false"/>
 
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:background="#9fff"/>
+
                     <ui.Button
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:onClick="openWallets"
+                        android:onClick="openListOfWallets"
                         app:_background="#3c6"
                         app:_font="light"
                         app:_foreground="#fff"

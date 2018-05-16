@@ -33,6 +33,7 @@ import static model.Const.getMoney;
         value = Parcel.Serialization.BEAN,
         analyze = {Wallet.class})
 public class Wallet extends RealmObject {
+    public static Wallet currentWallet = null;
     @Ignore
     public final ObservableField<String> money = new ObservableField<>("");
     @PrimaryKey
@@ -55,17 +56,26 @@ public class Wallet extends RealmObject {
 
     @Nullable
     public static Wallet getCurrentWallet() {
-        final User currentUser = User.getCurrentUser();
-        if (currentUser == null) {
-            return null;
-        } else {
-            final RealmResults<Wallet> wallets = currentUser.getWallets();
-            if (wallets.size() == 0) {
-                return Wallet.createEmptyWallet(currentUser);
+        if (currentWallet == null) {
+            final User currentUser = User.getCurrentUser();
+            if (currentUser == null) {
+                return null;
             } else {
-                return wallets.first();
+                final RealmResults<Wallet> wallets = currentUser.getWallets();
+                wallets.load();
+                if (wallets.size() == 0) {
+                    return Wallet.createEmptyWallet(currentUser);
+                } else {
+                    return wallets.first();
+                }
             }
+        } else {
+            return currentWallet;
         }
+    }
+
+    public static void setCurrentWallet(Wallet currentWallet) {
+        Wallet.currentWallet = currentWallet;
     }
 
     private static Wallet createEmptyWallet(User user) {

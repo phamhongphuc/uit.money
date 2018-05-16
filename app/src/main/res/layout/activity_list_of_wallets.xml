@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.ListOfWalletsActivity">
+
+    <data>
+
+        <variable
+            name="state"
+            type="uit.money.activity.ListOfWalletsActivity.State"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f5f5f5"
+        android:clipChildren="false"
+        android:fitsSystemWindows="false">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="74dp">
+
+            <ui.List
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adapter="@{state.getWalletAdapter()}"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:layerType="hardware"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:scrollbarSize="4dp"
+                android:scrollbarStyle="insideOverlay"
+                android:scrollbarThumbVertical="@color/scrollbarThumb"
+                android:scrollbars="vertical"
+                tools:ignore="RtlSymmetry"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_wallet"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="24dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:layerType="software">
+
+            <ui.Shadow
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="top"
+                app:_backgroundColor="#3c6"
+                app:_shadowColor="#3c6"
+                app:_shadowSize="6dp"/>
+
+            <ui.Shadow
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                android:layerType="software"
+                app:_backgroundColor="#fff"
+                app:_shadowColor="#3000"
+                app:_shadowSize="8dp"/>
+
+            <ui.Row
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom">
+
+                <ui.Text
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom|start"
+                    android:gravity="end|center_vertical"
+                    android:paddingStart="25dp"
+                    android:text="@string/sum"
+                    android:textColor="#3c6"
+                    android:textSize="18sp"
+                    app:_font="bold"
+                    tools:ignore="RtlSymmetry"/>
+
+                <ui.Text
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom|start"
+                    android:layout_weight="1"
+                    android:gravity="end|center_vertical"
+                    android:paddingEnd="25dp"
+                    android:text="@{state.money}"
+                    android:textColor="#3c6"
+                    android:textSize="18sp"
+                    app:_font="bold"
+                    tools:ignore="RtlSymmetry"
+                    tools:text="123.456.789 đ"/>
+            </ui.Row>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:background="@android:color/white"
+            android:clipChildren="false">
+
+            <ui.Row
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#3c6">
+
+                <ui.Button
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:onClick="goBack"
+                    app:_background="#3c6"
+                    app:_childRadius="none"
+                    app:_font="light"
+                    app:_foreground="#fff"
+                    app:_icon=""
+                    app:_rippleColor="#99ffffff"
+                    app:_shadowColor="#884cb7ff"
+                    app:_shadowSize="6dp"
+                    app:_textAlign="left"
+                    app:_textPaddingLeft="false"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:background="#9fff"/>
+
+                <ui.Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:_background="#3c6"
+                    app:_font="light"
+                    app:_foreground="#fff"
+                    app:_rippleColor="#99ffffff"
+                    app:_shadowColor="#884cb7ff"
+                    app:_shadowSize="6dp"
+                    app:_text="Chọn một ví"
+                    app:_textAlign="left"/>
+
+                <ui.Button
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:onClick="goBack"
+                    app:_background="#3c6"
+                    app:_childRadius="none"
+                    app:_font="light"
+                    app:_foreground="#fff"
+                    app:_icon=""
+                    app:_rippleColor="#99ffffff"
+                    app:_shadowColor="#884cb7ff"
+                    app:_shadowSize="6dp"
+                    app:_textAlign="left"
+                    app:_textPaddingLeft="false"/>
+
+            </ui.Row>
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:background="#33cc66"/>
+
+    </FrameLayout>
+</layout>
