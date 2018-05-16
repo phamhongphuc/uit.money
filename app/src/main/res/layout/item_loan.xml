@@ -8,6 +8,10 @@
         <variable
             name="loan"
             type="model.model.transaction.Loan"/>
+
+        <variable
+            name="action"
+            type="uit.money.adapter.TransactionRecyclerViewAdapter"/>
     </data>
 
     <ui.Row

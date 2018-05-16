@@ -20,4 +20,5 @@
     <drawable name="login_3_icon">@drawable/ic_filter</drawable>
     <string name="login_3_title">Kiểm soát chi tiêu</string>
     <string name="login_3_content">Thiết lập mức chi tiêu trong ngân sách bạn đặt ra sẽ giúp bạn tránh được việc chi tiêu ngoài tâm kiểm soát</string>
+    <string name="sum">Tổng cộng:</string>
 </resources>

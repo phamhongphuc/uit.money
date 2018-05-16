@@ -1,14 +1,10 @@
 package ui;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.RippleDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,48 +15,21 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.google.common.collect.ImmutableMap;
-
-import java.util.Arrays;
-import java.util.Map;
 import java.util.Objects;
 
 import ui.ui.R;
 
+import static ui.utils.Const.ALIGN;
+import static ui.utils.Const.CENTER;
+import static ui.utils.Const.FONT_SIZEs;
+import static ui.utils.Const.FONTs;
+import static ui.utils.Const.ICON;
+import static ui.utils.Const.RADIUS_ICON;
+import static ui.utils.Const.RADIUS_NONE;
+import static ui.utils.Const.RADIUS_TEXT;
+
 public class Button extends FrameLayout {
     private static final String TAG = "Ai.Button";
-
-    private static final int LEFT = 0;
-    private static final int CENTER = 1;
-    private static final int RIGHT = 2;
-    private static final Map<Integer, Integer> ALIGN = ImmutableMap.<Integer, Integer>builder()
-            .put(LEFT, Gravity.START)
-            .put(CENTER, Gravity.CENTER_HORIZONTAL)
-            .put(RIGHT, Gravity.END)
-            .build();
-
-    private static final String ICON = "fonts/aicon.ttf";
-    private static final String REGULAR = "fonts/segoe regular.ttf";
-    private static final String LIGHT = "fonts/segoe light.ttf";
-    private static final String BOLD = "fonts/segoe bold.ttf";
-    private static final Map<Integer, String> FONTs = ImmutableMap.<Integer, String>builder()
-            .put(1, REGULAR)
-            .put(2, LIGHT)
-            .put(3, BOLD)
-            .build();
-
-    private static final float SMALL = 0.35f;
-    private static final float LARGE = 0.6f;
-    private static final float MEDIUM = 0.45f;
-    private static final Map<Integer, Float> FONT_SIZEs = ImmutableMap.<Integer, Float>builder()
-            .put(0, SMALL)
-            .put(1, LARGE)
-            .put(2, MEDIUM)
-            .build();
-
-    private static final int RADIUS_NONE = 0;
-    private static final int RADIUS_ICON = 1;
-    private static final int RADIUS_TEXT = 2;
 
     private String text;
     private String icon;
@@ -135,8 +104,8 @@ public class Button extends FrameLayout {
 
     private void initializeShadow(Context context) {
         Shadow shadow = new Shadow(context);
-        shadow.setForeground(getRippleDrawable());
         shadow.setClickable(true);
+        shadow.setRippleColor(rippleColor);
         shadow.setShadowColor(shadowColor);
         shadow.setBackground(background);
         shadow.setShadowSize(shadowSize);
@@ -207,22 +176,6 @@ public class Button extends FrameLayout {
         } else if (textView != null) {
             linearLayoutCompat.removeView(textView);
         }
-    }
-
-    @NonNull
-    private RippleDrawable getRippleDrawable() {
-        float[] outer = new float[8];
-        Arrays.fill(outer, radius);
-        RoundRectShape roundRectShape = new RoundRectShape(
-                outer,
-                null,
-                null
-        );
-        return new RippleDrawable(
-                ColorStateList.valueOf(rippleColor),
-                null,
-                new ShapeDrawable(roundRectShape)
-        );
     }
 
     @NonNull

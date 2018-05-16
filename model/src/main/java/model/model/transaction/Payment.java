@@ -8,7 +8,6 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 import io.realm.model_model_transaction_PaymentRealmProxy;
-import model.adapter.TransactionRecyclerViewAdapter.TransactionModel;
 import model.model.Wallet;
 import model.model.util.Organization;
 

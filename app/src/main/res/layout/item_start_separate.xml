@@ -6,7 +6,7 @@
 
         <variable
             name="startSeparator"
-            type="model.adapter.separator.StartSeparator"/>
+            type="uit.money.adapter.separator.StartSeparator"/>
     </data>
 
     <ui.Row

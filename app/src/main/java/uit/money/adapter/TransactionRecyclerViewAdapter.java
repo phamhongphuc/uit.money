@@ -1,10 +1,11 @@
-package model.adapter;
+package uit.money.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import org.apache.commons.lang3.time.DateUtils;
@@ -12,16 +13,18 @@ import org.apache.commons.lang3.time.DateUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.ListIterator;
 
 import io.realm.RealmResults;
-import model.adapter.separator.DateSeparator;
-import model.adapter.separator.EndSeparator;
-import model.model.BR;
-import model.model.R;
 import model.model.Wallet;
 import model.model.transaction.Bill;
 import model.model.transaction.Loan;
+import model.model.transaction.TransactionModel;
+import uit.money.BR;
+import uit.money.R;
+import uit.money.adapter.separator.DateSeparator;
+import uit.money.adapter.separator.EndSeparator;
 
 import static model.Const.BILL;
 import static model.Const.DATE_SEPARATOR;
@@ -32,7 +35,7 @@ import static model.Const.START_SEPARATOR;
 public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<TransactionRecyclerViewAdapter.ViewHolder> {
     private RealmResults<Loan> loans;
     private RealmResults<Bill> bills;
-    private ArrayList<TransactionModel> transactions;
+    private List<TransactionModel> transactions;
 
     public TransactionRecyclerViewAdapter(Wallet wallet) {
         loans = wallet.getLoans();
@@ -55,6 +58,7 @@ public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<Transac
         transactions.addAll(bills);
 
         Collections.sort(transactions, (a, b) -> a.getTime().compareTo(b.getTime()));
+
         ListIterator<TransactionModel> i = transactions.listIterator();
         Date time = new Date(0);
         while (i.hasNext()) {
@@ -107,14 +111,6 @@ public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<Transac
         return transactions.size();
     }
 
-    public interface TransactionModel {
-        Date getTime();
-
-        int getType();
-
-        void initialize();
-    }
-
     static class ViewHolder extends RecyclerView.ViewHolder {
         private final ViewDataBinding binding;
         private int variable;
@@ -140,7 +136,17 @@ public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<Transac
         void bind(TransactionModel model) {
             model.initialize();
             binding.setVariable(variable, model);
+            binding.setVariable(BR.action, new Action());
             binding.executePendingBindings();
+        }
+    }
+
+    public static class Action {
+        Action() {
+        }
+
+        public void click(View view) {
+//            view.getContext().startActivity(new Intent(view.getContext(), LoginActivity.class));
         }
     }
 }

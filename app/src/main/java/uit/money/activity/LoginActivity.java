@@ -11,7 +11,7 @@ import com.facebook.CallbackManager;
 import java.util.ArrayList;
 
 import uit.money.R;
-import uit.money.adapter.FragmentAdapter;
+import uit.money.fragment.FragmentAdapter;
 import uit.money.databinding.ActivityLoginBinding;
 import uit.money.facebook.Credential;
 import uit.money.fragment.LoginFragment;

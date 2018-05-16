@@ -13,13 +13,12 @@ import java.util.Map;
 
 import io.realm.ObjectServerError;
 import io.realm.Realm;
-import io.realm.SyncConfiguration;
+import io.realm.RealmConfiguration;
 import io.realm.SyncCredentials;
 import io.realm.SyncUser;
 import model.model.User;
 
 import static uit.money.app.Constants.AUTH_URL;
-import static uit.money.app.Constants.BASE_URL;
 
 public class Credential {
     private static final String TAG = "Credential";
@@ -27,10 +26,10 @@ public class Credential {
     private static AccessToken accessToken = null;
 
     public static void initializeLogin(final Credential.Callback nextActivity) {
+        checkAndLogin(nextActivity);
+
         // Don't call this method more than one time
         if (accessTokenTracker != null) return;
-
-        checkAndLogin(nextActivity);
         accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken accessToken) {
@@ -47,6 +46,7 @@ public class Credential {
             setCurrentUser();
             nextActivity.call();
         };
+
         if (SyncUser.all().size() > 1) {
             final Map<String, SyncUser> all = SyncUser.all();
             for (Map.Entry<String, SyncUser> eachUser : all.entrySet()) {
@@ -56,7 +56,7 @@ public class Credential {
             setDefaultConfiguration();
             callback.call();
         } else {
-            SyncCredentials credentials = SyncCredentials.nickname(accessToken.getUserId(), false);
+            SyncCredentials credentials = SyncCredentials.nickname(accessToken.getUserId(), true);
             SyncUser.logInAsync(credentials, AUTH_URL, new SyncUser.Callback<SyncUser>() {
                 @Override
                 public void onSuccess(@NonNull SyncUser user) {
@@ -83,8 +83,12 @@ public class Credential {
     }
 
     private static void setDefaultConfiguration() {
-        SyncConfiguration configuration = new SyncConfiguration
-                .Builder(SyncUser.current(), BASE_URL + "/~/" + accessToken.getUserId())
+//        SyncConfiguration configuration = new SyncConfiguration
+//                .Builder(SyncUser.current(), BASE_URL + "/~/" + accessToken.getUserId())
+//                .build();
+
+        RealmConfiguration configuration = new RealmConfiguration.Builder()
+                .name("realm.realm")
                 .build();
         Realm.setDefaultConfiguration(configuration);
     }

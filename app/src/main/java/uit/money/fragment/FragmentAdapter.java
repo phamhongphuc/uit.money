@@ -1,4 +1,4 @@
-package uit.money.adapter;
+package uit.money.fragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

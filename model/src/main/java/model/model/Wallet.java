@@ -15,7 +15,6 @@ import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 import io.realm.model_model_WalletRealmProxy;
-import model.adapter.TransactionRecyclerViewAdapter;
 import model.model.transaction.Bill;
 import model.model.transaction.BillDetail;
 import model.model.transaction.Loan;
@@ -34,6 +33,7 @@ import static model.Const.getMoney;
         value = Parcel.Serialization.BEAN,
         analyze = {Wallet.class})
 public class Wallet extends RealmObject {
+    public static Wallet currentWallet = null;
     @Ignore
     public final ObservableField<String> money = new ObservableField<>("");
     @PrimaryKey
@@ -56,17 +56,26 @@ public class Wallet extends RealmObject {
 
     @Nullable
     public static Wallet getCurrentWallet() {
-        final User currentUser = User.getCurrentUser();
-        if (currentUser == null) {
-            return null;
-        } else {
-            final RealmResults<Wallet> wallets = currentUser.getWallets();
-            if (wallets.size() == 0) {
-                return Wallet.createEmptyWallet(currentUser);
+        if (currentWallet == null) {
+            final User currentUser = User.getCurrentUser();
+            if (currentUser == null) {
+                return null;
             } else {
-                return wallets.first();
+                final RealmResults<Wallet> wallets = currentUser.getWallets();
+                wallets.load();
+                if (wallets.size() == 0) {
+                    return Wallet.createEmptyWallet(currentUser);
+                } else {
+                    return wallets.first();
+                }
             }
+        } else {
+            return currentWallet;
         }
+    }
+
+    public static void setCurrentWallet(Wallet currentWallet) {
+        Wallet.currentWallet = currentWallet;
     }
 
     private static Wallet createEmptyWallet(User user) {
@@ -110,9 +119,7 @@ public class Wallet extends RealmObject {
         for (BillDetail billDetail : billDetails) {
             money += billDetail.getMoney() * (billDetail.getBill().isBuyOrSell() == BUY ? -1 : 1);
         }
-        this.money.set(
-                getMoney(money)
-        );
+        this.money.set(getMoney(money));
     }
 
     public RealmResults<Bill> getBills() {
@@ -154,10 +161,6 @@ public class Wallet extends RealmObject {
                 .where(Loan.class)
                 .equalTo("wallet.id", id)
                 .findAllAsync();
-    }
-
-    public TransactionRecyclerViewAdapter getTransactionAdapter() {
-        return new TransactionRecyclerViewAdapter(this);
     }
 
     public interface Callback {

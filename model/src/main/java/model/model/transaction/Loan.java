@@ -9,7 +9,6 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 import io.realm.model_model_transaction_LoanRealmProxy;
-import model.adapter.TransactionRecyclerViewAdapter.TransactionModel;
 import model.model.Person;
 import model.model.R;
 import model.model.Wallet;
@@ -23,7 +22,7 @@ import static model.Const.getString;
  * <Fields>
  *
  * @see Loan#id                         {@link Integer}
- * @see Loan#wallet                     {@link Wallet}              >> {@link Wallet#loans}
+ * @see Loan#wallet                     {@link Wallet}              >> {@link Wallet}
  * @see Loan#money                      {@link Long}
  * @see Loan#partner                    {@link Person}              >> {@link Person#loans}
  * @see Loan#organization               {@link Organization}        >> {@link Organization#loans}

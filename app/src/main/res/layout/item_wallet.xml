@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="wallet"
+            type="model.model.Wallet"/>
+
+        <variable
+            name="action"
+            type="uit.money.adapter.WalletRecyclerViewAdapter.Action"/>
+    </data>
+
+    <ui.Row
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:focusable="true"
+        android:layerType="software"
+        tools:background="#ccc"
+        tools:ignore="RtlSymmetry">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:focusable="true">
+
+            <ui.Shadow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{action::select}"
+                app:_backgroundColor="#fff"
+                app:_dy="1dp"
+                app:_radius="5dp"
+                app:_rippleColor="#73c6"
+                app:_shadowColor="#15000000"
+                app:_shadowSize="8dp"/>
+
+            <ui.Col
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:layerType="hardware"
+                android:paddingBottom="5dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp">
+
+                <ui.Row
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false">
+
+                    <ui.Text
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|start"
+                        android:text="@{wallet.name}"
+                        android:textColor="#222"
+                        android:textSize="15sp"
+                        app:_font="bold"
+                        tools:text="Mua/Bán"/>
+                </ui.Row>
+
+                <ui.Row
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false">
+
+                    <ui.Text
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|end"
+                        android:text="@{wallet.money}"
+                        android:textSize="15sp"
+                        app:_font="bold"
+                        tools:text="20.000 đ"/>
+                </ui.Row>
+            </ui.Col>
+        </FrameLayout>
+    </ui.Row>
+</layout>

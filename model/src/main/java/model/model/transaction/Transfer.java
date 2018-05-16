@@ -8,7 +8,6 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 import io.realm.model_model_transaction_TransferRealmProxy;
-import model.adapter.TransactionRecyclerViewAdapter.TransactionModel;
 import model.model.Wallet;
 
 /**
@@ -17,8 +16,8 @@ import model.model.Wallet;
  * @see Transfer#id                     {@link Integer}
  * @see Transfer#time                   {@link Date}
  * @see Transfer#location               {@link String}
- * @see Transfer#from                   {@link Wallet}              >>  {@link Wallet#transfersFrom}
- * @see Transfer#to                     {@link Wallet}              >>  {@link Wallet#transfersTo}
+ * @see Transfer#from                   {@link Wallet}              >>  {@link Wallet}
+ * @see Transfer#to                     {@link Wallet}              >>  {@link Wallet}
  * @see Transfer#money                  {@link Long}
  */
 @Parcel(implementations = {model_model_transaction_TransferRealmProxy.class},

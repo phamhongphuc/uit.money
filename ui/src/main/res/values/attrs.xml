@@ -59,6 +59,7 @@
         <attr name="_shadowSize" format="dimension"/>
         <attr name="_dx" format="dimension"/>
         <attr name="_dy" format="dimension"/>
+        <attr name="_rippleColor"/>
         <attr name="_shadowColor" format="color"/>
         <attr name="_backgroundColor" format="color"/>
     </declare-styleable>
@@ -84,5 +85,8 @@
         <attr name="_fbid" format="string"/>
         <attr name="_innerSize" format="dimension"/>
         <attr name="_outerSize" format="dimension"/>
+    </declare-styleable>
+    <declare-styleable name="List">
+        <attr name="_stackFromEnd" format="boolean"/>
     </declare-styleable>
 </resources>
