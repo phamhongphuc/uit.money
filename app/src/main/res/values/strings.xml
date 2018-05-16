@@ -20,10 +20,16 @@
     <drawable name="login_3_icon">@drawable/ic_filter</drawable>
     <string name="login_3_title">Kiểm soát chi tiêu</string>
     <string name="login_3_content">Thiết lập mức chi tiêu trong ngân sách bạn đặt ra sẽ giúp bạn tránh được việc chi tiêu ngoài tâm kiểm soát</string>
-    <string name="sum">Tổng cộng:</string>
-    <string name="add_wallet">Thêm ví</string>
-    <string name="select_wallet">Chọn một ví</string>
-    <string name="wallet_name">Tên ví</string>
+
+    <string name="wallet_total">Tổng cộng:</string>
+    <string name="create_wallet_title">Tạo ví mới</string>
+    <string name="list_of_wallet_title">Chọn một ví</string>
+    <string name="edit_wallet_title">Sửa ví</string>
+
     <string name="wallet_name_field">Tên ví</string>
-    <string name="money_number">Số tiền</string>
+
+    <string name="wallet_total_field">Số tiền</string>
+    <string name="wallet_transactions_count">Số giao dịch:</string>
+    <string name="edit_wallet_delete_button">Xóa ví và toàn bộ giao dịch</string>
+    <string name="edit_wallet_delete_last_wallet">Không thể xóa ví duy nhất hiện có</string>
 </resources>
