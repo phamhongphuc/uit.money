@@ -20,6 +20,10 @@
             type="uit.money.activity.WalletActivity"/>
 
         <variable
+            name="walletName"
+            type="String"/>
+
+        <variable
             name="state"
             type="uit.money.activity.WalletActivity.State"/>
     </data>
@@ -155,7 +159,7 @@
                         android:layout_marginStart="150dp"
                         android:gravity="end|center_vertical"
                         android:paddingEnd="30dp"
-                        android:text="@{wallet.money}"
+                        android:text="@{wallet._money}"
                         android:textColor="#3c6"
                         android:textSize="18sp"
                         app:_font="bold"

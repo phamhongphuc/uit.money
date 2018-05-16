@@ -28,7 +28,6 @@ import static uit.money.utils.Timer.setTimeout;
 
 public class WalletActivity extends RealmActivity {
     private static final String TAG = "WalletActivity";
-    private static final int CHANGE_WALLET = 1;
     private Wallet wallet;
     private Voice voice;
     private State state = new State();
@@ -110,8 +109,8 @@ public class WalletActivity extends RealmActivity {
     private void initializeDataBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_wallet);
         binding.setUser(User.getCurrentUser());
-        binding.setWallet(wallet);
         binding.setState(state);
+        binding.setWallet(wallet);
     }
 
     public void voice(View view) {
@@ -123,22 +122,18 @@ public class WalletActivity extends RealmActivity {
     }
 
     public void openListOfWallets(View view) {
-        startActivityForResult(new Intent(getBaseContext(), ListOfWalletsActivity.class), CHANGE_WALLET);
+        startActivity(new Intent(getBaseContext(), ListOfWalletsActivity.class));
     }
 
     public void editWallet(View view) {
-
+        startActivity(new Intent(getBaseContext(), EditWalletActivity.class));
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CHANGE_WALLET) {
-            if (resultCode == RESULT_OK) {
-                initializeWallet();
-                binding.setWallet(wallet);
-            }
-        }
+    protected void onRestart() {
+        super.onRestart();
+        initializeWallet();
+        binding.setWallet(wallet);
     }
 
     public void logout(View view) {

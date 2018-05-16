@@ -33,9 +33,11 @@ import static model.Const.getMoney;
         value = Parcel.Serialization.BEAN,
         analyze = {Wallet.class})
 public class Wallet extends RealmObject {
-    public static Wallet currentWallet = null;
+    private static Wallet currentWallet = null;
     @Ignore
-    public final ObservableField<String> money = new ObservableField<>("");
+    public final ObservableField<String> _money = new ObservableField<>("");
+    @Ignore
+    public final ObservableField<String> _name = new ObservableField<>("");
     @PrimaryKey
     private int id;
     @Required
@@ -103,6 +105,8 @@ public class Wallet extends RealmObject {
     }
 
     public void initialize() {
+        _name.set(getName());
+
         if (billDetails == null) {
             billDetails = Realm.getDefaultInstance()
                     .where(BillDetail.class)
@@ -119,7 +123,7 @@ public class Wallet extends RealmObject {
         for (BillDetail billDetail : billDetails) {
             money += billDetail.getMoney() * (billDetail.getBill().isBuyOrSell() == BUY ? -1 : 1);
         }
-        this.money.set(getMoney(money));
+        this._money.set(getMoney(money));
     }
 
     public RealmResults<Bill> getBills() {
@@ -146,6 +150,7 @@ public class Wallet extends RealmObject {
 
     public void setName(String name) {
         this.name = name;
+        _name.set(name);
     }
 
     public User getUser() {
@@ -161,6 +166,10 @@ public class Wallet extends RealmObject {
                 .where(Loan.class)
                 .equalTo("wallet.id", id)
                 .findAllAsync();
+    }
+
+    public void updateName() {
+        name = _name.get();
     }
 
     public interface Callback {

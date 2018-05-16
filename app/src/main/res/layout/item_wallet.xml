@@ -88,7 +88,7 @@
                         android:layout_height="25dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical|end"
-                        android:text="@{wallet.money}"
+                        android:text="@{wallet._money}"
                         android:textSize="15sp"
                         app:_font="bold"
                         tools:text="20.000 đ"/>
