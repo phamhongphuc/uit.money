@@ -14,8 +14,8 @@ public class Const {
     public static final String BOLD = "fonts/segoe bold.ttf";
     public static final Map<Integer, String> FONTs = ImmutableMap.<Integer, String>builder()
             .put(0, NONE)
-            .put(1, REGULAR)
-            .put(2, LIGHT)
+            .put(1, LIGHT)
+            .put(2, REGULAR)
             .put(3, BOLD)
             .build();
 
