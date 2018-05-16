@@ -27,6 +27,7 @@ public class InputMoney extends InputText {
         addTextChangedListener(new MoneyTextWatcher(this));
     }
 
+    // TODO loop button when holding
     class MoneyTextWatcher implements TextWatcher {
         private InputText inputText;
 
@@ -46,15 +47,15 @@ public class InputMoney extends InputText {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            inputText.removeTextChangedListener(this);
 
             final DecimalFormat format = new DecimalFormat("###,###,### đ");
             String string = editable.toString().replaceAll("[^0-9]", "");
             if (string.equals("")) string = "0";
             final String number = format.format(Long.parseLong(string));
+
+            inputText.removeTextChangedListener(this);
             inputText.setText(number);
             inputText.setSelection(number.length() - 2);
-
             inputText.addTextChangedListener(this);
         }
     }

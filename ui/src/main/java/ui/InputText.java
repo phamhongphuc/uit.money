@@ -1,13 +1,20 @@
 package ui;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.RippleDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RoundRectShape;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 import android.view.inputmethod.EditorInfo;
+
+import java.util.Arrays;
 
 import ui.ui.R;
 
@@ -16,6 +23,7 @@ import static ui.utils.Const.FONTs;
 public class InputText extends AppCompatEditText {
     private boolean autoSize;
     private String font;
+    private int rippleColor;
 
     public InputText(Context context) {
         super(context);
@@ -33,6 +41,7 @@ public class InputText extends AppCompatEditText {
         typedArray = context.obtainStyledAttributes(attrs, R.styleable.InputText);
         autoSize = typedArray.getBoolean(R.styleable.InputText__autoSize, false);
         font = FONTs.get(typedArray.getInt(R.styleable.InputText__font, 2));
+        rippleColor = typedArray.getColor(R.styleable.InputText__rippleColor, Color.TRANSPARENT);
 
         typedArray.recycle();
     }
@@ -41,10 +50,7 @@ public class InputText extends AppCompatEditText {
         setTypeface(
                 Typeface.createFromAsset(getContext().getAssets(), font)
         );
-        setForeground(context
-                .obtainStyledAttributes(new int[]{R.attr.selectableItemBackgroundBorderless})
-                .getDrawable(0)
-        );
+        setForeground(getRippleDrawable());
     }
 
     public InputText(Context context, AttributeSet attrs) {
@@ -80,5 +86,21 @@ public class InputText extends AppCompatEditText {
                     (int) (size * 0.75f / dp), 0
             );
         }
+    }
+
+    @NonNull
+    private RippleDrawable getRippleDrawable() {
+        float[] outer = new float[8];
+        Arrays.fill(outer, 0);
+        RoundRectShape roundRectShape = new RoundRectShape(
+                outer,
+                null,
+                null
+        );
+        return new RippleDrawable(
+                ColorStateList.valueOf(rippleColor),
+                null,
+                new ShapeDrawable(roundRectShape)
+        );
     }
 }

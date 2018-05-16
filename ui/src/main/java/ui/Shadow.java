@@ -109,7 +109,6 @@ public class Shadow extends View {
         initializePaint();
     }
 
-
     @NonNull
     private RippleDrawable getRippleDrawable() {
         float[] outer = new float[8];
