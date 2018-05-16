@@ -13,5 +13,8 @@
         <item name="android:windowContentOverlay">@null</item>
 
         <item name="android:colorPrimaryDark">#33cc66</item>
+
+        <item name="android:colorPrimary">#33cc66</item>
+        <item name="android:colorAccent">#ffcc66</item>
     </style>
 </resources>
