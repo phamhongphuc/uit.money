@@ -91,4 +91,11 @@
     <declare-styleable name="List">
         <attr name="_stackFromEnd" format="boolean"/>
     </declare-styleable>
+    <declare-styleable name="FrameShadow">
+        <attr name="_radius"/>
+        <attr name="_shadowSize"/>
+        <attr name="_dx"/>
+        <attr name="_dy"/>
+        <attr name="_shadowColor"/>
+    </declare-styleable>
 </resources>
