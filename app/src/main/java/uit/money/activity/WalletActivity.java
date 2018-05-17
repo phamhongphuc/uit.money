@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.transition.TransitionManager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -140,6 +141,14 @@ public class WalletActivity extends RealmActivity {
         Credential.logout();
         startActivity(new Intent(getBaseContext(), LoginActivity.class));
         finish();
+    }
+
+    public void openStatistical(View view) {
+        Toast.makeText(getApplicationContext(), R.string.error_features_not_developed_yet, Toast.LENGTH_SHORT).show();
+    }
+
+    public void openPayloan(View view) {
+        Toast.makeText(getApplicationContext(), R.string.error_features_not_developed_yet, Toast.LENGTH_SHORT).show();
     }
 
     public static class State extends Observable {

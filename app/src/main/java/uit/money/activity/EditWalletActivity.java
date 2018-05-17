@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.Objects;
+
 import io.realm.RealmResults;
 import model.model.User;
 import model.model.Wallet;
@@ -36,8 +38,12 @@ public class EditWalletActivity extends RealmActivity {
     }
 
     public void done(View view) {
-        realm.executeTransaction(r -> wallet.updateName());
-        finish();
+        if (wallet._name.get() == null || Objects.requireNonNull(wallet._name.get()).equals("")) {
+            Toast.makeText(getApplicationContext(), R.string.error_empty_wallet_name, Toast.LENGTH_SHORT).show();
+        } else {
+            realm.executeTransaction(r -> wallet.updateName());
+            finish();
+        }
     }
 
     private void initializeDataBinding() {

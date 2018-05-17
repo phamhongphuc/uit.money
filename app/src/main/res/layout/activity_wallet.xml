@@ -20,10 +20,6 @@
             type="uit.money.activity.WalletActivity"/>
 
         <variable
-            name="walletName"
-            type="String"/>
-
-        <variable
             name="state"
             type="uit.money.activity.WalletActivity.State"/>
     </data>
@@ -309,10 +305,11 @@
                         app:_font="regular"
                         app:_fontSize="small"
                         app:_foreground="#555"
+                        android:onClick="openPayloan"
                         app:_icon=""
                         app:_paddingLeft="7dp"
                         app:_rippleColor="#2000"
-                        app:_text="Sổ nợ"
+                        app:_text="@string/sidebar_payloan_button"
                         app:_textAlign="left"
                         app:_textPaddingLeft="false"/>
 
@@ -326,7 +323,8 @@
                         app:_icon=""
                         app:_paddingLeft="7dp"
                         app:_rippleColor="#2000"
-                        app:_text="Thống kê"
+                        android:onClick="openStatistical"
+                        app:_text="@string/sidebar_statistical_button"
                         app:_textAlign="left"
                         app:_textPaddingLeft="false"/>
 
@@ -345,7 +343,7 @@
                         app:_icon=""
                         app:_paddingLeft="7dp"
                         app:_rippleColor="#2000"
-                        app:_text="Hướng dẫn"
+                        app:_text="@string/sidebar_tutorial_button"
                         app:_textAlign="left"
                         app:_textPaddingLeft="false"/>
 
@@ -360,7 +358,7 @@
                         app:_icon=""
                         app:_paddingLeft="7dp"
                         app:_rippleColor="#2000"
-                        app:_text="Đăng xuất"
+                        app:_text="@string/sidebar_logout_button"
                         app:_textAlign="left"
                         app:_textPaddingLeft="false"/>
                 </ui.Col>

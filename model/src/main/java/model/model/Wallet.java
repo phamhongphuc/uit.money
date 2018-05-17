@@ -35,6 +35,8 @@ import static model.Const.getMoney;
         analyze = {Wallet.class})
 public class Wallet extends RealmObject {
     private static Wallet currentWallet = null;
+
+    // TODO: Binding Error when String is "" or null
     @Ignore
     public final ObservableField<String> _money = new ObservableField<>("");
     @Ignore
@@ -128,7 +130,6 @@ public class Wallet extends RealmObject {
             money += billDetail.getMoney() * (billDetail.getBill().isBuyOrSell() == BUY ? -1 : 1);
         }
         _money.set(getMoney(money));
-        _count.set(billDetails.size());
     }
 
     public RealmResults<Bill> getBills() {

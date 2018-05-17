@@ -32,4 +32,10 @@
     <string name="wallet_transactions_count">Số giao dịch:</string>
     <string name="edit_wallet_delete_button">Xóa ví và toàn bộ giao dịch</string>
     <string name="edit_wallet_delete_last_wallet">Không thể xóa ví duy nhất hiện có</string>
+    <string name="sidebar_logout_button">Đăng xuất</string>
+    <string name="sidebar_tutorial_button">Hướng dẫn</string>
+    <string name="sidebar_statistical_button">Thống kê</string>
+    <string name="error_empty_wallet_name">Tên ví không được để trống</string>
+    <string name="error_features_not_developed_yet">Tính năng vẫn chưa được phát triển</string>
+    <string name="sidebar_payloan_button">Sổ nợ</string>
 </resources>

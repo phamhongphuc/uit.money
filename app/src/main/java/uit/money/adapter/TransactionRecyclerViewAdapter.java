@@ -1,5 +1,6 @@
 package uit.money.adapter;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
@@ -23,6 +24,7 @@ import model.model.transaction.Loan;
 import model.model.transaction.TransactionModel;
 import uit.money.BR;
 import uit.money.R;
+import uit.money.activity.LoginActivity;
 import uit.money.adapter.separator.DateSeparator;
 import uit.money.adapter.separator.EndSeparator;
 
@@ -142,11 +144,7 @@ public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<Transac
     }
 
     public static class Action {
-        Action() {
-        }
-
         public void click(View view) {
-//            view.getContext().startActivity(new Intent(view.getContext(), LoginActivity.class));
         }
     }
 }
