@@ -1,6 +1,7 @@
 package model.model;
 
 import android.databinding.ObservableField;
+import android.databinding.ObservableInt;
 
 import org.parceler.Parcel;
 
@@ -38,6 +39,9 @@ public class Wallet extends RealmObject {
     public final ObservableField<String> _money = new ObservableField<>("");
     @Ignore
     public final ObservableField<String> _name = new ObservableField<>("");
+    @Ignore
+    public final ObservableInt _count = new ObservableInt(0);
+
     @PrimaryKey
     private int id;
     @Required
@@ -114,16 +118,17 @@ public class Wallet extends RealmObject {
                     .findAllAsync();
         }
         billDetails.removeAllChangeListeners();
-        billDetails.addChangeListener(this::updateMoney);
-        updateMoney(billDetails);
+        billDetails.addChangeListener(this::updateBillDetails);
+        updateBillDetails(billDetails);
     }
 
-    private void updateMoney(RealmResults<BillDetail> billDetails) {
+    private void updateBillDetails(RealmResults<BillDetail> billDetails) {
         long money = 0;
         for (BillDetail billDetail : billDetails) {
             money += billDetail.getMoney() * (billDetail.getBill().isBuyOrSell() == BUY ? -1 : 1);
         }
-        this._money.set(getMoney(money));
+        _money.set(getMoney(money));
+        _count.set(billDetails.size());
     }
 
     public RealmResults<Bill> getBills() {

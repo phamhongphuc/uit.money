@@ -8,9 +8,6 @@
     <data>
 
         <variable
-            name="state"
-            type="uit.money.activity.EditWalletActivity.State"/>
-        <variable
             name="wallet"
             type="model.model.Wallet"/>
     </data>
@@ -110,7 +107,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center_vertical|end"
                             android:paddingEnd="15dp"
-                            android:text="@{String.valueOf(state.count)}"
+                            android:text="@{String.valueOf(wallet._count)}"
                             android:textColor="#555"
                             android:textSize="15sp"
                             app:_font="regular"
