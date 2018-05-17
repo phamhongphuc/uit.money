@@ -20,5 +20,30 @@
     <drawable name="login_3_icon">@drawable/ic_filter</drawable>
     <string name="login_3_title">Kiểm soát chi tiêu</string>
     <string name="login_3_content">Thiết lập mức chi tiêu trong ngân sách bạn đặt ra sẽ giúp bạn tránh được việc chi tiêu ngoài tâm kiểm soát</string>
-    <string name="sum">Tổng cộng:</string>
+
+    <string name="wallet_total">Tổng cộng:</string>
+    <string name="create_wallet_title">Tạo ví mới</string>
+    <string name="list_of_wallet_title">Chọn một ví</string>
+    <string name="edit_wallet_title">Sửa ví</string>
+
+    <string name="wallet_name_field">Tên ví</string>
+
+    <string name="wallet_total_field">Số tiền</string>
+    <string name="wallet_transactions_count">Số giao dịch:</string>
+    <string name="edit_wallet_delete_button">Xóa ví và toàn bộ giao dịch</string>
+    <string name="edit_wallet_delete_last_wallet">Không thể xóa ví duy nhất hiện có</string>
+    <string name="sidebar_logout_button">Đăng xuất</string>
+    <string name="sidebar_tutorial_button">Hướng dẫn</string>
+    <string name="sidebar_statistical_button">Thống kê</string>
+    <string name="error_empty_wallet_name">Tên ví không được để trống</string>
+    <string name="error_features_not_developed_yet">Tính năng vẫn chưa được phát triển</string>
+    <string name="sidebar_payloan_button">Sổ nợ</string>
+    <string name="bill_title">Thông tin giao dịch</string>
+    <string name="bill_detail">Chi tiết giao dịch:</string>
+    <string name="time">Thời gian:</string>
+    <string name="number_99">99</string>
+    <string name="bill_go_with">Cùng với:</string>
+    <string name="bill_location">Địa điểm:</string>
+    <string name="icon_location"></string>
+    <string name="icon_person"></string>
 </resources>

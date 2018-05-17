@@ -19,7 +19,7 @@ import ui.Row;
 import ui.Text;
 import uit.money.R;
 
-import static model.Const.getMoney;
+import static model.Utils.getMoney;
 import static ui.utils.Const.BOLD;
 import static ui.utils.Const.REGULAR;
 

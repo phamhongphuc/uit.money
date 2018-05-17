@@ -49,50 +49,88 @@
                 app:_radius="5dp"
                 app:_rippleColor="#73c6"
                 app:_shadowColor="#15000000"
-                app:_shadowSize="8dp"/>
+                app:_shadowSize="4dp"/>
 
             <ui.Col
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="false"
-                android:layerType="hardware"
-                android:paddingBottom="5dp"
-                android:paddingEnd="10dp"
-                android:paddingStart="10dp"
-                android:paddingTop="5dp">
+                android:layerType="software">
+
+                <ui.Text
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="#0000"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:text="@{wallet.name}"
+                    android:textColor="#444"
+                    app:_autoSize="true"
+                    app:_font="bold"
+                    tools:text="{Tên ví}"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#15000000"/>
 
                 <ui.Row
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="false">
+                    android:layout_height="40dp">
 
                     <ui.Text
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical|start"
-                        android:text="@{wallet.name}"
-                        android:textColor="#222"
+                        android:paddingStart="15dp"
+                        android:text="@string/wallet_transactions_count"
+                        android:textColor="#555"
                         android:textSize="15sp"
-                        app:_font="bold"
-                        tools:text="Mua/Bán"/>
+                        app:_font="regular"
+                        tools:ignore="RtlSymmetry"/>
+
+                    <ui.Text
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|end"
+                        android:paddingEnd="15dp"
+                        android:text="@{String.valueOf(wallet._count)}"
+                        android:textColor="#555"
+                        android:textSize="15sp"
+                        app:_font="regular"
+                        tools:ignore="RtlSymmetry"/>
                 </ui.Row>
 
                 <ui.Row
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="false">
+                    android:layout_height="40dp">
 
                     <ui.Text
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="center_vertical|end"
-                        android:text="@{wallet.money}"
+                        android:gravity="center_vertical|start"
+                        android:paddingStart="15dp"
+                        android:text="@string/wallet_total"
+                        android:textColor="#555"
                         android:textSize="15sp"
-                        app:_font="bold"
-                        tools:text="20.000 đ"/>
+                        app:_font="regular"
+                        tools:ignore="RtlSymmetry"/>
+
+                    <ui.Text
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|end"
+                        android:paddingEnd="15dp"
+                        android:text="@{wallet._money}"
+                        android:textColor="#555"
+                        android:textSize="15sp"
+                        app:_font="regular"
+                        tools:ignore="RtlSymmetry"/>
                 </ui.Row>
+
             </ui.Col>
         </FrameLayout>
     </ui.Row>

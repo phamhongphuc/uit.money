@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View"/>
+
         <variable
             name="bill"
             type="model.model.transaction.Bill"/>
@@ -35,7 +37,7 @@
                 android:layout_height="25dp"
                 android:layout_marginTop="15dp"
                 android:gravity="center_vertical|end"
-                android:text="@{model.Const.getTime(bill.time)}"
+                android:text="@{model.Utils.getTime(bill.time)}"
                 android:textColor="#3c6"
                 app:_font="bold"
                 tools:text="00:00"/>
@@ -103,12 +105,12 @@
 
                 <ui.Row
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="25dp"
                     android:clickable="false">
 
                     <ui.Text
-                        android:layout_width="match_parent"
-                        android:layout_height="25dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical|start"
                         android:text="@{bill.action}"
@@ -116,6 +118,34 @@
                         android:textSize="15sp"
                         app:_font="bold"
                         tools:text="Mua/Bán"/>
+
+                    <ui.Row
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="-3dp">
+
+                        <ui.Text
+                            android:layout_width="25dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/icon_location"
+                            android:textColor="#222"
+                            android:textSize="15sp"
+                            android:visibility="@{(bill.location == null || ``.equals(bill.location)) ? View.GONE : View.VISIBLE, default=gone}"
+                            app:_font="icon"
+                            tools:visibility="visible"/>
+
+                        <ui.Text
+                            android:layout_width="25dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@string/icon_person"
+                            android:textColor="#222"
+                            android:textSize="15sp"
+                            android:visibility="@{bill.with == null ? View.GONE : View.VISIBLE, default=gone}"
+                            app:_font="icon"
+                            tools:visibility="visible"/>
+                    </ui.Row>
                 </ui.Row>
 
                 <uit.money.view.BillDetailsView
@@ -123,22 +153,60 @@
                     android:layout_height="wrap_content"
                     app:_billId="@{bill.id}"/>
 
-                <ui.Row
-                    android:layout_width="match_parent"
+                <ui.Col
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="false">
+                    android:layout_gravity="end">
 
-                    <ui.Text
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="25dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|end"
-                        android:text="@{model.Const.getMoney(bill.money)}"
-                        android:textColor="@{bill.moneyColor}"
-                        android:textSize="15sp"
-                        app:_font="bold"
-                        tools:text="20.000 đ"/>
-                </ui.Row>
+                        android:layout_height="1dp"
+                        android:background="#2000"/>
+
+                    <ui.Row
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false">
+
+                        <ui.Text
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:gravity="center_vertical|end"
+                            android:text="@{String.valueOf(bill.maxCount)}"
+                            android:textColor="#0000"
+                            android:textSize="15sp"
+                            app:_font="bold"
+                            tools:ignore="RtlSymmetry"
+                            tools:text="7"/>
+
+                        <ui.Text
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:paddingEnd="15dp"
+                            android:paddingStart="15dp"
+                            android:text="✕"
+                            android:textColor="#0000"
+                            android:textSize="15sp"
+                            app:_font="bold"
+                            tools:ignore="HardcodedText,RtlSymmetry"/>
+
+                        <ui.Text
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|end"
+                            android:minWidth="80dp"
+                            android:text="@{model.Utils.getMoney(bill.money)}"
+                            android:textColor="@{bill.moneyColor}"
+                            android:textSize="15sp"
+                            app:_font="bold"
+                            tools:text="20.000 đ"/>
+                    </ui.Row>
+                </ui.Col>
             </ui.Col>
         </FrameLayout>
     </ui.Row>

@@ -7,6 +7,8 @@
 
     <data>
 
+        <import type="uit.money.adapter.TransactionRecyclerViewAdapter"/>
+
         <variable
             name="wallet"
             type="model.model.Wallet"/>
@@ -47,7 +49,7 @@
                 <ui.List
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:adapter="@{state.getTransactionAdapter(wallet)}"
+                    android:adapter="@{TransactionRecyclerViewAdapter.getInstance(wallet)}"
                     android:clipChildren="false"
                     android:clipToPadding="false"
                     android:scrollbarSize="4dp"
@@ -76,10 +78,9 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:visibility="@{state.showSpeechRecognizerBar, default=visible}"/>
+                    android:visibility="@{state.isShowSpeechRecognizerBar, default=visible}"/>
 
                 <ui.Text
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -121,19 +122,8 @@
                     android:layout_gravity="bottom"
                     android:layerType="software"
                     app:_backgroundColor="#fff"
-                    app:_shadowColor="#3000"
+                    app:_shadowColor="#15000000"
                     app:_shadowSize="8dp"/>
-
-                <ui.Circle
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="-5dp"
-                    android:layout_marginStart="10dp"
-                    app:_backgroundColor="#93c6"
-                    app:_minSize="50dp"
-                    app:_ratio="@{state.ratio}"
-                    tools:_ratio="1"/>
 
                 <ui.Shadow
                     android:layout_width="90dp"
@@ -146,59 +136,76 @@
                     app:_shadowColor="#a3c6"
                     app:_shadowSize="7dp"/>
 
-                <ui.Button
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginStart="70dp"
-                    android:clipChildren="false"
-                    android:onClick="voice"
-                    app:_background="#0000"
-                    app:_fontSize="small"
-                    app:_foreground="#fff"
-                    app:_icon=""
-                    app:_radius="25dp"/>
-
-                <ui.Button
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginStart="30dp"
-                    android:clipChildren="false"
-                    android:onClick="voice"
-                    app:_background="#0000"
-                    app:_fontSize="medium"
-                    app:_foreground="#fff"
-                    app:_icon=""
-                    app:_radius="25dp"/>
-
-                <ui.Text
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_gravity="bottom|end"
-                    android:layout_marginStart="150dp"
-                    android:gravity="end|center_vertical"
-                    android:paddingEnd="30dp"
-                    android:text="@{wallet.money}"
-                    android:textColor="#3c6"
-                    android:textSize="18sp"
-                    app:_font="bold"
-                    tools:ignore="RtlSymmetry"
-                    tools:text="123.123.369.000 đ"/>
             </FrameLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="24dp"
-                android:background="@android:color/white"
                 android:clipChildren="false">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom"
+                    android:clipChildren="false">
+
+                    <ui.Text
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="150dp"
+                        android:gravity="end|center_vertical"
+                        android:paddingEnd="30dp"
+                        android:text="@{wallet._money}"
+                        android:textColor="#3c6"
+                        android:textSize="18sp"
+                        app:_font="bold"
+                        tools:ignore="RtlSymmetry"
+                        tools:text="123.123.369.000 đ"/>
+
+                    <ui.Circle
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="-5dp"
+                        android:layout_marginStart="10dp"
+                        app:_backgroundColor="#93c6"
+                        app:_minSize="50dp"
+                        app:_ratio="@{state.ratio}"
+                        tools:_ratio="1"/>
+
+                    <ui.Button
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginStart="30dp"
+                        android:clipChildren="false"
+                        android:onClick="voice"
+                        app:_background="#0000"
+                        app:_fontSize="medium"
+                        app:_foreground="#fff"
+                        app:_icon=""
+                        app:_radius="25dp"/>
+
+                    <ui.Button
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginStart="70dp"
+                        android:clipChildren="false"
+                        android:onClick="voice"
+                        app:_background="#0000"
+                        app:_fontSize="small"
+                        app:_foreground="#fff"
+                        app:_icon=""
+                        app:_radius="25dp"/>
+                </FrameLayout>
 
                 <ui.Row
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="50dp"
                     android:background="#3c6">
 
                     <ui.Button
@@ -207,12 +214,10 @@
                         android:onClick="openDrawer"
                         app:_background="#3c6"
                         app:_childRadius="none"
-                        app:_font="light"
+                        app:_font="regular"
                         app:_foreground="#fff"
                         app:_icon=""
                         app:_rippleColor="#99ffffff"
-                        app:_shadowColor="#884cb7ff"
-                        app:_shadowSize="6dp"
                         app:_textAlign="left"
                         app:_textPaddingLeft="false"/>
 
@@ -228,12 +233,10 @@
                         android:layout_weight="1"
                         android:onClick="openListOfWallets"
                         app:_background="#3c6"
-                        app:_font="light"
+                        app:_font="regular"
                         app:_foreground="#fff"
                         app:_icon=""
                         app:_rippleColor="#99ffffff"
-                        app:_shadowColor="#884cb7ff"
-                        app:_shadowSize="6dp"
                         app:_text="@{wallet.name}"
                         app:_textAlign="left"
                         app:_textPaddingLeft="false"
@@ -242,13 +245,13 @@
                     <ui.Button
                         android:layout_width="50dp"
                         android:layout_height="match_parent"
+                        android:onClick="editWallet"
                         app:_background="#3c6"
                         app:_childRadius="none"
-                        app:_font="light"
+                        app:_font="regular"
                         app:_foreground="#fff"
-                        app:_icon=""
+                        app:_icon=""
                         app:_rippleColor="#99ffffff"
-                        app:_shadowColor="#884cb7ff"
                         app:_textAlign="left"
                         app:_textPaddingLeft="false"/>
 
@@ -299,6 +302,7 @@
                     <ui.Button
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
+                        android:onClick="openPayloan"
                         app:_background="#0000"
                         app:_font="regular"
                         app:_fontSize="small"
@@ -306,13 +310,14 @@
                         app:_icon=""
                         app:_paddingLeft="7dp"
                         app:_rippleColor="#2000"
-                        app:_text="Sổ nợ"
+                        app:_text="@string/sidebar_payloan_button"
                         app:_textAlign="left"
                         app:_textPaddingLeft="false"/>
 
                     <ui.Button
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
+                        android:onClick="openStatistical"
                         app:_background="#0000"
                         app:_font="regular"
                         app:_fontSize="small"
@@ -320,7 +325,7 @@
                         app:_icon=""
                         app:_paddingLeft="7dp"
                         app:_rippleColor="#2000"
-                        app:_text="Thống kê"
+                        app:_text="@string/sidebar_statistical_button"
                         app:_textAlign="left"
                         app:_textPaddingLeft="false"/>
 
@@ -339,7 +344,7 @@
                         app:_icon=""
                         app:_paddingLeft="7dp"
                         app:_rippleColor="#2000"
-                        app:_text="Hướng dẫn"
+                        app:_text="@string/sidebar_tutorial_button"
                         app:_textAlign="left"
                         app:_textPaddingLeft="false"/>
 
@@ -354,7 +359,7 @@
                         app:_icon=""
                         app:_paddingLeft="7dp"
                         app:_rippleColor="#2000"
-                        app:_text="Đăng xuất"
+                        app:_text="@string/sidebar_logout_button"
                         app:_textAlign="left"
                         app:_textPaddingLeft="false"/>
                 </ui.Col>

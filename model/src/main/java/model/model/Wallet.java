@@ -1,6 +1,7 @@
 package model.model;
 
 import android.databinding.ObservableField;
+import android.databinding.ObservableInt;
 
 import org.parceler.Parcel;
 
@@ -20,7 +21,7 @@ import model.model.transaction.BillDetail;
 import model.model.transaction.Loan;
 
 import static model.Const.BUY;
-import static model.Const.getMoney;
+import static model.Utils.getMoney;
 
 /**
  * <Fields>
@@ -33,9 +34,16 @@ import static model.Const.getMoney;
         value = Parcel.Serialization.BEAN,
         analyze = {Wallet.class})
 public class Wallet extends RealmObject {
-    public static Wallet currentWallet = null;
+    private static Wallet currentWallet = null;
+
+    // TODO: Binding Error when String is "" or null
     @Ignore
-    public final ObservableField<String> money = new ObservableField<>("");
+    public final ObservableField<String> _money = new ObservableField<>("");
+    @Ignore
+    public final ObservableField<String> _name = new ObservableField<>("");
+    @Ignore
+    public final ObservableInt _count = new ObservableInt(0);
+
     @PrimaryKey
     private int id;
     @Required
@@ -92,7 +100,7 @@ public class Wallet extends RealmObject {
         return managedWallet;
     }
 
-    private void autoId() {
+    public void autoId() {
         RealmResults<Wallet> wallets = Realm.getDefaultInstance()
                 .where(Wallet.class)
                 .findAllAsync();
@@ -103,6 +111,8 @@ public class Wallet extends RealmObject {
     }
 
     public void initialize() {
+        _name.set(getName());
+
         if (billDetails == null) {
             billDetails = Realm.getDefaultInstance()
                     .where(BillDetail.class)
@@ -110,16 +120,16 @@ public class Wallet extends RealmObject {
                     .findAllAsync();
         }
         billDetails.removeAllChangeListeners();
-        billDetails.addChangeListener(this::updateMoney);
-        updateMoney(billDetails);
+        billDetails.addChangeListener(this::updateBillDetails);
+        updateBillDetails(billDetails);
     }
 
-    private void updateMoney(RealmResults<BillDetail> billDetails) {
+    private void updateBillDetails(RealmResults<BillDetail> billDetails) {
         long money = 0;
         for (BillDetail billDetail : billDetails) {
             money += billDetail.getMoney() * (billDetail.getBill().isBuyOrSell() == BUY ? -1 : 1);
         }
-        this.money.set(getMoney(money));
+        _money.set(getMoney(money));
     }
 
     public RealmResults<Bill> getBills() {
@@ -146,6 +156,7 @@ public class Wallet extends RealmObject {
 
     public void setName(String name) {
         this.name = name;
+        _name.set(name);
     }
 
     public User getUser() {
@@ -161,6 +172,10 @@ public class Wallet extends RealmObject {
                 .where(Loan.class)
                 .equalTo("wallet.id", id)
                 .findAllAsync();
+    }
+
+    public void updateName() {
+        name = _name.get();
     }
 
     public interface Callback {

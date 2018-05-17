@@ -41,18 +41,21 @@
         <attr name="_paddingRight" format="dimension"/>
         <attr name="_paddingBottom" format="dimension"/>
     </declare-styleable>
-    <declare-styleable name="TextInput" parent="View">
+    <declare-styleable name="InputText" parent="View">
         <attr name="_autoSize" format="boolean"/>
         <attr name="_font"/>
+        <attr name="_rippleColor"/>
     </declare-styleable>
     <declare-styleable name="Text">
         <attr name="_font" format="enum">
             <enum name="none" value="0"/>
-            <enum name="regular" value="1"/>
-            <enum name="light" value="2"/>
+            <enum name="light" value="1"/>
+            <enum name="regular" value="2"/>
             <enum name="bold" value="3"/>
+            <enum name="icon" value="4"/>
         </attr>
         <attr name="_autoSize"/>
+        <attr name="_autoPadding" format="boolean"/>
     </declare-styleable>
     <declare-styleable name="Shadow">
         <attr name="_radius" format="dimension"/>
@@ -88,5 +91,12 @@
     </declare-styleable>
     <declare-styleable name="List">
         <attr name="_stackFromEnd" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="FrameShadow">
+        <attr name="_radius"/>
+        <attr name="_shadowSize"/>
+        <attr name="_dx"/>
+        <attr name="_dy"/>
+        <attr name="_shadowColor"/>
     </declare-styleable>
 </resources>

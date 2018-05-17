@@ -1,5 +1,7 @@
 package uit.money.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
@@ -23,6 +25,7 @@ import model.model.transaction.Loan;
 import model.model.transaction.TransactionModel;
 import uit.money.BR;
 import uit.money.R;
+import uit.money.activity.BillActivity;
 import uit.money.adapter.separator.DateSeparator;
 import uit.money.adapter.separator.EndSeparator;
 
@@ -36,6 +39,10 @@ public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<Transac
     private RealmResults<Loan> loans;
     private RealmResults<Bill> bills;
     private List<TransactionModel> transactions;
+
+    public static TransactionRecyclerViewAdapter getInstance(Wallet wallet) {
+        return new TransactionRecyclerViewAdapter(wallet);
+    }
 
     public TransactionRecyclerViewAdapter(Wallet wallet) {
         loans = wallet.getLoans();
@@ -136,17 +143,32 @@ public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<Transac
         void bind(TransactionModel model) {
             model.initialize();
             binding.setVariable(variable, model);
-            binding.setVariable(BR.action, new Action());
+            binding.setVariable(BR.action, new Action(model));
             binding.executePendingBindings();
         }
     }
 
     public static class Action {
-        Action() {
+        private TransactionModel model;
+
+        Action(TransactionModel model) {
+            this.model = model;
         }
 
         public void click(View view) {
-//            view.getContext().startActivity(new Intent(view.getContext(), LoginActivity.class));
+            final Context context = view.getContext();
+
+            Class<?> transactionActivity = null;
+            switch (model.getType()) {
+                case BILL:
+                    transactionActivity = BillActivity.class;
+                    break;
+                default:
+                    return;
+            }
+            final Intent intent = new Intent(context, transactionActivity);
+            intent.putExtra("id", model.getId());
+            context.startActivity(intent);
         }
     }
 }

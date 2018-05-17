@@ -1,31 +1,32 @@
 package uit.money.adapter;
 
-import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import io.realm.RealmRecyclerViewAdapter;
-import model.model.User;
-import model.model.Wallet;
+import model.model.transaction.Bill;
+import model.model.transaction.BillDetail;
 import uit.money.R;
-import uit.money.databinding.ItemWalletBinding;
+import uit.money.databinding.ItemBillDetailBinding;
 
-public class WalletRecyclerViewAdapter extends RealmRecyclerViewAdapter<Wallet, WalletRecyclerViewAdapter.ViewHolder> {
-    public WalletRecyclerViewAdapter(User user) {
-        super(user.getWallets(), true);
+public class BillDetailRecyclerViewAdapter extends RealmRecyclerViewAdapter<BillDetail, BillDetailRecyclerViewAdapter.ViewHolder> {
+    public BillDetailRecyclerViewAdapter(Bill bill) {
+        super(bill.getBillDetails(), true);
     }
 
+    public static BillDetailRecyclerViewAdapter getInstance(Bill bill) {
+        return new BillDetailRecyclerViewAdapter(bill);
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        ItemWalletBinding viewDataBinding = DataBindingUtil.inflate(
+        ItemBillDetailBinding viewDataBinding = DataBindingUtil.inflate(
                 layoutInflater,
-                R.layout.item_wallet,
+                R.layout.item_bill_detail,
                 parent, false
         );
         return new ViewHolder(viewDataBinding);
@@ -37,9 +38,9 @@ public class WalletRecyclerViewAdapter extends RealmRecyclerViewAdapter<Wallet, 
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private final ItemWalletBinding binding;
+        private final ItemBillDetailBinding binding;
 
-        ViewHolder(ItemWalletBinding binding) {
+        ViewHolder(ItemBillDetailBinding binding) {
             super(binding.getRoot());
             binding.getRoot().setLayoutParams(new RecyclerView.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -48,26 +49,9 @@ public class WalletRecyclerViewAdapter extends RealmRecyclerViewAdapter<Wallet, 
             this.binding = binding;
         }
 
-        void bind(Wallet wallet) {
-            wallet.initialize();
-            binding.setWallet(wallet);
-            binding.setAction(new Action(wallet));
+        void bind(BillDetail billDetail) {
+            binding.setBillDetail(billDetail);
             binding.executePendingBindings();
-        }
-    }
-
-    public static class Action {
-        private Wallet wallet;
-
-        Action(Wallet wallet) {
-            this.wallet = wallet;
-        }
-
-        public void select(View view) {
-            Wallet.setCurrentWallet(wallet);
-            Activity activity = (Activity) view.getContext();
-            activity.setResult(Activity.RESULT_OK);
-            activity.finish();
         }
     }
 }

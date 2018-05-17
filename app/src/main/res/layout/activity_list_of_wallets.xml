@@ -17,32 +17,25 @@
         android:layout_height="match_parent"
         android:background="#f5f5f5"
         android:clipChildren="false"
-        android:fitsSystemWindows="false">
+        android:fitsSystemWindows="false"
+        android:layerType="software">
 
-        <FrameLayout
+        <ui.List
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="50dp"
-            android:layout_marginTop="74dp">
-
-            <ui.List
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:adapter="@{state.getWalletAdapter()}"
-                android:clipChildren="false"
-                android:clipToPadding="false"
-                android:layerType="hardware"
-                android:paddingBottom="15dp"
-                android:paddingTop="15dp"
-                android:scrollbarSize="4dp"
-                android:scrollbarStyle="insideOverlay"
-                android:scrollbarThumbVertical="@color/scrollbarThumb"
-                android:scrollbars="vertical"
-                tools:ignore="RtlSymmetry"
-                tools:itemCount="3"
-                tools:listitem="@layout/item_wallet"/>
-
-        </FrameLayout>
+            android:layout_marginTop="74dp"
+            android:adapter="@{state.getWalletAdapter()}"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:scrollbarSize="4dp"
+            android:scrollbarStyle="insideOverlay"
+            android:scrollbarThumbVertical="@color/scrollbarThumb"
+            android:scrollbars="vertical"
+            tools:ignore="RtlSymmetry"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_wallet"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -59,7 +52,7 @@
                 android:layout_gravity="top"
                 app:_backgroundColor="#3c6"
                 app:_shadowColor="#3c6"
-                app:_shadowSize="6dp"/>
+                app:_shadowSize="5dp"/>
 
             <ui.Shadow
                 android:layout_width="match_parent"
@@ -67,8 +60,16 @@
                 android:layout_gravity="bottom"
                 android:layerType="software"
                 app:_backgroundColor="#fff"
-                app:_shadowColor="#3000"
-                app:_shadowSize="8dp"/>
+                app:_shadowColor="#15000000"
+                app:_shadowSize="5dp"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="24dp"
+            android:clipChildren="false">
 
             <ui.Row
                 android:layout_width="match_parent"
@@ -81,7 +82,7 @@
                     android:layout_gravity="bottom|start"
                     android:gravity="end|center_vertical"
                     android:paddingStart="25dp"
-                    android:text="@string/sum"
+                    android:text="@string/wallet_total"
                     android:textColor="#3c6"
                     android:textSize="18sp"
                     app:_font="bold"
@@ -101,32 +102,22 @@
                     tools:ignore="RtlSymmetry"
                     tools:text="123.456.789 đ"/>
             </ui.Row>
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="24dp"
-            android:background="@android:color/white"
-            android:clipChildren="false">
 
             <ui.Row
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:background="#3c6">
 
                 <ui.Button
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:onClick="goBack"
+                    android:onClick="back"
                     app:_background="#3c6"
                     app:_childRadius="none"
-                    app:_font="light"
+                    app:_font="regular"
                     app:_foreground="#fff"
                     app:_icon=""
                     app:_rippleColor="#99ffffff"
-                    app:_shadowColor="#884cb7ff"
-                    app:_shadowSize="6dp"
                     app:_textAlign="left"
                     app:_textPaddingLeft="false"/>
 
@@ -136,31 +127,27 @@
                     android:layout_gravity="center"
                     android:background="#9fff"/>
 
-                <ui.Button
+                <ui.Text
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    app:_background="#3c6"
-                    app:_font="light"
-                    app:_foreground="#fff"
-                    app:_rippleColor="#99ffffff"
-                    app:_shadowColor="#884cb7ff"
-                    app:_shadowSize="6dp"
-                    app:_text="Chọn một ví"
-                    app:_textAlign="left"/>
+                    android:gravity="center_vertical|start"
+                    android:text="@string/list_of_wallet_title"
+                    android:textColor="#fff"
+                    app:_autoPadding="true"
+                    app:_autoSize="true"
+                    app:_font="regular"/>
 
                 <ui.Button
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:onClick="goBack"
+                    android:onClick="create"
                     app:_background="#3c6"
                     app:_childRadius="none"
-                    app:_font="light"
+                    app:_font="regular"
                     app:_foreground="#fff"
                     app:_icon=""
                     app:_rippleColor="#99ffffff"
-                    app:_shadowColor="#884cb7ff"
-                    app:_shadowSize="6dp"
                     app:_textAlign="left"
                     app:_textPaddingLeft="false"/>
 

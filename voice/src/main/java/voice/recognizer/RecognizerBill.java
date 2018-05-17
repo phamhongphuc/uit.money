@@ -30,7 +30,7 @@ public class RecognizerBill {
             .put(Keys.PRICE, asList("hết", "tốn", "với giá", "mất", "giá"))
             .put(Keys.LOCATION, asList("tại", "ở", "ngoài", "ở ngoài"))
             .put(Keys.TIME, asList("lúc", "vào lúc", "hồi", "ngày"))
-            .put(Keys.WITH, asList("đi cùng", "cùng", "cùng với", "đi với"))
+            .put(Keys.WITH, asList("đi cùng", "cùng với", "cùng", "đi với"))
             .build();
     private Bill bill;
     private BillDetail billDetail;
