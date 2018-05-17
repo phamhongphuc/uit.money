@@ -52,6 +52,7 @@
             <enum name="light" value="1"/>
             <enum name="regular" value="2"/>
             <enum name="bold" value="3"/>
+            <enum name="icon" value="4"/>
         </attr>
         <attr name="_autoSize"/>
         <attr name="_autoPadding" format="boolean"/>

@@ -17,6 +17,7 @@ public class Const {
             .put(1, LIGHT)
             .put(2, REGULAR)
             .put(3, BOLD)
+            .put(4, ICON)
             .build();
 
     private static final int LEFT = 0;
