@@ -1,5 +1,7 @@
 package model.model.transaction;
 
+import android.databinding.ObservableInt;
+
 import org.parceler.Parcel;
 
 import java.util.Date;
@@ -44,7 +46,10 @@ import static model.Const.getString;
 public class Bill extends RealmObject implements Transaction, TransactionModel {
     @Ignore
     private RealmResults<BillDetail> billDetails = null;
-
+    @Ignore
+    public long money = 0;
+    @Ignore
+    public final ObservableInt maxCount = new ObservableInt(0);
     @PrimaryKey
     private int id;
     private Wallet wallet;
@@ -55,13 +60,11 @@ public class Bill extends RealmObject implements Transaction, TransactionModel {
     private Organization organization;
     private boolean buyOrSell;
 
-    @Ignore
-    public long money = 0;
-
     public Bill() {
         time = new Date();
     }
 
+    @Override
     public int getId() {
         return id;
     }
@@ -91,8 +94,8 @@ public class Bill extends RealmObject implements Transaction, TransactionModel {
     public void initialize() {
         getBillDetails();
         billDetails.removeAllChangeListeners();
-        billDetails.addChangeListener(this::updateMoney);
-        updateMoney(billDetails);
+        billDetails.addChangeListener(this::updateBindingValue);
+        updateBindingValue(billDetails);
     }
 
     public RealmResults<BillDetail> getBillDetails() {
@@ -137,11 +140,15 @@ public class Bill extends RealmObject implements Transaction, TransactionModel {
         this.buyOrSell = buyOrSell;
     }
 
-    private void updateMoney(RealmResults<BillDetail> billDetails) {
+    private void updateBindingValue(RealmResults<BillDetail> billDetails) {
         long money = 0;
+        int maxAmount = 0;
         for (BillDetail billDetail : billDetails) {
             money += billDetail.getMoney();
+            final int amount = billDetail.getAmount();
+            if (amount > maxAmount) maxAmount = amount;
         }
+        this.maxCount.set(maxAmount);
         setMoney(money);
     }
 

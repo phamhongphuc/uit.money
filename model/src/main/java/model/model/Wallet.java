@@ -21,7 +21,7 @@ import model.model.transaction.BillDetail;
 import model.model.transaction.Loan;
 
 import static model.Const.BUY;
-import static model.Const.getMoney;
+import static model.Utils.getMoney;
 
 /**
  * <Fields>
