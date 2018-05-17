@@ -23,6 +23,11 @@ public class DateSeparator implements TransactionModel {
     }
 
     @Override
+    public int getId() {
+        return 0;
+    }
+
+    @Override
     public Date getTime() {
         return time;
     }

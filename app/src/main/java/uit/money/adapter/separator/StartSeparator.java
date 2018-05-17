@@ -8,6 +8,11 @@ import static model.Const.START_SEPARATOR;
 
 public class StartSeparator implements TransactionModel {
     @Override
+    public int getId() {
+        return 0;
+    }
+
+    @Override
     public Date getTime() {
         return null;
     }

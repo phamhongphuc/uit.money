@@ -8,6 +8,11 @@ import static model.Const.END_SEPARATOR;
 
 public class EndSeparator implements TransactionModel {
     @Override
+    public int getId() {
+        return 0;
+    }
+
+    @Override
     public Date getTime() {
         return null;
     }
