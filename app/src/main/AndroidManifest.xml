@@ -45,6 +45,7 @@
         <activity android:name=".activity.CreateWalletActivity">
         </activity>
         <activity android:name=".activity.EditWalletActivity"/>
+        <activity android:name=".activity.BillActivity"/>
     </application>
 
 </manifest>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.BillActivity">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <import type="model.Utils"/>
+
+        <import type="uit.money.adapter.BillDetailRecyclerViewAdapter"/>
+
+        <variable
+            name="state"
+            type="uit.money.activity.BillActivity.State"/>
+
+        <variable
+            name="bill"
+            type="model.model.transaction.Bill"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f5f5f5"
+        android:clipChildren="false"
+        android:fitsSystemWindows="false">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="74dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:layerType="software"
+            android:measureAllChildren="true"
+            android:padding="30dp">
+
+            <ui.FrameShadow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                app:_dy="1dp"
+                app:_radius="5dp"
+                app:_shadowColor="#15000000"
+                app:_shadowSize="4dp">
+
+                <ui.Col
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ui.Text
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical|start"
+                        android:paddingEnd="20dp"
+                        android:paddingStart="20dp"
+                        android:text="@{bill.action}"
+                        android:textColor="#444"
+                        app:_autoSize="true"
+                        app:_font="bold"
+                        tools:text="Mua/Bán"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#15000000"/>
+
+                    <ui.Row
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <ui.Text
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical|start"
+                            android:paddingEnd="20dp"
+                            android:paddingStart="20dp"
+                            android:text="@string/time"
+                            android:textColor="#555"
+                            android:textSize="15sp"
+                            app:_autoPadding="false"
+                            app:_font="bold"/>
+
+                        <ui.Text
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|end"
+                            android:paddingEnd="20dp"
+                            android:paddingStart="20dp"
+                            android:text="@{Utils.getDateTime(bill.time)}"
+                            android:textColor="#666"
+                            android:textSize="15sp"
+                            app:_autoPadding="false"
+                            app:_font="bold"/>
+                    </ui.Row>
+
+                    <ui.Row
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:visibility="@{(bill.location == null || ``.equals(bill.location)) ? View.GONE : View.VISIBLE, default=gone}"
+                        tools:visibility="visible">
+
+                        <ui.Text
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical|start"
+                            android:paddingEnd="20dp"
+                            android:paddingStart="20dp"
+                            android:text="@string/bill_location"
+                            android:textColor="#555"
+                            android:textSize="15sp"
+                            app:_autoPadding="false"
+                            app:_font="bold"/>
+
+                        <ui.Text
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|end"
+                            android:paddingEnd="20dp"
+                            android:paddingStart="20dp"
+                            android:text="@{bill.location}"
+                            android:textColor="#999"
+                            android:textSize="15sp"
+                            app:_autoPadding="false"
+                            app:_font="bold"
+                            tools:text="bill.location"/>
+                    </ui.Row>
+
+                    <ui.Row
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:visibility="@{bill.with == null ? View.GONE : View.VISIBLE, default=gone}"
+                        tools:visibility="visible">
+
+                        <ui.Text
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical|start"
+                            android:paddingEnd="20dp"
+                            android:paddingStart="20dp"
+                            android:text="@string/bill_go_with"
+                            android:textColor="#555"
+                            android:textSize="15sp"
+                            app:_autoPadding="false"
+                            app:_font="bold"/>
+
+                        <ui.Text
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|end"
+                            android:paddingEnd="20dp"
+                            android:paddingStart="20dp"
+                            android:text="@{bill.with.name}"
+                            android:textColor="#999"
+                            android:textSize="15sp"
+                            app:_autoPadding="false"
+                            app:_font="bold"
+                            tools:text="bill.with.name"/>
+                    </ui.Row>
+
+                    <ui.Text
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical|start"
+                        android:paddingEnd="20dp"
+                        android:paddingStart="20dp"
+                        android:text="@string/bill_detail"
+                        android:textColor="#555"
+                        android:textSize="15sp"
+                        app:_autoPadding="false"
+                        app:_font="bold"/>
+
+                    <ui.List
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adapter="@{BillDetailRecyclerViewAdapter.getInstance(bill)}"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/item_bill_detail"/>
+
+                    <ui.Col
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="20dp">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginTop="3dp"
+                            android:background="#15000000"/>
+
+                        <ui.Row
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp">
+
+                            <ui.Text
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:gravity="center_vertical|end"
+                                android:text="@{String.valueOf(bill.maxCount)}"
+                                android:textColor="#0000"
+                                android:textSize="15sp"
+                                app:_font="bold"
+                                tools:ignore="RtlSymmetry"
+                                tools:text="7"/>
+
+                            <ui.Text
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:paddingEnd="15dp"
+                                android:paddingStart="15dp"
+                                android:text="✕"
+                                android:textColor="#0000"
+                                android:textSize="15sp"
+                                app:_font="bold"
+                                tools:ignore="HardcodedText,RtlSymmetry"/>
+
+                            <ui.Text
+                                android:layout_width="match_parent"
+                                android:layout_height="25dp"
+                                android:gravity="center_vertical|end"
+                                android:minWidth="80dp"
+                                android:text="@{model.Utils.getMoney(bill.money)}"
+                                android:textColor="@{bill.moneyColor}"
+                                android:textSize="15sp"
+                                app:_autoPadding="false"
+                                app:_font="bold"
+                                tools:text="10.000 đ"/>
+                        </ui.Row>
+                    </ui.Col>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"/>
+                </ui.Col>
+            </ui.FrameShadow>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="24dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:layerType="software">
+
+            <ui.Shadow
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="top"
+                app:_backgroundColor="#3c6"
+                app:_shadowColor="#3c6"
+                app:_shadowSize="6dp"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:background="@android:color/white"
+            android:clipChildren="false">
+
+            <ui.Row
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#3c6">
+
+                <ui.Button
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:onClick="back"
+                    app:_background="#3c6"
+                    app:_childRadius="none"
+                    app:_font="regular"
+                    app:_foreground="#fff"
+                    app:_icon=""
+                    app:_rippleColor="#99ffffff"
+                    app:_textAlign="left"
+                    app:_textPaddingLeft="false"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:background="#9fff"/>
+
+                <ui.Text
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|start"
+                    android:text="@string/bill_title"
+                    android:textColor="#fff"
+                    app:_autoPadding="true"
+                    app:_autoSize="true"
+                    app:_font="regular"/>
+
+                <ui.Button
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    app:_background="#3c6"
+                    app:_childRadius="none"
+                    app:_font="regular"
+                    app:_foreground="#fff"
+                    app:_icon=""
+                    app:_rippleColor="#99ffffff"
+                    app:_textAlign="left"
+                    app:_textPaddingLeft="false"/>
+
+            </ui.Row>
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:background="#33cc66"/>
+
+    </FrameLayout>
+</layout>

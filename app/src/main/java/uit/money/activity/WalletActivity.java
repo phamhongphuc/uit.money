@@ -19,7 +19,6 @@ import java.util.Observable;
 import model.model.User;
 import model.model.Wallet;
 import uit.money.R;
-import uit.money.adapter.TransactionRecyclerViewAdapter;
 import uit.money.databinding.ActivityWalletBinding;
 import uit.money.facebook.Credential;
 import voice.Voice;
@@ -165,10 +164,6 @@ public class WalletActivity extends RealmActivity {
 
         public void setIsShowSpeechRecognizerBar(boolean value) {
             isShowSpeechRecognizerBar.set(value ? View.VISIBLE : View.GONE);
-        }
-
-        public TransactionRecyclerViewAdapter getTransactionAdapter(Wallet wallet) {
-            return new TransactionRecyclerViewAdapter(wallet);
         }
     }
 }

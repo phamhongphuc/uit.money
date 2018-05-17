@@ -3,6 +3,9 @@ package uit.money.activity;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
+
+import java.util.Objects;
 
 import model.model.User;
 import model.model.Wallet;
@@ -25,14 +28,17 @@ public class CreateWalletActivity extends RealmActivity {
     }
 
     public void done(View view) {
-        realm.executeTransaction(r -> {
-            wallet.autoId();
-            wallet.updateName();
-            wallet.setUser(User.getCurrentUser());
-
-            r.copyToRealmOrUpdate(wallet);
-        });
-        finish();
+        if (wallet._name.get() == null || Objects.requireNonNull(wallet._name.get()).equals("")) {
+            Toast.makeText(getApplicationContext(), R.string.error_empty_wallet_name, Toast.LENGTH_SHORT).show();
+        } else {
+            realm.executeTransaction(r -> {
+                wallet.autoId();
+                wallet.updateName();
+                wallet.setUser(User.getCurrentUser());
+                r.copyToRealmOrUpdate(wallet);
+            });
+            finish();
+        }
     }
 
     private void initializeDataBinding() {

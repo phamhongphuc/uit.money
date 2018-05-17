@@ -18,7 +18,7 @@ import uit.money.adapter.WalletRecyclerViewAdapter;
 import uit.money.databinding.ActivityListOfWalletsBinding;
 
 import static model.Const.BUY;
-import static model.Const.getMoney;
+import static model.Utils.getMoney;
 
 public class ListOfWalletsActivity extends RealmActivity {
     @Override
