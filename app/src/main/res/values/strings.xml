@@ -38,4 +38,12 @@
     <string name="error_empty_wallet_name">Tên ví không được để trống</string>
     <string name="error_features_not_developed_yet">Tính năng vẫn chưa được phát triển</string>
     <string name="sidebar_payloan_button">Sổ nợ</string>
+    <string name="bill_title">Thông tin giao dịch</string>
+    <string name="bill_detail">Chi tiết giao dịch:</string>
+    <string name="time">Thời gian:</string>
+    <string name="number_99">99</string>
+    <string name="bill_go_with">Cùng với:</string>
+    <string name="bill_location">Địa điểm:</string>
+    <string name="icon_location"></string>
+    <string name="icon_person"></string>
 </resources>
