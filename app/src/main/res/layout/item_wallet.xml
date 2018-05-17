@@ -67,8 +67,8 @@
                     android:text="@{wallet.name}"
                     android:textColor="#444"
                     app:_autoSize="true"
-                    tools:text="{Tên ví}"
-                    app:_font="bold"/>
+                    app:_font="bold"
+                    tools:text="{Tên ví}"/>
 
                 <View
                     android:layout_width="match_parent"

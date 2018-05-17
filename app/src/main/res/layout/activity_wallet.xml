@@ -7,6 +7,8 @@
 
     <data>
 
+        <import type="uit.money.adapter.TransactionRecyclerViewAdapter"/>
+
         <variable
             name="wallet"
             type="model.model.Wallet"/>
@@ -47,7 +49,7 @@
                 <ui.List
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:adapter="@{state.getTransactionAdapter(wallet)}"
+                    android:adapter="@{TransactionRecyclerViewAdapter.getInstance(wallet)}"
                     android:clipChildren="false"
                     android:clipToPadding="false"
                     android:scrollbarSize="4dp"
@@ -79,7 +81,6 @@
                     android:visibility="@{state.isShowSpeechRecognizerBar, default=visible}"/>
 
                 <ui.Text
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -301,11 +302,11 @@
                     <ui.Button
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
+                        android:onClick="openPayloan"
                         app:_background="#0000"
                         app:_font="regular"
                         app:_fontSize="small"
                         app:_foreground="#555"
-                        android:onClick="openPayloan"
                         app:_icon=""
                         app:_paddingLeft="7dp"
                         app:_rippleColor="#2000"
@@ -316,6 +317,7 @@
                     <ui.Button
                         android:layout_width="wrap_content"
                         android:layout_height="45dp"
+                        android:onClick="openStatistical"
                         app:_background="#0000"
                         app:_font="regular"
                         app:_fontSize="small"
@@ -323,7 +325,6 @@
                         app:_icon=""
                         app:_paddingLeft="7dp"
                         app:_rippleColor="#2000"
-                        android:onClick="openStatistical"
                         app:_text="@string/sidebar_statistical_button"
                         app:_textAlign="left"
                         app:_textPaddingLeft="false"/>
