@@ -13,12 +13,13 @@ import uit.money.R;
 import uit.money.databinding.ActivityCreateWalletBinding;
 
 public class CreateWalletActivity extends RealmActivity {
+    private final int layout = R.layout.activity_create_wallet;
     private Wallet wallet = new Wallet();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_wallet);
+        setContentView(layout);
 
         initializeDataBinding();
     }
@@ -43,7 +44,7 @@ public class CreateWalletActivity extends RealmActivity {
 
     private void initializeDataBinding() {
         final ActivityCreateWalletBinding binding;
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_create_wallet);
+        binding = DataBindingUtil.setContentView(this, layout);
         binding.setWallet(wallet);
     }
 }

@@ -150,6 +150,10 @@ public class WalletActivity extends RealmActivity {
         Toast.makeText(getApplicationContext(), R.string.error_features_not_developed_yet, Toast.LENGTH_SHORT).show();
     }
 
+    public void createTransaction(View view) {
+        startActivity(new Intent(getBaseContext(), CreateBillActivity.class));
+    }
+
     public static class State extends Observable {
         public final ObservableBoolean isOpenDrawer = new ObservableBoolean(false);
         public final ObservableInt isShowSpeechRecognizerBar = new ObservableInt(View.GONE);
