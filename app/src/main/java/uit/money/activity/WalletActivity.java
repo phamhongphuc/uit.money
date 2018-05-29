@@ -23,6 +23,7 @@ import uit.money.databinding.ActivityWalletBinding;
 import uit.money.facebook.Credential;
 import voice.Voice;
 import voice.recognizer.RecognizerBill;
+import voice.recognizer.RecognizerWallet;
 
 import static uit.money.utils.Timer.setTimeout;
 
@@ -91,10 +92,10 @@ public class WalletActivity extends RealmActivity {
                 setTimeout(() -> state.setIsShowSpeechRecognizerBar(false), 1200);
 
                 RecognizerBill recognizerBill = new RecognizerBill(wallet, log.get(0));
+                if (recognizerBill.isValid()) recognizerBill.copyToRealmOrUpdate();
 
-                if (recognizerBill.isValid()) {
-                    recognizerBill.copyToRealmOrUpdate();
-                }
+                RecognizerWallet recognizerWallet = new RecognizerWallet(wallet, log.get(0));
+                if (recognizerWallet.isValid()) recognizerWallet.start();
             }
 
             @Override
