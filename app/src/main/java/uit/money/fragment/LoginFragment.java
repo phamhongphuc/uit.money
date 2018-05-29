@@ -1,42 +1,47 @@
 package uit.money.fragment;
 
-import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.Objects;
-
 import uit.money.R;
 import uit.money.databinding.FragmentLoginBinding;
 
-@SuppressLint("ValidFragment")
 public class LoginFragment extends Fragment {
-    private final int icon;
-    private final int title;
-    private final int content;
+    private int icon;
+    private int title;
+    private int content;
 
-    public LoginFragment(int icon, int title, int content) {
-        this.icon = icon;
-        this.title = title;
-        this.content = content;
+    public LoginFragment() {
+
+    }
+
+    public static LoginFragment getFragment(int icon, int title, int content) {
+        final LoginFragment loginFragment = new LoginFragment();
+        loginFragment.icon = icon;
+        loginFragment.title = title;
+        loginFragment.content = content;
+        return loginFragment;
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentLoginBinding binding;
         binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_login,
                 container, false
         );
-        binding.setBackground(Objects.requireNonNull(getContext()).getDrawable(icon));
-        binding.setContent(getString(content));
-        binding.setTitle(getString(title));
+        try {
+            binding.setBackground(getResources().getDrawable(icon, null));
+            binding.setContent(getString(content));
+            binding.setTitle(getString(title));
+        } catch (Exception ignored) {
+        }
         return binding.getRoot();
     }
 }

@@ -11,10 +11,11 @@ import com.facebook.CallbackManager;
 import java.util.ArrayList;
 
 import uit.money.R;
-import uit.money.fragment.FragmentAdapter;
 import uit.money.databinding.ActivityLoginBinding;
 import uit.money.facebook.Credential;
-import uit.money.fragment.LoginFragment;
+import uit.money.fragment.FragmentAdapter;
+
+import static uit.money.fragment.LoginFragment.getFragment;
 
 public class LoginActivity extends RealmActivity {
     private static final String TAG = "LoginActivity";
@@ -41,9 +42,9 @@ public class LoginActivity extends RealmActivity {
         binding.setAdapter(new FragmentAdapter(
                 getSupportFragmentManager(),
                 new ArrayList<Fragment>() {{
-                    add(new LoginFragment(R.drawable.login_1_icon, R.string.login_1_title, R.string.login_1_content));
-                    add(new LoginFragment(R.drawable.login_2_icon, R.string.login_2_title, R.string.login_2_content));
-                    add(new LoginFragment(R.drawable.login_3_icon, R.string.login_3_title, R.string.login_3_content));
+                    add(getFragment(R.drawable.login_1_icon, R.string.login_1_title, R.string.login_1_content));
+                    add(getFragment(R.drawable.login_2_icon, R.string.login_2_title, R.string.login_2_content));
+                    add(getFragment(R.drawable.login_3_icon, R.string.login_3_title, R.string.login_3_content));
                 }}
         ));
     }

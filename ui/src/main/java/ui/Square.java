@@ -16,14 +16,11 @@ public class Square extends FrameLayout {
 
     public Square(@NonNull Context context) {
         super(context);
+        initialize(context, null);
     }
 
-    public Square(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    public Square(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+    private void initialize(@NonNull Context context, @Nullable AttributeSet attrs) {
+        initializeAttr(context, attrs);
     }
 
     private void initializeAttr(@NonNull Context context, @Nullable AttributeSet attrs) {
@@ -31,24 +28,31 @@ public class Square extends FrameLayout {
         typedArray = context.obtainStyledAttributes(attrs, R.styleable.Square);
 
         by = typedArray.getInt(R.styleable.Square__by, 0);
-//        autoSize = typedArray.getBoolean(R.styleable.Text__autoSize, false);
-
         typedArray.recycle();
+    }
+
+    public Square(@NonNull Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        initialize(context, attrs);
+    }
+
+    public Square(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        initialize(context, attrs);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        final float dp = getResources().getDisplayMetrics().density;
-        final int width = MeasureSpec.getSize(widthMeasureSpec);
-        final int height = MeasureSpec.getSize(heightMeasureSpec);
+        final int minHeight = MeasureSpec.getSize(widthMeasureSpec);
+        final int minWidth = MeasureSpec.getSize(heightMeasureSpec);
 
-        switch (by){
+        switch (by) {
             case WIDTH:
-                setMinimumHeight(width);
+                setMinimumHeight(minHeight);
                 break;
             case HEIGHT:
-                setMinimumWidth(height);
+                setMinimumWidth(minWidth);
                 break;
         }
     }

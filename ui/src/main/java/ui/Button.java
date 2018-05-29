@@ -2,10 +2,10 @@ package ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.graphics.drawable.GradientDrawable;
-import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
@@ -13,12 +13,15 @@ import android.support.v7.widget.LinearLayoutCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import java.util.Objects;
 
 import ui.ui.R;
+import ui.utils.Calc;
+import ui.utils.ShadowView;
 
+import static ui.utils.Calc.getRippleDrawable;
+import static ui.utils.Calc.setShadow;
 import static ui.utils.Const.ALIGN;
 import static ui.utils.Const.CENTER;
 import static ui.utils.Const.FONT_SIZEs;
@@ -28,13 +31,10 @@ import static ui.utils.Const.RADIUS_ICON;
 import static ui.utils.Const.RADIUS_NONE;
 import static ui.utils.Const.RADIUS_TEXT;
 
-public class Button extends FrameLayout {
-    private static final String TAG = "Ai.Button";
-
+public class Button extends LinearLayoutCompat implements ShadowView {
     private String text;
     private String icon;
 
-    private int background;
     private int foreground;
     private int backgroundIcon;
     private int backgroundText;
@@ -46,15 +46,15 @@ public class Button extends FrameLayout {
 
     private AppCompatTextView textView;
     private AppCompatTextView iconView;
-    private LinearLayoutCompat linearLayoutCompat;
 
-    private boolean textPaddingLeft;
-    private int childRadius;
     private String font;
     private Float fontSize;
+    private boolean textPaddingLeft;
+    private int childRadius;
     private int shadowSize;
     private int paddingLeft;
     private int paddingRight;
+    private Paint paint = new Paint();
 
     public Button(Context context) {
         super(context, null);
@@ -62,12 +62,10 @@ public class Button extends FrameLayout {
     }
 
     private void initialize(@NonNull Context context, @Nullable AttributeSet attrs) {
-        setClipChildren(false);
         setClickable(true);
 
         initializeAttrs(context, attrs);
-        initializeShadow(context);
-        initializeLinearLayoutCompat(context);
+        initializeView();
         initializeIcon(context);
         initializeText(context);
     }
@@ -80,7 +78,6 @@ public class Button extends FrameLayout {
         text = (String) typedArray.getText(R.styleable.Button__text);
         textAlign = ALIGN.get(typedArray.getInt(R.styleable.Button__textAlign, CENTER)) | Gravity.CENTER_VERTICAL;
 
-        background = typedArray.getColor(R.styleable.Button__background, Color.WHITE);
         foreground = typedArray.getColor(R.styleable.Button__foreground, context.getColor(R.color.foreground));
 
         backgroundIcon = typedArray.getColor(R.styleable.Button__backgroundIcon, Color.TRANSPARENT);
@@ -88,7 +85,7 @@ public class Button extends FrameLayout {
 
         textPaddingLeft = typedArray.getBoolean(R.styleable.Button__textPaddingLeft, true);
         childRadius = typedArray.getInt(R.styleable.Button__childRadius, RADIUS_NONE);
-        font = FONTs.get(typedArray.getInt(R.styleable.Button__font, 1));
+        font = FONTs.get(typedArray.getInt(R.styleable.Button__font, 2));
         fontSize = FONT_SIZEs.get(typedArray.getInt(R.styleable.Button__fontSize, 0));
 
         radius = MeasureSpec.getSize((int) typedArray.getDimension(R.styleable.Button__radius, 0));
@@ -102,40 +99,21 @@ public class Button extends FrameLayout {
         typedArray.recycle();
     }
 
-    private void initializeShadow(Context context) {
-        Shadow shadow = new Shadow(context);
-        shadow.setClickable(true);
-        shadow.setRippleColor(rippleColor);
-        shadow.setShadowColor(shadowColor);
-        shadow.setBackground(background);
-        shadow.setShadowSize(shadowSize);
-        shadow.setRadius(radius);
-        shadow.setLayoutParams(new LayoutParams(
-                LayoutParams.MATCH_PARENT,
-                LayoutParams.MATCH_PARENT
-        ));
-        shadow.setOnClickListener(v -> callOnClick());
-        addView(shadow);
-    }
-
-    private void initializeLinearLayoutCompat(Context context) {
-        linearLayoutCompat = new LinearLayoutCompat(context);
-        linearLayoutCompat.setLayoutParams(new LayoutParams(
-                LayoutParams.MATCH_PARENT,
-                LayoutParams.MATCH_PARENT
-        ));
-        linearLayoutCompat.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-        linearLayoutCompat.setClipChildren(true);
-        linearLayoutCompat.setClipToOutline(true);
-        linearLayoutCompat.setPadding(paddingLeft, 0, paddingRight, 0);
-        addView(linearLayoutCompat);
+    private void initializeView() {
+        setClipChildren(false);
+        setClipToOutline(false);
+        setShadow(this, paint);
+        setForeground(getRippleDrawable(rippleColor, radius, radius));
+        setBackgroundColor(Color.TRANSPARENT);
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        setPadding(paddingLeft + shadowSize, shadowSize, paddingRight + shadowSize, shadowSize);
     }
 
     private void initializeIcon(Context context) {
         if (icon != null && !Objects.equals(icon, "")) {
             if (iconView == null) {
                 iconView = new AppCompatTextView(context);
-                linearLayoutCompat.addView(iconView);
+                addView(iconView);
             }
             iconView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
             iconView.setText(icon);
@@ -149,9 +127,9 @@ public class Button extends FrameLayout {
             iconView.setIncludeFontPadding(false);
             iconView.setGravity(Gravity.CENTER);
             iconView.setTextColor(foreground);
-            iconView.setBackgroundDrawable(getGradientDrawable(backgroundIcon, radius, childRadius == RADIUS_ICON ? radius : 0));
+            iconView.setBackgroundDrawable(Calc.getPaintDrawable(backgroundIcon, radius, childRadius == RADIUS_ICON ? radius : 0));
         } else if (iconView != null) {
-            linearLayoutCompat.removeView(iconView);
+            removeView(iconView);
         }
     }
 
@@ -159,7 +137,7 @@ public class Button extends FrameLayout {
         if (text != null && !Objects.equals(text, "")) {
             if (textView == null) {
                 textView = new AppCompatTextView(context);
-                linearLayoutCompat.addView(textView);
+                addView(textView);
             }
             textView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
             textView.setText(text);
@@ -172,20 +150,10 @@ public class Button extends FrameLayout {
             ));
             textView.setIncludeFontPadding(false);
             textView.setTextColor(foreground);
-            textView.setBackgroundDrawable(getGradientDrawable(backgroundText, childRadius == RADIUS_TEXT ? radius : 0, radius));
+            textView.setBackgroundDrawable(Calc.getPaintDrawable(backgroundText, childRadius == RADIUS_TEXT ? radius : 0, radius));
         } else if (textView != null) {
-            linearLayoutCompat.removeView(textView);
+            removeView(textView);
         }
-    }
-
-    @NonNull
-    private GradientDrawable getGradientDrawable(@ColorInt int color, float left, float right) {
-        GradientDrawable drawable = new GradientDrawable();
-        drawable.setColor(color);
-        drawable.setCornerRadii(new float[]{
-                left, left, right, right, right, right, left, left
-        });
-        return drawable;
     }
 
     public Button(Context context, AttributeSet attrs) {
@@ -193,15 +161,31 @@ public class Button extends FrameLayout {
         initialize(context, attrs);
     }
 
+    public void set_text(String text) {
+        this.text = text;
+        initializeText(getContext());
+    }
+
+    public void set_icon(String icon) {
+        this.icon = icon;
+        initializeIcon(getContext());
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        canvas.drawRoundRect(
+                shadowSize, shadowSize, getWidth() - shadowSize, getHeight() - shadowSize,
+                radius, radius, paint
+        );
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         final float dp = getResources().getDisplayMetrics().density;
-        final int width = MeasureSpec.getSize(widthMeasureSpec);
-        final int height = MeasureSpec.getSize(heightMeasureSpec);
-        final int size = Math.min(width, height);
+        final int size = MeasureSpec.getSize(heightMeasureSpec) - 2 * shadowSize;
 
-        linearLayoutCompat.setMinimumHeight(size);
+        setMinimumHeight(size);
         if (iconView != null) {
             iconView.setTextSize(size * (fontSize + 0.05f) / dp);
             iconView.setWidth(size);
@@ -218,13 +202,28 @@ public class Button extends FrameLayout {
         }
     }
 
-    public void set_text(String text) {
-        this.text = text;
-        initializeText(getContext());
+    @Override
+    public View getView() {
+        return this;
     }
 
-    public void set_icon(String icon) {
-        this.icon = icon;
-        initializeIcon(getContext());
+    @Override
+    public int getShadowSize() {
+        return shadowSize;
+    }
+
+    @Override
+    public int getDx() {
+        return 0;
+    }
+
+    @Override
+    public int getDy() {
+        return 0;
+    }
+
+    @Override
+    public int getShadowColor() {
+        return shadowColor;
     }
 }

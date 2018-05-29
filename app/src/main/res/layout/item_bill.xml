@@ -20,17 +20,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:clipChildren="false"
-        android:clipToPadding="false"
         android:focusable="true"
         android:layerType="software"
-        android:paddingEnd="20dp"
+        android:paddingEnd="10dp"
         tools:background="#ccc"
         tools:ignore="RtlSymmetry">
 
         <FrameLayout
-            android:layout_width="50dp"
-            android:layout_height="match_parent">
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:paddingEnd="5dp">
 
             <ui.Text
                 android:layout_width="match_parent"
@@ -44,10 +43,8 @@
         </FrameLayout>
 
         <FrameLayout
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:clipChildren="false"
-            android:layerType="software">
+            android:layout_width="40dp"
+            android:layout_height="match_parent">
 
             <View
                 android:layout_width="2dp"
@@ -57,41 +54,34 @@
                 android:layout_marginTop="0dp"
                 android:background="#3c6"/>
 
-            <ui.Shadow
-                android:layout_width="21dp"
-                android:layout_height="21dp"
+            <ui.FrameShadow
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:layout_gravity="center_horizontal|top"
-                android:layout_marginTop="17dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/primary"
                 android:clickable="false"
-                android:clipChildren="false"
-                app:_backgroundColor="#3c6"
                 app:_radius="10.5dp"
                 app:_shadowColor="#73c6"
                 app:_shadowSize="5dp"/>
         </FrameLayout>
 
-        <FrameLayout
+        <ui.FrameShadow
+            style="@style/item_shadow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
             android:layout_weight="1"
             android:clickable="true"
-            android:clipChildren="false"
             android:focusable="true">
 
-            <ui.Shadow
+            <ui.Ripple
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
                 android:onClick="@{action::click}"
-                app:_backgroundColor="#fff"
-                app:_dy="1dp"
-                app:_radius="5dp"
-                app:_rippleColor="#73c6"
-                app:_shadowColor="#15000000"
-                app:_shadowSize="8dp"/>
+                app:_radius="@dimen/radius"
+                app:_rippleColor="#93c6"/>
 
             <ui.Col
                 android:layout_width="match_parent"
@@ -208,6 +198,6 @@
                     </ui.Row>
                 </ui.Col>
             </ui.Col>
-        </FrameLayout>
+        </ui.FrameShadow>
     </ui.Row>
 </layout>

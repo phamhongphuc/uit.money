@@ -35,7 +35,9 @@
         <activity
             android:name=".activity.LoginActivity"
             android:noHistory="false"/>
-        <activity android:name=".activity.WalletActivity"/>
+        <activity
+            android:name=".activity.WalletActivity"
+            android:theme="@style/TransparentStatusBarTheme"/>
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -46,6 +48,9 @@
         </activity>
         <activity android:name=".activity.EditWalletActivity"/>
         <activity android:name=".activity.BillActivity"/>
+        <activity
+            android:name=".activity.CreateBillActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
     </application>
 
 </manifest>

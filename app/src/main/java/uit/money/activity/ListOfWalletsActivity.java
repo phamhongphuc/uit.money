@@ -21,17 +21,20 @@ import static model.Const.BUY;
 import static model.Utils.getMoney;
 
 public class ListOfWalletsActivity extends RealmActivity {
+
+    private final int layout = R.layout.activity_list_of_wallets;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_of_wallets);
+        setContentView(layout);
 
         initializeDataBinding();
     }
 
     private void initializeDataBinding() {
         final ActivityListOfWalletsBinding binding;
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_list_of_wallets);
+        binding = DataBindingUtil.setContentView(this, layout);
         binding.setState(new State());
     }
 

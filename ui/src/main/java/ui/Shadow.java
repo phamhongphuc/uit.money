@@ -1,22 +1,18 @@
 package ui;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.RippleDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import java.util.Arrays;
-
 import ui.ui.R;
+
+import static ui.utils.Calc.getRippleDrawable;
 
 public class Shadow extends View {
     private final Paint paint = new Paint();
@@ -28,6 +24,7 @@ public class Shadow extends View {
     private int dy;
     private int rippleColor;
 
+    @Deprecated
     public Shadow(Context context) {
         super(context);
         initialize(context, null);
@@ -42,7 +39,7 @@ public class Shadow extends View {
     }
 
     private void initializeRipple() {
-        setForeground(getRippleDrawable());
+        setForeground(getRippleDrawable(rippleColor, radius, radius));
     }
 
     private void initializeAttr(@NonNull Context context, @Nullable AttributeSet attrs) {
@@ -107,21 +104,5 @@ public class Shadow extends View {
     public void setBackground(int backgroundColor) {
         this.backgroundColor = backgroundColor;
         initializePaint();
-    }
-
-    @NonNull
-    private RippleDrawable getRippleDrawable() {
-        float[] outer = new float[8];
-        Arrays.fill(outer, radius);
-        RoundRectShape roundRectShape = new RoundRectShape(
-                outer,
-                null,
-                null
-        );
-        return new RippleDrawable(
-                ColorStateList.valueOf(rippleColor),
-                null,
-                new ShapeDrawable(roundRectShape)
-        );
     }
 }
