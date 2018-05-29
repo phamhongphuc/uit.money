@@ -2,10 +2,19 @@ package ui;
 
 import android.content.Context;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
+
+import ui.ui.R;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class InputMoney extends InputText {
     public InputMoney(Context context) {
@@ -24,15 +33,17 @@ public class InputMoney extends InputText {
     }
 
     private void initialize() {
-        addTextChangedListener(new MoneyTextWatcher(this));
+        setInputType(InputType.TYPE_CLASS_NUMBER);
+        setKeyListener(DigitsKeyListener.getInstance(false, true));
+        addTextChangedListener(new MoneyTextWatcher());
     }
 
     // TODO loop button when holding
     class MoneyTextWatcher implements TextWatcher {
-        private InputText inputText;
+        private static final String TAG = "MoneyTextWatcher";
+        boolean isEditing;
 
-        MoneyTextWatcher(InputText inputText) {
-            this.inputText = inputText;
+        MoneyTextWatcher() {
         }
 
         @Override
@@ -42,21 +53,34 @@ public class InputMoney extends InputText {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+            Log.i(TAG, "onTextChanged: " + count);
         }
 
         @Override
         public void afterTextChanged(Editable editable) {
+            if (isEditing) return;
+            isEditing = true;
 
-            final DecimalFormat format = new DecimalFormat("###,###,### đ");
-            String string = editable.toString().replaceAll("[^0-9]", "");
-            if (string.equals("")) string = "0";
-            final String number = format.format(Long.parseLong(string));
+            try {
+                final DecimalFormat format = new DecimalFormat("###,###,###");
+                String string = editable.toString().replaceAll("[^0-9]", "");
+                if (string.equals("")) string = "0";
+                if (string.length() > 12) {
+                    string = "999999999999";
+                    Toast.makeText(getApplicationContext(), R.string.so_much_money, Toast.LENGTH_SHORT).show();
+                }
+                final String number = format.format(Long.parseLong(string));
 
-            inputText.removeTextChangedListener(this);
-            inputText.setText(number);
-            inputText.setSelection(number.length() - 2);
-            inputText.addTextChangedListener(this);
+                InputFilter[] filters = editable.getFilters();
+                editable.setFilters(new InputFilter[]{});
+                editable.clear();
+                editable.insert(0, number);
+                editable.setFilters(filters);
+            } catch (Exception ignored) {
+
+            }
+
+            isEditing = false;
         }
     }
 }
