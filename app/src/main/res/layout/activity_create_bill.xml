@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.CreateBillActivity">
+
+    <data>
+
+        <import type="uit.money.adapter.BillDetailEditRecyclerViewAdapter"/>
+
+        <variable
+            name="bill"
+            type="model.model.transaction.Bill"/>
+
+        <variable
+            name="state"
+            type="uit.money.activity.CreateBillActivity.State"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f5f5f5"
+        android:fitsSystemWindows="true">
+
+        <ui.Col
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:background="@color/gray"
+            android:padding="10dp">
+
+            <ui.FrameShadow
+                style="@style/item_shadow"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="1">
+
+                <ui.List
+                    style="@style/list"
+                    android:adapter="@{BillDetailEditRecyclerViewAdapter.getInstance(bill)}"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_bill_detail_edit"/>
+
+            </ui.FrameShadow>
+
+            <ui.FrameShadow
+                style="@style/item_shadow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <ui.Col
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layerType="hardware">
+
+                    <ui.Row
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ui.Col
+                            android:layout_width="@dimen/input_size"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <ui.InputText
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/input_size"
+                                android:background="#0000"
+                                android:hint="@string/hint_object_name"
+                                android:text="@={state.objectName}"
+                                android:textSize="@dimen/input_text_size"
+                                app:_focusColor="@color/primary_focus"
+                                tools:ignore="RtlSymmetry"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/primary_line_color"/>
+                        </ui.Col>
+
+                        <Space
+                            android:layout_width="5dp"
+                            android:layout_height="match_parent"/>
+
+                        <ui.Button
+                            android:layout_width="41dp"
+                            android:layout_height="41dp"
+                            android:background="@color/primary"
+                            android:onClick="clear"
+                            app:_foreground="@color/white"
+                            app:_icon=""/>
+
+                    </ui.Row>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"/>
+
+                    <ui.Row
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ui.Col
+                            android:layout_width="@dimen/input_size"
+                            android:layout_height="wrap_content">
+
+                            <ui.InputNumber
+                                android:layout_width="@dimen/input_size"
+                                android:layout_height="@dimen/input_size"
+                                android:background="#0000"
+                                android:gravity="center"
+                                android:paddingEnd="-1dp"
+                                android:paddingStart="-1dp"
+                                android:text="@={state.amount}"
+                                android:textSize="@dimen/input_text_size"
+                                app:_focusColor="@color/primary_focus"
+                                app:_rippleColor="#33c6"
+                                tools:text="1"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/primary_line_color"/>
+                        </ui.Col>
+
+
+                        <ui.Text
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:gravity="center"
+                            android:paddingEnd="0dp"
+                            android:paddingStart="0dp"
+                            android:text="✕"
+                            android:textColor="#333"
+                            android:textSize="16sp"
+                            app:_font="bold"
+                            tools:ignore="HardcodedText,RtlSymmetry"/>
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <ui.InputMoney
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/input_size"
+                                android:layout_marginBottom="1dp"
+                                android:background="#0000"
+                                android:gravity="center"
+                                android:paddingEnd="26dp"
+                                android:text="@={state.unitPrice}"
+                                android:textAlignment="textEnd"
+                                android:textColor="#444"
+                                android:textSize="@dimen/input_text_size"
+                                app:_focusColor="@color/primary_focus"
+                                app:_font="regular"
+                                app:_rippleColor="#33c6"
+                                tools:ignore="RtlCompat,RtlSymmetry"
+                                tools:text="1.000"/>
+
+                            <ui.Text
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/input_size"
+                                android:layout_gravity="center_vertical|end"
+                                android:layout_marginBottom="1dp"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:gravity="center"
+                                android:paddingEnd="10dp"
+                                android:text="@string/currency_unit"
+                                android:textColor="#333"
+                                android:textSize="@dimen/input_text_size"
+                                tools:ignore="RtlSymmetry"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_gravity="bottom"
+                                android:background="@color/primary_line_color"/>
+                        </FrameLayout>
+
+                        <Space
+                            android:layout_width="5dp"
+                            android:layout_height="match_parent"/>
+
+                        <ui.Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="41dp"
+                            android:background="@color/primary"
+                            android:onClick="add"
+                            app:_foreground="@color/white"
+                            app:_icon=""
+                            app:_text="Thêm"
+                            app:_textPaddingLeft="false"/>
+                    </ui.Row>
+                </ui.Col>
+
+            </ui.FrameShadow>
+        </ui.Col>
+
+        <ui.FrameShadow style="@style/top_bar">
+
+            <ui.Row
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ui.Button
+                    style="@style/button"
+                    android:layout_width="50dp"
+                    android:onClick="back"
+                    app:_icon=""/>
+
+                <View style="@style/vr_line"/>
+
+                <ui.Text
+                    style="@style/text"
+                    android:layout_weight="1"
+                    android:text="@string/create_wallet_title"/>
+
+                <ui.Button
+                    style="@style/button"
+                    android:layout_width="50dp"
+                    android:onClick="done"
+                    app:_icon=""/>
+            </ui.Row>
+        </ui.FrameShadow>
+    </FrameLayout>
+</layout>
