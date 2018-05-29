@@ -14,7 +14,6 @@
             <enum name="right" value="2"/>
         </attr>
         <attr name="_foreground" format="color"/>
-        <attr name="_background" format="color"/>
         <attr name="_backgroundIcon" format="color"/>
         <attr name="_backgroundText" format="color"/>
         <attr name="_textPaddingLeft" format="boolean"/>
@@ -43,8 +42,10 @@
     </declare-styleable>
     <declare-styleable name="InputText" parent="View">
         <attr name="_autoSize" format="boolean"/>
+        <attr name="_autoPadding" format="boolean"/>
         <attr name="_font"/>
-        <attr name="_rippleColor"/>
+        <!-- TODO: Remove "_rippleColor" -->
+        <attr name="_focusColor" format="color"/>
     </declare-styleable>
     <declare-styleable name="Text">
         <attr name="_font" format="enum">
@@ -55,7 +56,7 @@
             <enum name="icon" value="4"/>
         </attr>
         <attr name="_autoSize"/>
-        <attr name="_autoPadding" format="boolean"/>
+        <attr name="_autoPadding"/>
     </declare-styleable>
     <declare-styleable name="Shadow">
         <attr name="_radius" format="dimension"/>
@@ -98,5 +99,17 @@
         <attr name="_dx"/>
         <attr name="_dy"/>
         <attr name="_shadowColor"/>
+        <attr name="_extendTop" format="boolean"/>
+        <attr name="_extendLeft" format="boolean"/>
+        <attr name="_extendRight" format="boolean"/>
+        <attr name="_extendBottom" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="Ripple">
+        <attr name="_rippleColor"/>
+        <attr name="_radius"/>
+        <attr name="_radiusTop" format="boolean"/>
+        <attr name="_radiusLeft" format="boolean"/>
+        <attr name="_radiusRight" format="boolean"/>
+        <attr name="_radiusBottom" format="boolean"/>
     </declare-styleable>
 </resources>
