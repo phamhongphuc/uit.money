@@ -18,14 +18,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:clipChildren="false"
-        android:clipToPadding="false"
         android:focusable="true"
         android:layerType="software"
-        tools:background="#ccc"
+        tools:background="#aaa"
         tools:ignore="RtlSymmetry">
 
-        <FrameLayout
+        <ui.FrameShadow
+            style="@style/item_shadow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
@@ -34,27 +33,18 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:clickable="true"
-            android:clipChildren="false"
-            android:clipToPadding="false"
             android:focusable="true">
 
-            <ui.Shadow
+            <ui.Ripple
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
                 android:onClick="@{action::select}"
-                app:_backgroundColor="#fff"
-                app:_dy="1dp"
-                app:_radius="5dp"
-                app:_rippleColor="#73c6"
-                app:_shadowColor="#15000000"
-                app:_shadowSize="4dp"/>
+                app:_radius="@dimen/radius"
+                app:_rippleColor="#93c6"/>
 
             <ui.Col
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layerType="software">
+                android:layout_height="wrap_content">
 
                 <ui.Text
                     android:layout_width="match_parent"
@@ -73,7 +63,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#15000000"/>
+                    android:background="@color/white_shadow"/>
 
                 <ui.Row
                     android:layout_width="match_parent"
@@ -132,6 +122,6 @@
                 </ui.Row>
 
             </ui.Col>
-        </FrameLayout>
+        </ui.FrameShadow>
     </ui.Row>
 </layout>
