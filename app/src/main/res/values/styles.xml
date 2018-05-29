@@ -8,13 +8,90 @@
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowActivityTransitions">true</item>
 
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-
-        <item name="android:colorPrimaryDark">#33cc66</item>
-
-        <item name="android:colorPrimary">#33cc66</item>
+        <item name="android:colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:colorPrimary">@color/primary</item>
         <item name="android:colorAccent">#ffcc66</item>
+
+        <item name="android:statusBarColor">@color/primary_dark</item>
     </style>
+
+    <style name="TransparentStatusBarTheme" parent="AppTheme">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="tittle_bar">
+        <item name="_extendLeft">false</item>
+        <item name="_extendRight">false</item>
+        <item name="_shadowSize">5dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
+    </style>
+
+    <style name="bottom_bar" parent="tittle_bar">
+        <item name="_extendBottom">false</item>
+        <item name="_shadowColor">@color/white_shadow</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+
+    <style name="top_bar" parent="tittle_bar">
+        <item name="_extendTop">false</item>
+        <item name="_shadowColor">@color/primary_shadow</item>
+        <item name="android:background">@color/primary</item>
+        <item name="android:layout_gravity">top</item>
+    </style>
+
+    <style name="button">
+        <item name="android:layout_height">match_parent</item>
+        <item name="_font">regular</item>
+        <item name="_foreground">@color/white</item>
+        <item name="_rippleColor">@color/white_ripple</item>
+        <item name="_textPaddingLeft">false</item>
+    </style>
+
+    <style name="list">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:scrollbarSize">4dp</item>
+        <item name="android:scrollbarStyle">insideOverlay</item>
+        <item name="android:scrollbarThumbVertical">@color/scrollbar_thumb</item>
+        <item name="android:scrollbars">vertical</item>
+    </style>
+
+    <style name="text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical|start</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="_autoPadding">true</item>
+        <item name="_autoSize">true</item>
+        <item name="_font">regular</item>
+    </style>
+
+    <style name="bottom_text">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textSize">@dimen/bottom_text_size</item>
+        <item name="_font">bold</item>
+    </style>
+
+    <style name="vr_line">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">#9fff</item>
+    </style>
+
+    <style name="item_shadow">
+        <item name="android:background">@color/white</item>
+        <item name="_dy">1dp</item>
+        <item name="_radius">@dimen/radius</item>
+        <item name="_shadowColor">#20000000</item>
+        <item name="_shadowSize">@dimen/shadow_size</item>
+    </style>
+
+    w
 </resources>

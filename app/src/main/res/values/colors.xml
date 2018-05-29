@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="white">#ffffff</color>
-    <color name="facebook">#3b5998</color>
-    <color name="blueTransparent">#443498db</color>
-    <color name="backgroundLight">#fff</color>
-
-    <color name="green">#cc33cc66</color>
-    <color name="scrollbarThumb">#5533cc66</color>
+    <color name="scrollbar_thumb">#5533cc66</color>
+    <color name="primary_shadow">#aa33cc66</color>
+    <color name="primary_focus">#3333cc66</color>
+    <color name="primary_dark">#1f7a3d</color>
+    <color name="primary">#33cc66</color>
+    <color name="input_line_color">#999</color>
+    <color name="white">#fff</color>
+    <color name="white_shadow">#15000000</color>
+    <color name="white_ripple">#99ffffff</color>
+    <color name="red">#e74c3c</color>
+    <color name="red_shadow">#77e74c3c</color>
+    <color name="gray">#eee</color>
+    <color name="primary_line_color">#93c6</color>
+    <color name="primary_ripple">#73c6</color>
 </resources>

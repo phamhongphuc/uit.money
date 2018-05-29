@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">- Money</string>
+    <string name="app_name">Tài chính cá nhân</string>
     <string name="facebook_app_id">2071312033150967</string>
     <string name="fb_login_protocol_scheme">fb2071312033150967</string>
 
@@ -36,7 +36,7 @@
     <string name="sidebar_tutorial_button">Hướng dẫn</string>
     <string name="sidebar_statistical_button">Thống kê</string>
     <string name="error_empty_wallet_name">Tên ví không được để trống</string>
-    <string name="error_features_not_developed_yet">Tính năng vẫn chưa được phát triển</string>
+    <string name="error_features_not_developed_yet">Tính năng này vẫn đang được phát triển</string>
     <string name="sidebar_payloan_button">Sổ nợ</string>
     <string name="bill_title">Thông tin giao dịch</string>
     <string name="bill_detail">Chi tiết giao dịch:</string>
@@ -46,4 +46,8 @@
     <string name="bill_location">Địa điểm:</string>
     <string name="icon_location"></string>
     <string name="icon_person"></string>
+    <string name="create_bill_title">Tạo giao dịch</string>
+    <string name="icon_done"></string>
+    <string name="currency_unit">đ</string>
+    <string name="hint_object_name">Tên món đồ</string>
 </resources>
