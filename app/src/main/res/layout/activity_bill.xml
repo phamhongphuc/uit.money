@@ -293,11 +293,11 @@
                 <ui.Button
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-
+                    android:onClick="removeBill"
                     app:_childRadius="none"
                     app:_font="regular"
                     app:_foreground="#fff"
-                    app:_icon=""
+                    app:_icon=""
                     app:_rippleColor="#99ffffff"
                     app:_textAlign="left"
                     app:_textPaddingLeft="false"/>
