@@ -21,37 +21,38 @@ import model.model.Wallet;
 import uit.money.R;
 import uit.money.databinding.ActivityWalletBinding;
 import uit.money.facebook.Credential;
+import voice.InterfaceWalletActivity;
+import voice.Recognizer;
 import voice.Voice;
-import voice.recognizer.RecognizerBill;
 
 import static uit.money.utils.Timer.setTimeout;
 
-public class WalletActivity extends RealmActivity {
+public class WalletActivity extends RealmActivity implements InterfaceWalletActivity {
     private static final String TAG = "WalletActivity";
     private Wallet wallet;
     private Voice voice;
     private State state = new State();
     private ActivityWalletBinding binding;
+    private Recognizer recognizer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallet);
 
+        initializeRecognizer();
         initializeVoice();
         initializeWallet();
         initializeDataBinding();
     }
 
-    private void initializeWallet() {
-        wallet = Wallet.getCurrentWallet();
-        if (wallet != null) {
-            wallet.initialize();
-        }
+    private void initializeRecognizer() {
+        recognizer = new Recognizer(this);
     }
 
     private void initializeVoice() {
         voice = new Voice(this);
+        voice.checkPermission();
         voice.setListener(new Voice.Listener() {
             @Override
             public void onBeginningOfSpeech() {
@@ -62,17 +63,9 @@ public class WalletActivity extends RealmActivity {
 
             @Override
             public void onRmsChanged(float db) {
-                float ratio;
-                float min = 2;
-                float max = 10;
-                if (db < min) {
-                    ratio = 0;
-                } else if (db > max) {
-                    ratio = 1;
-                } else {
-                    ratio = (db - min) / (max - min);
-                }
-                state.ratio.set(ratio);
+                final float min = 2;
+                final float max = 10;
+                state.ratio.set(db < min ? 0 : db > max ? 1 : (db - min) / (max - min));
             }
 
             @Override
@@ -90,11 +83,7 @@ public class WalletActivity extends RealmActivity {
                 state.ratio.set(0);
                 setTimeout(() -> state.setIsShowSpeechRecognizerBar(false), 1200);
 
-                RecognizerBill recognizerBill = new RecognizerBill(wallet, log.get(0));
-
-                if (recognizerBill.isValid()) {
-                    recognizerBill.copyToRealmOrUpdate();
-                }
+                recognizer.recognize(log);
             }
 
             @Override
@@ -104,6 +93,13 @@ public class WalletActivity extends RealmActivity {
                 state.speechRecognizerString.set(matches.get(0));
             }
         });
+    }
+
+    private void initializeWallet() {
+        wallet = Wallet.getCurrentWallet();
+        if (wallet != null) {
+            wallet.initialize();
+        }
     }
 
     private void initializeDataBinding() {
@@ -119,10 +115,6 @@ public class WalletActivity extends RealmActivity {
 
     public void openDrawer(View view) {
         state.isOpenDrawer.set(true);
-    }
-
-    public void openListOfWallets(View view) {
-        startActivity(new Intent(getBaseContext(), ListOfWalletsActivity.class));
     }
 
     public void editWallet(View view) {
@@ -150,8 +142,19 @@ public class WalletActivity extends RealmActivity {
         Toast.makeText(getApplicationContext(), R.string.error_features_not_developed_yet, Toast.LENGTH_SHORT).show();
     }
 
-    public void createTransaction(View view) {
+    @Override
+    public void openCreateBill(View view) {
         startActivity(new Intent(getBaseContext(), CreateBillActivity.class));
+    }
+
+    @Override
+    public void openListOfWallets(View view) {
+        startActivity(new Intent(getBaseContext(), ListOfWalletsActivity.class));
+    }
+
+    @Override
+    public Wallet getWallet() {
+        return wallet;
     }
 
     public static class State extends Observable {

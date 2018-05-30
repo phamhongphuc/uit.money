@@ -61,7 +61,12 @@ public class Bill extends RealmObject implements Transaction, TransactionModel {
     private boolean buyOrSell;
 
     public Bill() {
-        time = new Date();
+        this.time = new Date();
+    }
+
+    public Bill(Wallet wallet) {
+        this.time = new Date();
+        this.wallet = wallet;
     }
 
     @Override

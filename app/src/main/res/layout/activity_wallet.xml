@@ -180,7 +180,7 @@
                             style="@style/button"
                             android:layout_width="50dp"
                             android:layout_gravity="end"
-                            android:onClick="createTransaction"
+                            android:onClick="openCreateBill"
                             app:_icon=""
                             app:_radius="25dp"/>
                     </ui.FrameShadow>
@@ -229,7 +229,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:onClick="openPayloan"
-
                         app:_font="regular"
                         app:_fontSize="small"
                         app:_foreground="#555"
@@ -244,7 +243,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:onClick="openStatistical"
-
                         app:_font="regular"
                         app:_fontSize="small"
                         app:_foreground="#555"
@@ -263,7 +261,6 @@
                     <ui.Button
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-
                         app:_font="regular"
                         app:_fontSize="small"
                         app:_foreground="#555"
@@ -278,7 +275,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:onClick="logout"
-
                         app:_font="regular"
                         app:_fontSize="small"
                         app:_foreground="#555"

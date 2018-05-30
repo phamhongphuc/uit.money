@@ -32,7 +32,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="74dp"
+            android:layout_marginTop="50dp"
 
 
             android:layerType="software"
@@ -253,38 +253,7 @@
             </ui.FrameShadow>
         </FrameLayout>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="24dp"
-
-
-            android:layerType="software">
-
-            <ui.FrameShadow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="#3c6"
-                app:_shadowColor="#3c6"
-                app:_shadowSize="6dp"/>
-
-            <ui.Shadow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="top"
-                app:_backgroundColor="#3c6"
-                app:_shadowColor="#3c6"
-                app:_shadowSize="6dp"/>
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="24dp"
-            android:background="@android:color/white"
-            >
+        <ui.FrameShadow style="@style/top_bar">
 
             <ui.Row
                 android:layout_width="match_parent"
@@ -324,22 +293,17 @@
                 <ui.Button
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-
+                    android:onClick="removeBill"
                     app:_childRadius="none"
                     app:_font="regular"
                     app:_foreground="#fff"
-                    app:_icon=""
+                    app:_icon=""
                     app:_rippleColor="#99ffffff"
                     app:_textAlign="left"
                     app:_textPaddingLeft="false"/>
 
             </ui.Row>
-        </FrameLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:background="#33cc66"/>
+        </ui.FrameShadow>
 
     </FrameLayout>
 </layout>

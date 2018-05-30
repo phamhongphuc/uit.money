@@ -54,6 +54,12 @@ public class BillActivity extends RealmActivity {
         finish();
     }
 
+    public void removeBill(View view) {
+        realm.executeTransaction(r -> bill.deleteFromRealm());
+        finish();
+    }
+
+
     public static class State extends Observable {
 
     }
