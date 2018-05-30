@@ -9,16 +9,16 @@ import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 
 import java.util.Collections;
-import java.util.Map;
 
 import io.realm.ObjectServerError;
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
+import io.realm.SyncConfiguration;
 import io.realm.SyncCredentials;
 import io.realm.SyncUser;
 import model.model.User;
 
 import static uit.money.app.Constants.AUTH_URL;
+import static uit.money.app.Constants.BASE_URL;
 
 public class Credential {
     private static final String TAG = "Credential";
@@ -47,29 +47,29 @@ public class Credential {
             nextActivity.call();
         };
 
-        if (SyncUser.all().size() > 1) {
-            final Map<String, SyncUser> all = SyncUser.all();
-            for (Map.Entry<String, SyncUser> eachUser : all.entrySet()) {
-                eachUser.getValue().logOut();
+//        if (SyncUser.all().size() > 1) {
+//            final Map<String, SyncUser> all = SyncUser.all();
+//            for (Map.Entry<String, SyncUser> eachUser : all.entrySet()) {
+//                eachUser.getValue().logOut();
+//            }
+//        } else if (SyncUser.current() != null) {
+//            setDefaultConfiguration();
+//            callback.call();
+//        } else {
+//        }
+        SyncCredentials credentials = SyncCredentials.nickname(accessToken.getUserId(), false);
+        SyncUser.logInAsync(credentials, AUTH_URL, new SyncUser.Callback<SyncUser>() {
+            @Override
+            public void onSuccess(@NonNull SyncUser user) {
+                setDefaultConfiguration();
+                callback.call();
             }
-        } else if (SyncUser.current() != null) {
-            setDefaultConfiguration();
-            callback.call();
-        } else {
-            SyncCredentials credentials = SyncCredentials.nickname(accessToken.getUserId(), true);
-            SyncUser.logInAsync(credentials, AUTH_URL, new SyncUser.Callback<SyncUser>() {
-                @Override
-                public void onSuccess(@NonNull SyncUser user) {
-                    setDefaultConfiguration();
-                    callback.call();
-                }
 
-                @Override
-                public void onError(@NonNull ObjectServerError error) {
-                    callback.call();
-                }
-            });
-        }
+            @Override
+            public void onError(@NonNull ObjectServerError error) {
+                callback.call();
+            }
+        });
     }
 
     private static void setCurrentUser() {
@@ -83,12 +83,8 @@ public class Credential {
     }
 
     private static void setDefaultConfiguration() {
-//        SyncConfiguration configuration = new SyncConfiguration
-//                .Builder(SyncUser.current(), BASE_URL + "/~/" + accessToken.getUserId())
-//                .build();
-
-        RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("realm.realm")
+        SyncConfiguration configuration = new SyncConfiguration
+                .Builder(SyncUser.current(), BASE_URL + "/~/" + accessToken.getUserId())
                 .build();
         Realm.setDefaultConfiguration(configuration);
     }
