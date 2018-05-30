@@ -72,7 +72,7 @@ public class Voice {
         int selfPermission = ContextCompat.checkSelfPermission(
                 activity, Manifest.permission.RECORD_AUDIO
         );
-        if (selfPermission == PackageManager.PERMISSION_GRANTED) {
+        if (selfPermission == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(
                     activity,
                     new String[]{Manifest.permission.RECORD_AUDIO},
