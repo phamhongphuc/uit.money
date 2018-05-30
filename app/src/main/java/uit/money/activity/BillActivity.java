@@ -55,7 +55,7 @@ public class BillActivity extends RealmActivity {
     }
 
     public void removeBill(View view) {
-        bill.deleteFromRealm();
+        realm.executeTransaction(r -> bill.deleteFromRealm());
         finish();
     }
 

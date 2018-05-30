@@ -180,7 +180,7 @@
                             style="@style/button"
                             android:layout_width="50dp"
                             android:layout_gravity="end"
-                            android:onClick="createTransaction"
+                            android:onClick="openCreateBill"
                             app:_icon=""
                             app:_radius="25dp"/>
                     </ui.FrameShadow>
