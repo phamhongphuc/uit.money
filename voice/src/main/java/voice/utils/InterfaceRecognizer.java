@@ -1,8 +1,6 @@
-package voice.recognizer;
+package voice.utils;
 
 import java.util.ArrayList;
-
-import voice.InterfaceWalletActivity;
 
 public interface InterfaceRecognizer {
     boolean run(ArrayList<String> text, InterfaceWalletActivity activity);

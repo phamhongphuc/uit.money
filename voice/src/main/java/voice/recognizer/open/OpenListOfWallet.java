@@ -2,10 +2,10 @@ package voice.recognizer.open;
 
 import java.util.ArrayList;
 
-import voice.InterfaceWalletActivity;
-import voice.recognizer.InterfaceRecognizer;
+import voice.utils.InterfaceWalletActivity;
+import voice.utils.InterfaceRecognizer;
 
-import static voice.Utils.matchEachInput;
+import static voice.utils.Utils.matchEachInput;
 
 public class OpenListOfWallet implements InterfaceRecognizer {
     private static final String REGEX = "mở danh sách ví";

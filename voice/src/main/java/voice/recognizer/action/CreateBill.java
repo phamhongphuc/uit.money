@@ -1,14 +1,11 @@
 package voice.recognizer.action;
 
-import android.text.TextUtils;
-
-import com.google.common.collect.ImmutableMap;
+import android.speech.tts.TextToSpeech;
+import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 
 import io.realm.Realm;
@@ -17,35 +14,37 @@ import model.model.Wallet;
 import model.model.transaction.Bill;
 import model.model.transaction.BillDetail;
 import model.model.util.Object;
-import voice.InterfaceWalletActivity;
-import voice.Utils;
-import voice.recognizer.InterfaceRecognizer;
+import voice.getter.Getter;
+import voice.utils.Const.Key;
+import voice.utils.InterfaceRecognizer;
+import voice.utils.InterfaceWalletActivity;
+import voice.utils.Utils;
 
 import static java.util.Arrays.asList;
-import static model.Const.BUY;
-import static model.Const.SELL;
-import static voice.Utils.getMatcher;
+import static model.Const.IN;
+import static model.Const.OUT;
+import static voice.utils.Const.Key._BUY_SELL;
+import static voice.utils.Const.Key._LOCATION;
+import static voice.utils.Const.Key._PRICE;
+import static voice.utils.Const.Key._TIME;
+import static voice.utils.Const.Key._WITH;
+import static voice.utils.Utils.getMatcher;
+import static voice.utils.Utils.wordsOfBut;
 
 public class CreateBill implements InterfaceRecognizer {
-    private static final Map<Keys, List<String>> BUY_SELL_KEYS = ImmutableMap.<Keys, List<String>>builder()
-            .put(Keys.BUY_SELL, asList("mua", "bán", "sắm"))
-            .put(Keys.PRICE, asList("hết", "tốn", "với giá", "mất", "giá"))
-            .put(Keys.LOCATION, asList("tại", "ở", "ngoài", "ở ngoài"))
-            .put(Keys.TIME, asList("lúc", "vào lúc", "hồi", "ngày"))
-            .put(Keys.WITH, asList("đi cùng", "cùng với", "cùng", "đi với"))
-            .build();
+    private static final List<Key> KEYS = asList(_BUY_SELL, _PRICE, _LOCATION, _TIME, _WITH);
 
     @Override
     public boolean run(ArrayList<String> rawText, InterfaceWalletActivity activity) {
         Wallet wallet = Wallet.getCurrentWallet();
         if (wallet == null) return false;
 
-        String text = rawText.get(0).replaceAll("\\.", "") + ".";
+        String text = Utils.getFirstFormattedText(rawText);
 
-        final Matcher matcher_buy_sell = Utils.getMatcher(
+        final Matcher matcher_buy_sell = getMatcher(
                 text,
                 "(mua|sắm)|(bán)",
-                joinKeywords(Keys.PRICE, Keys.LOCATION, Keys.TIME, Keys.WITH)
+                wordsOfBut(KEYS, _BUY_SELL)
         );
         if (!matcher_buy_sell.find()) return false;
 
@@ -66,25 +65,22 @@ public class CreateBill implements InterfaceRecognizer {
 
         save(bill, billDetail);
 
+
+        TextToSpeech textToSpeech = new TextToSpeech(((AppCompatActivity) activity).getApplicationContext(), status -> {
+
+        });
+        textToSpeech.speak("Đã tạo giao dịch thành công", TextToSpeech.QUEUE_FLUSH, null, null);
+
         return true;
     }
 
-    private static String joinKeywords(Keys... listKeys) {
-        List<String> keywords = new ArrayList<>();
-        List<Keys> keysList = asList(listKeys);
-        for (Keys k : keysList) {
-            keywords.addAll(BUY_SELL_KEYS.get(k));
-        }
-        return TextUtils.join("|", keywords);
-    }
-
     private boolean setBuyOrSell(Bill bill, String buy, String sell) {
-        // BUY OR SELL
+        // OUT OR IN
         if (buy != null) {
-            bill.setBuyOrSell(BUY);
+            bill.setInOrOut(OUT);
             return true;
         } else if (sell != null) {
-            bill.setBuyOrSell(SELL);
+            bill.setInOrOut(IN);
             return true;
         } else {
             return false;
@@ -106,38 +102,23 @@ public class CreateBill implements InterfaceRecognizer {
     }
 
     private boolean setUnitPrice(String text, BillDetail billDetail) {
-        final Matcher matcher_price = Utils.getMatcher(
-                text,
-                joinKeywords(Keys.PRICE),
-                joinKeywords(Keys.LOCATION, Keys.TIME, Keys.WITH, Keys.BUY_SELL)
-        );
+        final Matcher matcher_price = getMatcher(text, KEYS, _PRICE);
         if (!matcher_price.find()) return false;
-        final String number = matcher_price.group(2)
-                .replaceAll("nghìn", "000")
-                .replaceAll("triệu", "000000")
-                .replaceAll("tỷ", "000000000")
-                .replaceAll("[^0-9]", "");
-        billDetail.setUnitPrice(Long.parseLong(number));
+
+        final long unitPrice = Getter.getMoney(matcher_price.group(2));
+        billDetail.setUnitPrice(unitPrice);
         return true;
     }
 
     private void setLocation(String text, Bill bill) {
-        final Matcher matcher_location = Utils.getMatcher(
-                text,
-                joinKeywords(Keys.LOCATION),
-                joinKeywords(Keys.BUY_SELL, Keys.PRICE, Keys.TIME, Keys.WITH)
-        );
+        final Matcher matcher_location = getMatcher(text, KEYS, _LOCATION);
         if (matcher_location.find()) {
             bill.setLocation(matcher_location.group(2));
         }
     }
 
     private void setWith(String text, Bill bill) {
-        final Matcher matcher_with = Utils.getMatcher(
-                text,
-                joinKeywords(Keys.WITH),
-                joinKeywords(Keys.BUY_SELL, Keys.PRICE, Keys.TIME, Keys.LOCATION)
-        );
+        final Matcher matcher_with = getMatcher(text, KEYS, _WITH);
         if (matcher_with.find()) {
             Person person = new Person(matcher_with.group(2));
             bill.setWith(person);
@@ -145,7 +126,7 @@ public class CreateBill implements InterfaceRecognizer {
     }
 
     private void setTime(String text, Bill bill) {
-        Date time = getTime(text, joinKeywords(Keys.BUY_SELL, Keys.PRICE, Keys.WITH, Keys.LOCATION));
+        Date time = Getter.getTime(text, wordsOfBut(KEYS, _TIME));
         if (time != null) bill.setTime(time);
     }
 
@@ -163,68 +144,4 @@ public class CreateBill implements InterfaceRecognizer {
         });
     }
 
-    private static Date getTime(String input, String stop) {
-        final Matcher matcher_time = getMatcher(
-                input, String.format("((vào lúc|vào|lúc) (([^\\r\\n](?!(%s)))+)|ngày (hôm qua)|(hôm kia))(?!(%s))[ \\.]", stop, stop)
-        );
-        if (matcher_time.find()) {
-            final String yesterday = matcher_time.group(6);
-            final String the_day_before_yesterday = matcher_time.group(7);
-            final String at = matcher_time.group(3);
-
-            final Calendar cal = Calendar.getInstance();
-            if (yesterday != null) {
-                cal.add(Calendar.DATE, -1);
-            } else if (the_day_before_yesterday != null) {
-                cal.add(Calendar.DATE, -2);
-            } else if (at != null) {
-                final Matcher matcher_at = getMatcher(
-                        at, "((\\d+|một|hai|ba|bốn|năm) giờ trước|(\\d+|một|hai|ba|bốn|năm) ngày trước|((\\d+):(\\d+)|(\\d+|một|hai|ba|bốn|năm) giờ)( (\\d+|một|hai|ba|bốn|năm) ngày trước|( ngày hôm qua)|( ngày hôm kia))?)"
-                );
-                if (!matcher_at.find()) return null;
-                final String hour_ago = matcher_at.group(2);
-                final String date_ago = matcher_at.group(3);
-                final String date_time = matcher_at.group(4);
-                if (hour_ago != null) {
-                    cal.add(Calendar.HOUR, -Utils.getInt(hour_ago));
-                } else if (date_ago != null) {
-                    cal.add(Calendar.DATE, -Utils.getInt(date_ago));
-                } else if (date_time != null) {
-                    final String hour = matcher_at.group(5);
-                    final String minute = matcher_at.group(6);
-                    final String hour_only = matcher_at.group(7);
-                    if (hour != null && minute != null) {
-                        cal.set(Calendar.HOUR_OF_DAY, Utils.getInt(hour));
-                        cal.set(Calendar.MINUTE, Utils.getInt(minute));
-                    } else if (hour_only != null) {
-                        cal.set(Calendar.HOUR_OF_DAY, Utils.getInt(hour_only));
-                        cal.set(Calendar.MINUTE, 0);
-                    } else {
-                        return null;
-                    }
-
-                    final String on_date_ago = matcher_at.group(9);
-                    final String on_yesterday = matcher_at.group(10);
-                    final String on_the_day_before_yesterday = matcher_at.group(11);
-                    if (on_date_ago != null) {
-                        cal.add(Calendar.DATE, -Utils.getInt(on_date_ago));
-                    } else if (on_yesterday != null) {
-                        cal.add(Calendar.DATE, -1);
-                    } else if (on_the_day_before_yesterday != null) {
-                        cal.add(Calendar.DATE, -2);
-                    }
-                }
-            }
-            return cal.getTime();
-        }
-        return null;
-    }
-
-    private enum Keys {
-        BUY_SELL,
-        PRICE,
-        LOCATION,
-        TIME,
-        WITH
-    }
 }

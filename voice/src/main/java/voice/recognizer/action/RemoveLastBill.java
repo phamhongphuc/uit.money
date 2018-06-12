@@ -6,10 +6,10 @@ import io.realm.Realm;
 import io.realm.Sort;
 import model.model.Wallet;
 import model.model.transaction.Bill;
-import voice.InterfaceWalletActivity;
-import voice.recognizer.InterfaceRecognizer;
+import voice.utils.InterfaceWalletActivity;
+import voice.utils.InterfaceRecognizer;
 
-import static voice.Utils.matchEachInput;
+import static voice.utils.Utils.matchEachInput;
 
 public class RemoveLastBill implements InterfaceRecognizer {
     private static final String regex = "xóa giao dịch gần nhất";
