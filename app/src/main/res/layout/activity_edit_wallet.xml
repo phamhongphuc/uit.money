@@ -157,7 +157,7 @@
                     style="@style/button"
                     android:layout_width="50dp"
                     android:onClick="back"
-                    app:_icon=""/>
+                    app:_icon="@string/icon_back"/>
 
                 <View style="@style/vr_line"/>
 
@@ -170,7 +170,7 @@
                     style="@style/button"
                     android:layout_width="50dp"
                     android:onClick="done"
-                    app:_icon=""/>
+                    app:_icon="@string/icon_done"/>
 
             </ui.Row>
         </ui.FrameShadow>

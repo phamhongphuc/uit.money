@@ -11,6 +11,10 @@ import model.model.transaction.Bill;
 import uit.money.R;
 import uit.money.databinding.ActivityBillBinding;
 
+import static uit.money.activity.EditBillActivity.EDIT;
+import static uit.money.activity.EditBillActivity.ID;
+import static uit.money.activity.EditBillActivity.TYPE;
+
 public class BillActivity extends RealmActivity {
     private static final String TAG = "BillActivity";
     private ActivityBillBinding binding;
@@ -59,6 +63,12 @@ public class BillActivity extends RealmActivity {
         finish();
     }
 
+    public void editBill(View view) {
+        final Intent intent = new Intent(getBaseContext(), EditBillActivity.class);
+        intent.putExtra(TYPE, EDIT);
+        intent.putExtra(ID, bill.getId());
+        startActivity(intent);
+    }
 
     public static class State extends Observable {
 

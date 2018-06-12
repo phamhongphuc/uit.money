@@ -45,7 +45,7 @@
                     style="@style/button"
                     android:layout_width="50dp"
                     android:onClick="back"
-                    app:_icon=""/>
+                    app:_icon="@string/icon_back"/>
 
                 <View
                     android:layout_width="1dp"

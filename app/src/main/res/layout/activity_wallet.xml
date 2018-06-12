@@ -136,7 +136,7 @@
                             style="@style/button"
                             android:layout_width="50dp"
                             android:onClick="editWallet"
-                            app:_icon=""/>
+                            app:_icon="@string/icon_edit"/>
 
                     </ui.Row>
                 </ui.FrameShadow>

@@ -9,17 +9,21 @@ import java.util.Objects;
 
 import model.model.User;
 import model.model.Wallet;
+import model.model.transaction.Payment;
 import uit.money.R;
 import uit.money.databinding.ActivityCreateWalletBinding;
 
+import static model.Const.IN;
+import static model.model.transaction.Payment.INITIALIZE;
+
 public class CreateWalletActivity extends RealmActivity {
-    private final int layout = R.layout.activity_create_wallet;
+    private static final int LAYOUT = R.layout.activity_create_wallet;
     private Wallet wallet = new Wallet();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(layout);
+        setContentView(LAYOUT);
 
         initializeDataBinding();
     }
@@ -37,6 +41,23 @@ public class CreateWalletActivity extends RealmActivity {
                 wallet.updateName();
                 wallet.setUser(User.getCurrentUser());
                 r.copyToRealmOrUpdate(wallet);
+
+                final String moneyString = wallet._money.get();
+                if (moneyString == null || moneyString.equals("")) {
+                    return;
+                }
+                final long money = Math.abs(Long.parseLong(moneyString.replaceAll("[^0-9]", "")));
+                if (money == 0) {
+                    return;
+                }
+
+                final Payment payment = new Payment();
+                payment.autoId();
+                payment.setKind(INITIALIZE);
+                payment.setInOrOut(IN);
+                payment.setWallet(wallet);
+                payment.setMoney(money);
+                r.copyToRealmOrUpdate(payment);
             });
             finish();
         }
@@ -44,7 +65,7 @@ public class CreateWalletActivity extends RealmActivity {
 
     private void initializeDataBinding() {
         final ActivityCreateWalletBinding binding;
-        binding = DataBindingUtil.setContentView(this, layout);
+        binding = DataBindingUtil.setContentView(this, LAYOUT);
         binding.setWallet(wallet);
     }
 }

@@ -48,9 +48,8 @@
         </activity>
         <activity android:name=".activity.EditWalletActivity"/>
         <activity android:name=".activity.BillActivity"/>
-        <activity
-            android:name=".activity.CreateBillActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize"/>
+        <activity android:name=".activity.EditBillActivity"/>
+        <activity android:name=".activity.EditBillAdvancedActivity"/>
     </application>
 
 </manifest>

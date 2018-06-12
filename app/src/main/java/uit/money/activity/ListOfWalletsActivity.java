@@ -17,7 +17,7 @@ import uit.money.R;
 import uit.money.adapter.WalletRecyclerViewAdapter;
 import uit.money.databinding.ActivityListOfWalletsBinding;
 
-import static model.Const.BUY;
+import static model.Const.IN;
 import static model.Utils.getMoney;
 
 public class ListOfWalletsActivity extends RealmActivity {
@@ -65,7 +65,7 @@ public class ListOfWalletsActivity extends RealmActivity {
         private void updateMoney(RealmResults<BillDetail> billDetails) {
             long money = 0;
             for (BillDetail billDetail : billDetails) {
-                money += billDetail.getMoney() * (billDetail.getBill().isBuyOrSell() == BUY ? -1 : 1);
+                money += billDetail.getMoney() * (billDetail.getBill().isInOrOut() == IN ? 1 : -1);
             }
             State.money.set(getMoney(money));
         }

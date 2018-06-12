@@ -22,10 +22,13 @@ import io.realm.RealmResults;
 import model.model.Wallet;
 import model.model.transaction.Bill;
 import model.model.transaction.Loan;
+import model.model.transaction.Payment;
 import model.model.transaction.TransactionModel;
+import model.model.transaction.Transfer;
 import uit.money.BR;
 import uit.money.R;
 import uit.money.activity.BillActivity;
+import uit.money.activity.RealmActivity;
 import uit.money.adapter.separator.DateSeparator;
 import uit.money.adapter.separator.EndSeparator;
 
@@ -33,11 +36,16 @@ import static model.Const.BILL;
 import static model.Const.DATE_SEPARATOR;
 import static model.Const.END_SEPARATOR;
 import static model.Const.LOAN;
+import static model.Const.PAYMENT;
 import static model.Const.START_SEPARATOR;
+import static model.Const.TRANSFER;
 
 public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<TransactionRecyclerViewAdapter.ViewHolder> {
-    private RealmResults<Loan> loans;
-    private RealmResults<Bill> bills;
+    private final RealmResults<Payment> payments;
+    private final RealmResults<Transfer> transfers;
+    private final RealmResults<Loan> loans;
+    private final RealmResults<Bill> bills;
+    private final Wallet wallet;
     private List<TransactionModel> transactions;
 
     public static TransactionRecyclerViewAdapter getInstance(Wallet wallet) {
@@ -45,11 +53,16 @@ public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<Transac
     }
 
     public TransactionRecyclerViewAdapter(Wallet wallet) {
-        loans = wallet.getLoans();
+        this.wallet = wallet;
         bills = wallet.getBills();
+        loans = wallet.getLoans();
+        payments = wallet.getPayments();
+        transfers = wallet.getTransfers();
 
-        loans.addChangeListener(l -> onChange());
         bills.addChangeListener(l -> onChange());
+        loans.addChangeListener(l -> onChange());
+        payments.addChangeListener(l -> onChange());
+        transfers.addChangeListener(l -> onChange());
 
         indexing();
     }
@@ -61,8 +74,10 @@ public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<Transac
 
     private void indexing() {
         transactions = new ArrayList<>();
-        transactions.addAll(loans);
         transactions.addAll(bills);
+        transactions.addAll(loans);
+        transactions.addAll(payments);
+        transactions.addAll(transfers);
 
         Collections.sort(transactions, (a, b) -> a.getTime().compareTo(b.getTime()));
 
@@ -94,10 +109,15 @@ public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<Transac
                 return ViewHolder.getViewHolder(parent, R.layout.item_end_separate, BR.endSeparate);
             case DATE_SEPARATOR:
                 return ViewHolder.getViewHolder(parent, R.layout.item_date_separate, BR.dateSeparator);
-            case LOAN:
-                return ViewHolder.getViewHolder(parent, R.layout.item_loan, BR.loan);
             case BILL:
                 return ViewHolder.getViewHolder(parent, R.layout.item_bill, BR.bill);
+            case LOAN:
+                return ViewHolder.getViewHolder(parent, R.layout.item_loan, BR.loan);
+            case PAYMENT:
+                return ViewHolder.getViewHolder(parent, R.layout.item_payment, BR.payment);
+            case TRANSFER:
+                return ViewHolder.getViewHolder(parent, R.layout.item_transfer, BR.transfer);
+
             default:
                 throw new ExceptionInInitializerError("viewType not match");
         }
@@ -155,10 +175,10 @@ public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<Transac
             this.model = model;
         }
 
-        public void click(View view) {
+        public void openDetail(View view) {
             final Context context = view.getContext();
 
-            Class<?> transactionActivity = null;
+            Class<? extends RealmActivity> transactionActivity;
             switch (model.getType()) {
                 case BILL:
                     transactionActivity = BillActivity.class;

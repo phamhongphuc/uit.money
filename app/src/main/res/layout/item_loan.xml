@@ -11,10 +11,11 @@
 
         <variable
             name="action"
-            type="uit.money.adapter.TransactionRecyclerViewAdapter"/>
+            type="uit.money.adapter.TransactionRecyclerViewAdapter.Action"/>
     </data>
 
     <ui.Row
+        android:background="#569"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

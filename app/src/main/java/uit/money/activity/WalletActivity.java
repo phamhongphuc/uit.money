@@ -21,14 +21,17 @@ import model.model.Wallet;
 import uit.money.R;
 import uit.money.databinding.ActivityWalletBinding;
 import uit.money.facebook.Credential;
-import voice.InterfaceWalletActivity;
 import voice.Recognizer;
 import voice.Voice;
+import voice.utils.InterfaceWalletActivity;
 
+import static uit.money.activity.EditBillActivity.CREATE;
+import static uit.money.activity.EditBillActivity.TYPE;
 import static uit.money.utils.Timer.setTimeout;
 
 public class WalletActivity extends RealmActivity implements InterfaceWalletActivity {
     private static final String TAG = "WalletActivity";
+    public static final int LAYOUT = R.layout.activity_wallet;
     private Wallet wallet;
     private Voice voice;
     private State state = new State();
@@ -38,7 +41,7 @@ public class WalletActivity extends RealmActivity implements InterfaceWalletActi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wallet);
+        setContentView(LAYOUT);
 
         initializeRecognizer();
         initializeVoice();
@@ -103,7 +106,7 @@ public class WalletActivity extends RealmActivity implements InterfaceWalletActi
     }
 
     private void initializeDataBinding() {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_wallet);
+        binding = DataBindingUtil.setContentView(this, LAYOUT);
         binding.setUser(User.getCurrentUser());
         binding.setState(state);
         binding.setWallet(wallet);
@@ -144,7 +147,9 @@ public class WalletActivity extends RealmActivity implements InterfaceWalletActi
 
     @Override
     public void openCreateBill(View view) {
-        startActivity(new Intent(getBaseContext(), CreateBillActivity.class));
+        final Intent intent = new Intent(getBaseContext(), EditBillActivity.class);
+        intent.putExtra(TYPE, CREATE);
+        startActivity(intent);
     }
 
     @Override

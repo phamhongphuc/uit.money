@@ -268,7 +268,7 @@
                     app:_childRadius="none"
                     app:_font="regular"
                     app:_foreground="#fff"
-                    app:_icon=""
+                    app:_icon="@string/icon_back"
                     app:_rippleColor="#99ffffff"
                     app:_textAlign="left"
                     app:_textPaddingLeft="false"/>
@@ -289,6 +289,13 @@
                     app:_autoPadding="true"
                     app:_autoSize="true"
                     app:_font="regular"/>
+
+                <ui.Button
+                    style="@style/button"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="editBill"
+                    app:_icon="@string/icon_edit"/>
 
                 <ui.Button
                     android:layout_width="50dp"

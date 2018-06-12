@@ -71,6 +71,22 @@
         <item name="_font">regular</item>
     </style>
 
+    <style name="input_text">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:gravity">center_vertical|start</item>
+        <item name="_focusColor">@color/primary_focus</item>
+    </style>
+
+    <style name="icon">
+        <item name="android:gravity">center_vertical|start</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">22sp</item>
+        <item name="_autoPadding">true</item>
+        <item name="_font">icon</item>
+    </style>
+
     <style name="bottom_text">
         <item name="android:layout_height">match_parent</item>
         <item name="android:textColor">@color/primary</item>

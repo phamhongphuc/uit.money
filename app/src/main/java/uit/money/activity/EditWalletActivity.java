@@ -56,7 +56,14 @@ public class EditWalletActivity extends RealmActivity {
         final RealmResults<Wallet> wallets = User.getCurrentUser().getWallets();
         wallets.load();
         if (wallets.size() > 1) {
-            realm.executeTransaction(r -> wallet.deleteFromRealm());
+            realm.executeTransaction(r -> {
+                wallet.getBillDetails().deleteAllFromRealm();
+                wallet.getBills().deleteAllFromRealm();
+                wallet.getLoans().deleteAllFromRealm();
+                wallet.getPayments().deleteAllFromRealm();
+                wallet.getTransfers().deleteAllFromRealm();
+                wallet.deleteFromRealm();
+            });
             startActivity(new Intent(getBaseContext(), ListOfWalletsActivity.class));
             finish();
         } else {

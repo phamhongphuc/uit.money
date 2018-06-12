@@ -12,6 +12,7 @@ import java.util.Collections;
 
 import io.realm.ObjectServerError;
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.SyncConfiguration;
 import io.realm.SyncCredentials;
 import io.realm.SyncUser;
@@ -24,6 +25,7 @@ public class Credential {
     private static final String TAG = "Credential";
     private static AccessTokenTracker accessTokenTracker = null;
     private static AccessToken accessToken = null;
+    private static final Boolean SYNC = true;
 
     public static void initializeLogin(final Credential.Callback nextActivity) {
         checkAndLogin(nextActivity);
@@ -47,29 +49,25 @@ public class Credential {
             nextActivity.call();
         };
 
-//        if (SyncUser.all().size() > 1) {
-//            final Map<String, SyncUser> all = SyncUser.all();
-//            for (Map.Entry<String, SyncUser> eachUser : all.entrySet()) {
-//                eachUser.getValue().logOut();
-//            }
-//        } else if (SyncUser.current() != null) {
-//            setDefaultConfiguration();
-//            callback.call();
-//        } else {
-//        }
-        SyncCredentials credentials = SyncCredentials.nickname(accessToken.getUserId(), false);
-        SyncUser.logInAsync(credentials, AUTH_URL, new SyncUser.Callback<SyncUser>() {
-            @Override
-            public void onSuccess(@NonNull SyncUser user) {
-                setDefaultConfiguration();
-                callback.call();
-            }
+        if (SYNC) {
+            SyncCredentials credentials = SyncCredentials.nickname(accessToken.getUserId(), false);
+            SyncUser.logInAsync(credentials, AUTH_URL, new SyncUser.Callback<SyncUser>() {
+                @Override
+                public void onSuccess(@NonNull SyncUser user) {
+                    setSyncConfiguration();
+                    callback.call();
+                }
 
-            @Override
-            public void onError(@NonNull ObjectServerError error) {
-                callback.call();
-            }
-        });
+                @Override
+                public void onError(@NonNull ObjectServerError error) {
+                    setLocalConfiguration();
+                    callback.call();
+                }
+            });
+        } else {
+            setLocalConfiguration();
+            callback.call();
+        }
     }
 
     private static void setCurrentUser() {
@@ -82,10 +80,19 @@ public class Credential {
         });
     }
 
-    private static void setDefaultConfiguration() {
+    private static void setSyncConfiguration() {
         SyncConfiguration configuration = new SyncConfiguration
                 .Builder(SyncUser.current(), BASE_URL + "/~/" + accessToken.getUserId())
                 .build();
+        Realm.setDefaultConfiguration(configuration);
+    }
+
+    private static void setLocalConfiguration() {
+        RealmConfiguration configuration = new RealmConfiguration
+                .Builder()
+                .name("realm.realm")
+                .build();
+
         Realm.setDefaultConfiguration(configuration);
     }
 
