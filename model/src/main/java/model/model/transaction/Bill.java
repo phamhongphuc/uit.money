@@ -20,7 +20,8 @@ import model.model.Wallet;
 import model.model.util.Organization;
 
 import static model.Const.BILL;
-import static model.Const.BUY;
+import static model.Const.IN;
+import static model.Const.OUT;
 import static model.Const.getResource;
 import static model.Const.getString;
 
@@ -38,18 +39,18 @@ import static model.Const.getString;
  * @see Bill#location          {@link String}
  * @see Bill#with              {@link Person}              >>  {@link Person#multilineDealsWith}
  * @see Bill#organization      {@link Organization}        >>  {@link Organization#bills}
- * @see Bill#buyOrSell         {@link Boolean}
+ * @see Bill#inOrOut           {@link Boolean}
  */
 @Parcel(implementations = {model_model_transaction_BillRealmProxy.class},
         value = Parcel.Serialization.BEAN,
         analyze = {Bill.class})
 public class Bill extends RealmObject implements Transaction, TransactionModel {
     @Ignore
-    private RealmResults<BillDetail> billDetails = null;
+    public final ObservableInt maxCount = new ObservableInt(0);
     @Ignore
     public long money = 0;
     @Ignore
-    public final ObservableInt maxCount = new ObservableInt(0);
+    private RealmResults<BillDetail> billDetails = null;
     @PrimaryKey
     private int id;
     private Wallet wallet;
@@ -58,7 +59,7 @@ public class Bill extends RealmObject implements Transaction, TransactionModel {
     private String location;
     private Person with;
     private Organization organization;
-    private boolean buyOrSell;
+    private boolean inOrOut;
 
     public Bill() {
         this.time = new Date();
@@ -76,14 +77,6 @@ public class Bill extends RealmObject implements Transaction, TransactionModel {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Wallet getWallet() {
-        return wallet;
-    }
-
-    public void setWallet(Wallet wallet) {
-        this.wallet = wallet;
     }
 
     @Override
@@ -113,6 +106,26 @@ public class Bill extends RealmObject implements Transaction, TransactionModel {
         return billDetails;
     }
 
+    private void updateBindingValue(RealmResults<BillDetail> billDetails) {
+        long money = 0;
+        int maxAmount = 0;
+        for (BillDetail billDetail : billDetails) {
+            money += billDetail.getMoney();
+            final int amount = billDetail.getAmount();
+            if (amount > maxAmount) maxAmount = amount;
+        }
+        this.maxCount.set(maxAmount);
+        setMoney(money);
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
+    }
+
     public String getLocation() {
         return location;
     }
@@ -137,48 +150,36 @@ public class Bill extends RealmObject implements Transaction, TransactionModel {
         this.organization = organization;
     }
 
-    public boolean isBuyOrSell() {
-        return buyOrSell;
+    public void setInOrOut(boolean inOrOut) {
+        this.inOrOut = inOrOut;
     }
 
-    public void setBuyOrSell(boolean buyOrSell) {
-        this.buyOrSell = buyOrSell;
-    }
-
-    private void updateBindingValue(RealmResults<BillDetail> billDetails) {
-        long money = 0;
-        int maxAmount = 0;
-        for (BillDetail billDetail : billDetails) {
-            money += billDetail.getMoney();
-            final int amount = billDetail.getAmount();
-            if (amount > maxAmount) maxAmount = amount;
-        }
-        this.maxCount.set(maxAmount);
-        setMoney(money);
-    }
-
+    @Deprecated
     public int getMoneyColor() {
         return getResource().getColor(
-                buyOrSell == BUY ? R.color.buyColor : R.color.sellColor,
+                inOrOut == OUT ? R.color.outColor : R.color.inColor,
                 null
         );
     }
 
     @Override
-    public String getAction() {
-        return getString(
-                buyOrSell == BUY ? R.string.buy : R.string.sell
-        );
-    }
-
-    @Override
     public long getMoney() {
-        return money * (buyOrSell == BUY ? -1 : 1);
+        return money * (inOrOut == IN ? 1 : -1);
     }
 
     @Override
     public int getType() {
         return BILL;
+    }
+
+    @Override
+    public String getAction() {
+        return getString(inOrOut == OUT ? R.string.buy : R.string.sell);
+    }
+
+    @Override
+    public boolean isInOrOut() {
+        return inOrOut;
     }
 
     public void setMoney(long money) {
@@ -193,5 +194,12 @@ public class Bill extends RealmObject implements Transaction, TransactionModel {
         id = bills.size() == 0
                 ? 0
                 : Objects.requireNonNull(bills.max("id")).intValue() + 1;
+    }
+
+    public void delete(Realm realm) {
+        realm.executeTransaction(r -> {
+            getBillDetails().deleteAllFromRealm();
+            deleteFromRealm();
+        });
     }
 }

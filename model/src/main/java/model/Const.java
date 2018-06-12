@@ -9,9 +9,11 @@ public final class Const {
     public static final int END_SEPARATOR = 2;
     public static final int BILL = 3;
     public static final int LOAN = 4;
+    public static final int PAYMENT = 5;
+    public static final int TRANSFER = 6;
 
-    public static final boolean SELL = true;
-    public static final boolean BUY = false;
+    public static final boolean IN = true;
+    public static final boolean OUT = false;
 
     private static Resources resource;
 

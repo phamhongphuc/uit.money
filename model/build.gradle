@@ -42,6 +42,7 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation 'com.google.guava:guava:23.6-android'
     implementation 'org.parceler:parceler-api:1.1.10'
     implementation 'io.realm:android-adapters:3.0.0'
     implementation 'org.apache.commons:commons-lang3:3.7'

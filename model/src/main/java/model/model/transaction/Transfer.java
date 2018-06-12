@@ -10,6 +10,9 @@ import io.realm.annotations.Required;
 import io.realm.model_model_transaction_TransferRealmProxy;
 import model.model.Wallet;
 
+import static model.Const.IN;
+import static model.Const.TRANSFER;
+
 /**
  * <Fields>
  *
@@ -92,9 +95,15 @@ public class Transfer extends RealmObject implements Transaction, TransactionMod
         return "Chuyển tiền";
     }
 
+    @Deprecated
+    @Override
+    public boolean isInOrOut() {
+        return IN;
+    }
+
     @Override
     public int getType() {
-        return -1;
+        return TRANSFER;
     }
 
     @Override

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="buyColor">#f2786d</color>
-    <color name="sellColor">#33cc66</color>
+    <color name="outColor">#f2786d</color>
+    <color name="inColor">#33cc66</color>
 </resources>

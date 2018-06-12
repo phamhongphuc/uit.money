@@ -19,8 +19,10 @@ import io.realm.model_model_WalletRealmProxy;
 import model.model.transaction.Bill;
 import model.model.transaction.BillDetail;
 import model.model.transaction.Loan;
+import model.model.transaction.Payment;
+import model.model.transaction.Transfer;
 
-import static model.Const.BUY;
+import static model.Const.IN;
 import static model.Utils.getMoney;
 
 /**
@@ -53,6 +55,20 @@ public class Wallet extends RealmObject {
     private RealmResults<Bill> bills = null;
     @Ignore
     private RealmResults<BillDetail> billDetails = null;
+    @Ignore
+    private RealmResults<Payment> payments = null;
+    @Ignore
+    private RealmResults<Loan> loans = null;
+    @Ignore
+    private RealmResults<Transfer> transfers = null;
+    @Ignore
+    private long billDetailsMoney;
+    @Ignore
+    private long paymentsMoney;
+    @Ignore
+    private long loansMoney;
+    @Ignore
+    private long transfersMoney;
 
     public Wallet() {
 
@@ -113,23 +129,117 @@ public class Wallet extends RealmObject {
     public void initialize() {
         _name.set(getName());
 
-        if (billDetails == null) {
-            billDetails = Realm.getDefaultInstance()
-                    .where(BillDetail.class)
-                    .equalTo("bill.wallet.id", id)
-                    .findAllAsync();
-        }
+        initializeBillDetails();
+        initializePayments();
+        initializeLoans();
+        initializeTransfers();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    private void initializeBillDetails() {
+        getBillDetails();
         billDetails.removeAllChangeListeners();
         billDetails.addChangeListener(this::updateBillDetails);
         updateBillDetails(billDetails);
     }
 
+    private void initializePayments() {
+        getPayments();
+        payments.removeAllChangeListeners();
+        payments.addChangeListener(this::updatePayments);
+        updatePayments(payments);
+    }
+
+    private void initializeLoans() {
+        getLoans();
+        loans.removeAllChangeListeners();
+        loans.addChangeListener(this::updateLoans);
+        updateLoans(loans);
+    }
+
+    private void initializeTransfers() {
+        getTransfers();
+        transfers.removeAllChangeListeners();
+        transfers.addChangeListener(this::updateTransfers);
+        updateTransfers(transfers);
+    }
+
     private void updateBillDetails(RealmResults<BillDetail> billDetails) {
-        long money = 0;
+        billDetailsMoney = 0;
         for (BillDetail billDetail : billDetails) {
-            money += billDetail.getMoney() * (billDetail.getBill().isBuyOrSell() == BUY ? -1 : 1);
+            billDetailsMoney += billDetail.getMoney() * (billDetail.getBill().isInOrOut() == IN ? 1 : -1);
         }
-        _money.set(getMoney(money));
+        updateMoney();
+    }
+
+    public RealmResults<Payment> getPayments() {
+        if (payments == null) {
+            payments = Realm.getDefaultInstance()
+                    .where(Payment.class)
+                    .equalTo("wallet.id", id)
+                    .findAllAsync();
+        }
+        return payments;
+    }
+
+    private void updatePayments(RealmResults<Payment> payments) {
+        paymentsMoney = 0;
+        for (Payment payment : payments) {
+            paymentsMoney += payment.getMoney();
+        }
+        updateMoney();
+    }
+
+    public RealmResults<Loan> getLoans() {
+        if (loans == null) {
+            loans = Realm.getDefaultInstance()
+                    .where(Loan.class)
+                    .equalTo("wallet.id", id)
+                    .findAllAsync();
+        }
+        return loans;
+    }
+
+    private void updateLoans(RealmResults<Loan> loans) {
+        loansMoney = 0;
+        for (Loan loan : loans) {
+            loansMoney += loan.getMoney();
+        }
+        updateMoney();
+    }
+
+    public RealmResults<Transfer> getTransfers() {
+        if (transfers == null) {
+            transfers = Realm.getDefaultInstance()
+                    .where(Transfer.class)
+                    .equalTo("from.id", id)
+                    .and()
+                    .equalTo("to.id", id)
+                    .findAllAsync();
+        }
+        return transfers;
+    }
+
+    private void updateTransfers(RealmResults<Transfer> transfers) {
+        transfersMoney = 0;
+        for (Transfer transfer : transfers) {
+            transfersMoney += transfer.getMoney() * (transfer.getFrom() == this ? -1 : 1);
+        }
+        updateMoney();
+    }
+
+    private void updateMoney() {
+        _money.set(getMoney(
+                billDetailsMoney + paymentsMoney + loansMoney + transfersMoney
+        ));
+    }
+
+    public void setName(String name) {
+        this.name = name;
+        _name.set(name);
     }
 
     public RealmResults<Bill> getBills() {
@@ -142,6 +252,16 @@ public class Wallet extends RealmObject {
         return bills;
     }
 
+    public RealmResults<BillDetail> getBillDetails() {
+        if (billDetails == null) {
+            billDetails = Realm.getDefaultInstance()
+                    .where(BillDetail.class)
+                    .equalTo("bill.wallet.id", id)
+                    .findAllAsync();
+        }
+        return billDetails;
+    }
+
     public int getId() {
         return id;
     }
@@ -150,28 +270,12 @@ public class Wallet extends RealmObject {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-        _name.set(name);
-    }
-
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public RealmResults<Loan> getLoans() {
-        return Realm.getDefaultInstance()
-                .where(Loan.class)
-                .equalTo("wallet.id", id)
-                .findAllAsync();
     }
 
     public void updateName() {

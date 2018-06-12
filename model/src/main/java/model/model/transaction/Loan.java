@@ -2,7 +2,6 @@ package model.model.transaction;
 
 import org.parceler.Parcel;
 
-import java.text.DecimalFormat;
 import java.util.Date;
 
 import io.realm.RealmObject;
@@ -15,6 +14,7 @@ import model.model.Wallet;
 import model.model.util.Cycle;
 import model.model.util.Organization;
 
+import static model.Const.IN;
 import static model.Const.LOAN;
 import static model.Const.getString;
 
@@ -32,14 +32,12 @@ import static model.Const.getString;
  * @see Loan#location                   {@link String}
  * @see Loan#interestRate               {@link Float}
  * @see Loan#cycle                      {@link Cycle}               >> Không cần linking
- * @see Loan#borrowOrLend               {@link Boolean}
+ * @see Loan#inOrOut               {@link Boolean}
  */
 @Parcel(implementations = {model_model_transaction_LoanRealmProxy.class},
         value = Parcel.Serialization.BEAN,
         analyze = {Loan.class})
 public class Loan extends RealmObject implements Transaction, TransactionModel {
-    private static boolean BORROW = true;   // Mượn của ai
-    private static boolean LEND = false;    // Cho ai mượn
     @PrimaryKey
     private int id;
     private Wallet wallet;
@@ -64,9 +62,9 @@ public class Loan extends RealmObject implements Transaction, TransactionModel {
     private Cycle cycle;           // TODO: ???
     /**
      * Là kiểu có mượn hay không
-     * Tương ứng với BORROW và LEND
+     * Tương ứng với IN và OUT
      */
-    private boolean borrowOrLend;
+    private boolean inOrOut;
 
     public Loan() {
         time = new Date();
@@ -153,32 +151,29 @@ public class Loan extends RealmObject implements Transaction, TransactionModel {
         this.cycle = cycle;
     }
 
-    public boolean isBorrowOrLend() {
-        return borrowOrLend;
-    }
-
-    public void setBorrowOrLend(boolean borrowOrLend) {
-        this.borrowOrLend = borrowOrLend;
+    public void setInOrOut(boolean borrowOrLend) {
+        this.inOrOut = borrowOrLend;
     }
 
     @Override
     public String getAction() {
         return getString(
-                borrowOrLend == BORROW ? R.string.borrow : R.string.lend
+                inOrOut == IN ? R.string.borrow : R.string.lend
         );
     }
+
+    @Override
+    public boolean isInOrOut() {
+        return inOrOut;
+    }
+
     @Override
     public long getMoney() {
-        return (borrowOrLend == BORROW ? 1 : -1) * money;
+        return (inOrOut == IN ? 1 : -1) * money;
     }
 
     public void setMoney(long money) {
         this.money = money;
-    }
-
-    public String getStringMoney() {
-        DecimalFormat format = new DecimalFormat("###.###.### đ");
-        return format.format(getMoney());
     }
 
     @Override

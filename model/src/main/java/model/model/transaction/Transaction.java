@@ -8,4 +8,6 @@ public interface Transaction extends RealmModel {
     int getType();
 
     String getAction();
+
+    boolean isInOrOut();
 }
