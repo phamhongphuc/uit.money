@@ -25,7 +25,7 @@ public class Credential {
     private static final String TAG = "Credential";
     private static AccessTokenTracker accessTokenTracker = null;
     private static AccessToken accessToken = null;
-    private static final Boolean SYNC = true;
+    private static final Boolean SYNC = false;
 
     public static void initializeLogin(final Credential.Callback nextActivity) {
         checkAndLogin(nextActivity);
