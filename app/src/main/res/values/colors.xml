@@ -6,11 +6,17 @@
     <color name="primary_dark">#1f7a3d</color>
     <color name="primary">#33cc66</color>
     <color name="input_line_color">#999</color>
-    <color name="white">#fff</color>
     <color name="white_shadow">#15000000</color>
     <color name="white_ripple">#99ffffff</color>
     <color name="red">#e74c3c</color>
     <color name="red_shadow">#77e74c3c</color>
     <color name="gray">#eee</color>
     <color name="primary_ripple">#73c6</color>
+    <color name="white">#fff</color>
+    <color name="_text_color">#738699</color>
+
+    <color name="_background">#212733</color>
+    <color name="_background_item">#242b38</color>
+    <color name="_color">#59d9a4</color>
+    <color name="_line_color">#343d4a</color>
 </resources>

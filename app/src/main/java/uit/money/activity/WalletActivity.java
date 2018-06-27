@@ -162,8 +162,13 @@ public class WalletActivity extends RealmActivity implements InterfaceWalletActi
         return wallet;
     }
 
+    public void toogleCreate(View view) {
+        state.setIsOpenCreate(state.isOpenCreate.get() == View.GONE);
+    }
+
     public static class State extends Observable {
         public final ObservableBoolean isOpenDrawer = new ObservableBoolean(false);
+        public final ObservableInt isOpenCreate = new ObservableInt(View.GONE);
         public final ObservableInt isShowSpeechRecognizerBar = new ObservableInt(View.GONE);
         public final ObservableField<String> speechRecognizerString = new ObservableField<>("");
         public final ObservableFloat ratio = new ObservableFloat(0);
@@ -176,6 +181,10 @@ public class WalletActivity extends RealmActivity implements InterfaceWalletActi
 
         public void setIsShowSpeechRecognizerBar(boolean value) {
             isShowSpeechRecognizerBar.set(value ? View.VISIBLE : View.GONE);
+        }
+
+        void setIsOpenCreate(boolean value) {
+            isOpenCreate.set(value ? View.VISIBLE : View.GONE);
         }
     }
 }

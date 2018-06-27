@@ -40,7 +40,7 @@
     <style name="top_bar" parent="tittle_bar">
         <item name="_extendTop">false</item>
         <item name="_shadowColor">@color/primary_shadow</item>
-        <item name="android:background">@color/primary</item>
+        <item name="android:background">@color/_background</item>
         <item name="android:layout_gravity">top</item>
     </style>
 
@@ -54,7 +54,8 @@
 
     <style name="list">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:scrollbarSize">4dp</item>
         <item name="android:scrollbarStyle">insideOverlay</item>
         <item name="android:scrollbarThumbVertical">@color/scrollbar_thumb</item>
@@ -89,7 +90,7 @@
 
     <style name="bottom_text">
         <item name="android:layout_height">match_parent</item>
-        <item name="android:textColor">@color/primary</item>
+        <item name="android:textColor">@color/_color</item>
         <item name="android:textSize">@dimen/bottom_text_size</item>
         <item name="_font">bold</item>
     </style>
@@ -98,16 +99,22 @@
         <item name="android:layout_width">1dp</item>
         <item name="android:layout_height">30dp</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:background">#9fff</item>
+        <item name="android:background">@color/_line_color</item>
+    </style>
+
+
+    <style name="hr_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@color/_line_color</item>
     </style>
 
     <style name="item_shadow">
-        <item name="android:background">@color/white</item>
+        <item name="android:background">@color/_background_item</item>
         <item name="_dy">1dp</item>
         <item name="_radius">@dimen/radius</item>
         <item name="_shadowColor">#20000000</item>
         <item name="_shadowSize">@dimen/shadow_size</item>
     </style>
-
-    w
 </resources>

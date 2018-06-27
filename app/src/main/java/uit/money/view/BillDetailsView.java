@@ -24,6 +24,8 @@ import static ui.utils.Const.BOLD;
 import static ui.utils.Const.REGULAR;
 
 public class BillDetailsView extends LinearLayoutCompat {
+    public static final int TEXT_COLOR = Color.parseColor("#999999");
+    public static final int TEXT_SIZE = 15;
     private int billId;
 
     public BillDetailsView(Context context) {
@@ -85,10 +87,7 @@ public class BillDetailsView extends LinearLayoutCompat {
         for (BillDetail detail : details) {
             final Row row = new Row(context);
 
-            row.setLayoutParams(new LayoutParams(
-                    LayoutParams.MATCH_PARENT,
-                    getResources().getDimensionPixelSize(R.dimen.bill_detail_height)
-            ));
+            row.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, getResources().getDimensionPixelSize(R.dimen.bill_detail_height)));
 
             row.addView(getObjectView(context, detail));
             row.addView(getAmountView(context, detail));
@@ -109,7 +108,8 @@ public class BillDetailsView extends LinearLayoutCompat {
                 1
         ));
         object.setText(detail.getObject().getName());
-        object.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+        object.setTextColor(TEXT_COLOR);
+        object.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
         object.set_font(REGULAR);
         return object;
     }
@@ -120,8 +120,8 @@ public class BillDetailsView extends LinearLayoutCompat {
         amount.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
         amount.setGravity(Gravity.CENTER_VERTICAL | Gravity.END);
         amount.setText(String.valueOf(detail.getAmount()));
-        amount.setTextColor(Color.parseColor("#999999"));
-        amount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+        amount.setTextColor(TEXT_COLOR);
+        amount.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
         amount.set_font(BOLD);
         return amount;
     }
@@ -134,8 +134,8 @@ public class BillDetailsView extends LinearLayoutCompat {
         cross.setGravity(Gravity.CENTER_VERTICAL);
         cross.setPadding(padding, 0, padding, 0);
         cross.setText("✕");
-        cross.setTextColor(Color.parseColor("#999999"));
-        cross.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+        cross.setTextColor(TEXT_COLOR);
+        cross.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
         cross.set_font(BOLD);
         return cross;
     }
@@ -147,9 +147,9 @@ public class BillDetailsView extends LinearLayoutCompat {
         money.setMinimumWidth(getResources().getDimensionPixelSize(R.dimen.bill_detail_money_min_width));
         money.setGravity(Gravity.CENTER_VERTICAL | Gravity.END);
         money.setText(getMoney(detail.getUnitPrice()));
-        money.setTextColor(Color.parseColor("#999999"));
+        money.setTextColor(TEXT_COLOR);
         money.set_font(BOLD);
-        money.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+        money.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
         return money;
     }
 }

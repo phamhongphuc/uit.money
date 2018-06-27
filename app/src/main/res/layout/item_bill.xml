@@ -23,7 +23,7 @@
         android:focusable="true"
         android:layerType="software"
         android:paddingEnd="10dp"
-        tools:background="#ccc"
+        tools:background="@color/_background"
         tools:ignore="RtlSymmetry">
 
         <FrameLayout
@@ -47,16 +47,16 @@
             android:layout_height="match_parent">
 
             <View
-                android:layout_width="2dp"
+                android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="0dp"
                 android:layout_marginTop="0dp"
-                android:background="#3c6"/>
+                android:background="@color/_line_color"/>
 
             <ui.FrameShadow
-                android:layout_width="31dp"
-                android:layout_height="31dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center_horizontal|top"
                 android:layout_marginTop="12dp"
                 android:background="@color/primary"
@@ -104,7 +104,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical|start"
                         android:text="@{bill.action}"
-                        android:textColor="#222"
+                        android:textColor="#9fff"
                         android:textSize="15sp"
                         app:_font="bold"
                         tools:text="Mua/Bán"/>
@@ -151,7 +151,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#2000"/>
+                        android:background="@color/_line_color"/>
 
                     <ui.Row
                         android:layout_width="wrap_content"
