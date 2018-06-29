@@ -21,7 +21,7 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="74dp"
+                android:layout_marginStart="24.5dp"
                 android:background="@color/_line_color"/>
         </FrameLayout>
     </ui.Row>

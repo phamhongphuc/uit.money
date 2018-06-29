@@ -3,7 +3,6 @@ package uit.money.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -24,20 +23,30 @@ import static ui.utils.Const.BOLD;
 import static ui.utils.Const.REGULAR;
 
 public class BillDetailsView extends LinearLayoutCompat {
-    public static final int TEXT_COLOR = Color.parseColor("#999999");
-    public static final int TEXT_SIZE = 15;
+    private static final int TEXT_SIZE = 15;
+    private static final int TEXT_COLOR_ID = R.color._item_color;
+    private final int TEXT_COLOR;
     private int billId;
 
     public BillDetailsView(Context context) {
         super(context);
+        TEXT_COLOR = context.getColor(TEXT_COLOR_ID);
         initialize(context, null);
     }
 
     private void initialize(@NonNull Context context, @Nullable AttributeSet attrs) {
         setOrientation(LinearLayoutCompat.VERTICAL);
-
         initializeAttrs(context, attrs);
         initializeItems();
+    }
+
+    private void initializeAttrs(@NonNull Context context, @Nullable AttributeSet attrs) {
+        TypedArray typedArray;
+
+        typedArray = context.obtainStyledAttributes(attrs, R.styleable.BillDetailsView);
+        billId = typedArray.getInt(R.styleable.BillDetailsView__billId, -1);
+
+        typedArray.recycle();
     }
 
     private void initializeItems() {
@@ -54,30 +63,6 @@ public class BillDetailsView extends LinearLayoutCompat {
         final RealmResults<BillDetail> billDetails = bill.getBillDetails();
         billDetails.addChangeListener(this::addChild);
         addChild(billDetails);
-    }
-
-    private void initializeAttrs(@NonNull Context context, @Nullable AttributeSet attrs) {
-        TypedArray typedArray;
-
-        typedArray = context.obtainStyledAttributes(attrs, R.styleable.BillDetailsView);
-        billId = typedArray.getInt(R.styleable.BillDetailsView__billId, -1);
-
-        typedArray.recycle();
-    }
-
-    public BillDetailsView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initialize(context, attrs);
-    }
-
-    public BillDetailsView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        initialize(context, attrs);
-    }
-
-    public void set_billId(int billId) {
-        this.billId = billId;
-        initializeItems();
     }
 
     @SuppressLint("ResourceType")
@@ -151,5 +136,22 @@ public class BillDetailsView extends LinearLayoutCompat {
         money.set_font(BOLD);
         money.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
         return money;
+    }
+
+    public BillDetailsView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        TEXT_COLOR = context.getColor(TEXT_COLOR_ID);
+        initialize(context, attrs);
+    }
+
+    public BillDetailsView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        TEXT_COLOR = context.getColor(TEXT_COLOR_ID);
+        initialize(context, attrs);
+    }
+
+    public void set_billId(int billId) {
+        this.billId = billId;
+        initializeItems();
     }
 }

@@ -8,11 +8,11 @@
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowActivityTransitions">true</item>
 
-        <item name="android:colorPrimaryDark">@color/primary_dark</item>
-        <item name="android:colorPrimary">@color/primary</item>
+        <!--<item name="android:colorPrimaryDark">@color/_dark_1</item>-->
+        <item name="android:colorPrimary">@color/_dark_0</item>
         <item name="android:colorAccent">#ffcc66</item>
 
-        <item name="android:statusBarColor">@color/primary_dark</item>
+        <item name="android:statusBarColor">@color/_background_status</item>
     </style>
 
     <style name="TransparentStatusBarTheme" parent="AppTheme">
@@ -47,9 +47,17 @@
     <style name="button">
         <item name="android:layout_height">match_parent</item>
         <item name="_font">regular</item>
-        <item name="_foreground">@color/white</item>
+        <item name="_fontSize">small</item>
+        <item name="_foreground">@color/_text</item>
         <item name="_rippleColor">@color/white_ripple</item>
         <item name="_textPaddingLeft">false</item>
+    </style>
+
+    <style name="sidebar_button" parent="button">
+        <item name="_paddingLeft">7dp</item>
+        <item name="_textAlign">left</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_width">match_parent</item>
     </style>
 
     <style name="list">
@@ -66,7 +74,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center_vertical|start</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/_text</item>
         <item name="_autoPadding">true</item>
         <item name="_autoSize">true</item>
         <item name="_font">regular</item>
@@ -90,7 +98,7 @@
 
     <style name="bottom_text">
         <item name="android:layout_height">match_parent</item>
-        <item name="android:textColor">@color/_color</item>
+        <item name="android:textColor">@color/_green</item>
         <item name="android:textSize">@dimen/bottom_text_size</item>
         <item name="_font">bold</item>
     </style>
@@ -116,5 +124,11 @@
         <item name="_radius">@dimen/radius</item>
         <item name="_shadowColor">#20000000</item>
         <item name="_shadowSize">@dimen/shadow_size</item>
+    </style>
+
+    <style name="action_row">
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/_background_action</item>
     </style>
 </resources>

@@ -47,10 +47,7 @@
                     android:layout_height="24dp"
                     android:background="@android:color/transparent"/>
 
-                <ui.Row
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@android:color/transparent">
+                <ui.Row style="@style/action_row">
 
                     <ui.Button
                         style="@style/button"
@@ -80,7 +77,6 @@
 
                 <View style="@style/hr_line"/>
 
-
                 <ui.Col
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -89,27 +85,89 @@
                         style="@style/list"
                         android:adapter="@{TransactionRecyclerViewAdapter.getInstance(wallet)}"
                         app:_stackFromEnd="true"
-                        tools:itemCount="0"
+                        tools:itemCount="2"
                         tools:listitem="@layout/item_bill"/>
 
                     <View style="@style/hr_line"/>
 
+                    <ui.Row
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/_background_action"
+                        android:clipChildren="false"
+                        android:clipToPadding="false"
+                        android:gravity="center"
+                        android:layerType="software">
+
+                        <ui.Button
+                            style="@style/button"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:onClick="openDrawer"
+                            app:_icon=""
+                            app:_radius="25dp"/>
+
+                        <Space
+                            android:layout_width="10dp"
+                            android:layout_height="0dp"/>
+
+                        <ui.Button
+                            style="@style/button"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:onClick="openDrawer"
+                            app:_icon=""
+                            app:_radius="25dp"/>
+
+                        <ui.Button
+                            style="@style/button"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_margin="10dp"
+                            android:background="@color/_dark_4"
+                            android:onClick="voice"
+                            app:_fontSize="medium"
+                            app:_icon=""
+                            app:_radius="30dp"/>
+
+                        <ui.Button
+                            style="@style/button"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:onClick="openDrawer"
+                            app:_icon=""
+                            app:_radius="25dp"/>
+
+                        <Space
+                            android:layout_width="10dp"
+                            android:layout_height="0dp"/>
+
+                        <ui.Button
+                            style="@style/button"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:onClick="openDrawer"
+                            app:_icon=""
+                            app:_radius="25dp"/>
+
+                    </ui.Row>
+
                     <!--<FrameLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="50dp"-->
-                        <!--android:layout_gravity="bottom"-->
-                        <!--android:background="@color/n_background">-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_gravity="bottom"-->
+                    <!--android:background="@color/n_background">-->
 
-                        <!--<ui.Text-->
-                            <!--style="@style/bottom_text"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_gravity="end"-->
-                            <!--android:gravity="end|center_vertical"-->
-                            <!--android:paddingEnd="15dp"-->
-                            <!--android:text="@{wallet._money}"-->
-                            <!--tools:ignore="RtlSymmetry"-->
-                            <!--tools:text="500.000 đ"/>-->
-
+                    <!--<ui.Text-->
+                    <!--style="@style/bottom_text"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_gravity="end"-->
+                    <!--android:gravity="end|center_vertical"-->
+                    <!--android:paddingEnd="15dp"-->
+                    <!--android:text="@{wallet._money}"-->
+                    <!--tools:ignore="RtlSymmetry"-->
+                    <!--tools:text="500.000 đ"/>-->
                     <!--</FrameLayout>-->
                 </ui.Col>
 
@@ -149,159 +207,57 @@
                 <!--tools:text="369.000 đ"/>-->
 
                 <!--</ui.Col>-->
-
-
-                <!--<FrameLayout-->
-                <!--android:layout_width="130dp"-->
-                <!--android:layout_height="90dp"-->
-                <!--android:layout_gravity="bottom"-->
-                <!--android:layout_marginBottom="-5dp"-->
-                <!--android:layout_marginStart="10dp">-->
-
-                <!--<ui.Circle-->
-                <!--android:layout_width="90dp"-->
-                <!--android:layout_height="90dp"-->
-                <!--android:layout_gravity="bottom"-->
-                <!--app:_backgroundColor="#93c6"-->
-                <!--app:_minSize="50dp"-->
-                <!--app:_ratio="@{state.ratio}"-->
-                <!--tools:_ratio="1"/>-->
-
-                <!--<ui.FrameShadow-->
-                <!--android:layout_width="100dp"-->
-                <!--android:layout_height="60dp"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:background="@color/n_background"-->
-                <!--android:padding="5dp"-->
-                <!--app:_radius="25dp"-->
-                <!--app:_shadowColor="@color/primary_shadow"-->
-                <!--app:_shadowSize="@dimen/shadow_size">-->
-
-                <!--<ui.Button-->
-                <!--style="@style/button"-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_gravity="start"-->
-                <!--android:onClick="voice"-->
-                <!--app:_fontSize="medium"-->
-                <!--app:_icon=""-->
-                <!--app:_radius="25dp"/>-->
-
-                <!--<ui.Button-->
-                <!--style="@style/button"-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_gravity="end"-->
-                <!--android:onClick="toogleCreate"-->
-                <!--app:_icon=""-->
-                <!--app:_radius="25dp"/>-->
-                <!--</ui.FrameShadow>-->
-                <!--</FrameLayout>-->
             </ui.Col>
+
+            <!--<ui.Circle-->
+            <!--android:layout_width="90dp"-->
+            <!--android:layout_height="90dp"-->
+            <!--android:layout_gravity="bottom"-->
+            <!--app:_backgroundColor="#93c6"-->
+            <!--app:_minSize="50dp"-->
+            <!--app:_ratio="@{state.ratio}"-->
+            <!--tools:_ratio="1"/>-->
+
+            <!--<ui.FrameShadow-->
+            <!--android:layout_height="62dp"-->
+            <!--android:layout_width="62dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:background="@color/_dark_4"-->
+            <!--android:onClick="voice"-->
+            <!--app:_fontSize="medium"-->
+            <!--app:_icon=""-->
+            <!--app:_radius="32dp"/>-->
+
+            <!--<ui.Button-->
+            <!--style="@style/button"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_gravity="end"-->
+            <!--android:onClick="toogleCreate"-->
+            <!--app:_icon=""-->
+            <!--app:_radius="25dp"/>-->
         </FrameLayout>
+
         <android.support.design.widget.NavigationView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:fitsSystemWindows="true">
 
-            <FrameLayout
+            <ui.Col
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layerType="software">
-
-                <ui.Col
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="94dp"
-                    android:background="#f4f4f4"
-                    android:layerType="hardware">
-
-                    <ui.Button
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        app:_font="regular"
-                        app:_fontSize="small"
-                        app:_foreground="#555"
-                        app:_icon=""
-                        app:_paddingLeft="7dp"
-                        app:_rippleColor="#2000"
-                        app:_text="Danh sách ví"
-                        app:_textAlign="left"
-                        app:_textPaddingLeft="false"/>
-
-                    <ui.Button
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:onClick="openPayloan"
-                        app:_font="regular"
-                        app:_fontSize="small"
-                        app:_foreground="#555"
-                        app:_icon=""
-                        app:_paddingLeft="7dp"
-                        app:_rippleColor="#2000"
-                        app:_text="@string/sidebar_payloan_button"
-                        app:_textAlign="left"
-                        app:_textPaddingLeft="false"/>
-
-                    <ui.Button
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:onClick="openStatistical"
-                        app:_font="regular"
-                        app:_fontSize="small"
-                        app:_foreground="#555"
-                        app:_icon=""
-                        app:_paddingLeft="7dp"
-                        app:_rippleColor="#2000"
-                        app:_text="@string/sidebar_statistical_button"
-                        app:_textAlign="left"
-                        app:_textPaddingLeft="false"/>
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
-
-                    <ui.Button
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        app:_font="regular"
-                        app:_fontSize="small"
-                        app:_foreground="#555"
-                        app:_icon=""
-                        app:_paddingLeft="7dp"
-                        app:_rippleColor="#2000"
-                        app:_text="@string/sidebar_tutorial_button"
-                        app:_textAlign="left"
-                        app:_textPaddingLeft="false"/>
-
-                    <ui.Button
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:onClick="logout"
-                        app:_font="regular"
-                        app:_fontSize="small"
-                        app:_foreground="#555"
-                        app:_icon=""
-                        app:_paddingLeft="7dp"
-                        app:_rippleColor="#2000"
-                        app:_text="@string/sidebar_logout_button"
-                        app:_textAlign="left"
-                        app:_textPaddingLeft="false"/>
-                </ui.Col>
-
-                <ui.Shadow
-                    android:layout_width="match_parent"
-                    android:layout_height="94dp"
-                    app:_backgroundColor="#3c6"
-                    app:_shadowColor="#a3c6"
-                    app:_shadowSize="5dp"/>
+                android:background="@color/_background"
+                android:layerType="hardware">
 
                 <ui.Row
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:background="@color/_background_action"
                     android:layerType="hardware"
-                    android:padding="15dp">
+                    android:paddingBottom="15dp"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="39dp">
 
                     <ui.Avatar
                         android:layout_width="40dp"
@@ -309,18 +265,55 @@
                         android:layout_marginEnd="15dp"
                         app:_fbid="@{user.fbid}"
                         app:_innerSize="40dp"
-                        app:_outerSize="40dp"/>
+                        app:_outerSize="40dp"
+                        tools:background="@color/_light_1"/>
 
                     <ui.Text
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:gravity="center_vertical|start"
                         android:text="@{user.name}"
-                        android:textColor="#cfff"
+                        android:textColor="@color/_text"
                         android:textSize="17sp"
-                        app:_font="bold"/>
+                        app:_font="bold"
+                        tools:text="Tên người dùng"/>
                 </ui.Row>
-            </FrameLayout>
+
+                <View style="@style/hr_line"/>
+
+                <ui.Button
+                    style="@style/sidebar_button"
+                    app:_icon=""
+                    app:_text="Danh sách ví"/>
+
+                <ui.Button
+                    style="@style/sidebar_button"
+                    android:onClick="openPayloan"
+                    app:_icon=""
+                    app:_text="@string/sidebar_payloan_button"/>
+
+                <ui.Button
+                    style="@style/sidebar_button"
+                    android:onClick="openStatistical"
+                    app:_icon=""
+                    app:_text="@string/sidebar_statistical_button"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <ui.Button
+                    style="@style/sidebar_button"
+                    app:_icon=""
+                    app:_text="@string/sidebar_tutorial_button"/>
+
+                <ui.Button
+                    style="@style/sidebar_button"
+                    android:onClick="logout"
+                    app:_icon=""
+                    app:_text="@string/sidebar_logout_button"/>
+            </ui.Col>
         </android.support.design.widget.NavigationView>
     </ui.Drawer>
 </layout>

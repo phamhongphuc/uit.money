@@ -23,7 +23,7 @@ public class Utils {
 
     public static int getMoneyColor(Transaction transaction) {
         return getResource().getColor(
-                transaction.isInOrOut() == OUT ? R.color.outColor : R.color.inColor,
+                transaction.isInOrOut() == OUT ? R.color.out_color : R.color.in_color,
                 null
         );
     }

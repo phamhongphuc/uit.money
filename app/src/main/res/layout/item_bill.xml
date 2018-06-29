@@ -29,7 +29,8 @@
         <FrameLayout
             android:layout_width="55dp"
             android:layout_height="match_parent"
-            android:paddingEnd="5dp">
+            android:paddingEnd="5dp"
+            android:visibility="gone">
 
             <ui.Text
                 android:layout_width="match_parent"
@@ -44,7 +45,8 @@
 
         <FrameLayout
             android:layout_width="40dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp">
 
             <View
                 android:layout_width="1dp"
@@ -104,7 +106,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical|start"
                         android:text="@{bill.action}"
-                        android:textColor="#9fff"
+                        android:textColor="@color/_item_title"
                         android:textSize="15sp"
                         app:_font="bold"
                         tools:text="Mua/Bán"/>
@@ -119,7 +121,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="@string/icon_location"
-                            android:textColor="#222"
+                            android:textColor="@color/_item_title"
                             android:textSize="15sp"
                             android:visibility="@{(bill.location == null || ``.equals(bill.location)) ? View.GONE : View.VISIBLE, default=gone}"
                             app:_font="icon"
@@ -130,7 +132,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="@string/icon_person"
-                            android:textColor="#222"
+                            android:textColor="@color/_item_title"
                             android:textSize="15sp"
                             android:visibility="@{bill.with == null ? View.GONE : View.VISIBLE, default=gone}"
                             app:_font="icon"
@@ -141,7 +143,8 @@
                 <uit.money.view.BillDetailsView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:_billId="@{bill.id}"/>
+                    app:_billId="@{bill.id}"
+                    tools:visibility="gone"/>
 
                 <ui.Col
                     android:layout_width="wrap_content"
@@ -194,7 +197,8 @@
                             android:textColor="@{model.Utils.getMoneyColor(bill)}"
                             android:textSize="15sp"
                             app:_font="bold"
-                            tools:text="20.000 đ"/>
+                            tools:text="20.000 đ"
+                            tools:textColor="@color/out_color"/>
                     </ui.Row>
                 </ui.Col>
             </ui.Col>

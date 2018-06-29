@@ -13,10 +13,27 @@
     <color name="gray">#eee</color>
     <color name="primary_ripple">#73c6</color>
     <color name="white">#fff</color>
-    <color name="_text_color">#738699</color>
 
-    <color name="_background">#212733</color>
-    <color name="_background_item">#242b38</color>
-    <color name="_color">#59d9a4</color>
-    <color name="_line_color">#343d4a</color>
+
+    <color name="_dark_0">#000000</color>
+    <color name="_dark_1">#14171f</color><!-- Màu của thanh trạng thái trên cùng -->
+    <color name="_dark_2">#1c212b</color><!-- Màu dành cho thanh hành động -->
+    <color name="_dark_3">#212733</color><!-- Màu nền chính -->
+    <color name="_dark_4">#242b38</color>
+
+    <color name="_light_1">#343d4a</color>
+    <color name="_light_2">#738699</color>
+
+
+    <color name="_green">#59d9a4</color>
+
+    <color name="_text">@color/_light_2</color>
+    <color name="_background_status">@color/_dark_1</color>
+    <color name="_background_action">@color/_dark_2</color>
+    <color name="_background">@color/_dark_3</color>
+    <color name="_background_item">@color/_dark_4</color>
+    <color name="_line_color">@color/_light_1</color>
+
+    <color name="_item_title">#9fff</color>
+    <color name="_item_color">#999999</color>
 </resources>

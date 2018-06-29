@@ -30,8 +30,8 @@ import static uit.money.activity.EditBillActivity.TYPE;
 import static uit.money.utils.Timer.setTimeout;
 
 public class WalletActivity extends RealmActivity implements InterfaceWalletActivity {
-    private static final String TAG = "WalletActivity";
     public static final int LAYOUT = R.layout.activity_wallet;
+    private static final String TAG = "WalletActivity";
     private Wallet wallet;
     private Voice voice;
     private State state = new State();

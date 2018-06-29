@@ -18,33 +18,32 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            tools:background="#ccc">
+            tools:background="@color/_background">
 
             <View
-                android:layout_width="2dp"
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="74dp"
-                android:background="#3c6"/>
+                android:layout_marginStart="24.5dp"
+                android:background="@color/_line_color"/>
 
             <View
-                android:layout_gravity="center_vertical"
                 android:layout_width="30dp"
-                android:layout_height="2dp"
-                android:layout_marginStart="74dp"
-                android:background="#3c6"/>
+                android:layout_height="1dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="24.5dp"
+                android:background="@color/_line_color"/>
 
             <ui.Text
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginStart="76dp"
+                android:layout_marginStart="60dp"
                 android:gravity="center_vertical"
-                android:paddingStart="35dp"
                 android:text="@{dateSeparator.timeString}"
-                android:textColor="#3c6"
+                android:textColor="@color/_text"
                 android:textSize="15sp"
                 app:_font="bold"
-                tools:text="Hôm nay"
-                tools:ignore="RtlSymmetry"/>
+                tools:ignore="RtlSymmetry"
+                tools:text="Hôm nay"/>
         </FrameLayout>
     </ui.Row>
 </layout>

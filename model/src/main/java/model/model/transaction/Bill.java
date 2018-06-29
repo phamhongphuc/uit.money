@@ -157,7 +157,7 @@ public class Bill extends RealmObject implements Transaction, TransactionModel {
     @Deprecated
     public int getMoneyColor() {
         return getResource().getColor(
-                inOrOut == OUT ? R.color.outColor : R.color.inColor,
+                inOrOut == OUT ? R.color.out_color : R.color.in_color,
                 null
         );
     }
