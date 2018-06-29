@@ -12,11 +12,7 @@
             type="uit.money.activity.ListOfWalletsActivity.State"/>
     </data>
 
-    <ui.Col
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/_background"
-        android:fitsSystemWindows="false">
+    <ui.Col style="@style/root_col">
 
         <ui.Row style="@style/action_row">
 
@@ -26,8 +22,7 @@
                 android:onClick="back"
                 app:_icon="@string/icon_back"/>
 
-            <View
-                style="@style/vr_line"/>
+            <View style="@style/vr_line"/>
 
             <ui.Text
                 style="@style/text"

@@ -40,7 +40,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{action::select}"
                 app:_radius="@dimen/radius"
-                app:_rippleColor="#93c6"/>
+                app:_rippleColor="@color/_item_ripple"/>
 
             <ui.Col
                 android:layout_width="match_parent"

@@ -13,11 +13,18 @@
         <item name="android:colorAccent">#ffcc66</item>
 
         <item name="android:statusBarColor">@color/_background_status</item>
+
+        <item name="android:windowAnimationStyle">@style/WindowAnimationStyle</item>
     </style>
 
     <style name="TransparentStatusBarTheme" parent="AppTheme">
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="WindowAnimationStyle">
+        <item name="android:windowEnterAnimation">@anim/enter</item>
+        <item name="android:windowExitAnimation">@anim/exit</item>
     </style>
 
     <style name="tittle_bar">
@@ -49,7 +56,7 @@
         <item name="_font">regular</item>
         <item name="_fontSize">small</item>
         <item name="_foreground">@color/_text</item>
-        <item name="_rippleColor">@color/white_ripple</item>
+        <item name="_rippleColor">@color/_item_ripple</item>
         <item name="_textPaddingLeft">false</item>
     </style>
 
@@ -80,18 +87,35 @@
         <item name="_font">regular</item>
     </style>
 
+    <style name="input_name">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">25dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">5dp</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">@color/_text</item>
+        <item name="android:textSize">@dimen/input_name_size</item>
+        <item name="_autoPadding">false</item>
+        <item name="_autoSize">false</item>
+        <item name="_font">bold</item>
+    </style>
+
     <style name="input_text">
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:gravity">center_vertical|start</item>
-        <item name="_focusColor">@color/primary_focus</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:textColorHint">@color/_text</item>
+        <item name="_focusColor">@color/_dark_1</item>
     </style>
 
     <style name="icon">
         <item name="android:gravity">center_vertical|start</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/_text</item>
         <item name="android:textSize">22sp</item>
+        <item name="android:background">@color/_dark_1</item>
         <item name="_autoPadding">true</item>
         <item name="_font">icon</item>
     </style>
@@ -110,6 +134,9 @@
         <item name="android:background">@color/_line_color</item>
     </style>
 
+    <style name="vr_full" parent="vr_line">
+        <item name="android:layout_height">match_parent</item>
+    </style>
 
     <style name="hr_line">
         <item name="android:layout_width">match_parent</item>
@@ -130,5 +157,12 @@
         <item name="android:layout_height">50dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:background">@color/_background_action</item>
+    </style>
+
+    <style name="root_col">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/_background</item>
+        <item name="android:fitsSystemWindows">false</item>
     </style>
 </resources>

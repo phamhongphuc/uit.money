@@ -61,10 +61,10 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center_horizontal|top"
                 android:layout_marginTop="12dp"
-                android:background="@color/primary"
+                android:background="@color/_green"
                 android:clickable="false"
                 app:_radius="10.5dp"
-                app:_shadowColor="#73c6"
+                app:_shadowColor="@color/_green_shadow"
                 app:_shadowSize="5dp"/>
         </FrameLayout>
 
@@ -83,7 +83,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{action::openDetail}"
                 app:_radius="@dimen/radius"
-                app:_rippleColor="#93c6"/>
+                app:_rippleColor="@color/_item_ripple"/>
 
             <ui.Col
                 android:layout_width="match_parent"

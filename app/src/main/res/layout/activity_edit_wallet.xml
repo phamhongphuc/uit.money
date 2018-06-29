@@ -12,16 +12,36 @@
             type="model.model.Wallet"/>
     </data>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#f5f5f5"
-        android:fitsSystemWindows="false">
+    <ui.Col style="@style/root_col">
+
+        <ui.Row style="@style/action_row">
+
+            <ui.Button
+                style="@style/button"
+                android:layout_width="50dp"
+                android:onClick="back"
+                app:_icon="@string/icon_back"/>
+
+            <View style="@style/vr_line"/>
+
+            <ui.Text
+                style="@style/text"
+                android:layout_weight="1"
+                android:text="@string/edit_wallet_title"/>
+
+            <ui.Button
+                style="@style/button"
+                android:layout_width="50dp"
+                android:onClick="done"
+                app:_icon="@string/icon_done"/>
+
+        </ui.Row>
+
+        <View style="@style/hr_line"/>
 
         <ui.Col
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="50dp"
             android:padding="10dp">
 
             <ui.FrameShadow
@@ -45,14 +65,13 @@
                             android:paddingEnd="15dp"
                             android:paddingStart="15dp"
                             android:text="@string/wallet_name_field"
-                            android:textColor="#444"
+                            android:textColor="@color/_text"
                             app:_autoSize="true"
                             app:_font="regular"/>
 
                         <View
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="#f5f5f5"/>
+                            style="@style/vr_line"
+                            android:layout_height="match_parent"/>
 
                         <ui.InputText
                             android:layout_width="wrap_content"
@@ -61,16 +80,13 @@
                             android:background="@android:color/transparent"
                             android:inputType="textCapSentences"
                             android:text="@={wallet._name}"
-                            android:textColor="#444"
+                            android:textColor="@color/_text"
                             app:_autoSize="true"
                             app:_font="regular"
                             app:_rippleColor="#15000000"/>
                     </ui.Row>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#f5f5f5"/>
+                    <View style="@style/hr_line"/>
 
                     <ui.Row
                         android:layout_width="match_parent"
@@ -83,7 +99,7 @@
                             android:gravity="center_vertical|start"
                             android:paddingStart="15dp"
                             android:text="@string/wallet_transactions_count"
-                            android:textColor="#555"
+                            android:textColor="@color/_text"
                             android:textSize="15sp"
                             app:_font="regular"
                             tools:ignore="RtlSymmetry"/>
@@ -94,10 +110,11 @@
                             android:gravity="center_vertical|end"
                             android:paddingEnd="15dp"
                             android:text="@{String.valueOf(wallet._count)}"
-                            android:textColor="#555"
+                            android:textColor="@color/_text"
                             android:textSize="15sp"
                             app:_font="regular"
-                            tools:ignore="RtlSymmetry"/>
+                            tools:ignore="RtlSymmetry"
+                            tools:text="10"/>
                     </ui.Row>
 
                     <ui.Row
@@ -111,7 +128,7 @@
                             android:gravity="center_vertical|start"
                             android:paddingStart="15dp"
                             android:text="@string/wallet_total"
-                            android:textColor="#555"
+                            android:textColor="@color/_text"
                             android:textSize="15sp"
                             app:_font="regular"
                             tools:ignore="RtlSymmetry"/>
@@ -122,10 +139,11 @@
                             android:gravity="center_vertical|end"
                             android:paddingEnd="15dp"
                             android:text="@{wallet._money}"
-                            android:textColor="#555"
+                            android:textColor="@color/_text"
                             android:textSize="15sp"
                             app:_font="regular"
-                            tools:ignore="RtlSymmetry"/>
+                            tools:ignore="RtlSymmetry"
+                            tools:text="10.000 đ"/>
                     </ui.Row>
 
                 </ui.Col>
@@ -146,33 +164,5 @@
                 app:_text="@string/edit_wallet_delete_button"
                 app:_textAlign="left"/>
         </ui.Col>
-
-        <ui.FrameShadow style="@style/top_bar">
-
-            <ui.Row
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ui.Button
-                    style="@style/button"
-                    android:layout_width="50dp"
-                    android:onClick="back"
-                    app:_icon="@string/icon_back"/>
-
-                <View style="@style/vr_line"/>
-
-                <ui.Text
-                    style="@style/text"
-                    android:layout_weight="1"
-                    android:text="@string/edit_wallet_title"/>
-
-                <ui.Button
-                    style="@style/button"
-                    android:layout_width="50dp"
-                    android:onClick="done"
-                    app:_icon="@string/icon_done"/>
-
-            </ui.Row>
-        </ui.FrameShadow>
-    </FrameLayout>
+    </ui.Col>
 </layout>

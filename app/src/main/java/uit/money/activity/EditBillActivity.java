@@ -73,7 +73,6 @@ public class EditBillActivity extends RealmActivity {
     }
 
     public void back(View view) {
-        bill.delete(realm);
         finish();
     }
 

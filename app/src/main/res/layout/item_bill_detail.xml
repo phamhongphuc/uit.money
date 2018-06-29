@@ -14,7 +14,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:background="@color/_background_item">
 
         <ui.Row
             android:layout_width="match_parent"
@@ -33,6 +34,7 @@
                 android:focusable="false"
                 android:gravity="center_vertical"
                 android:text="@{billDetail.object.name}"
+                android:textColor="@color/_item_color"
                 android:textSize="15sp"
                 app:_font="regular"
                 tools:text="Bottle"/>
