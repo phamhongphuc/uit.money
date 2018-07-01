@@ -130,8 +130,8 @@ public class Wallet extends RealmObject {
         _name.set(getName());
 
         initializeBillDetails();
-        initializePayments();
         initializeLoans();
+        initializePayments();
         initializeTransfers();
     }
 
@@ -165,6 +165,16 @@ public class Wallet extends RealmObject {
         transfers.removeAllChangeListeners();
         transfers.addChangeListener(this::updateTransfers);
         updateTransfers(transfers);
+    }
+
+    public RealmResults<BillDetail> getBillDetails() {
+        if (billDetails == null) {
+            billDetails = Realm.getDefaultInstance()
+                    .where(BillDetail.class)
+                    .equalTo("bill.wallet.id", id)
+                    .findAllAsync();
+        }
+        return billDetails;
     }
 
     private void updateBillDetails(RealmResults<BillDetail> billDetails) {
@@ -252,16 +262,6 @@ public class Wallet extends RealmObject {
         return bills;
     }
 
-    public RealmResults<BillDetail> getBillDetails() {
-        if (billDetails == null) {
-            billDetails = Realm.getDefaultInstance()
-                    .where(BillDetail.class)
-                    .equalTo("bill.wallet.id", id)
-                    .findAllAsync();
-        }
-        return billDetails;
-    }
-
     public int getId() {
         return id;
     }
@@ -280,6 +280,22 @@ public class Wallet extends RealmObject {
 
     public void updateName() {
         name = _name.get();
+    }
+
+    public long getBillDetailsMoney() {
+        return billDetailsMoney;
+    }
+
+    public long getPaymentsMoney() {
+        return paymentsMoney;
+    }
+
+    public long getLoansMoney() {
+        return loansMoney;
+    }
+
+    public long getTransfersMoney() {
+        return transfersMoney;
     }
 
     public interface Callback {

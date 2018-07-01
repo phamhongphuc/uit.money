@@ -27,9 +27,9 @@
 
     <string name="fb_login_protocol_scheme">fb2071312033150967</string>
 
-    <string name="hint_location">Nhà riêng, trường học, công ty...</string>
-    <string name="hint_object_name">Chai nước, cây bút...</string>
-    <string name="hint_with">Bạn bè, người thân...</string>
+    <string name="hint_location">Nhà riêng, trường học, công ty…</string>
+    <string name="hint_object_name">Chai nước, cây bút…</string>
+    <string name="hint_with">Bạn bè, người thân…</string>
 
     <string name="icon">Icon</string>
     <string name="icon_advanced"></string>
@@ -68,7 +68,15 @@
     <string name="wallet_total">Tổng cộng:</string>
     <string name="wallet_total_field">Số tiền</string>
     <string name="wallet_transactions_count">Số giao dịch:</string>
-    <string name="icon_edit"></string>
     <string name="input_name_location">Địa điểm</string>
     <string name="input_name_with">Đi cùng</string>
+    <string name="input_name_money">Số tiền</string>
+    <string name="input_name_wallet_name">Tên ví</string>
+    <string name="hint_input_name">Ví da, tủ tiền, thẻ ngân hàng…</string>
+    <string name="hint_wallet_money">~ 200.000</string>
+
+    <string name="icon_edit"></string>
+    <string name="icon_wallet"></string>
+    <string name="icon_money"></string>
+    <string name="edit_bill_advanced_title">Thông tin giao dịch</string>
 </resources>

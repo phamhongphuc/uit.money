@@ -2,9 +2,7 @@ package model.model.transaction;
 
 import io.realm.RealmModel;
 
-public interface Transaction extends RealmModel {
-    long getMoney();
-
+public interface Transaction extends RealmModel, HasMoney {
     int getType();
 
     String getAction();

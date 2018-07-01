@@ -53,8 +53,8 @@ public class CreateBill implements InterfaceRecognizer {
         String sell = matcher_buy_sell.group(3);
         if (!setBuyOrSell(bill, buy, sell)) return false;
 
-        String amount_object = matcher_buy_sell.group(4);
-        BillDetail billDetail = setBillDetail(bill, amount_object);
+        String quantity_object = matcher_buy_sell.group(4);
+        BillDetail billDetail = setBillDetail(bill, quantity_object);
         if (billDetail == null) return false;
 
         if (!setUnitPrice(text, billDetail)) return false;
@@ -87,15 +87,15 @@ public class CreateBill implements InterfaceRecognizer {
         }
     }
 
-    private BillDetail setBillDetail(Bill bill, String amount_object) {
+    private BillDetail setBillDetail(Bill bill, String quantity_object) {
         BillDetail detail = new BillDetail();
         detail.setBill(bill);
 
-        final Matcher matcher_amount = getMatcher(amount_object, "(một|hai|ba|\\d+) ([^\\r\\n]+)");
-        if (!matcher_amount.find()) return null;
-        detail.setAmount(Utils.getInt(matcher_amount.group(1)));
+        final Matcher matcher_quantity = getMatcher(quantity_object, "(một|hai|ba|\\d+) ([^\\r\\n]+)");
+        if (!matcher_quantity.find()) return null;
+        detail.setQuantity(Utils.getInt(matcher_quantity.group(1)));
 
-        Object object = new Object(matcher_amount.group(2).replaceAll("^(cái|chiếc) ", ""));
+        Object object = new Object(matcher_quantity.group(2).replaceAll("^(cái|chiếc) ", ""));
         detail.setObject(object);
 
         return detail;

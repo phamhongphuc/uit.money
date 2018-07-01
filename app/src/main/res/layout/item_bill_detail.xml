@@ -45,7 +45,7 @@
                 android:clickable="false"
                 android:focusable="false"
                 android:gravity="center_vertical|end"
-                android:text="@{String.valueOf(billDetail.amount)}"
+                android:text="@{String.valueOf(billDetail.quantity)}"
                 android:textColor="#999"
                 android:textSize="15sp"
                 app:_font="bold"

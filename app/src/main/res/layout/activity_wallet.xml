@@ -55,7 +55,7 @@
                         android:onClick="openDrawer"
                         app:_icon=""/>
 
-                    <View style="@style/vr_line"/>
+                    <View style="@style/vr_half"/>
 
                     <ui.Button
                         style="@style/button"
@@ -75,7 +75,37 @@
 
                 </ui.Row>
 
-                <View style="@style/hr_line"/>
+                <View style="@style/hr_full"/>
+
+                <ui.Row
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/_background_action">
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <View style="@style/vr_full"/>
+
+                    <ui.Text
+                        style="@style/bottom_text"
+                        android:layout_width="wrap_content"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@{wallet._money}"
+                        tools:text="500.000 đ"/>
+
+                    <View style="@style/vr_full"/>
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+                </ui.Row>
+
+                <View style="@style/hr_full"/>
 
                 <ui.Col
                     android:layout_width="match_parent"
@@ -88,7 +118,7 @@
                         tools:itemCount="2"
                         tools:listitem="@layout/item_bill"/>
 
-                    <View style="@style/hr_line"/>
+                    <View style="@style/hr_full"/>
 
                     <ui.Row
                         android:layout_width="match_parent"
@@ -152,23 +182,6 @@
                             app:_radius="25dp"/>
 
                     </ui.Row>
-
-                    <!--<FrameLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="50dp"-->
-                    <!--android:layout_gravity="bottom"-->
-                    <!--android:background="@color/n_background">-->
-
-                    <!--<ui.Text-->
-                    <!--style="@style/bottom_text"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_gravity="end"-->
-                    <!--android:gravity="end|center_vertical"-->
-                    <!--android:paddingEnd="15dp"-->
-                    <!--android:text="@{wallet._money}"-->
-                    <!--tools:ignore="RtlSymmetry"-->
-                    <!--tools:text="500.000 đ"/>-->
-                    <!--</FrameLayout>-->
                 </ui.Col>
 
 
@@ -273,13 +286,13 @@
                         android:layout_height="40dp"
                         android:gravity="center_vertical|start"
                         android:text="@{user.name}"
-                        android:textColor="@color/_text"
+                        android:textColor="@color/_text_color"
                         android:textSize="17sp"
                         app:_font="bold"
                         tools:text="Tên người dùng"/>
                 </ui.Row>
 
-                <View style="@style/hr_line"/>
+                <View style="@style/hr_full"/>
 
                 <ui.Button
                     style="@style/sidebar_button"

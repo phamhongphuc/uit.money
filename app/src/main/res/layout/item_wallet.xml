@@ -60,10 +60,7 @@
                     app:_font="bold"
                     tools:text="{Tên ví}"/>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/white_shadow"/>
+                <View style="@style/hr_full"/>
 
                 <ui.Row
                     android:layout_width="match_parent"

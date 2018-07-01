@@ -75,7 +75,7 @@ public class BillDetailsView extends LinearLayoutCompat {
             row.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, getResources().getDimensionPixelSize(R.dimen.bill_detail_height)));
 
             row.addView(getObjectView(context, detail));
-            row.addView(getAmountView(context, detail));
+            row.addView(getQuantityView(context, detail));
             row.addView(getCrossView(context));
             row.addView(getMoneyView(context, detail));
 
@@ -100,15 +100,15 @@ public class BillDetailsView extends LinearLayoutCompat {
     }
 
     @NonNull
-    private Text getAmountView(Context context, BillDetail detail) {
-        final Text amount = new Text(context);
-        amount.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
-        amount.setGravity(Gravity.CENTER_VERTICAL | Gravity.END);
-        amount.setText(String.valueOf(detail.getAmount()));
-        amount.setTextColor(TEXT_COLOR);
-        amount.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
-        amount.set_font(BOLD);
-        return amount;
+    private Text getQuantityView(Context context, BillDetail detail) {
+        final Text quantity = new Text(context);
+        quantity.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
+        quantity.setGravity(Gravity.CENTER_VERTICAL | Gravity.END);
+        quantity.setText(String.valueOf(detail.getQuantity()));
+        quantity.setTextColor(TEXT_COLOR);
+        quantity.setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE);
+        quantity.set_font(BOLD);
+        return quantity;
     }
 
     @NonNull

@@ -108,13 +108,13 @@ public class Bill extends RealmObject implements Transaction, TransactionModel {
 
     private void updateBindingValue(RealmResults<BillDetail> billDetails) {
         long money = 0;
-        int maxAmount = 0;
+        int maxQuantity = 0;
         for (BillDetail billDetail : billDetails) {
             money += billDetail.getMoney();
-            final int amount = billDetail.getAmount();
-            if (amount > maxAmount) maxAmount = amount;
+            final int quantity = billDetail.getQuantity();
+            if (quantity > maxQuantity) maxQuantity = quantity;
         }
-        this.maxCount.set(maxAmount);
+        this.maxCount.set(maxQuantity);
         setMoney(money);
     }
 

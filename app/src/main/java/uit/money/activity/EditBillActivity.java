@@ -101,7 +101,7 @@ public class EditBillActivity extends RealmActivity {
             detail.autoId();
             detail.setBill(bill);
             detail.setObject(object);
-            detail.setAmount(state.getIntAmount());
+            detail.setQuantity(state.getIntQuantity());
             detail.setUnitPrice(state.getLongUnitPrice());
 
             r.copyToRealmOrUpdate(object);
@@ -127,7 +127,7 @@ public class EditBillActivity extends RealmActivity {
 
     public static class State extends Observable {
         public final ObservableField<String> objectName = new ObservableField<>("Tên món đồ");
-        public final ObservableField<String> amount = new ObservableField<>("1");
+        public final ObservableField<String> quantity = new ObservableField<>("1");
         public final ObservableField<String> unitPrice = new ObservableField<>("1.000");
 
         long getLongUnitPrice() {
@@ -139,8 +139,8 @@ public class EditBillActivity extends RealmActivity {
             return Long.parseLong(s);
         }
 
-        int getIntAmount() {
-            return Integer.parseInt(amount.get());
+        int getIntQuantity() {
+            return Integer.parseInt(quantity.get());
         }
 
         String getStringObjectName() {

@@ -22,7 +22,7 @@
                 android:onClick="back"
                 app:_icon="@string/icon_back"/>
 
-            <View style="@style/vr_line"/>
+            <View style="@style/vr_half"/>
 
             <ui.Text
                 style="@style/text"
@@ -37,7 +37,7 @@
 
         </ui.Row>
 
-        <View style="@style/hr_line"/>
+        <View style="@style/hr_full"/>
 
         <ui.List
             android:layout_width="match_parent"
@@ -54,7 +54,7 @@
             tools:itemCount="2"
             tools:listitem="@layout/item_wallet"/>
 
-        <View style="@style/hr_line"/>
+        <View style="@style/hr_full"/>
 
         <ui.Row style="@style/action_row">
 

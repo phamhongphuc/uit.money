@@ -23,13 +23,14 @@
         android:focusable="true"
         android:layerType="software"
         android:paddingEnd="10dp"
-        tools:background="#ccc"
+        tools:background="@color/_background"
         tools:ignore="RtlSymmetry">
 
         <FrameLayout
             android:layout_width="55dp"
             android:layout_height="match_parent"
-            android:paddingEnd="5dp">
+            android:paddingEnd="5dp"
+            android:visibility="gone">
 
             <ui.Text
                 android:layout_width="match_parent"
@@ -44,26 +45,17 @@
 
         <FrameLayout
             android:layout_width="40dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp">
 
             <View
-                android:layout_width="2dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="0dp"
-                android:layout_marginTop="0dp"
-                android:background="#3c6"/>
+                style="@style/vr_full"
+                android:layout_height="wrap_content"/>
 
             <ui.FrameShadow
-                android:layout_width="31dp"
-                android:layout_height="31dp"
-                android:layout_gravity="center_horizontal|top"
-                android:layout_marginTop="12dp"
-                android:background="@color/primary"
-                android:clickable="false"
-                app:_radius="10.5dp"
-                app:_shadowColor="#73c6"
-                app:_shadowSize="5dp"/>
+                style="@style/dot"
+                android:background="@color/_green"
+                app:_shadowColor="@color/_green_shadow"/>
         </FrameLayout>
 
         <ui.FrameShadow
@@ -81,17 +73,17 @@
                 android:layout_height="match_parent"
                 android:onClick="@{action::openDetail}"
                 app:_radius="@dimen/radius"
-                app:_rippleColor="#93c6"/>
+                app:_rippleColor="@color/_item_ripple"/>
 
             <ui.Col
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="false"
                 android:layerType="hardware"
-                android:paddingBottom="5dp"
-                android:paddingEnd="10dp"
-                android:paddingStart="10dp"
-                android:paddingTop="5dp">
+                android:paddingBottom="10dp"
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp"
+                android:paddingTop="10dp">
 
                 <ui.Row
                     android:layout_width="match_parent"
@@ -104,7 +96,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical|start"
                         android:text="@{payment.action}"
-                        android:textColor="#222"
+                        android:textColor="@color/_item_title"
                         android:textSize="15sp"
                         app:_font="bold"
                         tools:text="{payment.action}"/>
@@ -119,7 +111,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="@string/icon_location"
-                            android:textColor="#222"
+                            android:textColor="@color/_item_title"
                             android:textSize="15sp"
                             android:visibility="@{(payment.location == null || ``.equals(payment.location)) ? View.GONE : View.VISIBLE, default=gone}"
                             app:_font="icon"
@@ -138,7 +130,8 @@
                     android:textColor="@{model.Utils.getMoneyColor(payment)}"
                     android:textSize="15sp"
                     app:_font="bold"
-                    tools:text="20.000 đ"/>
+                    tools:text="20.000 đ"
+                    tools:textColor="@color/out_color"/>
             </ui.Col>
         </ui.FrameShadow>
     </ui.Row>

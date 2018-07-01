@@ -32,7 +32,7 @@
                 android:onClick="back"
                 app:_icon="@string/icon_back"/>
 
-            <View style="@style/vr_line"/>
+            <View style="@style/vr_half"/>
 
             <ui.Text
                 style="@style/text"
@@ -52,6 +52,8 @@
                 app:_icon=""/>
 
         </ui.Row>
+
+        <View style="@style/hr_full"/>
 
         <ui.FrameShadow
             style="@style/item_shadow"
@@ -75,7 +77,7 @@
                     app:_font="bold"
                     tools:text="Mua/Bán"/>
 
-                <View style="@style/hr_line"/>
+                <View style="@style/hr_full"/>
 
                 <ui.Row
                     android:layout_width="match_parent"
@@ -205,9 +207,9 @@
                     android:layout_marginStart="20dp">
 
                     <View
-                        style="@style/hr_line"
-                        android:layout_marginBottom="3dp"
-                        android:layout_marginTop="3dp"/>
+                        style="@style/hr_full"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"/>
 
                     <ui.Row
                         android:layout_width="wrap_content"

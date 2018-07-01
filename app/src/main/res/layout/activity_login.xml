@@ -15,20 +15,16 @@
     <ui.Col
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fff"
-        android:gravity="center">
+        android:background="@color/_background"
+        android:gravity="center"
+        android:padding="15dp">
 
         <ui.FrameShadow
+            style="@style/item_shadow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginTop="25dp"
-            android:layout_weight="1"
-            android:background="#2ecc71"
-            app:_radius="@dimen/radius"
-            app:_shadowColor="#bb2ecc71"
-            app:_shadowSize="@dimen/shadow_size">
+            android:layout_margin="10dp"
+            android:layout_weight="1">
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewPagerLogin"
@@ -39,22 +35,26 @@
 
         </ui.FrameShadow>
 
-        <ui.Button
+        <ui.FrameShadow
+            style="@style/item_shadow"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/element_height_with_shadow"
-            android:layout_margin="25dp"
-            android:background="#3498db"
-            android:onClick="login"
-            app:_backgroundIcon="#2000"
-            app:_childRadius="none"
-            app:_font="regular"
-            app:_foreground="#fff"
-            app:_icon=""
-            app:_radius="@dimen/radius"
-            app:_rippleColor="#99ffffff"
-            app:_shadowColor="#884cb7ff"
-            app:_shadowSize="@dimen/shadow_size"
-            app:_text="@string/login_with_facebook_button"
-            app:_textAlign="left"/>
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <ui.Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/_background_item"
+                android:onClick="login"
+                app:_backgroundIcon="#3000"
+                app:_childRadius="none"
+                app:_font="light"
+                app:_foreground="@color/_text_color"
+                app:_icon=""
+                app:_radius="@dimen/radius"
+                app:_rippleColor="#2fff"
+                app:_text="@string/login_with_facebook_button"
+                app:_textAlign="left"/>
+        </ui.FrameShadow>
     </ui.Col>
 </layout>

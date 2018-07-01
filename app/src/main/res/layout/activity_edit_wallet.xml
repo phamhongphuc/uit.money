@@ -22,7 +22,7 @@
                 android:onClick="back"
                 app:_icon="@string/icon_back"/>
 
-            <View style="@style/vr_line"/>
+            <View style="@style/vr_half"/>
 
             <ui.Text
                 style="@style/text"
@@ -37,7 +37,7 @@
 
         </ui.Row>
 
-        <View style="@style/hr_line"/>
+        <View style="@style/hr_full"/>
 
         <ui.Col
             android:layout_width="match_parent"
@@ -65,12 +65,12 @@
                             android:paddingEnd="15dp"
                             android:paddingStart="15dp"
                             android:text="@string/wallet_name_field"
-                            android:textColor="@color/_text"
+                            android:textColor="@color/_text_color"
                             app:_autoSize="true"
                             app:_font="regular"/>
 
                         <View
-                            style="@style/vr_line"
+                            style="@style/vr_half"
                             android:layout_height="match_parent"/>
 
                         <ui.InputText
@@ -80,13 +80,14 @@
                             android:background="@android:color/transparent"
                             android:inputType="textCapSentences"
                             android:text="@={wallet._name}"
-                            android:textColor="@color/_text"
+                            android:textColor="@color/_text_color"
                             app:_autoSize="true"
+                            app:_focusColor="@color/_dark_1"
                             app:_font="regular"
                             app:_rippleColor="#15000000"/>
                     </ui.Row>
 
-                    <View style="@style/hr_line"/>
+                    <View style="@style/hr_full"/>
 
                     <ui.Row
                         android:layout_width="match_parent"
@@ -99,7 +100,7 @@
                             android:gravity="center_vertical|start"
                             android:paddingStart="15dp"
                             android:text="@string/wallet_transactions_count"
-                            android:textColor="@color/_text"
+                            android:textColor="@color/_text_color"
                             android:textSize="15sp"
                             app:_font="regular"
                             tools:ignore="RtlSymmetry"/>
@@ -110,7 +111,7 @@
                             android:gravity="center_vertical|end"
                             android:paddingEnd="15dp"
                             android:text="@{String.valueOf(wallet._count)}"
-                            android:textColor="@color/_text"
+                            android:textColor="@color/_text_color"
                             android:textSize="15sp"
                             app:_font="regular"
                             tools:ignore="RtlSymmetry"
@@ -128,7 +129,7 @@
                             android:gravity="center_vertical|start"
                             android:paddingStart="15dp"
                             android:text="@string/wallet_total"
-                            android:textColor="@color/_text"
+                            android:textColor="@color/_text_color"
                             android:textSize="15sp"
                             app:_font="regular"
                             tools:ignore="RtlSymmetry"/>
@@ -139,7 +140,7 @@
                             android:gravity="center_vertical|end"
                             android:paddingEnd="15dp"
                             android:text="@{wallet._money}"
-                            android:textColor="@color/_text"
+                            android:textColor="@color/_text_color"
                             android:textSize="15sp"
                             app:_font="regular"
                             tools:ignore="RtlSymmetry"
@@ -149,20 +150,27 @@
                 </ui.Col>
             </ui.FrameShadow>
 
-            <ui.Button
+            <ui.FrameShadow
+                style="@style/item_shadow"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_margin="10dp"
-                android:background="@color/red"
-                android:onClick="deleteWallet"
-                app:_backgroundIcon="#2000"
-                app:_foreground="@color/white"
-                app:_icon=""
-                app:_radius="@dimen/radius"
-                app:_shadowColor="@color/red_shadow"
-                app:_shadowSize="@dimen/shadow_size"
-                app:_text="@string/edit_wallet_delete_button"
-                app:_textAlign="left"/>
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <ui.Button
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/_background_item"
+                    android:onClick="deleteWallet"
+                    app:_backgroundIcon="#3000"
+                    app:_childRadius="none"
+                    app:_font="light"
+                    app:_foreground="@color/_text_color"
+                    app:_icon=""
+                    app:_radius="@dimen/radius"
+                    app:_rippleColor="#2fff"
+                    app:_text="@string/edit_wallet_delete_button"
+                    app:_textAlign="left"/>
+            </ui.FrameShadow>
         </ui.Col>
     </ui.Col>
 </layout>

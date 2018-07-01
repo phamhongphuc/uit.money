@@ -39,7 +39,7 @@
                 android:layout_marginStart="60dp"
                 android:gravity="center_vertical"
                 android:text="@{dateSeparator.timeString}"
-                android:textColor="@color/_text"
+                android:textColor="@color/_text_color"
                 android:textSize="15sp"
                 app:_font="bold"
                 tools:ignore="RtlSymmetry"
