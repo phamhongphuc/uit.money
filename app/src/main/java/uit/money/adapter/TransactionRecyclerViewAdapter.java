@@ -31,6 +31,7 @@ import uit.money.activity.BillActivity;
 import uit.money.activity.RealmActivity;
 import uit.money.adapter.separator.DateSeparator;
 import uit.money.adapter.separator.EndSeparator;
+import uit.money.adapter.separator.StartSeparator;
 
 import static model.Const.BILL;
 import static model.Const.DATE_SEPARATOR;
@@ -45,7 +46,6 @@ public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<Transac
     private final RealmResults<Transfer> transfers;
     private final RealmResults<Loan> loans;
     private final RealmResults<Bill> bills;
-    private final Wallet wallet;
     private List<TransactionModel> transactions;
 
     public static TransactionRecyclerViewAdapter getInstance(Wallet wallet) {
@@ -53,7 +53,6 @@ public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<Transac
     }
 
     public TransactionRecyclerViewAdapter(Wallet wallet) {
-        this.wallet = wallet;
         bills = wallet.getBills();
         loans = wallet.getLoans();
         payments = wallet.getPayments();
@@ -96,6 +95,7 @@ public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<Transac
             }
         }
 
+        transactions.add(0, new StartSeparator());
         transactions.add(new EndSeparator());
     }
 

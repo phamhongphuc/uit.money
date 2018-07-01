@@ -22,7 +22,6 @@ import model.model.util.Organization;
 import static model.Const.BILL;
 import static model.Const.IN;
 import static model.Const.OUT;
-import static model.Const.getResource;
 import static model.Const.getString;
 
 /**
@@ -152,14 +151,6 @@ public class Bill extends RealmObject implements Transaction, TransactionModel {
 
     public void setInOrOut(boolean inOrOut) {
         this.inOrOut = inOrOut;
-    }
-
-    @Deprecated
-    public int getMoneyColor() {
-        return getResource().getColor(
-                inOrOut == OUT ? R.color.out_color : R.color.in_color,
-                null
-        );
     }
 
     @Override

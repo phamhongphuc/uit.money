@@ -43,7 +43,7 @@ public class ListOfWalletsActivity extends RealmActivity {
     }
 
     public void create(View view) {
-        startActivity(new Intent(getBaseContext(), CreateWalletActivity.class));
+        startActivity(new Intent(this, CreateWalletActivity.class));
     }
 
     public static class State extends Observable {
@@ -70,6 +70,7 @@ public class ListOfWalletsActivity extends RealmActivity {
             billDetails.load();
             billDetails.removeAllChangeListeners();
             billDetails.addChangeListener(this::updateBillDetails);
+            updateBillDetails(billDetails);
         }
 
         private void initializePayments(ListOfWalletsActivity activity) {
@@ -94,6 +95,12 @@ public class ListOfWalletsActivity extends RealmActivity {
             updateLoans(loans);
         }
 
+        private void updateBillDetails(RealmResults<BillDetail> billDetails) {
+            billDetailsMoney = 0;
+            for (BillDetail b : billDetails) billDetailsMoney += b.getMoney();
+            updateMoney();
+        }
+
         private void updatePayments(RealmResults<Payment> payments) {
             paymentsMoney = 0;
             for (Payment p : payments) paymentsMoney += p.getMoney();
@@ -108,12 +115,6 @@ public class ListOfWalletsActivity extends RealmActivity {
 
         private void updateMoney() {
             State.money.set(getMoney(billDetailsMoney + paymentsMoney + loansMoney));
-        }
-
-        private void updateBillDetails(RealmResults<BillDetail> billDetails) {
-            billDetailsMoney = 0;
-            for (BillDetail b : billDetails) billDetailsMoney += b.getMoney();
-            updateMoney();
         }
 
         public WalletRecyclerViewAdapter getWalletAdapter() {

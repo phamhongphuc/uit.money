@@ -14,6 +14,7 @@ import uit.money.databinding.ActivityBillBinding;
 import static uit.money.activity.WalletActivity.EDIT;
 import static uit.money.activity.WalletActivity.ID;
 import static uit.money.activity.WalletActivity.TYPE;
+import static uit.money.utils.Dialog.OpenConfirm;
 
 public class BillActivity extends RealmActivity {
     private ActivityBillBinding binding;
@@ -57,13 +58,15 @@ public class BillActivity extends RealmActivity {
         finish();
     }
 
-    public void removeBill(View view) {
-        realm.executeTransaction(r -> bill.deleteFromRealm());
-        finish();
+    public void deleteBill(View view) {
+        OpenConfirm(this, getString(R.string.bill_delete_dialog), (() -> {
+            realm.executeTransaction(r -> bill.deleteFromRealm());
+            finish();
+        }));
     }
 
-    public void editBill(View view) {
-        final Intent intent = new Intent(getBaseContext(), EditBillActivity.class);
+    public void openEditBill(View view) {
+        final Intent intent = new Intent(this, EditBillActivity.class);
         intent.putExtra(TYPE, EDIT);
         intent.putExtra(ID, bill.getId());
         startActivity(intent);

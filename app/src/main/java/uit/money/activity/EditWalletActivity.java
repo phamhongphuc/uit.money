@@ -14,6 +14,8 @@ import model.model.Wallet;
 import uit.money.R;
 import uit.money.databinding.ActivityEditWalletBinding;
 
+import static uit.money.utils.Dialog.OpenConfirm;
+
 public class EditWalletActivity extends RealmActivity {
     public static final int LAYOUT = R.layout.activity_edit_wallet;
     private Wallet wallet;
@@ -56,7 +58,12 @@ public class EditWalletActivity extends RealmActivity {
     public void deleteWallet(View view) {
         final RealmResults<Wallet> wallets = User.getCurrentUser().getWallets();
         wallets.load();
-        if (wallets.size() > 1) {
+        if (wallets.size() == 0) {
+            Toast.makeText(getApplicationContext(), R.string.edit_wallet_delete_last_wallet, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        OpenConfirm(this, getString(R.string.wallet_delete_dialog), (() -> {
             realm.executeTransaction(r -> {
                 wallet.getBillDetails().deleteAllFromRealm();
                 wallet.getBills().deleteAllFromRealm();
@@ -65,10 +72,8 @@ public class EditWalletActivity extends RealmActivity {
                 wallet.getTransfers().deleteAllFromRealm();
                 wallet.deleteFromRealm();
             });
-            startActivity(new Intent(getBaseContext(), ListOfWalletsActivity.class));
+            startActivity(new Intent(this, ListOfWalletsActivity.class));
             finish();
-        } else {
-            Toast.makeText(getApplicationContext(), R.string.edit_wallet_delete_last_wallet, Toast.LENGTH_SHORT).show();
-        }
+        }));
     }
 }

@@ -17,6 +17,12 @@ import model.model.util.Object;
 import uit.money.R;
 import uit.money.databinding.ActivityEditBillBinding;
 
+import static uit.money.activity.WalletActivity.CREATE;
+import static uit.money.activity.WalletActivity.EDIT;
+import static uit.money.activity.WalletActivity.ID;
+import static uit.money.activity.WalletActivity.NONE;
+import static uit.money.activity.WalletActivity.TYPE;
+
 public class EditBillActivity extends RealmActivity {
     private static final int LAYOUT = R.layout.activity_edit_bill;
 
@@ -34,9 +40,9 @@ public class EditBillActivity extends RealmActivity {
 
     private void initializeData() {
         final Intent intent = getIntent();
-        type = intent.getIntExtra(WalletActivity.TYPE, WalletActivity.NONE);
+        type = intent.getIntExtra(TYPE, NONE);
         switch (type) {
-            case WalletActivity.CREATE:
+            case CREATE:
                 state.title = getString(R.string.create_bill_title);
                 realm.executeTransaction(r -> {
                     bill.autoId();
@@ -44,9 +50,9 @@ public class EditBillActivity extends RealmActivity {
                     bill = realm.copyToRealmOrUpdate(bill);
                 });
                 break;
-            case WalletActivity.EDIT:
+            case EDIT:
                 state.title = getString(R.string.edit_bill_title);
-                final int id = intent.getIntExtra(WalletActivity.ID, -1);
+                final int id = intent.getIntExtra(ID, -1);
                 bill = realm.where(Bill.class).equalTo("id", id).findFirst();
                 if (bill == null) {
                     finish();
@@ -68,12 +74,7 @@ public class EditBillActivity extends RealmActivity {
     }
 
     public void back(View view) {
-        if (type == WalletActivity.CREATE && bill.isValid()) {
-            realm.executeTransaction(r -> {
-                bill.getBillDetails().deleteAllFromRealm();
-                bill.deleteFromRealm();
-            });
-        }
+        if (type == CREATE && bill.isValid()) bill.delete(realm);
         finish();
     }
 
@@ -115,14 +116,14 @@ public class EditBillActivity extends RealmActivity {
     }
 
     public void goToAdvanced(View view) {
-        final Intent intent = new Intent(getBaseContext(), EditBillAdvancedActivity.class);
+        final Intent intent = new Intent(this, EditBillAdvancedActivity.class);
         intent.putExtra("id", bill.getId());
         startActivity(intent);
     }
 
     @Override
     public void onBackPressed() {
-        if (type == WalletActivity.CREATE) bill.delete(realm);
+        if (type == CREATE && bill.isValid()) bill.delete(realm);
         super.onBackPressed();
     }
 

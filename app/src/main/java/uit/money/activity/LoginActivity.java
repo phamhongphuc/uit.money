@@ -29,7 +29,7 @@ public class LoginActivity extends RealmActivity {
 
     private void initializeListener() {
         Credential.initializeLogin(() -> {
-            startActivity(new Intent(getBaseContext(), WalletActivity.class));
+            startActivity(new Intent(this, WalletActivity.class));
             finish();
         });
     }

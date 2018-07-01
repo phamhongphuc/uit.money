@@ -80,4 +80,14 @@
     <string name="icon_money"></string>
     <string name="edit_bill_advanced_title">Thông tin giao dịch</string>
     <string name="create_bill_title">Tạo giao dịch</string>
+    <string name="icon_search"></string>
+    <string name="icon_bill"></string>
+    <string name="icon_payment"></string>
+    <string name="icon_loan"></string>
+    <string name="icon_transfer"></string>
+    <string name="dialog_yes">Có</string>
+    <string name="dialog_no">Không</string>
+    <string name="bill_delete_dialog">Bạn có chắc chắn muốn xóa giao dịch?</string>
+    <string name="wallet_delete_dialog">Bạn có chắc chắn xóa ví và toàn bộ giao dịch?</string>
+    <string name="input_name_type">Kiểu giao dịch</string>
 </resources>

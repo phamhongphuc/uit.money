@@ -32,7 +32,7 @@ import static model.Const.getString;
  * @see Loan#location                   {@link String}
  * @see Loan#interestRate               {@link Float}
  * @see Loan#cycle                      {@link Cycle}               >> Không cần linking
- * @see Loan#inOrOut               {@link Boolean}
+ * @see Loan#inOrOut                    {@link Boolean}
  */
 @Parcel(implementations = {model_model_transaction_LoanRealmProxy.class},
         value = Parcel.Serialization.BEAN,
@@ -169,7 +169,7 @@ public class Loan extends RealmObject implements Transaction, TransactionModel {
 
     @Override
     public long getMoney() {
-        return (inOrOut == IN ? 1 : -1) * money;
+        return money * (inOrOut == IN ? 1 : -1);
     }
 
     public void setMoney(long money) {

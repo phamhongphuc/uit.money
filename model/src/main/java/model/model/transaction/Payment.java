@@ -196,4 +196,8 @@ public class Payment extends RealmObject implements Transaction, TransactionMode
                 ? 0
                 : Objects.requireNonNull(payments.max("id")).intValue() + 1;
     }
+
+    public void delete(Realm realm) {
+        realm.executeTransaction(r -> this.deleteFromRealm());
+    }
 }

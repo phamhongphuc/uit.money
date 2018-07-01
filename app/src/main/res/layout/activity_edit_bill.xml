@@ -34,7 +34,8 @@
             <ui.Text
                 style="@style/text"
                 android:layout_weight="1"
-                android:text="@{state.title}"/>
+                android:text="@{state.title}"
+                tools:text="@string/edit_bill_title"/>
 
             <ui.Button
                 style="@style/button"

@@ -22,7 +22,6 @@ import model.model.transaction.Loan;
 import model.model.transaction.Payment;
 import model.model.transaction.Transfer;
 
-import static model.Const.IN;
 import static model.Utils.getMoney;
 
 /**
@@ -180,7 +179,7 @@ public class Wallet extends RealmObject {
     private void updateBillDetails(RealmResults<BillDetail> billDetails) {
         billDetailsMoney = 0;
         for (BillDetail billDetail : billDetails) {
-            billDetailsMoney += billDetail.getMoney() * (billDetail.getBill().isInOrOut() == IN ? 1 : -1);
+            billDetailsMoney += billDetail.getMoney();
         }
         updateMoney();
     }

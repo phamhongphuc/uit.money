@@ -42,14 +42,12 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"/>
-        <activity android:name=".activity.ListOfWalletsActivity">
-        </activity>
-        <activity android:name=".activity.CreateWalletActivity">
-        </activity>
-        <activity android:name=".activity.EditWalletActivity"/>
+        <activity android:name=".activity.ListOfWalletsActivity"/>
+        <activity android:name=".activity.CreateWalletActivity"/>
         <activity android:name=".activity.BillActivity"/>
+        <activity android:name=".activity.EditWalletActivity"/>
         <activity android:name=".activity.EditBillActivity"/>
         <activity android:name=".activity.EditBillAdvancedActivity"/>
+        <activity android:name=".activity.EditPaymentActivity"/>
     </application>
-
 </manifest>

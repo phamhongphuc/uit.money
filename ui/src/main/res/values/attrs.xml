@@ -58,19 +58,6 @@
         <attr name="_autoSize"/>
         <attr name="_autoPadding"/>
     </declare-styleable>
-    <declare-styleable name="Shadow">
-        <attr name="_radius" format="dimension"/>
-        <attr name="_shadowSize" format="dimension"/>
-        <attr name="_dx" format="dimension"/>
-        <attr name="_dy" format="dimension"/>
-        <attr name="_rippleColor"/>
-        <attr name="_shadowColor" format="color"/>
-        <attr name="_backgroundColor" format="color"/>
-    </declare-styleable>
-    <declare-styleable name="Line">
-        <attr name="_isFull" format="boolean"/>
-        <attr name="_color" format="color"/>
-    </declare-styleable>
     <declare-styleable name="Square">
         <attr name="_by" format="enum">
             <enum name="width" value="0"/>

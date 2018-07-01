@@ -11,6 +11,8 @@ import io.realm.annotations.PrimaryKey;
 import io.realm.model_model_transaction_BillDetailRealmProxy;
 import model.model.util.Object;
 
+import static model.Const.IN;
+
 //import io.realm.model_transaction_BillDetailRealmProxy;
 
 /**
@@ -41,7 +43,7 @@ public class BillDetail extends RealmObject implements HasMoney {
 
     @Override
     public long getMoney() {
-        return quantity * unitPrice;
+        return quantity * unitPrice * (bill.isInOrOut() == IN ? 1 : -1);
     }
 
     public int getId() {

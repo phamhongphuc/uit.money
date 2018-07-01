@@ -42,13 +42,13 @@
             <ui.Button
                 style="@style/button"
                 android:layout_width="50dp"
-                android:onClick="editBill"
+                android:onClick="openEditBill"
                 app:_icon="@string/icon_edit"/>
 
             <ui.Button
                 style="@style/button"
                 android:layout_width="50dp"
-                android:onClick="removeBill"
+                android:onClick="deleteBill"
                 app:_icon=""/>
 
         </ui.Row>
@@ -77,12 +77,13 @@
                     app:_font="bold"
                     tools:text="Mua/Bán"/>
 
-                <View style="@style/hr_full"/>
+                <View
+                    style="@style/hr_full"
+                    android:layout_marginBottom="10dp"/>
 
                 <ui.Row
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
+                    android:layout_height="wrap_content">
 
                     <ui.Text
                         android:layout_width="wrap_content"
@@ -245,9 +246,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="25dp"
                             android:gravity="center_vertical|end"
-                            android:minWidth="80dp"
-                            android:text="@{model.Utils.getMoney(bill.money)}"
-                            android:textColor="@{bill.moneyColor}"
+                            android:text="@{Utils.getMoney(bill.money)}"
+                            android:textColor="@{Utils.getMoneyColor(bill)}"
                             android:textSize="15sp"
                             app:_autoPadding="false"
                             app:_font="bold"

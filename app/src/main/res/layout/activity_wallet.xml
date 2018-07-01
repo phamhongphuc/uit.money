@@ -145,7 +145,7 @@
                             android:textSize="15sp"
                             app:_font="regular"
                             tools:ignore="RtlSymmetry"
-                            tools:text="Lời..."/>
+                            tools:text="Lời nói..."/>
 
                         <View
                             style="@style/hr_full"
@@ -171,7 +171,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:onClick="openCreateBill"
-                            app:_icon=""
+                            app:_icon="@string/icon_bill"
                             app:_radius="25dp"/>
 
                         <Space
@@ -183,7 +183,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:onClick="openCreatePayment"
-                            app:_icon=""
+                            app:_icon="@string/icon_payment"
                             app:_radius="25dp"/>
 
                         <ui.Button
@@ -203,7 +203,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:onClick="openCreateLoan"
-                            app:_icon=""
+                            app:_icon="@string/icon_loan"
                             app:_radius="25dp"/>
 
                         <Space
@@ -215,7 +215,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:onClick="openCreateTransfer"
-                            app:_icon=""
+                            app:_icon="@string/icon_transfer"
                             app:_radius="25dp"/>
 
                     </ui.Row>
