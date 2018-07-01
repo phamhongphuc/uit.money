@@ -18,40 +18,35 @@ import uit.money.R;
 import uit.money.databinding.ActivityEditBillBinding;
 
 public class EditBillActivity extends RealmActivity {
-    public static final String TYPE = "type";
-    public static final String ID = "id";
-    public static final int NONE = 0;
-    public static final int CREATE = 1;
-    public static final int EDIT = 2;
+    private static final int LAYOUT = R.layout.activity_edit_bill;
 
-    private final int layout = R.layout.activity_edit_bill;
+    private final State state = new State();
     private Bill bill = new Bill();
-    private State state = new State();
     private int type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(layout);
+        setContentView(LAYOUT);
         initializeData();
         initializeDataBinding();
     }
 
     private void initializeData() {
         final Intent intent = getIntent();
-        type = intent.getIntExtra(TYPE, NONE);
+        type = intent.getIntExtra(WalletActivity.TYPE, WalletActivity.NONE);
         switch (type) {
-            case CREATE:
-                realm.beginTransaction();
-
-                bill.autoId();
-                bill.setWallet(Wallet.getCurrentWallet());
-                bill = realm.copyToRealmOrUpdate(bill);
-
-                realm.commitTransaction();
+            case WalletActivity.CREATE:
+                state.title = getString(R.string.create_bill_title);
+                realm.executeTransaction(r -> {
+                    bill.autoId();
+                    bill.setWallet(Wallet.getCurrentWallet());
+                    bill = realm.copyToRealmOrUpdate(bill);
+                });
                 break;
-            case EDIT:
-                final int id = intent.getIntExtra(ID, -1);
+            case WalletActivity.EDIT:
+                state.title = getString(R.string.edit_bill_title);
+                final int id = intent.getIntExtra(WalletActivity.ID, -1);
                 bill = realm.where(Bill.class).equalTo("id", id).findFirst();
                 if (bill == null) {
                     finish();
@@ -67,12 +62,18 @@ public class EditBillActivity extends RealmActivity {
 
     private void initializeDataBinding() {
         final ActivityEditBillBinding binding;
-        binding = DataBindingUtil.setContentView(this, layout);
+        binding = DataBindingUtil.setContentView(this, LAYOUT);
         binding.setState(state);
         binding.setBill(bill);
     }
 
     public void back(View view) {
+        if (type == WalletActivity.CREATE && bill.isValid()) {
+            realm.executeTransaction(r -> {
+                bill.getBillDetails().deleteAllFromRealm();
+                bill.deleteFromRealm();
+            });
+        }
         finish();
     }
 
@@ -121,7 +122,7 @@ public class EditBillActivity extends RealmActivity {
 
     @Override
     public void onBackPressed() {
-        if (type == CREATE) bill.delete(realm);
+        if (type == WalletActivity.CREATE) bill.delete(realm);
         super.onBackPressed();
     }
 
@@ -129,6 +130,7 @@ public class EditBillActivity extends RealmActivity {
         public final ObservableField<String> objectName = new ObservableField<>("Tên món đồ");
         public final ObservableField<String> quantity = new ObservableField<>("1");
         public final ObservableField<String> unitPrice = new ObservableField<>("1.000");
+        public String title = "";
 
         long getLongUnitPrice() {
             String s = unitPrice.get();

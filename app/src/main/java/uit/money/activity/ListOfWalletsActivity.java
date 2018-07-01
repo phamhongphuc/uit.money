@@ -21,20 +21,19 @@ import uit.money.databinding.ActivityListOfWalletsBinding;
 import static model.Utils.getMoney;
 
 public class ListOfWalletsActivity extends RealmActivity {
-
-    private final int layout = R.layout.activity_list_of_wallets;
+    private static final int LAYOUT = R.layout.activity_list_of_wallets;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(layout);
+        setContentView(LAYOUT);
 
         initializeDataBinding();
     }
 
     private void initializeDataBinding() {
         final ActivityListOfWalletsBinding binding;
-        binding = DataBindingUtil.setContentView(this, layout);
+        binding = DataBindingUtil.setContentView(this, LAYOUT);
         binding.setState(new State(this));
     }
 

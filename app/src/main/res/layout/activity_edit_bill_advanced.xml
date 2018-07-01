@@ -83,6 +83,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:hint="@string/hint_location"
+                        android:text="@={state.location}"
                         android:textSize="@dimen/input_text_size"
                         tools:ignore="RtlSymmetry"/>
 
@@ -123,6 +124,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:hint="@string/hint_with"
+                        android:text="@={state.with}"
                         android:textSize="@dimen/input_text_size"
                         tools:ignore="RtlSymmetry"/>
 

@@ -11,12 +11,11 @@ import model.model.transaction.Bill;
 import uit.money.R;
 import uit.money.databinding.ActivityBillBinding;
 
-import static uit.money.activity.EditBillActivity.EDIT;
-import static uit.money.activity.EditBillActivity.ID;
-import static uit.money.activity.EditBillActivity.TYPE;
+import static uit.money.activity.WalletActivity.EDIT;
+import static uit.money.activity.WalletActivity.ID;
+import static uit.money.activity.WalletActivity.TYPE;
 
 public class BillActivity extends RealmActivity {
-    private static final String TAG = "BillActivity";
     private ActivityBillBinding binding;
     private Bill bill;
 

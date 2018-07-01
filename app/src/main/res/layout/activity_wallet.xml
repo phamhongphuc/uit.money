@@ -118,7 +118,44 @@
                         tools:itemCount="2"
                         tools:listitem="@layout/item_bill"/>
 
-                    <View style="@style/hr_full"/>
+                    <View
+                        style="@style/hr_full"
+                        android:layout_height="0.5dp"/>
+
+                    <ui.Col
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{state.isShowSpeechRecognizerBar, default=visible}">
+
+                        <View
+                            style="@style/hr_full"
+                            android:layout_height="0.5dp"/>
+
+                        <ui.Text
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:paddingBottom="4dp"
+                            android:paddingEnd="30dp"
+                            android:paddingStart="30dp"
+                            android:paddingTop="4dp"
+                            android:text="@{state.speechRecognizerString}"
+                            android:textColor="@color/_text_color"
+                            android:textSize="15sp"
+                            app:_font="regular"
+                            tools:ignore="RtlSymmetry"
+                            tools:text="Lời..."/>
+
+                        <View
+                            style="@style/hr_full"
+                            android:layout_height="0.5dp"/>
+
+                    </ui.Col>
+
+                    <View
+                        style="@style/hr_full"
+                        android:layout_height="0.5dp"/>
 
                     <ui.Row
                         android:layout_width="match_parent"
@@ -133,7 +170,7 @@
                             style="@style/button"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:onClick="openDrawer"
+                            android:onClick="openCreateBill"
                             app:_icon=""
                             app:_radius="25dp"/>
 
@@ -145,7 +182,7 @@
                             style="@style/button"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:onClick="openDrawer"
+                            android:onClick="openCreatePayment"
                             app:_icon=""
                             app:_radius="25dp"/>
 
@@ -165,7 +202,7 @@
                             style="@style/button"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:onClick="openDrawer"
+                            android:onClick="openCreateLoan"
                             app:_icon=""
                             app:_radius="25dp"/>
 
@@ -177,49 +214,12 @@
                             style="@style/button"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:onClick="openDrawer"
+                            android:onClick="openCreateTransfer"
                             app:_icon=""
                             app:_radius="25dp"/>
 
                     </ui.Row>
                 </ui.Col>
-
-
-                <!--<View-->
-                <!--android:layout_width="2dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_marginStart="74dp"-->
-                <!--android:background="@color/primary"/>-->
-
-                <!--<ui.Col-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="top"-->
-                <!--android:layout_marginTop="0dp">-->
-
-                <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:visibility="@{state.isShowSpeechRecognizerBar, default=visible}"/>-->
-
-                <!--<ui.Text-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:background="#93c6"-->
-                <!--android:gravity="center"-->
-                <!--android:paddingBottom="4dp"-->
-                <!--android:paddingEnd="30dp"-->
-                <!--android:paddingStart="30dp"-->
-                <!--android:paddingTop="4dp"-->
-                <!--android:text="@{state.speechRecognizerString}"-->
-                <!--android:textColor="#fff"-->
-                <!--android:textSize="15sp"-->
-                <!--app:_font="regular"-->
-                <!--tools:ignore="RtlSymmetry"-->
-                <!--tools:text="369.000 đ"/>-->
-
-                <!--</ui.Col>-->
             </ui.Col>
 
             <!--<ui.Circle-->

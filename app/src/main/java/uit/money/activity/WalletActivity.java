@@ -25,13 +25,16 @@ import voice.Recognizer;
 import voice.Voice;
 import voice.utils.InterfaceWalletActivity;
 
-import static uit.money.activity.EditBillActivity.CREATE;
-import static uit.money.activity.EditBillActivity.TYPE;
 import static uit.money.utils.Timer.setTimeout;
 
 public class WalletActivity extends RealmActivity implements InterfaceWalletActivity {
+    public static final String TYPE = "type";
+    public static final String ID = "id";
+    public static final int NONE = 0;
+    public static final int CREATE = 1;
+    public static final int EDIT = 2;
     public static final int LAYOUT = R.layout.activity_wallet;
-    private static final String TAG = "WalletActivity";
+
     private Wallet wallet;
     private Voice voice;
     private State state = new State();
@@ -162,13 +165,17 @@ public class WalletActivity extends RealmActivity implements InterfaceWalletActi
         return wallet;
     }
 
-    public void toogleCreate(View view) {
-        state.setIsOpenCreate(state.isOpenCreate.get() == View.GONE);
+    public void openCreatePayment(View view) {
+    }
+
+    public void openCreateLoan(View view) {
+    }
+
+    public void openCreateTransfer(View view) {
     }
 
     public static class State extends Observable {
         public final ObservableBoolean isOpenDrawer = new ObservableBoolean(false);
-        public final ObservableInt isOpenCreate = new ObservableInt(View.GONE);
         public final ObservableInt isShowSpeechRecognizerBar = new ObservableInt(View.GONE);
         public final ObservableField<String> speechRecognizerString = new ObservableField<>("");
         public final ObservableFloat ratio = new ObservableFloat(0);
@@ -181,10 +188,6 @@ public class WalletActivity extends RealmActivity implements InterfaceWalletActi
 
         public void setIsShowSpeechRecognizerBar(boolean value) {
             isShowSpeechRecognizerBar.set(value ? View.VISIBLE : View.GONE);
-        }
-
-        void setIsOpenCreate(boolean value) {
-            isOpenCreate.set(value ? View.VISIBLE : View.GONE);
         }
     }
 }

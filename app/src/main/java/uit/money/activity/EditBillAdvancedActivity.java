@@ -13,14 +13,14 @@ import uit.money.R;
 import uit.money.databinding.ActivityEditBillAdvancedBinding;
 
 public class EditBillAdvancedActivity extends RealmActivity {
-    private final int layout = R.layout.activity_edit_bill_advanced;
+    private static final int LAYOUT = R.layout.activity_edit_bill_advanced;
     private Bill bill = null;
     private State state = new State();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(layout);
+        setContentView(LAYOUT);
         initializeData();
         initializeDataBinding();
     }
@@ -40,7 +40,7 @@ public class EditBillAdvancedActivity extends RealmActivity {
 
     private void initializeDataBinding() {
         final ActivityEditBillAdvancedBinding binding;
-        binding = DataBindingUtil.setContentView(this, layout);
+        binding = DataBindingUtil.setContentView(this, LAYOUT);
         binding.setState(state);
     }
 
@@ -51,22 +51,26 @@ public class EditBillAdvancedActivity extends RealmActivity {
     public void done(View view) {
         realm.beginTransaction();
 
-        bill.setLocation(state.getLocation());
-        bill.setWith(state.getWith());
+        final String location = state.getLocation();
+        final Person with = state.getWith();
+        if (with != null) realm.copyToRealmOrUpdate(with);
+
+        bill.setLocation(location);
+        bill.setWith(with);
 
         realm.commitTransaction();
         finish();
     }
 
     public static class State extends Observable {
-        public final ObservableField<String> location = new ObservableField<>("1");
+        public final ObservableField<String> location = new ObservableField<>("");
         public final ObservableField<String> with = new ObservableField<>("");
 
-        public String getLocation() {
+        String getLocation() {
             return location.get();
         }
 
-        public Person getWith() {
+        Person getWith() {
             final String name = with.get();
             if (name == null || name.equals("")) {
                 return null;

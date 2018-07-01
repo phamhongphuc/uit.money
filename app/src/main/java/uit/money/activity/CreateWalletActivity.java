@@ -18,6 +18,7 @@ import static model.model.transaction.Payment.INITIALIZE;
 
 public class CreateWalletActivity extends RealmActivity {
     private static final int LAYOUT = R.layout.activity_create_wallet;
+
     private Wallet wallet = new Wallet();
 
     @Override

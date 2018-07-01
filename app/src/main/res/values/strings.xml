@@ -79,4 +79,5 @@
     <string name="icon_wallet"></string>
     <string name="icon_money"></string>
     <string name="edit_bill_advanced_title">Thông tin giao dịch</string>
+    <string name="create_bill_title">Tạo giao dịch</string>
 </resources>
