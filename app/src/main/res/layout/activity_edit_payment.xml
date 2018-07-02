@@ -3,12 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:windowSoftInputMode="stateVisible|adjustResize"
     tools:context=".activity.EditPaymentActivity">
 
     <data>
 
-        <import type="uit.money.adapter.BillDetailEditRecyclerViewAdapter"/>
+        <import type="uit.money.adapter.PaymentTypeRecyclerViewAdapter"/>
 
         <variable
             name="state"
@@ -37,18 +36,12 @@
                 style="@style/button"
                 android:layout_width="50dp"
                 android:onClick="done"
-                app:_icon="@string/icon_done">
-
-            </ui.Button>
+                app:_icon="@string/icon_done"/>
         </ui.Row>
 
         <View style="@style/hr_full"/>
 
-        <ui.Col
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/_background"
-            android:padding="10dp">
+        <ui.Col style="@style/content_col">
 
             <ui.FrameShadow
                 style="@style/item_shadow"
@@ -111,7 +104,7 @@
                             <View
                                 style="@style/vr_full"/>
 
-                            <Space
+                            <ui.ListWrap
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"/>
@@ -197,7 +190,7 @@
 
                             <View style="@style/vr_full"/>
 
-                            <ui.InputText
+                            <ui.InputMoney
                                 style="@style/input_text"
                                 android:layout_width="0dp"
                                 android:layout_weight="1"

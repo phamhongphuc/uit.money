@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="payment"
+            type="model.model.transaction.Payment"/>
+
+        <variable
+            name="action"
+            type="uit.money.adapter.TransactionRecyclerViewAdapter.Action"/>
+    </data>
+
+    <ui.Row
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:layerType="software"
+        android:paddingEnd="10dp"
+        tools:background="@color/_background"
+        tools:ignore="RtlSymmetry">
+
+        <ui.FrameShadow
+            style="@style/item_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="@color/_background_status"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ui.Text
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_gravity="end"
+                android:layout_weight="1"
+                android:gravity="center_vertical|end"
+                android:text="123123123"
+                android:textColor="@color/out_color"
+                android:textSize="15sp"
+                app:_font="bold"
+                tools:ignore="HardcodedText"/>
+        </ui.FrameShadow>
+    </ui.Row>
+</layout>
