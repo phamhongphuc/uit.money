@@ -28,7 +28,7 @@ import static model.model.transaction.Payment.HAVE_LUNCH;
 import static model.model.transaction.Payment.INTERNET_BILL;
 import static model.model.transaction.Payment.PICK_LOSE;
 import static model.model.transaction.Payment.SALARY;
-import static model.model.transaction.Payment.WATTER_BILL;
+import static model.model.transaction.Payment.WATER_BILL;
 import static voice.getter.Getter.getMoney;
 import static voice.utils.Const.Key._ELECTRIC_BILL;
 import static voice.utils.Const.Key._HAVE_BREAKFAST;
@@ -58,7 +58,7 @@ public class CreatePayment implements InterfaceRecognizer {
 
             .put(_INTERNET_BILL, -INTERNET_BILL)
             .put(_ELECTRIC_BILL, -ELECTRIC_BILL)
-            .put(_WATTER_BILL, -WATTER_BILL)
+            .put(_WATTER_BILL, -WATER_BILL)
 
             .build();
     private static final List<Key> KEYS = asList(

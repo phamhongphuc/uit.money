@@ -5,7 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
-import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.AlignContent;
+import com.google.android.flexbox.AlignItems;
+import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
 
@@ -32,8 +34,10 @@ public class ListWrap extends RecyclerView {
 
     private void initializeSelf(Context context) {
         final FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(context);
-        layoutManager.setFlexDirection(FlexDirection.COLUMN);
-        layoutManager.setJustifyContent(JustifyContent.FLEX_END);
+        layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        layoutManager.setAlignContent(AlignContent.FLEX_START);
+        layoutManager.setAlignItems(AlignItems.FLEX_START);
+        layoutManager.setFlexWrap(FlexWrap.WRAP);
 
         setLayoutManager(layoutManager);
         setHasFixedSize(true);

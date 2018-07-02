@@ -14,11 +14,13 @@ import io.realm.RealmResults;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 import io.realm.model_model_transaction_PaymentRealmProxy;
+import model.model.R;
 import model.model.Wallet;
 import model.model.util.Organization;
 
 import static model.Const.IN;
 import static model.Const.PAYMENT;
+import static model.Const.getString;
 
 /**
  * Dành cho các giao dịch chỉ có một dòng
@@ -52,22 +54,22 @@ public class Payment extends RealmObject implements Transaction, TransactionMode
     public static final int SALARY = 5;
     public static final int INTERNET_BILL = 6;
     public static final int ELECTRIC_BILL = 7;
-    public static final int WATTER_BILL = 8;
+    public static final int WATER_BILL = 8;
     public static final int INITIALIZE = 9;
 
     private static final Map<Integer, String> KIND = ImmutableMap.<Integer, String>builder()
-            .put(PICK_LOSE, "Nhặt được")
-            .put(-PICK_LOSE, "Làm mất")
-            .put(-HAVE_BREAKFAST, "Ăn sáng")
-            .put(-HAVE_LUNCH, "Ăn trưa")
-            .put(-HAVE_DINNER, "Ăn tối")
+            .put(PICK_LOSE, getString(R.string.payment_pick))
+            .put(-PICK_LOSE, getString(R.string.payment_lose))
+            .put(-HAVE_BREAKFAST, getString(R.string.payment_have_breakfast))
+            .put(-HAVE_LUNCH, getString(R.string.payment_have_lunch))
+            .put(-HAVE_DINNER, getString(R.string.payment_have_dinner))
 
-            .put(SALARY, "Nhận lương")
-            .put(-INTERNET_BILL, "Hóa đơn tiền mạng")
-            .put(-ELECTRIC_BILL, "Hóa đơn tiền điện")
-            .put(-WATTER_BILL, "Hóa đơn tiền nước")
+            .put(SALARY, getString(R.string.payment_salary))
+            .put(-INTERNET_BILL, getString(R.string.payment_internet_bill))
+            .put(-ELECTRIC_BILL, getString(R.string.payment_electric_bill))
+            .put(-WATER_BILL, getString(R.string.payment_water_bill))
 
-            .put(INITIALIZE, "Khởi tạo")
+            .put(INITIALIZE, getString(R.string.payment_initialize))
 
             .build();
     @PrimaryKey
@@ -93,6 +95,7 @@ public class Payment extends RealmObject implements Transaction, TransactionMode
 
     public void setKind(int kind) {
         this.kind = Math.abs(kind);
+        setInOrOut(kind > 0);
     }
 
     @Override

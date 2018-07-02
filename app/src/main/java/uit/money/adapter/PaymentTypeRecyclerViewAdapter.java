@@ -8,21 +8,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import uit.money.BR;
 import uit.money.R;
 
 public class PaymentTypeRecyclerViewAdapter extends RecyclerView.Adapter<PaymentTypeRecyclerViewAdapter.ViewHolder> {
-    private List<PaymentType> paymentTypes;
+    private List<PaymentType> paymentTypes = Arrays.asList(
+
+    );
 
     public static PaymentTypeRecyclerViewAdapter getInstance() {
         return new PaymentTypeRecyclerViewAdapter();
     }
 
     private PaymentTypeRecyclerViewAdapter() {
-        indexing();
+
     }
 
 //    private void onChange() {
@@ -30,9 +32,9 @@ public class PaymentTypeRecyclerViewAdapter extends RecyclerView.Adapter<Payment
 //        indexing();
 //    }
 
-    private void indexing() {
-        paymentTypes = new ArrayList<>();
-    }
+//    private void indexing() {
+//        paymentTypes = new ArrayList<>();
+//    }
 
     @NonNull
     @Override
@@ -89,7 +91,7 @@ public class PaymentTypeRecyclerViewAdapter extends RecyclerView.Adapter<Payment
         }
     }
 
-    interface PaymentType {
+    class PaymentType {
 
     }
 }
