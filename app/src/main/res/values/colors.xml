@@ -20,7 +20,8 @@
     <color name="_dark_1">#14171f</color><!-- Màu của thanh trạng thái trên cùng -->
     <color name="_dark_2">#1c212b</color><!-- Màu dành cho thanh hành động -->
     <color name="_dark_3">#212733</color><!-- Màu nền chính -->
-    <color name="_dark_4">#242b38</color>
+
+    <color name="_dark_5">#242b38</color><!-- Màu của item -->
 
     <color name="_light_1">#343d4a</color>
     <color name="_light_2">#29738699</color>
@@ -40,7 +41,7 @@
     <color name="_background_status">@color/_dark_1</color>
     <color name="_background_action">@color/_dark_2</color>
     <color name="_background">@color/_dark_3</color>
-    <color name="_background_item">@color/_dark_4</color>
+    <color name="_background_item">@color/_dark_5</color>
     <color name="_line_color">@color/_light_1</color>
 
     <color name="_item_title">@color/_light_5</color>

@@ -1,5 +1,7 @@
 package model.model.transaction;
 
-public interface HasMoney {
+import io.realm.RealmModel;
+
+public interface HasMoney extends RealmModel {
     long getMoney();
 }

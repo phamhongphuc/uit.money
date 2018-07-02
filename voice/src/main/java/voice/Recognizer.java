@@ -5,13 +5,12 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import voice.recognizer.action.CreatePayment;
-import voice.utils.InterfaceRecognizer;
-import voice.utils.InterfaceWalletActivity;
 import voice.recognizer.action.CreateBill;
 import voice.recognizer.action.RemoveLastBill;
 import voice.recognizer.open.OpenCreateBill;
 import voice.recognizer.open.OpenListOfWallet;
+import voice.utils.InterfaceRecognizer;
+import voice.utils.InterfaceWalletActivity;
 
 import static java.util.Arrays.asList;
 
@@ -19,7 +18,8 @@ public class Recognizer {
     private static final String TAG = "Recognizer";
     private static final List<InterfaceRecognizer> recognizers = asList(
             new CreateBill(),
-            new CreatePayment(),
+// TODO FIX THIS AS SOON AS POSSIBLE
+//            new CreatePayment(),
             new RemoveLastBill(),
             new OpenListOfWallet(),
             new OpenCreateBill()

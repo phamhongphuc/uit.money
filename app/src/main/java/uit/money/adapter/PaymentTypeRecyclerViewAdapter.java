@@ -1,6 +1,7 @@
 package uit.money.adapter;
 
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableInt;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,33 +9,41 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.Arrays;
-import java.util.List;
+import com.google.android.flexbox.FlexboxLayoutManager;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import model.model.transaction.Payment.PaymentType;
 import uit.money.BR;
 import uit.money.R;
 
-public class PaymentTypeRecyclerViewAdapter extends RecyclerView.Adapter<PaymentTypeRecyclerViewAdapter.ViewHolder> {
-    private List<PaymentType> paymentTypes = Arrays.asList(
+import static model.Const.IN;
+import static model.Const.OUT;
+import static model.Const.getResource;
+import static model.Utils.getMoneyColor;
+import static model.model.transaction.Payment.INITIALIZE;
+import static model.model.transaction.Payment.PAYMENT_TYPE;
 
-    );
+public class PaymentTypeRecyclerViewAdapter extends RecyclerView.Adapter<PaymentTypeRecyclerViewAdapter.ViewHolder> {
+    public static final List<State> states;
+
+    static {
+        states = new ArrayList<>();
+        for (Map.Entry<Integer, PaymentType> each : PAYMENT_TYPE.entrySet()) {
+            if (each.getKey() != INITIALIZE) {
+                states.add(new State(each.getKey(), each.getValue()));
+            }
+        }
+    }
 
     public static PaymentTypeRecyclerViewAdapter getInstance() {
         return new PaymentTypeRecyclerViewAdapter();
     }
 
     private PaymentTypeRecyclerViewAdapter() {
-
     }
-
-//    private void onChange() {
-//        notifyDataSetChanged();
-//        indexing();
-//    }
-
-//    private void indexing() {
-//        paymentTypes = new ArrayList<>();
-//    }
 
     @NonNull
     @Override
@@ -44,12 +53,12 @@ public class PaymentTypeRecyclerViewAdapter extends RecyclerView.Adapter<Payment
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bind(paymentTypes.get(position));
+        holder.bind(states.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return paymentTypes.size();
+        return states.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -57,10 +66,14 @@ public class PaymentTypeRecyclerViewAdapter extends RecyclerView.Adapter<Payment
 
         ViewHolder(@NonNull ViewDataBinding binding) {
             super(binding.getRoot());
-            binding.getRoot().setLayoutParams(new RecyclerView.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-            ));
+
+            final View root = binding.getRoot();
+
+            FlexboxLayoutManager.LayoutParams layoutParams =
+                    (FlexboxLayoutManager.LayoutParams) root.getLayoutParams();
+            layoutParams.setFlexBasisPercent(1f / 3);
+            root.setLayoutParams(layoutParams);
+
             this.binding = binding;
         }
 
@@ -73,25 +86,39 @@ public class PaymentTypeRecyclerViewAdapter extends RecyclerView.Adapter<Payment
             ));
         }
 
-        void bind(PaymentType model) {
-            binding.setVariable(BR.state, new State(model));
+        void bind(State state) {
+            binding.setVariable(BR.state, state);
             binding.executePendingBindings();
         }
     }
 
     public static class State {
-        private PaymentType paymentType;
+        public final int kind;
+        public final PaymentType paymentType;
+        public ObservableInt iconColor = new ObservableInt(getResource().getColor(R.color._text_color, null));
 
-        State(PaymentType paymentType) {
+        State(Integer kind, PaymentType paymentType) {
+            this.kind = kind;
             this.paymentType = paymentType;
         }
 
         public void select(View view) {
-//            final Context context = view.getContext();
+            for (State state : states) state.setIconColor(false);
+            setIconColor(true);
         }
-    }
 
-    class PaymentType {
+        private void setIconColor(Boolean value) {
+            iconColor.set(
+                    getResource().getColor(
+                            value ? R.color.in_color : R.color._text_color,
+                            null
+                    )
+            );
+        }
+
+        public int getLineColor() {
+            return getMoneyColor(kind > 0 ? IN : OUT);
+        }
 
     }
 }

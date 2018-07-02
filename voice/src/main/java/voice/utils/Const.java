@@ -14,7 +14,7 @@ public class Const {
             .put(_BUY_SELL, asList("mua", "bán", "sắm"))
 
             .put(_PICK, asList("nhặt được", "lượm được"))
-            .put(_LOSE, asList("làm mất", "làm rơi", "đánh rơi"))
+            .put(_LOST, asList("làm mất", "làm rơi", "đánh rơi"))
 
             .put(_HAVE_BREAKFAST, of("ăn sáng"))
             .put(_HAVE_LUNCH, of("ăn trưa"))
@@ -35,7 +35,7 @@ public class Const {
     public enum Key {
         _BUY_SELL,
         _PICK,
-        _LOSE,
+        _LOST,
         _HAVE_BREAKFAST,
         _HAVE_LUNCH,
         _HAVE_DINNER,

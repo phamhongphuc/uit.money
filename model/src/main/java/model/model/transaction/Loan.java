@@ -37,7 +37,7 @@ import static model.Const.getString;
 @Parcel(implementations = {model_model_transaction_LoanRealmProxy.class},
         value = Parcel.Serialization.BEAN,
         analyze = {Loan.class})
-public class Loan extends RealmObject implements Transaction, TransactionModel {
+public class Loan extends RealmObject implements Transaction, TransactionModel, HasMoney {
     @PrimaryKey
     private int id;
     private Wallet wallet;

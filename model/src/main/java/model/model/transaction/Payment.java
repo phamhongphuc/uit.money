@@ -21,6 +21,7 @@ import model.model.util.Organization;
 import static model.Const.IN;
 import static model.Const.PAYMENT;
 import static model.Const.getString;
+import static model.model.transaction.Payment.PaymentType.type;
 
 /**
  * Dành cho các giao dịch chỉ có một dòng
@@ -47,7 +48,7 @@ import static model.Const.getString;
         value = Parcel.Serialization.BEAN,
         analyze = {Payment.class})
 public class Payment extends RealmObject implements Transaction, TransactionModel {
-    public static final int PICK_LOSE = 1;
+    public static final int PICK_LOST = 1;
     public static final int HAVE_BREAKFAST = 2;
     public static final int HAVE_LUNCH = 3;
     public static final int HAVE_DINNER = 4;
@@ -57,21 +58,23 @@ public class Payment extends RealmObject implements Transaction, TransactionMode
     public static final int WATER_BILL = 8;
     public static final int INITIALIZE = 9;
 
-    private static final Map<Integer, String> KIND = ImmutableMap.<Integer, String>builder()
-            .put(PICK_LOSE, getString(R.string.payment_pick))
-            .put(-PICK_LOSE, getString(R.string.payment_lose))
-            .put(-HAVE_BREAKFAST, getString(R.string.payment_have_breakfast))
-            .put(-HAVE_LUNCH, getString(R.string.payment_have_lunch))
-            .put(-HAVE_DINNER, getString(R.string.payment_have_dinner))
+    public static final Map<Integer, PaymentType> PAYMENT_TYPE = ImmutableMap.<Integer, PaymentType>builder()
+            .put(-HAVE_BREAKFAST, type(R.string.icon_breakfast, R.string.payment_have_breakfast))
+            .put(-HAVE_LUNCH, type(R.string.icon_lunch, R.string.payment_have_lunch))
+            .put(-HAVE_DINNER, type(R.string.icon_dinner, R.string.payment_have_dinner))
 
-            .put(SALARY, getString(R.string.payment_salary))
-            .put(-INTERNET_BILL, getString(R.string.payment_internet_bill))
-            .put(-ELECTRIC_BILL, getString(R.string.payment_electric_bill))
-            .put(-WATER_BILL, getString(R.string.payment_water_bill))
+            .put(PICK_LOST, type(R.string.icon_pick, R.string.payment_pick))
+            .put(-PICK_LOST, type(R.string.icon_lost, R.string.payment_lost))
+            .put(SALARY, type(R.string.icon_salary, R.string.payment_salary))
 
-            .put(INITIALIZE, getString(R.string.payment_initialize))
+            .put(-INTERNET_BILL, type(R.string.icon_internet, R.string.payment_internet_bill))
+            .put(-ELECTRIC_BILL, type(R.string.icon_electricity, R.string.payment_electric_bill))
+            .put(-WATER_BILL, type(R.string.icon_water, R.string.payment_water_bill))
+
+            .put(INITIALIZE, type(R.string.icon_create, R.string.payment_initialize))
 
             .build();
+
     @PrimaryKey
     private int id;
     private Wallet wallet;
@@ -114,9 +117,9 @@ public class Payment extends RealmObject implements Transaction, TransactionMode
 
     @Override
     public String getAction() {
-        String action = KIND.get(kind * (inOrOut == IN ? 1 : -1));
-        if (action == null) action = "Giao dịch không xác định";
-        return action;
+        final PaymentType paymentType = PAYMENT_TYPE.get(kind * (inOrOut == IN ? 1 : -1));
+        if (paymentType == null) return getString(R.string.payment_type_unknown);
+        return paymentType.text;
     }
 
     @Override
@@ -202,5 +205,27 @@ public class Payment extends RealmObject implements Transaction, TransactionMode
 
     public void delete(Realm realm) {
         realm.executeTransaction(r -> this.deleteFromRealm());
+    }
+
+    public static class PaymentType {
+        private String text;
+        private String icon;
+
+        private PaymentType(int iconId, int textId) {
+            this.icon = getString(iconId);
+            this.text = getString(textId);
+        }
+
+        public static PaymentType type(int iconId, int stringId) {
+            return new PaymentType(iconId, stringId);
+        }
+
+        public String getIcon() {
+            return icon;
+        }
+
+        public String getText() {
+            return text;
+        }
     }
 }

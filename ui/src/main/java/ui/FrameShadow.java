@@ -80,6 +80,21 @@ public class FrameShadow extends FrameLayout implements ShadowView {
     }
 
     @Override
+    protected void onDraw(Canvas canvas) {
+        canvas.drawRoundRect(
+                extendLeft ? shadowSize : 0,
+                extendTop ? shadowSize : 0,
+                getWidth() - (extendRight ? shadowSize : 0),
+                getHeight() - (extendBottom ? shadowSize : 0),
+                radius, radius, paint
+        );
+    }
+
+    public View getView() {
+        return this;
+    }
+
+    @Override
     public int getShadowSize() {
         return shadowSize;
     }
@@ -97,20 +112,5 @@ public class FrameShadow extends FrameLayout implements ShadowView {
     @Override
     public int getShadowColor() {
         return shadowColor;
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        canvas.drawRoundRect(
-                extendLeft ? shadowSize : 0,
-                extendTop ? shadowSize : 0,
-                getWidth() - (extendRight ? shadowSize : 0),
-                getHeight() - (extendBottom ? shadowSize : 0),
-                radius, radius, paint
-        );
-    }
-
-    public View getView() {
-        return this;
     }
 }

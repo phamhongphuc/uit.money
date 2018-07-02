@@ -65,39 +65,6 @@
 
                         <ui.Row
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/input_size">
-
-                            <View style="@style/vr_full"/>
-
-                            <ui.Text
-                                style="@style/icon"
-                                android:layout_width="@dimen/input_size"
-                                android:layout_height="@dimen/input_size"
-                                android:gravity="center"
-                                android:text="@string/icon_search"
-                                android:textSize="@dimen/input_icon_size"
-                                app:_autoPadding="false"
-                                app:_autoSize="false"/>
-
-                            <View style="@style/vr_full"/>
-
-                            <ui.InputText
-                                style="@style/input_text"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:hint="@string/hint_location"
-                                android:text="@={state.search}"
-                                android:textSize="@dimen/input_text_size"
-                                tools:ignore="RtlSymmetry"/>
-
-                            <View style="@style/vr_full"/>
-                        </ui.Row>
-
-                        <View
-                            style="@style/hr_full"/>
-
-                        <ui.Row
-                            android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1">
 
@@ -107,8 +74,11 @@
                             <ui.ListWrap
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
+                                android:layout_margin="5dp"
                                 android:layout_weight="1"
-                                android:adapter="@{PaymentTypeRecyclerViewAdapter.instance}"/>
+                                android:adapter="@{PaymentTypeRecyclerViewAdapter.instance}"
+                                tools:itemCount="2"
+                                tools:listitem="@layout/item_payment_type"/>
 
                             <View
                                 style="@style/vr_full"/>
@@ -127,46 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="15dp">
 
-                        <ui.Text
-                            style="@style/input_name"
-                            android:text="@string/input_name_type"/>
-
                         <View style="@style/hr_full"/>
-
-                        <ui.Row
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/input_size">
-
-                            <View style="@style/vr_full"/>
-
-                            <ui.Text
-                                style="@style/icon"
-                                android:layout_width="@dimen/input_size"
-                                android:layout_height="@dimen/input_size"
-                                android:gravity="center"
-                                android:text="@string/icon_payment"
-                                android:textSize="@dimen/input_icon_size"
-                                app:_autoPadding="false"
-                                app:_autoSize="false"/>
-
-                            <View style="@style/vr_full"/>
-
-                            <ui.Text
-                                style="@style/input_text"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:text="@string/hint_location"
-                                android:textSize="@dimen/input_text_size"
-                                tools:ignore="RtlSymmetry"/>
-
-                            <View style="@style/vr_full"/>
-                        </ui.Row>
-
-                        <View style="@style/hr_full"/>
-
-                        <Space
-                            android:layout_width="match_parent"
-                            android:layout_height="10dp"/>
 
                         <ui.Text
                             style="@style/input_name"
@@ -197,6 +128,7 @@
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
                                 android:hint="@string/hint_location"
+                                android:text="@={state.money}"
                                 android:textSize="@dimen/input_text_size"
                                 tools:ignore="RtlSymmetry"/>
 

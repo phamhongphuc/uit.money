@@ -153,12 +153,13 @@ public class WalletActivity extends RealmActivity implements InterfaceWalletActi
     public void openCreateBill(View view) {
         final Intent intent = new Intent(this, EditBillActivity.class);
         intent.putExtra(TYPE, CREATE);
-        startActivity(intent);
+        setTimeout(() -> startActivity(intent), 500);
     }
 
     @Override
     public void openListOfWallets(View view) {
-        startActivity(new Intent(this, ListOfWalletsActivity.class));
+        final Intent intent = new Intent(this, ListOfWalletsActivity.class);
+        setTimeout(() -> startActivity(intent), 500);
     }
 
     @Override
@@ -167,9 +168,9 @@ public class WalletActivity extends RealmActivity implements InterfaceWalletActi
     }
 
     public void openCreatePayment(View view) {
-        final Intent intent = new Intent(this, EditPaymentActivity.class);
+        final Intent intent = new Intent(getBaseContext(), EditPaymentActivity.class);
         intent.putExtra(TYPE, CREATE);
-        startActivity(intent);
+        setTimeout(() -> startActivity(intent), 500);
     }
 
     public void openCreateLoan(View view) {

@@ -6,11 +6,13 @@ import android.databinding.ObservableField;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.Objects;
 import java.util.Observable;
 
 import model.model.Wallet;
 import model.model.transaction.Payment;
 import uit.money.R;
+import uit.money.adapter.PaymentTypeRecyclerViewAdapter;
 import uit.money.databinding.ActivityEditPaymentBinding;
 
 import static uit.money.activity.WalletActivity.CREATE;
@@ -18,6 +20,8 @@ import static uit.money.activity.WalletActivity.EDIT;
 import static uit.money.activity.WalletActivity.ID;
 import static uit.money.activity.WalletActivity.NONE;
 import static uit.money.activity.WalletActivity.TYPE;
+import static uit.money.adapter.PaymentTypeRecyclerViewAdapter.states;
+import static uit.money.utils.Money.getMoneyNumber;
 
 public class EditPaymentActivity extends RealmActivity {
     private static final int LAYOUT = R.layout.activity_edit_payment;
@@ -66,7 +70,6 @@ public class EditPaymentActivity extends RealmActivity {
         final ActivityEditPaymentBinding binding;
         binding = DataBindingUtil.setContentView(this, LAYOUT);
         binding.setState(state);
-//        binding.setPayment(payment);
     }
 
     public void back(View view) {
@@ -75,7 +78,16 @@ public class EditPaymentActivity extends RealmActivity {
     }
 
     public void done(View view) {
-        finish();
+        for (PaymentTypeRecyclerViewAdapter.State type : states) {
+            if (type.iconColor.get() == getColor(R.color.in_color)) {
+                realm.executeTransaction(r -> {
+                    payment.setKind(type.kind);
+                    payment.setMoney(getMoneyNumber(Objects.requireNonNull(state.money.get())));
+                });
+                finish();
+                return;
+            }
+        }
     }
 
     @Override
@@ -85,8 +97,7 @@ public class EditPaymentActivity extends RealmActivity {
     }
 
     public static class State extends Observable {
-        public final ObservableField<String> search = new ObservableField<>("");
-
         public String title = "";
+        public ObservableField<String> money = new ObservableField<>("");
     }
 }
