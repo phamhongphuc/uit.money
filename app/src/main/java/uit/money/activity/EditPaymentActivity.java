@@ -13,6 +13,9 @@ import model.model.transaction.Payment;
 import uit.money.R;
 import uit.money.databinding.ActivityEditPaymentBinding;
 
+import static uit.money.activity.WalletActivity.CREATE;
+import static uit.money.activity.WalletActivity.EDIT;
+import static uit.money.activity.WalletActivity.ID;
 import static uit.money.activity.WalletActivity.NONE;
 import static uit.money.activity.WalletActivity.TYPE;
 
@@ -35,7 +38,7 @@ public class EditPaymentActivity extends RealmActivity {
         final Intent intent = getIntent();
         type = intent.getIntExtra(TYPE, NONE);
         switch (type) {
-            case WalletActivity.CREATE:
+            case CREATE:
                 state.title = getString(R.string.create_bill_title);
                 realm.executeTransaction(r -> {
                     payment.autoId();
@@ -43,9 +46,9 @@ public class EditPaymentActivity extends RealmActivity {
                     payment = realm.copyToRealmOrUpdate(payment);
                 });
                 break;
-            case WalletActivity.EDIT:
+            case EDIT:
                 state.title = getString(R.string.edit_bill_title);
-                final int id = intent.getIntExtra(WalletActivity.ID, -1);
+                final int id = intent.getIntExtra(ID, -1);
                 payment = realm.where(Payment.class).equalTo("id", id).findFirst();
                 if (payment == null) {
                     finish();
@@ -67,9 +70,7 @@ public class EditPaymentActivity extends RealmActivity {
     }
 
     public void back(View view) {
-        if (type == WalletActivity.CREATE && payment.isValid()) {
-            realm.executeTransaction(r -> payment.deleteFromRealm());
-        }
+        if (type == CREATE && payment.isValid()) payment.delete(realm);
         finish();
     }
 
@@ -79,7 +80,7 @@ public class EditPaymentActivity extends RealmActivity {
 
     @Override
     public void onBackPressed() {
-        if (type == WalletActivity.CREATE) payment.delete(realm);
+        if (type == CREATE) payment.delete(realm);
         super.onBackPressed();
     }
 

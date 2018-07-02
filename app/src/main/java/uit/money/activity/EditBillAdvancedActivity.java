@@ -52,8 +52,8 @@ public class EditBillAdvancedActivity extends RealmActivity {
         realm.beginTransaction();
 
         final String location = state.getLocation();
-        final Person with = state.getWith();
-        if (with != null) realm.copyToRealmOrUpdate(with);
+        Person with = state.getWith();
+        if (with != null) with = realm.copyToRealmOrUpdate(with);
 
         bill.setLocation(location);
         bill.setWith(with);

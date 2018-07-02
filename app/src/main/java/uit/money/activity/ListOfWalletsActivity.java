@@ -15,7 +15,6 @@ import model.model.transaction.BillDetail;
 import model.model.transaction.Loan;
 import model.model.transaction.Payment;
 import uit.money.R;
-import uit.money.adapter.WalletRecyclerViewAdapter;
 import uit.money.databinding.ActivityListOfWalletsBinding;
 
 import static model.Utils.getMoney;
@@ -35,6 +34,7 @@ public class ListOfWalletsActivity extends RealmActivity {
         final ActivityListOfWalletsBinding binding;
         binding = DataBindingUtil.setContentView(this, LAYOUT);
         binding.setState(new State(this));
+        binding.setUser(User.getCurrentUser());
     }
 
     public void back(View view) {
@@ -115,10 +115,6 @@ public class ListOfWalletsActivity extends RealmActivity {
 
         private void updateMoney() {
             State.money.set(getMoney(billDetailsMoney + paymentsMoney + loansMoney));
-        }
-
-        public WalletRecyclerViewAdapter getWalletAdapter() {
-            return new WalletRecyclerViewAdapter(user);
         }
     }
 }

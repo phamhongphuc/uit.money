@@ -35,9 +35,7 @@
                 style="@style/button"
                 android:layout_width="50dp"
                 android:onClick="done"
-                app:_icon="@string/icon_done">
-
-            </ui.Button>
+                app:_icon="@string/icon_done"/>
         </ui.Row>
 
         <View style="@style/hr_full"/>

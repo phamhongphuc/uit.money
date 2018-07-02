@@ -7,9 +7,15 @@
 
     <data>
 
+        <import type="uit.money.adapter.WalletRecyclerViewAdapter"/>
+
         <variable
             name="state"
             type="uit.money.activity.ListOfWalletsActivity.State"/>
+
+        <variable
+            name="user"
+            type="model.model.User"/>
     </data>
 
     <ui.Col style="@style/root_col">
@@ -39,11 +45,13 @@
 
         <View style="@style/hr_full"/>
 
+        <!--android:adapter="@{state.getWalletAdapter()}"-->
+
         <ui.List
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:adapter="@{state.getWalletAdapter()}"
+            android:adapter="@{WalletRecyclerViewAdapter.getInstance(user)}"
             android:paddingBottom="15dp"
             android:paddingTop="15dp"
             android:scrollbarSize="4dp"
