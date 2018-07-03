@@ -5,13 +5,13 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import voice.recognizer.action.CreatePayment;
-import voice.utils.InterfaceRecognizer;
-import voice.utils.InterfaceWalletActivity;
 import voice.recognizer.action.CreateBill;
+import voice.recognizer.action.CreatePayment;
 import voice.recognizer.action.RemoveLastBill;
 import voice.recognizer.open.OpenCreateBill;
 import voice.recognizer.open.OpenListOfWallet;
+import voice.utils.InterfaceRecognizer;
+import voice.utils.InterfaceWalletActivity;
 
 import static java.util.Arrays.asList;
 

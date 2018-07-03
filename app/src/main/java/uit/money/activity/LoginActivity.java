@@ -17,9 +17,7 @@ import uit.money.fragment.FragmentAdapter;
 
 import static uit.money.fragment.LoginFragment.getFragment;
 
-public class LoginActivity extends RealmActivity {
-    private static final String TAG = "LoginActivity";
-
+public class LoginActivity extends AppActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +29,7 @@ public class LoginActivity extends RealmActivity {
 
     private void initializeListener() {
         Credential.initializeLogin(() -> {
-            startActivity(new Intent(getBaseContext(), WalletActivity.class));
+            startActivity(new Intent(this, WalletActivity.class));
             finish();
         });
     }

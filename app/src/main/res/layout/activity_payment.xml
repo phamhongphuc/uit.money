@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activity.BillActivity">
+    tools:context=".activity.PaymentActivity">
 
     <data>
 
@@ -11,15 +11,13 @@
 
         <import type="model.Utils"/>
 
-        <import type="uit.money.adapter.BillDetailRecyclerViewAdapter"/>
-
         <variable
             name="state"
-            type="uit.money.activity.BillActivity.State"/>
+            type="uit.money.activity.PaymentActivity.State"/>
 
         <variable
-            name="bill"
-            type="model.model.transaction.Bill"/>
+            name="payment"
+            type="model.model.transaction.Payment"/>
     </data>
 
     <ui.Col style="@style/root_col">
@@ -42,13 +40,13 @@
             <ui.Button
                 style="@style/button"
                 android:layout_width="50dp"
-                android:onClick="openEditBill"
+                android:onClick="openEditPayment"
                 app:_icon="@string/icon_edit"/>
 
             <ui.Button
                 style="@style/button"
                 android:layout_width="50dp"
-                android:onClick="deleteBill"
+                android:onClick="deletePayment"
                 app:_icon=""/>
 
         </ui.Row>
@@ -65,17 +63,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ui.Text
+                <ui.Row
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:gravity="center_vertical|start"
-                    android:paddingEnd="20dp"
-                    android:paddingStart="20dp"
-                    android:text="@{bill.action}"
-                    android:textColor="@color/_item_title"
-                    app:_autoSize="true"
-                    app:_font="bold"
-                    tools:text="Mua/Bán"/>
+                    android:layout_height="wrap_content">
+
+                    <ui.Square
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:_by="height">
+
+                        <ui.Text
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="@{payment.paymentType.icon}"
+                            android:textColor="@color/_text_color"
+                            app:_autoSize="true"
+                            app:_font="icon"
+                            tools:text="@string/icon_money"/>
+                    </ui.Square>
+
+                    <View
+                        style="@style/vr_full"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"/>
+
+                    <ui.Text
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical|start"
+                        android:paddingEnd="20dp"
+                        android:paddingStart="20dp"
+                        android:text="@{payment.paymentType.text}"
+                        android:textColor="@color/_item_title"
+                        app:_autoSize="true"
+                        app:_font="bold"
+                        tools:text="Mua/Bán"/>
+
+                </ui.Row>
 
                 <View
                     style="@style/hr_full"
@@ -104,7 +129,7 @@
                         android:gravity="center_vertical|end"
                         android:paddingEnd="20dp"
                         android:paddingStart="20dp"
-                        android:text="@{Utils.getDateTime(bill.time)}"
+                        android:text="@{Utils.getDateTime(payment.time)}"
                         android:textColor="@color/_item_color"
                         android:textSize="15sp"
                         app:_autoPadding="false"
@@ -116,7 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:visibility="@{(bill.location == null || ``.equals(bill.location)) ? View.GONE : View.VISIBLE, default=gone}"
+                    android:visibility="@{(payment.location == null || ``.equals(payment.location)) ? View.GONE : View.VISIBLE, default=gone}"
                     tools:visibility="visible">
 
                     <ui.Text
@@ -138,67 +163,13 @@
                         android:gravity="center_vertical|end"
                         android:paddingEnd="20dp"
                         android:paddingStart="20dp"
-                        android:text="@{bill.location}"
+                        android:text="@{payment.location}"
                         android:textColor="@color/_item_color"
                         android:textSize="15sp"
                         app:_autoPadding="false"
                         app:_font="bold"
                         tools:text="bill.location"/>
                 </ui.Row>
-
-                <ui.Row
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:visibility="@{bill.with == null ? View.GONE : View.VISIBLE, default=gone}"
-                    tools:visibility="visible">
-
-                    <ui.Text
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical|start"
-                        android:paddingEnd="20dp"
-                        android:paddingStart="20dp"
-                        android:text="@string/bill_go_with"
-                        android:textColor="@color/_item_color"
-                        android:textSize="15sp"
-                        app:_autoPadding="false"
-                        app:_font="bold"/>
-
-                    <ui.Text
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|end"
-                        android:paddingEnd="20dp"
-                        android:paddingStart="20dp"
-                        android:text="@{bill.with.name}"
-                        android:textColor="@color/_item_color"
-                        android:textSize="15sp"
-                        app:_autoPadding="false"
-                        app:_font="bold"
-                        tools:text="bill.with.name"/>
-                </ui.Row>
-
-                <ui.Text
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center_vertical|start"
-                    android:paddingEnd="20dp"
-                    android:paddingStart="20dp"
-                    android:text="@string/bill_detail"
-                    android:textColor="@color/_item_color"
-                    android:textSize="15sp"
-                    app:_autoPadding="false"
-                    app:_font="bold"/>
-
-                <ui.List
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:adapter="@{BillDetailRecyclerViewAdapter.getInstance(bill)}"
-                    tools:itemCount="2"
-                    tools:listitem="@layout/item_bill_detail"/>
 
                 <ui.Col
                     android:layout_width="wrap_content"
@@ -207,27 +178,9 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginStart="20dp">
 
-                    <View
-                        style="@style/hr_full"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginTop="5dp"/>
-
                     <ui.Row
                         android:layout_width="wrap_content"
                         android:layout_height="25dp">
-
-                        <ui.Text
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:clickable="false"
-                            android:focusable="false"
-                            android:gravity="center_vertical|end"
-                            android:text="@{String.valueOf(bill.maxCount)}"
-                            android:textColor="#0000"
-                            android:textSize="15sp"
-                            app:_font="bold"
-                            tools:ignore="RtlSymmetry"
-                            tools:text="7"/>
 
                         <ui.Text
                             android:layout_width="wrap_content"
@@ -246,8 +199,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="25dp"
                             android:gravity="center_vertical|end"
-                            android:text="@{Utils.getMoney(bill.money)}"
-                            android:textColor="@{Utils.getMoneyColor(bill)}"
+                            android:text="@{Utils.getMoney(payment.money)}"
+                            android:textColor="@{Utils.getMoneyColor(payment)}"
                             android:textSize="15sp"
                             app:_autoPadding="false"
                             app:_font="bold"

@@ -20,7 +20,7 @@
         android:clickable="true"
         android:focusable="true"
         android:layerType="software"
-        tools:background="#aaa"
+        tools:background="@color/_background"
         tools:ignore="RtlSymmetry">
 
         <ui.FrameShadow
@@ -40,7 +40,7 @@
                 android:layout_height="match_parent"
                 android:onClick="@{action::select}"
                 app:_radius="@dimen/radius"
-                app:_rippleColor="#93c6"/>
+                app:_rippleColor="@color/_item_ripple"/>
 
             <ui.Col
                 android:layout_width="match_parent"
@@ -55,15 +55,12 @@
                     android:paddingEnd="15dp"
                     android:paddingStart="15dp"
                     android:text="@{wallet.name}"
-                    android:textColor="#444"
+                    android:textColor="@color/_item_title"
                     app:_autoSize="true"
                     app:_font="bold"
                     tools:text="{Tên ví}"/>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/white_shadow"/>
+                <View style="@style/hr_full"/>
 
                 <ui.Row
                     android:layout_width="match_parent"
@@ -76,7 +73,7 @@
                         android:gravity="center_vertical|start"
                         android:paddingStart="15dp"
                         android:text="@string/wallet_transactions_count"
-                        android:textColor="#555"
+                        android:textColor="@color/_item_color"
                         android:textSize="15sp"
                         app:_font="regular"
                         tools:ignore="RtlSymmetry"/>
@@ -87,10 +84,11 @@
                         android:gravity="center_vertical|end"
                         android:paddingEnd="15dp"
                         android:text="@{String.valueOf(wallet._count)}"
-                        android:textColor="#555"
+                        android:textColor="@color/_item_color"
                         android:textSize="15sp"
                         app:_font="regular"
-                        tools:ignore="RtlSymmetry"/>
+                        tools:ignore="RtlSymmetry"
+                        tools:text="10"/>
                 </ui.Row>
 
                 <ui.Row
@@ -104,7 +102,7 @@
                         android:gravity="center_vertical|start"
                         android:paddingStart="15dp"
                         android:text="@string/wallet_total"
-                        android:textColor="#555"
+                        android:textColor="@color/_item_color"
                         android:textSize="15sp"
                         app:_font="regular"
                         tools:ignore="RtlSymmetry"/>
@@ -115,10 +113,11 @@
                         android:gravity="center_vertical|end"
                         android:paddingEnd="15dp"
                         android:text="@{wallet._money}"
-                        android:textColor="#555"
+                        android:textColor="@color/_item_color"
                         android:textSize="15sp"
                         app:_font="regular"
-                        tools:ignore="RtlSymmetry"/>
+                        tools:ignore="RtlSymmetry"
+                        tools:text="10.000 đ"/>
                 </ui.Row>
 
             </ui.Col>

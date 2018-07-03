@@ -16,13 +16,13 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="15dp"
-            tools:background="#ccc">
+            tools:background="@color/_background">
 
             <View
-                android:layout_width="2dp"
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="74dp"
-                android:background="#3c6"/>
+                android:layout_marginStart="24.5dp"
+                android:background="@color/_line_color"/>
         </FrameLayout>
     </ui.Row>
 </layout>

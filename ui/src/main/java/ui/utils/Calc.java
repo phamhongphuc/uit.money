@@ -13,7 +13,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 
 public class Calc {
-    public static void setShadow(@NonNull ShadowView view, @NonNull Paint paint) {
+    public static void setShadow(@NonNull ShadowView view, Paint paint) {
         final Drawable background = view.getView().getBackground();
         final int color = background instanceof ColorDrawable
                 ? ((ColorDrawable) background).getColor()

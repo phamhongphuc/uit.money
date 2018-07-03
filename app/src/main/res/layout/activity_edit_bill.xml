@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:windowSoftInputMode="stateVisible|adjustResize"
     tools:context=".activity.EditBillActivity">
 
     <data>
@@ -19,18 +18,40 @@
             type="uit.money.activity.EditBillActivity.State"/>
     </data>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#f5f5f5"
-        android:fitsSystemWindows="true">
+    <ui.Col style="@style/root_col">
 
-        <ui.Col
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="50dp"
-            android:background="@color/gray"
-            android:padding="10dp">
+        <ui.Row style="@style/action_row">
+
+            <ui.Button
+                style="@style/button"
+                android:layout_width="50dp"
+                android:onClick="back"
+                app:_icon="@string/icon_back"/>
+
+            <View style="@style/vr_half"/>
+
+            <ui.Text
+                style="@style/text"
+                android:layout_weight="1"
+                android:text="@{state.title}"
+                tools:text="@string/edit_bill_title"/>
+
+            <ui.Button
+                style="@style/button"
+                android:layout_width="50dp"
+                android:onClick="goToAdvanced"
+                app:_icon="@string/icon_advanced"/>
+
+            <ui.Button
+                style="@style/button"
+                android:layout_width="50dp"
+                android:onClick="done"
+                app:_icon="@string/icon_done"/>
+        </ui.Row>
+
+        <View style="@style/hr_full"/>
+
+        <ui.Col style="@style/content_col">
 
             <ui.FrameShadow
                 style="@style/item_shadow"
@@ -42,6 +63,7 @@
                 <ui.List
                     style="@style/list"
                     android:adapter="@{BillDetailEditRecyclerViewAdapter.getInstance(bill)}"
+                    android:padding="10dp"
                     tools:itemCount="2"
                     tools:listitem="@layout/item_bill_detail_edit"/>
 
@@ -63,35 +85,45 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <ui.Col
-                            android:layout_width="@dimen/input_size"
-                            android:layout_height="wrap_content"
+                        <ui.Row
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/input_size"
                             android:layout_weight="1">
 
-                            <ui.InputText
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/input_size"
-                                android:background="#0000"
-                                android:hint="@string/hint_object_name"
-                                android:text="@={state.objectName}"
-                                android:textSize="@dimen/input_text_size"
-                                app:_focusColor="@color/primary_focus"
-                                tools:ignore="RtlSymmetry"/>
+                            <View style="@style/vr_full"/>
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/primary"/>
-                        </ui.Col>
+                            <ui.Col
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/input_size"
+                                android:layout_weight="1">
+
+                                <View style="@style/hr_full"/>
+
+                                <ui.InputText
+                                    style="@style/input_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:hint="@string/hint_object_name"
+                                    android:text="@={state.objectName}"/>
+
+                                <View style="@style/hr_full"/>
+
+                            </ui.Col>
+
+                            <View style="@style/vr_full"/>
+
+
+                        </ui.Row>
 
                         <Space
-                            android:layout_width="5dp"
+                            android:layout_width="10dp"
                             android:layout_height="match_parent"/>
 
                         <ui.Button
-                            android:layout_width="41dp"
-                            android:layout_height="41dp"
-                            android:background="@color/primary"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@color/_dark_1"
                             android:onClick="clear"
                             app:_foreground="@color/white"
                             app:_icon=""/>
@@ -100,102 +132,108 @@
 
                     <Space
                         android:layout_width="match_parent"
-                        android:layout_height="5dp"/>
+                        android:layout_height="10dp"/>
 
                     <ui.Row
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="@dimen/input_size">
+
+                        <View style="@style/vr_full"/>
 
                         <ui.Col
                             android:layout_width="@dimen/input_size"
-                            android:layout_height="wrap_content">
+                            android:layout_height="@dimen/input_size">
+
+                            <View style="@style/hr_full"/>
 
                             <ui.InputNumber
+                                style="@style/input_text"
                                 android:layout_width="@dimen/input_size"
-                                android:layout_height="@dimen/input_size"
-                                android:background="#0000"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
                                 android:gravity="center"
                                 android:paddingEnd="-1dp"
                                 android:paddingStart="-1dp"
-                                android:text="@={state.amount}"
-                                android:textSize="@dimen/input_text_size"
-                                app:_focusColor="@color/primary_focus"
-                                app:_rippleColor="#33c6"
+                                android:text="@={state.quantity}"
                                 tools:text="1"/>
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="@color/primary"/>
+                            <View style="@style/hr_full"/>
+
                         </ui.Col>
 
+                        <View style="@style/vr_full"/>
 
                         <ui.Text
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_gravity="center"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="8dp"
                             android:clickable="false"
                             android:focusable="false"
                             android:gravity="center"
                             android:paddingEnd="0dp"
                             android:paddingStart="0dp"
                             android:text="✕"
-                            android:textColor="#333"
+                            android:textColor="@color/_text_color"
                             android:textSize="16sp"
                             app:_font="bold"
                             tools:ignore="HardcodedText,RtlSymmetry"/>
 
-                        <FrameLayout
+                        <View style="@style/vr_full"/>
+
+                        <ui.Col
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="1">
 
-                            <ui.InputMoney
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/input_size"
-                                android:layout_marginBottom="1dp"
-                                android:background="#0000"
-                                android:gravity="center"
-                                android:paddingEnd="26dp"
-                                android:text="@={state.unitPrice}"
-                                android:textAlignment="textEnd"
-                                android:textColor="#444"
-                                android:textSize="@dimen/input_text_size"
-                                app:_focusColor="@color/primary_focus"
-                                app:_font="regular"
-                                app:_rippleColor="#33c6"
-                                tools:ignore="RtlCompat,RtlSymmetry"
-                                tools:text="1.000"/>
+                            <View style="@style/hr_full"/>
 
-                            <ui.Text
-                                android:layout_width="wrap_content"
-                                android:layout_height="@dimen/input_size"
-                                android:layout_gravity="center_vertical|end"
-                                android:layout_marginBottom="1dp"
-                                android:clickable="false"
-                                android:focusable="false"
-                                android:gravity="center"
-                                android:paddingEnd="10dp"
-                                android:text="@string/currency_unit"
-                                android:textColor="#333"
-                                android:textSize="@dimen/input_text_size"
-                                tools:ignore="RtlSymmetry"/>
-
-                            <View
+                            <FrameLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_gravity="bottom"
-                                android:background="@color/primary"/>
-                        </FrameLayout>
+                                android:layout_height="0dp"
+                                android:layout_weight="1">
+
+                                <ui.InputMoney
+                                    style="@style/input_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="#0000"
+                                    android:paddingEnd="26dp"
+                                    android:text="@={state.unitPrice}"
+                                    android:textAlignment="textEnd"
+                                    tools:ignore="RtlSymmetry"
+                                    tools:text="1.000"/>
+
+                                <ui.Text
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center_vertical|end"
+                                    android:clickable="false"
+                                    android:focusable="false"
+                                    android:gravity="center"
+                                    android:paddingEnd="10dp"
+                                    android:text="@string/currency_unit"
+                                    android:textColor="@color/_text_color"
+                                    android:textSize="@dimen/input_text_size"
+                                    tools:ignore="RtlSymmetry"/>
+
+                            </FrameLayout>
+
+                            <View style="@style/hr_full"/>
+
+                        </ui.Col>
+
+                        <View style="@style/vr_full"/>
 
                         <Space
-                            android:layout_width="5dp"
+                            android:layout_width="10dp"
                             android:layout_height="match_parent"/>
 
                         <ui.Button
                             android:layout_width="wrap_content"
-                            android:layout_height="41dp"
-                            android:background="@color/primary"
+                            android:layout_height="@dimen/input_size"
+                            android:background="@color/_dark_1"
                             android:onClick="add"
                             app:_foreground="@color/white"
                             app:_icon=""
@@ -203,44 +241,7 @@
                             app:_textPaddingLeft="false"/>
                     </ui.Row>
                 </ui.Col>
-
             </ui.FrameShadow>
         </ui.Col>
-
-        <ui.FrameShadow style="@style/top_bar">
-
-            <ui.Row
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ui.Button
-                    style="@style/button"
-                    android:layout_width="50dp"
-                    android:onClick="back"
-                    app:_icon="@string/icon_back"/>
-
-                <View style="@style/vr_line"/>
-
-                <ui.Text
-                    style="@style/text"
-                    android:layout_weight="1"
-                    android:text="@string/edit_bill_title"/>
-
-                <ui.Button
-                    style="@style/button"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:onClick="goToAdvanced"
-                    app:_icon="@string/icon_advanced"/>
-
-                <ui.Button
-                    style="@style/button"
-                    android:layout_width="50dp"
-                    android:onClick="done"
-                    app:_icon="@string/icon_done">
-
-                </ui.Button>
-            </ui.Row>
-        </ui.FrameShadow>
-    </FrameLayout>
+    </ui.Col>
 </layout>

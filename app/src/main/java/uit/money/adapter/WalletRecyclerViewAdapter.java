@@ -19,6 +19,10 @@ public class WalletRecyclerViewAdapter extends RealmRecyclerViewAdapter<Wallet, 
         super(user.getWallets(), true);
     }
 
+    public static WalletRecyclerViewAdapter getInstance(User user) {
+        return new WalletRecyclerViewAdapter(user);
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

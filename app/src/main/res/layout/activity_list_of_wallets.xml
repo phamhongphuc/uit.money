@@ -7,24 +7,51 @@
 
     <data>
 
+        <import type="uit.money.adapter.WalletRecyclerViewAdapter"/>
+
         <variable
             name="state"
             type="uit.money.activity.ListOfWalletsActivity.State"/>
+
+        <variable
+            name="user"
+            type="model.model.User"/>
     </data>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#f5f5f5"
-        android:fitsSystemWindows="false"
-        android:layerType="software">
+    <ui.Col style="@style/root_col">
+
+        <ui.Row style="@style/action_row">
+
+            <ui.Button
+                style="@style/button"
+                android:layout_width="50dp"
+                android:onClick="back"
+                app:_icon="@string/icon_back"/>
+
+            <View style="@style/vr_half"/>
+
+            <ui.Text
+                style="@style/text"
+                android:layout_weight="1"
+                android:text="@string/list_of_wallet_title"/>
+
+            <ui.Button
+                style="@style/button"
+                android:layout_width="50dp"
+                android:onClick="create"
+                app:_icon=""/>
+
+        </ui.Row>
+
+        <View style="@style/hr_full"/>
+
+        <!--android:adapter="@{state.getWalletAdapter()}"-->
 
         <ui.List
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="50dp"
-            android:layout_marginTop="50dp"
-            android:adapter="@{state.getWalletAdapter()}"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:adapter="@{WalletRecyclerViewAdapter.getInstance(user)}"
             android:paddingBottom="15dp"
             android:paddingTop="15dp"
             android:scrollbarSize="4dp"
@@ -32,66 +59,30 @@
             android:scrollbarThumbVertical="@color/scrollbar_thumb"
             android:scrollbars="vertical"
             tools:ignore="RtlSymmetry"
-            tools:itemCount="3"
+            tools:itemCount="2"
             tools:listitem="@layout/item_wallet"/>
 
-        <ui.FrameShadow style="@style/top_bar">
+        <View style="@style/hr_full"/>
 
-            <ui.Row
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <ui.Row style="@style/action_row">
 
-                <ui.Button
-                    style="@style/button"
-                    android:layout_width="50dp"
-                    android:onClick="back"
-                    app:_icon="@string/icon_back"/>
+            <ui.Text
+                style="@style/bottom_text"
+                android:layout_width="wrap_content"
+                android:gravity="end|center_vertical"
+                android:paddingStart="25dp"
+                android:text="@string/wallet_total"
+                tools:ignore="RtlSymmetry"/>
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:background="#9fff"/>
-
-                <ui.Text
-                    style="@style/text"
-                    android:layout_weight="1"
-                    android:text="@string/list_of_wallet_title"/>
-
-                <ui.Button
-                    style="@style/button"
-                    android:layout_width="50dp"
-                    android:onClick="create"
-                    app:_icon=""/>
-
-            </ui.Row>
-        </ui.FrameShadow>
-
-        <ui.FrameShadow style="@style/bottom_bar">
-
-            <ui.Row
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ui.Text
-                    style="@style/bottom_text"
-                    android:layout_width="wrap_content"
-                    android:gravity="end|center_vertical"
-                    android:paddingStart="25dp"
-                    android:text="@string/wallet_total"
-                    tools:ignore="RtlSymmetry"/>
-
-                <ui.Text
-                    style="@style/bottom_text"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="end|center_vertical"
-                    android:paddingEnd="25dp"
-                    android:text="@{state.money}"
-                    tools:ignore="RtlSymmetry"
-                    tools:text="123.456.789 đ"/>
-            </ui.Row>
-        </ui.FrameShadow>
-
-    </FrameLayout>
+            <ui.Text
+                style="@style/bottom_text"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="end|center_vertical"
+                android:paddingEnd="25dp"
+                android:text="@{state.money}"
+                tools:ignore="RtlSymmetry"
+                tools:text="123.456.789 đ"/>
+        </ui.Row>
+    </ui.Col>
 </layout>

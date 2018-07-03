@@ -11,4 +11,5 @@
     <string name="error_speech_timeout">Không phát hiện giọng nói đầu vào</string>
     <string name="error_unknown">Lỗi không xác định</string>
     <string name="voice_start">Đang nghe...</string>
+    <string name="voice_open_list_of_wallet">Mở danh sách ví</string>
 </resources>

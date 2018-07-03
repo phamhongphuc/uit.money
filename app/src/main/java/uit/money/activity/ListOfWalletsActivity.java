@@ -13,29 +13,30 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 import model.model.User;
 import model.model.transaction.BillDetail;
+import model.model.transaction.HasMoney;
+import model.model.transaction.Loan;
+import model.model.transaction.Payment;
 import uit.money.R;
-import uit.money.adapter.WalletRecyclerViewAdapter;
 import uit.money.databinding.ActivityListOfWalletsBinding;
 
-import static model.Const.IN;
 import static model.Utils.getMoney;
 
-public class ListOfWalletsActivity extends RealmActivity {
-
-    private final int layout = R.layout.activity_list_of_wallets;
+public class ListOfWalletsActivity extends AppActivity {
+    private static final int LAYOUT = R.layout.activity_list_of_wallets;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(layout);
+        setContentView(LAYOUT);
 
         initializeDataBinding();
     }
 
     private void initializeDataBinding() {
         final ActivityListOfWalletsBinding binding;
-        binding = DataBindingUtil.setContentView(this, layout);
-        binding.setState(new State());
+        binding = DataBindingUtil.setContentView(this, LAYOUT);
+        binding.setState(new State(realm));
+        binding.setUser(User.getCurrentUser());
     }
 
     public void back(View view) {
@@ -44,34 +45,56 @@ public class ListOfWalletsActivity extends RealmActivity {
     }
 
     public void create(View view) {
-        startActivity(new Intent(getBaseContext(), CreateWalletActivity.class));
+        delayStartActivity(new Intent(this, CreateWalletActivity.class));
     }
 
     public static class State extends Observable {
+        private final Realm realm;
+        private final User user = User.getCurrentUser();
+
         public static final ObservableField<String> money = new ObservableField<>("");
-        private User user = User.getCurrentUser();
 
-        // TODO: make it sync
-        State() {
-            RealmResults<BillDetail> billDetails = Realm.getDefaultInstance()
-                    .where(BillDetail.class)
-                    .equalTo("bill.wallet.user.fbid", user.getFbid())
+        private long billDetailsMoney = 0L;
+        private long paymentsMoney = 0L;
+        private long loansMoney = 0L;
+
+        State(Realm realm) {
+            this.realm = realm;
+
+            initialize(BillDetail.class, "bill.wallet.user.fbid");
+            initialize(Payment.class, "wallet.user.fbid");
+            initialize(Loan.class, "wallet.user.fbid");
+            // Không cần cộng trừ Transfers vì chuyển qua chuyển lại
+            // nhưng tổng tiền của người dùng vẫn luôn được bảo toàn
+        }
+
+        private void initialize(final Class<? extends HasMoney> clazz, final String fbid) {
+            final RealmResults<? extends HasMoney> objects = realm
+                    .where(clazz)
+                    .equalTo(fbid, user.getFbid())
                     .findAllAsync();
-            billDetails.removeAllChangeListeners();
-            billDetails.addChangeListener(this::updateMoney);
-            updateMoney(billDetails);
+            objects.load();
+            objects.removeAllChangeListeners();
+            objects.addChangeListener(hasMonies -> update(hasMonies, clazz));
+            update(objects, clazz);
         }
 
-        private void updateMoney(RealmResults<BillDetail> billDetails) {
+        private void update(RealmResults<? extends HasMoney> hasMonies, Class<? extends HasMoney> clazz) {
             long money = 0;
-            for (BillDetail billDetail : billDetails) {
-                money += billDetail.getMoney() * (billDetail.getBill().isInOrOut() == IN ? 1 : -1);
+
+            if (hasMonies.size() != 0) {
+                for (HasMoney hasMoney : hasMonies) money += hasMoney.getMoney();
             }
-            State.money.set(getMoney(money));
+
+            if (clazz == BillDetail.class) billDetailsMoney = money;
+            else if (clazz == Payment.class) paymentsMoney = money;
+            else if (clazz == Loan.class) loansMoney = money;
+
+            updateMoney();
         }
 
-        public WalletRecyclerViewAdapter getWalletAdapter() {
-            return new WalletRecyclerViewAdapter(user);
+        private void updateMoney() {
+            State.money.set(getMoney(billDetailsMoney + paymentsMoney + loansMoney));
         }
     }
 }

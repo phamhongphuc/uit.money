@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
@@ -42,14 +42,21 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"/>
-        <activity android:name=".activity.ListOfWalletsActivity">
-        </activity>
-        <activity android:name=".activity.CreateWalletActivity">
-        </activity>
-        <activity android:name=".activity.EditWalletActivity"/>
+        <activity android:name=".activity.ListOfWalletsActivity"/>
+        <activity android:name=".activity.CreateWalletActivity"/>
         <activity android:name=".activity.BillActivity"/>
-        <activity android:name=".activity.EditBillActivity"/>
-        <activity android:name=".activity.EditBillAdvancedActivity"/>
+        <activity android:name=".activity.PaymentActivity"/>
+        <activity
+            android:name=".activity.EditWalletActivity"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".activity.EditBillActivity"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".activity.EditPaymentActivity"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".activity.EditBillAdvancedActivity"
+            android:windowSoftInputMode="adjustResize"/>
     </application>
-
 </manifest>

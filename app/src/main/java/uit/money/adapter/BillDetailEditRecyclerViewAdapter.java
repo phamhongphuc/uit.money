@@ -69,7 +69,7 @@ public class BillDetailEditRecyclerViewAdapter extends RealmRecyclerViewAdapter<
         public void delete(View view) {
             Realm.getDefaultInstance().executeTransaction(r -> {
 //                billDetail.setBill(null);
-                billDetail.deleteFromRealm();
+                if (billDetail.isValid()) billDetail.deleteFromRealm();
             });
         }
     }

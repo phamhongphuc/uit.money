@@ -25,13 +25,17 @@ import voice.Recognizer;
 import voice.Voice;
 import voice.utils.InterfaceWalletActivity;
 
-import static uit.money.activity.EditBillActivity.CREATE;
-import static uit.money.activity.EditBillActivity.TYPE;
 import static uit.money.utils.Timer.setTimeout;
 
-public class WalletActivity extends RealmActivity implements InterfaceWalletActivity {
-    private static final String TAG = "WalletActivity";
+public class WalletActivity extends AppActivity implements InterfaceWalletActivity {
     public static final int LAYOUT = R.layout.activity_wallet;
+
+    public static final String TYPE = "type";
+    public static final String ID = "id";
+    public static final int NONE = 0;
+    public static final int CREATE = 1;
+    public static final int EDIT = 2;
+
     private Wallet wallet;
     private Voice voice;
     private State state = new State();
@@ -121,7 +125,7 @@ public class WalletActivity extends RealmActivity implements InterfaceWalletActi
     }
 
     public void editWallet(View view) {
-        startActivity(new Intent(getBaseContext(), EditWalletActivity.class));
+        delayStartActivity(new Intent(this, EditWalletActivity.class));
     }
 
     @Override
@@ -133,7 +137,7 @@ public class WalletActivity extends RealmActivity implements InterfaceWalletActi
 
     public void logout(View view) {
         Credential.logout();
-        startActivity(new Intent(getBaseContext(), LoginActivity.class));
+        delayStartActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 
@@ -147,19 +151,32 @@ public class WalletActivity extends RealmActivity implements InterfaceWalletActi
 
     @Override
     public void openCreateBill(View view) {
-        final Intent intent = new Intent(getBaseContext(), EditBillActivity.class);
+        final Intent intent = new Intent(this, EditBillActivity.class);
         intent.putExtra(TYPE, CREATE);
-        startActivity(intent);
+        delayStartActivity(intent);
     }
 
     @Override
     public void openListOfWallets(View view) {
-        startActivity(new Intent(getBaseContext(), ListOfWalletsActivity.class));
+        final Intent intent = new Intent(this, ListOfWalletsActivity.class);
+        delayStartActivity(intent);
     }
 
     @Override
     public Wallet getWallet() {
         return wallet;
+    }
+
+    public void openCreatePayment(View view) {
+        final Intent intent = new Intent(getBaseContext(), EditPaymentActivity.class);
+        intent.putExtra(TYPE, CREATE);
+        delayStartActivity(intent);
+    }
+
+    public void openCreateLoan(View view) {
+    }
+
+    public void openCreateTransfer(View view) {
     }
 
     public static class State extends Observable {

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="payment"
+            type="model.model.transaction.Payment"/>
+
+        <variable
+            name="state"
+            type="uit.money.adapter.PaymentTypeRecyclerViewAdapter.State"/>
+    </data>
+
+    <ui.Row
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:layerType="software"
+        tools:background="@color/_background_item"
+        tools:ignore="RtlSymmetry"
+        tools:layout_width="100dp">
+
+        <ui.FrameShadow
+            style="@style/item_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/_background_action"
+            android:clickable="true"
+            android:focusable="true"
+            app:_shadowColor="#15000000">
+
+            <ui.Ripple
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="@{state::select}"
+                app:_radius="@dimen/radius"
+                app:_rippleColor="@color/_item_ripple"
+                tools:layout_height="0dp"/>
+
+            <ui.Col
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ui.Text
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@{state.paymentType.icon}"
+                    android:textColor="@{state.iconColor}"
+                    app:_autoSize="true"
+                    app:_font="icon"
+                    tools:text="@string/icon_money"
+                    tools:textColor="@color/_text_color"/>
+
+                <View
+                    style="@style/hr_full"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@{state.lineColor}"
+                    tools:background="@color/in_color"/>
+
+                <ui.Text
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:text="@{state.paymentType.text}"
+                    android:textColor="@{state.iconColor}"
+                    android:textSize="12sp"
+                    app:_font="regular"
+                    tools:text="Giao dịch"/>
+            </ui.Col>
+
+        </ui.FrameShadow>
+    </ui.Row>
+</layout>

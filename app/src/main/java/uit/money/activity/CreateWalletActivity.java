@@ -12,12 +12,14 @@ import model.model.Wallet;
 import model.model.transaction.Payment;
 import uit.money.R;
 import uit.money.databinding.ActivityCreateWalletBinding;
+import uit.money.utils.Money;
 
 import static model.Const.IN;
 import static model.model.transaction.Payment.INITIALIZE;
 
-public class CreateWalletActivity extends RealmActivity {
+public class CreateWalletActivity extends AppActivity {
     private static final int LAYOUT = R.layout.activity_create_wallet;
+
     private Wallet wallet = new Wallet();
 
     @Override
@@ -46,7 +48,7 @@ public class CreateWalletActivity extends RealmActivity {
                 if (moneyString == null || moneyString.equals("")) {
                     return;
                 }
-                final long money = Math.abs(Long.parseLong(moneyString.replaceAll("[^0-9]", "")));
+                final long money = Money.getMoneyNumber(moneyString);
                 if (money == 0) {
                     return;
                 }

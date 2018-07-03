@@ -16,7 +16,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:background="@color/_background_item">
 
         <ui.Row
             android:layout_width="match_parent"
@@ -32,8 +33,11 @@
                 android:focusable="false"
                 android:gravity="center_vertical"
                 android:text="@{billDetail.object.name}"
-                android:textSize="16sp"
-                app:_autoPadding="true"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:textColor="@color/_text_color"
+                android:textSize="@dimen/item_text_size"
+                app:_autoPadding="false"
                 app:_font="regular"
                 tools:text="Hộp sữa"/>
 
@@ -43,9 +47,9 @@
                 android:clickable="false"
                 android:focusable="false"
                 android:gravity="center_vertical|end"
-                android:text="@{String.valueOf(billDetail.amount)}"
-                android:textColor="#999"
-                android:textSize="16sp"
+                android:text="@{String.valueOf(billDetail.quantity)}"
+                android:textColor="@color/_text_color"
+                android:textSize="@dimen/item_text_size"
                 app:_font="regular"
                 tools:ignore="RtlSymmetry"
                 tools:text="7"/>
@@ -59,8 +63,8 @@
                 android:paddingEnd="15dp"
                 android:paddingStart="15dp"
                 android:text="✕"
-                android:textColor="#999"
-                android:textSize="16sp"
+                android:textColor="@color/_text_color"
+                android:textSize="@dimen/item_text_size"
                 app:_font="regular"
                 tools:ignore="HardcodedText,RtlSymmetry"/>
 
@@ -72,16 +76,13 @@
                 android:gravity="center"
                 android:minWidth="80dp"
                 android:text="@{model.Utils.getMoney(billDetail.unitPrice)}"
-                android:textColor="#999"
-                android:textSize="16sp"
+                android:textColor="@color/_text_color"
+                android:textSize="@dimen/item_text_size"
                 app:_font="regular"
                 tools:ignore="RtlSymmetry"
                 tools:text="10.000 đ"/>
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/gray"/>
+            <View style="@style/vr_full"/>
 
             <ui.Button
                 android:layout_width="40dp"
@@ -89,6 +90,7 @@
                 android:gravity="center"
                 android:layerType="hardware"
                 android:onClick="@{action::delete}"
+                app:_foreground="@color/_text_color"
                 app:_icon=""
                 app:_rippleColor="@color/primary_ripple"/>
         </ui.Row>

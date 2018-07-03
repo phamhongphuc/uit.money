@@ -26,9 +26,9 @@ import static model.model.transaction.Payment.HAVE_BREAKFAST;
 import static model.model.transaction.Payment.HAVE_DINNER;
 import static model.model.transaction.Payment.HAVE_LUNCH;
 import static model.model.transaction.Payment.INTERNET_BILL;
-import static model.model.transaction.Payment.PICK_LOSE;
+import static model.model.transaction.Payment.PICK_LOST;
 import static model.model.transaction.Payment.SALARY;
-import static model.model.transaction.Payment.WATTER_BILL;
+import static model.model.transaction.Payment.WATER_BILL;
 import static voice.getter.Getter.getMoney;
 import static voice.utils.Const.Key._ELECTRIC_BILL;
 import static voice.utils.Const.Key._HAVE_BREAKFAST;
@@ -36,7 +36,7 @@ import static voice.utils.Const.Key._HAVE_DINNER;
 import static voice.utils.Const.Key._HAVE_LUNCH;
 import static voice.utils.Const.Key._INTERNET_BILL;
 import static voice.utils.Const.Key._LOCATION;
-import static voice.utils.Const.Key._LOSE;
+import static voice.utils.Const.Key._LOST;
 import static voice.utils.Const.Key._PICK;
 import static voice.utils.Const.Key._SALARY;
 import static voice.utils.Const.Key._TIME;
@@ -47,8 +47,8 @@ import static voice.utils.Utils.wordsOf;
 
 public class CreatePayment implements InterfaceRecognizer {
     private static final Map<Key, Integer> MAP = ImmutableMap.<Key, Integer>builder()
-            .put(_PICK, PICK_LOSE)
-            .put(_LOSE, -PICK_LOSE)
+            .put(_PICK, PICK_LOST)
+            .put(_LOST, -PICK_LOST)
 
             .put(_HAVE_BREAKFAST, -HAVE_BREAKFAST)
             .put(_HAVE_LUNCH, -HAVE_LUNCH)
@@ -58,12 +58,12 @@ public class CreatePayment implements InterfaceRecognizer {
 
             .put(_INTERNET_BILL, -INTERNET_BILL)
             .put(_ELECTRIC_BILL, -ELECTRIC_BILL)
-            .put(_WATTER_BILL, -WATTER_BILL)
+            .put(_WATTER_BILL, -WATER_BILL)
 
             .build();
     private static final List<Key> KEYS = asList(
             _PICK,
-            _LOSE,
+            _LOST,
 
             _HAVE_BREAKFAST,
             _HAVE_LUNCH,

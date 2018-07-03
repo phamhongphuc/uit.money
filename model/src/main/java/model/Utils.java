@@ -9,7 +9,6 @@ import java.util.Locale;
 import model.model.R;
 import model.model.transaction.Transaction;
 
-import static model.Const.OUT;
 import static model.Const.getResource;
 
 public class Utils {
@@ -22,9 +21,11 @@ public class Utils {
     }
 
     public static int getMoneyColor(Transaction transaction) {
-        return getResource().getColor(
-                transaction.isInOrOut() == OUT ? R.color.outColor : R.color.inColor,
-                null
+        return getMoneyColor(transaction.isInOrOut());
+    }
+
+    public static int getMoneyColor(Boolean inOrOut) {
+        return getResource().getColor(inOrOut ? R.color.in_color : R.color.out_color, null
         );
     }
 

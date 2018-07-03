@@ -22,7 +22,6 @@ import model.model.transaction.Loan;
 import model.model.transaction.Payment;
 import model.model.transaction.Transfer;
 
-import static model.Const.IN;
 import static model.Utils.getMoney;
 
 /**
@@ -130,8 +129,8 @@ public class Wallet extends RealmObject {
         _name.set(getName());
 
         initializeBillDetails();
-        initializePayments();
         initializeLoans();
+        initializePayments();
         initializeTransfers();
     }
 
@@ -167,10 +166,20 @@ public class Wallet extends RealmObject {
         updateTransfers(transfers);
     }
 
+    public RealmResults<BillDetail> getBillDetails() {
+        if (billDetails == null) {
+            billDetails = Realm.getDefaultInstance()
+                    .where(BillDetail.class)
+                    .equalTo("bill.wallet.id", id)
+                    .findAllAsync();
+        }
+        return billDetails;
+    }
+
     private void updateBillDetails(RealmResults<BillDetail> billDetails) {
         billDetailsMoney = 0;
         for (BillDetail billDetail : billDetails) {
-            billDetailsMoney += billDetail.getMoney() * (billDetail.getBill().isInOrOut() == IN ? 1 : -1);
+            billDetailsMoney += billDetail.getMoney();
         }
         updateMoney();
     }
@@ -252,16 +261,6 @@ public class Wallet extends RealmObject {
         return bills;
     }
 
-    public RealmResults<BillDetail> getBillDetails() {
-        if (billDetails == null) {
-            billDetails = Realm.getDefaultInstance()
-                    .where(BillDetail.class)
-                    .equalTo("bill.wallet.id", id)
-                    .findAllAsync();
-        }
-        return billDetails;
-    }
-
     public int getId() {
         return id;
     }
@@ -280,6 +279,22 @@ public class Wallet extends RealmObject {
 
     public void updateName() {
         name = _name.get();
+    }
+
+    public long getBillDetailsMoney() {
+        return billDetailsMoney;
+    }
+
+    public long getPaymentsMoney() {
+        return paymentsMoney;
+    }
+
+    public long getLoansMoney() {
+        return loansMoney;
+    }
+
+    public long getTransfersMoney() {
+        return transfersMoney;
     }
 
     public interface Callback {

@@ -11,6 +11,8 @@ import io.realm.annotations.PrimaryKey;
 import io.realm.model_model_transaction_BillDetailRealmProxy;
 import model.model.util.Object;
 
+import static model.Const.IN;
+
 //import io.realm.model_transaction_BillDetailRealmProxy;
 
 /**
@@ -21,26 +23,27 @@ import model.model.util.Object;
  * @see BillDetail#id                          {@link Integer}
  * @see BillDetail#bill                        {@link Bill}                >>  {@link Bill#billDetails}
  * @see BillDetail#object                      {@link Object}              >>  {@link Object#billDetails}
- * @see BillDetail#amount                      {@link Integer}
+ * @see BillDetail#quantity                      {@link Integer}
  * @see BillDetail#unitPrice                   {@link Long}
  */
 @Parcel(implementations = {model_model_transaction_BillDetailRealmProxy.class},
         value = Parcel.Serialization.BEAN,
         analyze = {BillDetail.class})
-public class BillDetail extends RealmObject {
+public class BillDetail extends RealmObject implements HasMoney {
     @PrimaryKey
     private int id;
     private Bill bill;
     private Object object;          // Đại diện cho [chai nước, cái ly, ...]
-    private int amount;
+    private int quantity;
     private long unitPrice;
 
     public BillDetail() {
 
     }
 
+    @Override
     public long getMoney() {
-        return amount * unitPrice;
+        return quantity * unitPrice * (bill.isInOrOut() == IN ? 1 : -1);
     }
 
     public int getId() {
@@ -67,12 +70,12 @@ public class BillDetail extends RealmObject {
         this.object = object;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public long getUnitPrice() {

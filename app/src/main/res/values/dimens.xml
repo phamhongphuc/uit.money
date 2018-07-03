@@ -4,7 +4,10 @@
     <dimen name="bill_detail_cross_padding">15dp</dimen>
     <dimen name="bill_detail_money_min_width">80dp</dimen>
     <dimen name="line_weight">1dp</dimen>
+    <dimen name="item_text_size">16sp</dimen>
     <dimen name="input_text_size">16sp</dimen>
+    <dimen name="input_icon_size">16sp</dimen>
+    <dimen name="input_name_size">14sp</dimen>
     <dimen name="input_size">40dp</dimen>
     <dimen name="input_space">10dp</dimen>
     <dimen name="input_button_radius">3dp</dimen>
