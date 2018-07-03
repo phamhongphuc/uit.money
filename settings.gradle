@@ -1,1 +1,1 @@
-include ':app', ':ai'
+include ':app', ':ui', ':model', ':voice'

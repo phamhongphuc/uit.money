@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.EditBillAdvancedActivity">
+
+    <data>
+
+        <import type="uit.money.adapter.BillDetailEditRecyclerViewAdapter"/>
+
+        <variable
+            name="state"
+            type="uit.money.activity.EditBillAdvancedActivity.State"/>
+    </data>
+
+    <ui.Col style="@style/root_col">
+
+        <ui.Row style="@style/action_row">
+
+            <ui.Button
+                style="@style/button"
+                android:layout_width="50dp"
+                android:onClick="back"
+                app:_icon="@string/icon_back"/>
+
+            <View style="@style/vr_half"/>
+
+            <ui.Text
+                style="@style/text"
+                android:layout_weight="1"
+                android:text="@string/edit_bill_advanced_title"/>
+
+            <ui.Button
+                style="@style/button"
+                android:layout_width="50dp"
+                android:onClick="done"
+                app:_icon="@string/icon_done"/>
+        </ui.Row>
+
+        <View style="@style/hr_full"/>
+
+        <ui.FrameShadow
+            style="@style/item_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp">
+
+            <ui.Col
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layerType="hardware">
+
+                <ui.Text
+                    style="@style/input_name"
+                    android:text="@string/input_name_location"/>
+
+                <View style="@style/hr_full"/>
+
+                <ui.Row
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_size">
+
+                    <View style="@style/vr_full"/>
+
+                    <ui.Text
+                        style="@style/icon"
+                        android:layout_width="@dimen/input_size"
+                        android:layout_height="@dimen/input_size"
+                        android:gravity="center"
+                        android:text="@string/icon_location"
+                        android:textSize="@dimen/input_icon_size"
+                        app:_autoPadding="false"
+                        app:_autoSize="false"/>
+
+                    <View style="@style/vr_full"/>
+
+                    <ui.InputText
+                        style="@style/input_text"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:hint="@string/hint_location"
+                        android:text="@={state.location}"
+                        android:textSize="@dimen/input_text_size"
+                        tools:ignore="RtlSymmetry"/>
+
+                    <View style="@style/vr_full"/>
+                </ui.Row>
+
+                <View style="@style/hr_full"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"/>
+
+                <ui.Text
+                    style="@style/input_name"
+                    android:text="@string/input_name_with"/>
+
+                <View style="@style/hr_full"/>
+
+                <ui.Row
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_size">
+
+                    <View style="@style/vr_full"/>
+
+                    <ui.Text
+                        style="@style/icon"
+                        android:layout_width="@dimen/input_size"
+                        android:layout_height="@dimen/input_size"
+                        android:gravity="center"
+                        android:text="@string/icon_person"
+                        android:textSize="@dimen/input_icon_size"
+                        app:_autoPadding="false"/>
+
+                    <View style="@style/vr_full"/>
+
+                    <ui.InputText
+                        style="@style/input_text"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:hint="@string/hint_with"
+                        android:text="@={state.with}"
+                        android:textSize="@dimen/input_text_size"
+                        tools:ignore="RtlSymmetry"/>
+
+                    <View style="@style/vr_full"/>
+                </ui.Row>
+
+                <View style="@style/hr_full"/>
+            </ui.Col>
+
+        </ui.FrameShadow>
+
+    </ui.Col>
+</layout>

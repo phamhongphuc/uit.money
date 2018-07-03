@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.LoginActivity">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="uit.money.fragment.FragmentAdapter"/>
+    </data>
+
+    <ui.Col
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/_background"
+        android:gravity="center"
+        android:padding="15dp">
+
+        <ui.FrameShadow
+            style="@style/item_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adapter="@{adapter}"
+                android:layerType="hardware"/>
+
+        </ui.FrameShadow>
+
+        <ui.FrameShadow
+            style="@style/item_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <ui.Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/_background_item"
+                android:onClick="login"
+                app:_backgroundIcon="#3000"
+                app:_childRadius="none"
+                app:_font="light"
+                app:_foreground="@color/_text_color"
+                app:_icon=""
+                app:_radius="@dimen/radius"
+                app:_rippleColor="#2fff"
+                app:_text="@string/login_with_facebook_button"
+                app:_textAlign="left"/>
+        </ui.FrameShadow>
+    </ui.Col>
+</layout>

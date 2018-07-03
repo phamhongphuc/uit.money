@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Voice</string>
+    <string name="error_audio">Lỗi ghi âm</string>
+    <string name="error_client">Lỗi không xác định từ máy khách</string>
+    <string name="error_insufficient_permissions">Không đủ quyền</string>
+    <string name="error_network">Lỗi mạng</string>
+    <string name="error_network_timeout">Lỗi mạng</string>
+    <string name="error_no_match">Không có kết quả nào phù hợp</string>
+    <string name="error_recognizer_busy">Dịch vụ nhận dạng đang bận</string>
+    <string name="error_server">Lỗi máy chủ</string>
+    <string name="error_speech_timeout">Không phát hiện giọng nói đầu vào</string>
+    <string name="error_unknown">Lỗi không xác định</string>
+    <string name="voice_start">Đang nghe...</string>
+    <string name="voice_open_list_of_wallet">Mở danh sách ví</string>
+</resources>

@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="scrollbar_thumb">#5514171f</color>
+    <color name="primary_shadow">#aa33cc66</color>
+    <color name="primary_focus">#3333cc66</color>
+
+    <color name="primary_dark">#990000</color>
+    <color name="primary">#0000ff</color>
+
+    <color name="input_line_color">#999</color>
+    <color name="white_shadow">#15000000</color>
+    <color name="red">#e74c3c</color>
+    <color name="red_shadow">#77e74c3c</color>
+    <color name="gray">#eee</color>
+    <color name="primary_ripple">#73c6</color>
+    <color name="white">#fff</color>
+
+
+    <color name="_dark_0">#000000</color>
+    <color name="_dark_1">#14171f</color><!-- Màu của thanh trạng thái trên cùng -->
+    <color name="_dark_2">#1c212b</color><!-- Màu dành cho thanh hành động -->
+    <color name="_dark_3">#212733</color><!-- Màu nền chính -->
+
+    <color name="_dark_5">#242b38</color><!-- Màu của item -->
+
+    <color name="_light_1">#343d4a</color>
+    <color name="_light_2">#29738699</color>
+    <color name="_light_3">#738699</color>
+    <color name="_light_4">#999999</color>
+    <color name="_light_5">#9fff</color>
+
+
+    <color name="_green">#3c6</color>
+    <color name="_green_shadow">#73c6</color>
+
+    <color name="_gray">#ccc</color>
+    <color name="_gray_shadow">#5fff</color>
+
+    <color name="_text_color">@color/_light_3</color>
+    <color name="_hint_color">@color/_light_2</color>
+    <color name="_background_status">@color/_dark_1</color>
+    <color name="_background_action">@color/_dark_2</color>
+    <color name="_background">@color/_dark_3</color>
+    <color name="_background_item">@color/_dark_5</color>
+    <color name="_line_color">@color/_light_1</color>
+
+    <color name="_item_title">@color/_light_5</color>
+    <color name="_item_color">@color/_light_4</color>
+    <color name="_item_ripple">#3fff</color>
+
+    <color name="_draw_border">#000</color>
+
+    <color name="white_ripple">#2fff</color>
 </resources>

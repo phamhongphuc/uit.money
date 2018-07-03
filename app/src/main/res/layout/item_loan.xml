@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="loan"
+            type="model.model.transaction.Loan"/>
+
+        <variable
+            name="action"
+            type="uit.money.adapter.TransactionRecyclerViewAdapter.Action"/>
+    </data>
+
+    <ui.Row
+        android:background="#569"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ui.Text
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="@{`Loan` + String.valueOf(loan.id)}"
+            app:_autoSize="true"/>
+    </ui.Row>
+</layout>

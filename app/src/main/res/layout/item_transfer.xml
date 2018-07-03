@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="transfer"
+            type="model.model.transaction.Transfer"/>
+
+        <variable
+            name="action"
+            type="uit.money.adapter.TransactionRecyclerViewAdapter.Action"/>
+    </data>
+
+    <ui.Row
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:layerType="software"
+        android:paddingEnd="10dp"
+        tools:background="#ccc"
+        tools:ignore="RtlSymmetry">
+
+        <FrameLayout
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:paddingEnd="5dp">
+
+            <ui.Text
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical|end"
+                android:text="@{model.Utils.getTime(transfer.time)}"
+                android:textColor="#3c6"
+                app:_font="bold"
+                tools:text="00:00"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="match_parent">
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="0dp"
+                android:layout_marginTop="0dp"
+                android:background="#3c6"/>
+
+            <ui.FrameShadow
+                android:layout_width="31dp"
+                android:layout_height="31dp"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_marginTop="12dp"
+                android:background="@color/primary"
+                android:clickable="false"
+                app:_radius="10.5dp"
+                app:_shadowColor="#73c6"
+                app:_shadowSize="5dp"/>
+        </FrameLayout>
+
+        <ui.FrameShadow
+            style="@style/item_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true">
+
+            <ui.Ripple
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="@{action::openDetail}"
+                app:_radius="@dimen/radius"
+                app:_rippleColor="#93c6"/>
+
+            <ui.Col
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:layerType="hardware"
+                android:paddingBottom="5dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp">
+
+                <ui.Row
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:clickable="false">
+
+                    <ui.Text
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|start"
+                        android:text="{bill.action}"
+                        android:textColor="#222"
+                        android:textSize="15sp"
+                        app:_font="bold"/>
+
+                </ui.Row>
+
+                <ui.Text
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|end"
+                    android:text="@{model.Utils.getMoney(transfer.money)}"
+                    android:textColor="@{model.Utils.getMoneyColor(transfer)}"
+                    android:textSize="15sp"
+                    app:_font="bold"
+                    tools:text="20.000 đ"/>
+            </ui.Col>
+        </ui.FrameShadow>
+    </ui.Row>
+</layout>

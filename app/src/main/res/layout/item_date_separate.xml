@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="dateSeparator"
+            type="uit.money.adapter.separator.DateSeparator"/>
+    </data>
+
+    <ui.Row
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            tools:background="@color/_background">
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="24.5dp"
+                android:background="@color/_line_color"/>
+
+            <View
+                android:layout_width="30dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="24.5dp"
+                android:background="@color/_line_color"/>
+
+            <ui.Text
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginStart="60dp"
+                android:gravity="center_vertical"
+                android:text="@{dateSeparator.timeString}"
+                android:textColor="@color/_text_color"
+                android:textSize="15sp"
+                app:_font="bold"
+                tools:ignore="RtlSymmetry"
+                tools:text="Hôm nay"/>
+        </FrameLayout>
+    </ui.Row>
+</layout>

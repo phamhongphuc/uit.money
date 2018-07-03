@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Theme">
+        <attr name="ButtonStyle" format="reference"/>
+    </declare-styleable>
+
+    <!-- Components -->
+    <declare-styleable name="Button" parent="View">
+        <attr name="_icon" format="string"/>
+        <attr name="_text" format="string"/>
+        <attr name="_textAlign" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+        <attr name="_foreground" format="color"/>
+        <attr name="_backgroundIcon" format="color"/>
+        <attr name="_backgroundText" format="color"/>
+        <attr name="_textPaddingLeft" format="boolean"/>
+        <attr name="_childRadius" format="enum">
+            <enum name="none" value="0"/>
+            <enum name="icon" value="1"/>
+            <enum name="text" value="2"/>
+        </attr>
+        <attr name="_hasRipple"/>
+        <attr name="_backgroundActive" format="color"/>
+        <attr name="_font"/>
+        <attr name="_active" format="boolean"/>
+        <attr name="_fontSize" format="enum">
+            <enum name="small" value="0"/>
+            <enum name="large" value="1"/>
+            <enum name="medium" value="2"/>
+        </attr>
+        <attr name="_radius"/>
+        <attr name="_shadowSize"/>
+        <attr name="_shadowColor"/>
+        <attr name="_rippleColor" format="color"/>
+        <attr name="_paddingLeft" format="dimension"/>
+        <attr name="_paddingTop" format="dimension"/>
+        <attr name="_paddingRight" format="dimension"/>
+        <attr name="_paddingBottom" format="dimension"/>
+    </declare-styleable>
+    <declare-styleable name="InputText" parent="View">
+        <attr name="_autoSize" format="boolean"/>
+        <attr name="_autoPadding" format="boolean"/>
+        <attr name="_font"/>
+        <!-- TODO: Remove "_rippleColor" -->
+        <attr name="_focusColor" format="color"/>
+    </declare-styleable>
+    <declare-styleable name="Text">
+        <attr name="_font" format="enum">
+            <enum name="none" value="0"/>
+            <enum name="light" value="1"/>
+            <enum name="regular" value="2"/>
+            <enum name="bold" value="3"/>
+            <enum name="icon" value="4"/>
+        </attr>
+        <attr name="_autoSize"/>
+        <attr name="_autoPadding"/>
+    </declare-styleable>
+    <declare-styleable name="Square">
+        <attr name="_by" format="enum">
+            <enum name="width" value="0"/>
+            <enum name="height" value="1"/>
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="Circle">
+        <attr name="_minSize" format="dimension"/>
+        <attr name="_ratio" format="float"/>
+        <attr name="_backgroundColor"/>
+    </declare-styleable>
+    <declare-styleable name="Drawer">
+        <attr name="_isOpen" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="Avatar">
+        <attr name="_fbid" format="string"/>
+        <attr name="_innerSize" format="dimension"/>
+        <attr name="_outerSize" format="dimension"/>
+    </declare-styleable>
+    <declare-styleable name="List">
+        <attr name="_stackFromEnd" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="FrameShadow">
+        <attr name="_radius"/>
+        <attr name="_shadowSize"/>
+        <attr name="_dx"/>
+        <attr name="_dy"/>
+        <attr name="_shadowColor"/>
+        <attr name="_extendTop" format="boolean"/>
+        <attr name="_extendLeft" format="boolean"/>
+        <attr name="_extendRight" format="boolean"/>
+        <attr name="_extendBottom" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="Ripple">
+        <attr name="_rippleColor"/>
+        <attr name="_radius"/>
+        <attr name="_radiusTop" format="boolean"/>
+        <attr name="_radiusLeft" format="boolean"/>
+        <attr name="_radiusRight" format="boolean"/>
+        <attr name="_radiusBottom" format="boolean"/>
+    </declare-styleable>
+</resources>

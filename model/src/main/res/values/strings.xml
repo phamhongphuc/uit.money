@@ -1,0 +1,34 @@
+<resources>
+    <string name="buy">Mua</string>
+    <string name="sell">Bán</string>
+
+    <string name="borrow">Mượn</string>
+    <string name="lend">Cho mượn</string>
+    <string name="today">Hôm nay</string>
+    <string name="yesterday">Hôm qua</string>
+    <string name="day_ago">ngày trước</string>
+    <string name="payment_pick">Nhặt được</string>
+    <string name="payment_lost">Làm mất</string>
+    <string name="payment_have_breakfast">Ăn sáng</string>
+    <string name="payment_have_lunch">Ăn trưa</string>
+    <string name="payment_have_dinner">Ăn tối</string>
+    <string name="payment_salary">Nhận lương</string>
+    <string name="payment_internet_bill">Hóa đơn tiền mạng</string>
+    <string name="payment_electric_bill">Hóa đơn tiền điện</string>
+    <string name="payment_water_bill">Hóa đơn tiền nước</string>
+    <string name="payment_initialize">Khởi tạo</string>
+    <string name="payment_unknown">Giao dịch không xác định</string>
+
+    <string name="icon_book"></string>
+    <string name="icon_pick"></string>
+    <string name="icon_breakfast"></string>
+    <string name="icon_lunch"></string>
+    <string name="icon_dinner"></string>
+    <string name="icon_internet"></string>
+    <string name="icon_water"></string>
+    <string name="icon_electricity"></string>
+    <string name="icon_salary"></string>
+    <string name="icon_create"></string>
+    <string name="icon_lost"></string>
+    <string name="icon_unknown"></string>
+</resources>
