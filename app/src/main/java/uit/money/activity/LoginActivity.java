@@ -17,7 +17,7 @@ import uit.money.fragment.FragmentAdapter;
 
 import static uit.money.fragment.LoginFragment.getFragment;
 
-public class LoginActivity extends RealmActivity {
+public class LoginActivity extends AppActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

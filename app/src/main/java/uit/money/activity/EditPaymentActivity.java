@@ -15,15 +15,18 @@ import uit.money.R;
 import uit.money.adapter.PaymentTypeRecyclerViewAdapter;
 import uit.money.databinding.ActivityEditPaymentBinding;
 
+import static model.Const.IN;
+import static model.Utils.getMoney;
 import static uit.money.activity.WalletActivity.CREATE;
 import static uit.money.activity.WalletActivity.EDIT;
 import static uit.money.activity.WalletActivity.ID;
 import static uit.money.activity.WalletActivity.NONE;
 import static uit.money.activity.WalletActivity.TYPE;
+import static uit.money.adapter.PaymentTypeRecyclerViewAdapter.setKind;
 import static uit.money.adapter.PaymentTypeRecyclerViewAdapter.states;
 import static uit.money.utils.Money.getMoneyNumber;
 
-public class EditPaymentActivity extends RealmActivity {
+public class EditPaymentActivity extends AppActivity {
     private static final int LAYOUT = R.layout.activity_edit_payment;
 
     private final State state = new State();
@@ -58,6 +61,8 @@ public class EditPaymentActivity extends RealmActivity {
                     finish();
                     return;
                 }
+                state.money.set(getMoney(payment.getMoney()));
+                setKind(payment.getKind() * (payment.isInOrOut() == IN ? 1 : -1));
                 break;
             default:
                 finish();

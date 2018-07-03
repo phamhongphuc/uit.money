@@ -45,13 +45,18 @@
         <activity android:name=".activity.ListOfWalletsActivity"/>
         <activity android:name=".activity.CreateWalletActivity"/>
         <activity android:name=".activity.BillActivity"/>
-        <activity android:name=".activity.EditWalletActivity"/>
+        <activity android:name=".activity.PaymentActivity"/>
+        <activity
+            android:name=".activity.EditWalletActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".activity.EditBillActivity"
             android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".activity.EditPaymentActivity"
             android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".activity.EditBillAdvancedActivity"/>
+        <activity
+            android:name=".activity.EditBillAdvancedActivity"
+            android:windowSoftInputMode="adjustResize"/>
     </application>
 </manifest>

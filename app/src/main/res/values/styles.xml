@@ -4,11 +4,11 @@
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowActivityTransitions">true</item>
 
-        <!--<item name="android:colorPrimaryDark">@color/_dark_1</item>-->
+        <item name="android:colorPrimaryDark">@color/_dark_1</item>
         <item name="android:colorPrimary">@color/_dark_0</item>
         <item name="android:colorAccent">#ffcc66</item>
 

@@ -1,5 +1,7 @@
 package model.model.transaction;
 
+import android.support.annotation.NonNull;
+
 import com.google.common.collect.ImmutableMap;
 
 import org.parceler.Parcel;
@@ -48,6 +50,7 @@ import static model.model.transaction.Payment.PaymentType.type;
         value = Parcel.Serialization.BEAN,
         analyze = {Payment.class})
 public class Payment extends RealmObject implements Transaction, TransactionModel {
+    public static final int UNKNOWN = 0;
     public static final int PICK_LOST = 1;
     public static final int HAVE_BREAKFAST = 2;
     public static final int HAVE_LUNCH = 3;
@@ -59,6 +62,7 @@ public class Payment extends RealmObject implements Transaction, TransactionMode
     public static final int INITIALIZE = 9;
 
     public static final Map<Integer, PaymentType> PAYMENT_TYPE = ImmutableMap.<Integer, PaymentType>builder()
+            .put(UNKNOWN, type(R.string.icon_unknown, R.string.payment_unknown))
             .put(-HAVE_BREAKFAST, type(R.string.icon_breakfast, R.string.payment_have_breakfast))
             .put(-HAVE_LUNCH, type(R.string.icon_lunch, R.string.payment_have_lunch))
             .put(-HAVE_DINNER, type(R.string.icon_dinner, R.string.payment_have_dinner))
@@ -117,9 +121,14 @@ public class Payment extends RealmObject implements Transaction, TransactionMode
 
     @Override
     public String getAction() {
+        return getPaymentType().text;
+    }
+
+    @NonNull
+    public PaymentType getPaymentType() {
         final PaymentType paymentType = PAYMENT_TYPE.get(kind * (inOrOut == IN ? 1 : -1));
-        if (paymentType == null) return getString(R.string.payment_type_unknown);
-        return paymentType.text;
+        if (paymentType == null) return PAYMENT_TYPE.get(UNKNOWN);
+        return paymentType;
     }
 
     @Override

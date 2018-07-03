@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:onClick="@{state::select}"
-                app:_radius="5dp"
+                app:_radius="@dimen/radius"
                 app:_rippleColor="@color/_item_ripple"
                 tools:layout_height="0dp"/>
 
@@ -75,7 +75,7 @@
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
                     android:text="@{state.paymentType.text}"
-                    android:textColor="@color/_text_color"
+                    android:textColor="@{state.iconColor}"
                     android:textSize="12sp"
                     app:_font="regular"
                     tools:text="Giao dịch"/>

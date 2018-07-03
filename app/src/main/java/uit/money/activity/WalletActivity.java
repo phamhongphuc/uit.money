@@ -27,7 +27,7 @@ import voice.utils.InterfaceWalletActivity;
 
 import static uit.money.utils.Timer.setTimeout;
 
-public class WalletActivity extends RealmActivity implements InterfaceWalletActivity {
+public class WalletActivity extends AppActivity implements InterfaceWalletActivity {
     public static final int LAYOUT = R.layout.activity_wallet;
 
     public static final String TYPE = "type";
@@ -125,7 +125,7 @@ public class WalletActivity extends RealmActivity implements InterfaceWalletActi
     }
 
     public void editWallet(View view) {
-        startActivity(new Intent(this, EditWalletActivity.class));
+        delayStartActivity(new Intent(this, EditWalletActivity.class));
     }
 
     @Override
@@ -137,7 +137,7 @@ public class WalletActivity extends RealmActivity implements InterfaceWalletActi
 
     public void logout(View view) {
         Credential.logout();
-        startActivity(new Intent(this, LoginActivity.class));
+        delayStartActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 
@@ -153,13 +153,13 @@ public class WalletActivity extends RealmActivity implements InterfaceWalletActi
     public void openCreateBill(View view) {
         final Intent intent = new Intent(this, EditBillActivity.class);
         intent.putExtra(TYPE, CREATE);
-        setTimeout(() -> startActivity(intent), 500);
+        delayStartActivity(intent);
     }
 
     @Override
     public void openListOfWallets(View view) {
         final Intent intent = new Intent(this, ListOfWalletsActivity.class);
-        setTimeout(() -> startActivity(intent), 500);
+        delayStartActivity(intent);
     }
 
     @Override
@@ -170,7 +170,7 @@ public class WalletActivity extends RealmActivity implements InterfaceWalletActi
     public void openCreatePayment(View view) {
         final Intent intent = new Intent(getBaseContext(), EditPaymentActivity.class);
         intent.putExtra(TYPE, CREATE);
-        setTimeout(() -> startActivity(intent), 500);
+        delayStartActivity(intent);
     }
 
     public void openCreateLoan(View view) {

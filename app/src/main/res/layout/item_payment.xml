@@ -66,45 +66,69 @@
             android:layout_marginTop="3dp"
             android:layout_weight="1"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            tools:layout_height="wrap_content">
 
             <ui.Ripple
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:onClick="@{action::openDetail}"
                 app:_radius="@dimen/radius"
-                app:_rippleColor="@color/_item_ripple"/>
+                app:_rippleColor="@color/_item_ripple"
+                tools:layout_height="0dp"/>
 
-            <ui.Col
+            <ui.Row
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="false"
-                android:layerType="hardware"
-                android:paddingBottom="10dp"
-                android:paddingEnd="15dp"
-                android:paddingStart="15dp"
-                android:paddingTop="10dp">
+                android:layerType="hardware">
 
-                <ui.Row
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:clickable="false">
+                <ui.Square
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:_by="height">
 
                     <ui.Text
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|start"
-                        android:text="@{payment.action}"
-                        android:textColor="@color/_item_title"
-                        android:textSize="15sp"
-                        app:_font="bold"
-                        tools:text="{payment.action}"/>
+                        android:gravity="center"
+                        android:text="@{payment.paymentType.icon}"
+                        android:textColor="@color/_text_color"
+                        app:_autoSize="true"
+                        app:_font="icon"
+                        tools:text="@string/icon_money"/>
+                </ui.Square>
+
+                <View
+                    style="@style/vr_full"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"/>
+
+                <ui.Col
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:layerType="hardware"
+                    android:paddingBottom="10dp"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="10dp">
 
                     <ui.Row
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="25dp"
-                        android:layout_marginEnd="-3dp">
+                        android:clickable="false">
+
+                        <ui.Text
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|start"
+                            android:text="@{payment.action}"
+                            android:textColor="@color/_item_title"
+                            android:textSize="15sp"
+                            app:_font="bold"
+                            tools:text="{payment.action}"/>
 
                         <ui.Text
                             android:layout_width="25dp"
@@ -117,22 +141,31 @@
                             app:_font="icon"
                             tools:visibility="visible"/>
 
+                        <ui.Text
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="5dp"
+                            android:gravity="center_vertical|end"
+                            android:text="@{model.Utils.getTime(payment.time)}"
+                            android:textColor="@color/_item_color"
+                            app:_font="regular"
+                            tools:text="00:00"/>
                     </ui.Row>
-                </ui.Row>
 
-                <ui.Text
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:layout_gravity="end"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical|end"
-                    android:text="@{model.Utils.getMoney(payment.money)}"
-                    android:textColor="@{model.Utils.getMoneyColor(payment)}"
-                    android:textSize="15sp"
-                    app:_font="bold"
-                    tools:text="20.000 đ"
-                    tools:textColor="@color/out_color"/>
-            </ui.Col>
+                    <ui.Text
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_gravity="end"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|end"
+                        android:text="@{model.Utils.getMoney(payment.money)}"
+                        android:textColor="@{model.Utils.getMoneyColor(payment)}"
+                        android:textSize="15sp"
+                        app:_font="bold"
+                        tools:text="20.000 đ"
+                        tools:textColor="@color/out_color"/>
+                </ui.Col>
+            </ui.Row>
         </ui.FrameShadow>
     </ui.Row>
 </layout>

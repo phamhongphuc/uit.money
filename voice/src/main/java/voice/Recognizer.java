@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import voice.recognizer.action.CreateBill;
+import voice.recognizer.action.CreatePayment;
 import voice.recognizer.action.RemoveLastBill;
 import voice.recognizer.open.OpenCreateBill;
 import voice.recognizer.open.OpenListOfWallet;
@@ -18,8 +19,7 @@ public class Recognizer {
     private static final String TAG = "Recognizer";
     private static final List<InterfaceRecognizer> recognizers = asList(
             new CreateBill(),
-// TODO FIX THIS AS SOON AS POSSIBLE
-//            new CreatePayment(),
+            new CreatePayment(),
             new RemoveLastBill(),
             new OpenListOfWallet(),
             new OpenCreateBill()

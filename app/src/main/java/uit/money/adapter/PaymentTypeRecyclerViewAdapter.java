@@ -25,6 +25,7 @@ import static model.Const.getResource;
 import static model.Utils.getMoneyColor;
 import static model.model.transaction.Payment.INITIALIZE;
 import static model.model.transaction.Payment.PAYMENT_TYPE;
+import static model.model.transaction.Payment.UNKNOWN;
 
 public class PaymentTypeRecyclerViewAdapter extends RecyclerView.Adapter<PaymentTypeRecyclerViewAdapter.ViewHolder> {
     public static final List<State> states;
@@ -32,9 +33,15 @@ public class PaymentTypeRecyclerViewAdapter extends RecyclerView.Adapter<Payment
     static {
         states = new ArrayList<>();
         for (Map.Entry<Integer, PaymentType> each : PAYMENT_TYPE.entrySet()) {
-            if (each.getKey() != INITIALIZE) {
+            if (each.getKey() != INITIALIZE && each.getKey() != UNKNOWN) {
                 states.add(new State(each.getKey(), each.getValue()));
             }
+        }
+    }
+
+    public static void setKind(int kind) {
+        for (State state : states) {
+            state.setIconColor(state.kind == kind);
         }
     }
 
@@ -110,7 +117,7 @@ public class PaymentTypeRecyclerViewAdapter extends RecyclerView.Adapter<Payment
         private void setIconColor(Boolean value) {
             iconColor.set(
                     getResource().getColor(
-                            value ? R.color.in_color : R.color._text_color,
+                            value ? (kind > 0 ? R.color.in_color : R.color.out_color) : R.color._text_color,
                             null
                     )
             );
@@ -119,6 +126,5 @@ public class PaymentTypeRecyclerViewAdapter extends RecyclerView.Adapter<Payment
         public int getLineColor() {
             return getMoneyColor(kind > 0 ? IN : OUT);
         }
-
     }
 }

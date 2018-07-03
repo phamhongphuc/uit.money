@@ -17,7 +17,7 @@
     <string name="payment_electric_bill">Hóa đơn tiền điện</string>
     <string name="payment_water_bill">Hóa đơn tiền nước</string>
     <string name="payment_initialize">Khởi tạo</string>
-    <string name="payment_type_unknown">Giao dịch không xác định</string>
+    <string name="payment_unknown">Giao dịch không xác định</string>
 
     <string name="icon_book"></string>
     <string name="icon_pick"></string>
@@ -30,4 +30,5 @@
     <string name="icon_salary"></string>
     <string name="icon_create"></string>
     <string name="icon_lost"></string>
+    <string name="icon_unknown"></string>
 </resources>

@@ -17,7 +17,7 @@ import uit.money.utils.Money;
 import static model.Const.IN;
 import static model.model.transaction.Payment.INITIALIZE;
 
-public class CreateWalletActivity extends RealmActivity {
+public class CreateWalletActivity extends AppActivity {
     private static final int LAYOUT = R.layout.activity_create_wallet;
 
     private Wallet wallet = new Wallet();

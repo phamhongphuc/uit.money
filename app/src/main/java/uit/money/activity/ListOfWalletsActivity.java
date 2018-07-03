@@ -21,7 +21,7 @@ import uit.money.databinding.ActivityListOfWalletsBinding;
 
 import static model.Utils.getMoney;
 
-public class ListOfWalletsActivity extends RealmActivity {
+public class ListOfWalletsActivity extends AppActivity {
     private static final int LAYOUT = R.layout.activity_list_of_wallets;
 
     @Override
@@ -45,7 +45,7 @@ public class ListOfWalletsActivity extends RealmActivity {
     }
 
     public void create(View view) {
-        startActivity(new Intent(this, CreateWalletActivity.class));
+        delayStartActivity(new Intent(this, CreateWalletActivity.class));
     }
 
     public static class State extends Observable {

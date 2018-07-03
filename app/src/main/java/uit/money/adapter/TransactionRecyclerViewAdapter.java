@@ -1,6 +1,5 @@
 package uit.money.adapter;
 
-import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -27,8 +26,9 @@ import model.model.transaction.TransactionModel;
 import model.model.transaction.Transfer;
 import uit.money.BR;
 import uit.money.R;
+import uit.money.activity.AppActivity;
 import uit.money.activity.BillActivity;
-import uit.money.activity.RealmActivity;
+import uit.money.activity.PaymentActivity;
 import uit.money.adapter.separator.DateSeparator;
 import uit.money.adapter.separator.EndSeparator;
 import uit.money.adapter.separator.StartSeparator;
@@ -176,19 +176,22 @@ public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<Transac
         }
 
         public void openDetail(View view) {
-            final Context context = view.getContext();
+            final AppActivity context = (AppActivity) view.getContext();
 
-            Class<? extends RealmActivity> transactionActivity;
+            Class<? extends AppActivity> transactionActivity;
             switch (model.getType()) {
                 case BILL:
                     transactionActivity = BillActivity.class;
+                    break;
+                case PAYMENT:
+                    transactionActivity = PaymentActivity.class;
                     break;
                 default:
                     return;
             }
             final Intent intent = new Intent(context, transactionActivity);
             intent.putExtra("id", model.getId());
-            context.startActivity(intent);
+            context.delayStartActivity(intent);
         }
     }
 }

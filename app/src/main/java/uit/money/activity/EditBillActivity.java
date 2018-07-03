@@ -23,7 +23,7 @@ import static uit.money.activity.WalletActivity.ID;
 import static uit.money.activity.WalletActivity.NONE;
 import static uit.money.activity.WalletActivity.TYPE;
 
-public class EditBillActivity extends RealmActivity {
+public class EditBillActivity extends AppActivity {
     private static final int LAYOUT = R.layout.activity_edit_bill;
 
     private final State state = new State();
@@ -118,7 +118,7 @@ public class EditBillActivity extends RealmActivity {
     public void goToAdvanced(View view) {
         final Intent intent = new Intent(this, EditBillAdvancedActivity.class);
         intent.putExtra("id", bill.getId());
-        startActivity(intent);
+        delayStartActivity(intent);
     }
 
     @Override

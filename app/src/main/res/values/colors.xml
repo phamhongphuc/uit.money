@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="scrollbar_thumb">#5533cc66</color>
+    <color name="scrollbar_thumb">#5514171f</color>
     <color name="primary_shadow">#aa33cc66</color>
     <color name="primary_focus">#3333cc66</color>
 

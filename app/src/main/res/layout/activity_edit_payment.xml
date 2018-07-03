@@ -46,97 +46,69 @@
             <ui.FrameShadow
                 style="@style/item_shadow"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1">
 
+                <ui.ListWrap
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:adapter="@{PaymentTypeRecyclerViewAdapter.instance}"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_payment_type"/>
+
+            </ui.FrameShadow>
+
+            <ui.FrameShadow
+                style="@style/item_shadow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
                 <ui.Col
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp">
 
-                    <ui.Col
+                    <ui.Text
+                        style="@style/input_name"
+                        android:text="@string/input_name_money"/>
+
+                    <View style="@style/hr_full"/>
+
+                    <ui.Row
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_margin="15dp"
-                        android:layout_weight="1">
+                        android:layout_height="@dimen/input_size">
 
-                        <View
-                            style="@style/hr_full"/>
-
-                        <ui.Row
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1">
-
-                            <View
-                                style="@style/vr_full"/>
-
-                            <ui.ListWrap
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_margin="5dp"
-                                android:layout_weight="1"
-                                android:adapter="@{PaymentTypeRecyclerViewAdapter.instance}"
-                                tools:itemCount="2"
-                                tools:listitem="@layout/item_payment_type"/>
-
-                            <View
-                                style="@style/vr_full"/>
-
-                        </ui.Row>
-
-                        <View
-                            style="@style/hr_full"/>
-                    </ui.Col>
-
-                    <View
-                        style="@style/hr_full"/>
-
-                    <ui.Col
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp">
-
-                        <View style="@style/hr_full"/>
+                        <View style="@style/vr_full"/>
 
                         <ui.Text
-                            style="@style/input_name"
-                            android:text="@string/input_name_money"/>
+                            style="@style/icon"
+                            android:layout_width="@dimen/input_size"
+                            android:layout_height="@dimen/input_size"
+                            android:gravity="center"
+                            android:text="@string/icon_money"
+                            android:textSize="@dimen/input_icon_size"
+                            app:_autoPadding="false"
+                            app:_autoSize="false"/>
 
-                        <View style="@style/hr_full"/>
+                        <View style="@style/vr_full"/>
 
-                        <ui.Row
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/input_size">
+                        <ui.InputMoney
+                            style="@style/input_text"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:hint="@string/hint_location"
+                            android:text="@={state.money}"
+                            android:textSize="@dimen/input_text_size"
+                            tools:ignore="RtlSymmetry"/>
 
-                            <View style="@style/vr_full"/>
+                        <View style="@style/vr_full"/>
+                    </ui.Row>
 
-                            <ui.Text
-                                style="@style/icon"
-                                android:layout_width="@dimen/input_size"
-                                android:layout_height="@dimen/input_size"
-                                android:gravity="center"
-                                android:text="@string/icon_money"
-                                android:textSize="@dimen/input_icon_size"
-                                app:_autoPadding="false"
-                                app:_autoSize="false"/>
-
-                            <View style="@style/vr_full"/>
-
-                            <ui.InputMoney
-                                style="@style/input_text"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:hint="@string/hint_location"
-                                android:text="@={state.money}"
-                                android:textSize="@dimen/input_text_size"
-                                tools:ignore="RtlSymmetry"/>
-
-                            <View style="@style/vr_full"/>
-                        </ui.Row>
-
-                        <View style="@style/hr_full"/>
-                    </ui.Col>
+                    <View style="@style/hr_full"/>
                 </ui.Col>
             </ui.FrameShadow>
         </ui.Col>

@@ -16,7 +16,7 @@ import uit.money.databinding.ActivityEditWalletBinding;
 
 import static uit.money.utils.Dialog.OpenConfirm;
 
-public class EditWalletActivity extends RealmActivity {
+public class EditWalletActivity extends AppActivity {
     public static final int LAYOUT = R.layout.activity_edit_wallet;
     private Wallet wallet;
 

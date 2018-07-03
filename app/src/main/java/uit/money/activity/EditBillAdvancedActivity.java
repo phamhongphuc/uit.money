@@ -12,7 +12,7 @@ import model.model.transaction.Bill;
 import uit.money.R;
 import uit.money.databinding.ActivityEditBillAdvancedBinding;
 
-public class EditBillAdvancedActivity extends RealmActivity {
+public class EditBillAdvancedActivity extends AppActivity {
     private static final int LAYOUT = R.layout.activity_edit_bill_advanced;
     private Bill bill = null;
     private State state = new State();
