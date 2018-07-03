@@ -124,7 +124,7 @@
                             style="@style/input_text"
                             android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:hint="@string/hint_wallet_money"
+                            android:hint="@string/hint_money"
                             android:text="@={wallet._money}"
                             android:textSize="@dimen/input_text_size"
                             tools:ignore="RtlSymmetry"/>

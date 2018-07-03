@@ -41,7 +41,7 @@ public class PaymentTypeRecyclerViewAdapter extends RecyclerView.Adapter<Payment
 
     public static void setKind(int kind) {
         for (State state : states) {
-            state.setIconColor(state.kind == kind);
+            state.setTextColor(state.kind == kind);
         }
     }
 
@@ -102,7 +102,7 @@ public class PaymentTypeRecyclerViewAdapter extends RecyclerView.Adapter<Payment
     public static class State {
         public final int kind;
         public final PaymentType paymentType;
-        public ObservableInt iconColor = new ObservableInt(getResource().getColor(R.color._text_color, null));
+        public ObservableInt textColor = new ObservableInt(getResource().getColor(R.color._text_color, null));
 
         State(Integer kind, PaymentType paymentType) {
             this.kind = kind;
@@ -110,12 +110,12 @@ public class PaymentTypeRecyclerViewAdapter extends RecyclerView.Adapter<Payment
         }
 
         public void select(View view) {
-            for (State state : states) state.setIconColor(false);
-            setIconColor(true);
+            for (State state : states) state.setTextColor(false);
+            setTextColor(true);
         }
 
-        private void setIconColor(Boolean value) {
-            iconColor.set(
+        private void setTextColor(Boolean value) {
+            textColor.set(
                     getResource().getColor(
                             value ? (kind > 0 ? R.color.in_color : R.color.out_color) : R.color._text_color,
                             null

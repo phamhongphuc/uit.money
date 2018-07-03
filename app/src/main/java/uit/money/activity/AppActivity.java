@@ -19,6 +19,6 @@ public class AppActivity extends AppCompatActivity {
     }
 
     public void delayStartActivity(Intent intent) {
-        setTimeout(() -> startActivity(intent), 700);
+        setTimeout(() -> startActivity(intent), 300);
     }
 }

@@ -73,7 +73,7 @@
     <string name="input_name_money">Số tiền</string>
     <string name="input_name_wallet_name">Tên ví</string>
     <string name="hint_input_name">Ví da, tủ tiền, thẻ ngân hàng…</string>
-    <string name="hint_wallet_money">~ 200.000</string>
+    <string name="hint_money">~ 200.000</string>
 
     <string name="icon_edit"></string>
     <string name="icon_wallet"></string>

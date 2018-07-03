@@ -84,7 +84,7 @@ public class EditPaymentActivity extends AppActivity {
 
     public void done(View view) {
         for (PaymentTypeRecyclerViewAdapter.State type : states) {
-            if (type.iconColor.get() == getColor(R.color.in_color)) {
+            if (type.textColor.get() != getColor(R.color._text_color)) {
                 realm.executeTransaction(r -> {
                     payment.setKind(type.kind);
                     payment.setMoney(getMoneyNumber(Objects.requireNonNull(state.money.get())));
