@@ -1,6 +1,7 @@
 # Where is my money?
 
 [![Travis Build](https://travis-ci.org/phamhongphuc/uit.money.svg?branch=master)](https://travis-ci.org/phamhongphuc/uit.money/builds "Most recent build") [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/phamhongphuc/uit.money.svg)](https://github.com/phamhongphuc/uit.money/issues "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/phamhongphuc/uit.money.svg)](https://github.com/phamhongphuc/uit.money/issues "Percentage of issues still open")
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fphamhongphuc%2Fuit.money.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fphamhongphuc%2Fuit.money?ref=badge_shield)
 
 Welcome to open source Android app!
 
@@ -65,3 +66,5 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 ```
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fphamhongphuc%2Fuit.money.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fphamhongphuc%2Fuit.money?ref=badge_large)
